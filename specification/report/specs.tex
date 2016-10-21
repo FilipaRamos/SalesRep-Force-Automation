@@ -442,7 +442,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \textbf{Webservice ID}                     & \multicolumn{1}{c|}{get\_client}                                                                                                                                                                                        \\ \hline
 \multicolumn{1}{|l|}{\textbf{Description}} & Retorna a informação de um cliente específico.                                                                                                                                                                                    \\ \hline
 \textbf{Core Views}                        & CLI\_PAGE                                                                                                                                                                                                                          \\ \hline
-\textbf{Path}                              & \url{http://<domain>/api/client=<clientID>}                                                                                                                                                          \\ \hline
+\textbf{Path}                              & \url{http://<domain>/api/client?id=<clientID>}                                                                                                                                                          \\ \hline
 \textbf{Verb}                              & \multicolumn{1}{c|}{GET}                                                                                                                                                                                                \\ \hline
 \textbf{Input}                             & \multicolumn{1}{c|}{clientID}                                                                                                                                                                                           \\ \hline
 \textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\      "id": "EFACSA",\\      "nome": "EFACEC",\\      "nome\_fiscal": "EFACEC SA",\\ \\      "morada": "Porto",\\      "telefone": 969509655,\\      "contribuinte": 989922455\\ \}\end{tabular} \\ \hline
@@ -476,7 +476,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \textbf{Webservice ID}                     & \multicolumn{1}{c|}{add\_client}                                                                                                                                                                                        \\ \hline
 \multicolumn{1}{|l|}{\textbf{Description}} & Adiciona um cliente.                                                                                                                                                                                    \\ \hline
 \textbf{Core Views}                        & NEW\_CLI                                                                                                                                                                                                                         \\ \hline
-\textbf{Path}                              & \url{http://<domain>/api}                                                                                                                                                          \\ \hline
+\textbf{Path}                              & \url{http://<domain>/api/client}                                                                                                                                                          \\ \hline
 \textbf{Verb}                              & \multicolumn{1}{c|}{POST}                                                                                                                                                                                                \\ \hline
 \textbf{Input}                             & \multicolumn{1}{c|}{nome, nome\_fiscal, email, morada, telefone, contribuinte}                                                                                                                                                                                           \\ \hline
 \textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\  "resultado": "OK" \\ \}\end{tabular} \\ \hline
@@ -495,7 +495,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \multicolumn{1}{|l|}{\textbf{Description}} & Retorna as reuniões.                                                                                                                                                                                    \\ \hline
 \textbf{Core Views}                        & HOM\_PAGE
 \\ \hline
-\textbf{Path}                              & \url{http://<domain>/api/meetings}                                                                                                                                                          \\ \hline
+\textbf{Path}                              & \url{http://<domain>/api/meeting}                                                                                                                                                          \\ \hline
 \textbf{Verb}                              & \multicolumn{1}{c|}{GET}                                                                                                                                                                                                \\ \hline
 \textbf{Input}                             & \multicolumn{1}{c|}{userID}                                                                                                                                                                                           \\ \hline
 \textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{ "Reunioes": [ \\ \{\\  "descricao": "Discussão dos novos produtos da empresa.", \\ 
@@ -516,7 +516,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \multicolumn{1}{|l|}{\textbf{Description}} & Adiciona uma reunião.                                                                                                                                                                                    \\ \hline
 \textbf{Core Views}                        & NEW\_MEE
 \\ \hline
-\textbf{Path}                              & \url{http://<domain>/api}                                                                                                                                                          \\ \hline
+\textbf{Path}                              & \url{http://<domain>/api/meeting}                                                                                                                                                          \\ \hline
 \textbf{Verb}                              & \multicolumn{1}{c|}{POST}                                                                                                                                                                                                \\ \hline
 \textbf{Input}                             & \multicolumn{1}{c|}{descricao, data, tempo, notas}                                                                                                                                                                                           \\ \hline
 \textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\  "resultado": "OK" \\ \}\end{tabular} \\ \hline
@@ -550,7 +550,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \multicolumn{1}{|l|}{\textbf{Description}} & Apaga uma reunião.                                                                                                                                                                                    \\ \hline
 \textbf{Core Views}                        & 
 \\ \hline
-\textbf{Path}                              & \url{http://<domain>/api/meeting=<meetingID>}                                                                                                                                                          \\ \hline
+\textbf{Path}                              & \url{http://<domain>/api/meeting?id=<meetingID>}                                                                                                                                                          \\ \hline
 \textbf{Verb}                              & \multicolumn{1}{c|}{DELETE}                                                                                                                                                                                                \\ \hline
 \textbf{Input}                             & \multicolumn{1}{c|}{meetingID}                                                                                                                                                                                           \\ \hline
 \textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\  "resultado": "OK" \\ \}\end{tabular} \\ \hline
@@ -569,7 +569,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \multicolumn{1}{|l|}{\textbf{Description}} & Retorna a informação dos armazens.
  \\ \hline
 \textbf{Core Views}                        & \multicolumn{1}{c|}{PRO\_PAGE}                                                                                                                                                                                                                        \\ \hline
-\textbf{Path}                              & \url{http://<domain>/api/warehouse=<warehouseID>}                                                                                                                                                          \\ \hline
+\textbf{Path}                              & \url{http://<domain>/api/warehouse?id=<warehouseID>}                                                                                                                                                          \\ \hline
 \textbf{Verb}                              & \multicolumn{1}{c|}{GET}                                                                                                                                                                                                \\ \hline
 \textbf{Input}                             & \multicolumn{1}{c|}{warehouseID}                                                                                                                                                                                           \\ \hline
 \textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\      "name": "ARMAZ",\\     "morada": "warehouse location",\\    "contacto": "warehouse contact"\\ \}\end{tabular} \\ \hline
@@ -588,7 +588,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 		\multicolumn{1}{|l|}{\textbf{Description}} & Retorna a transação.
  \\ \hline
 		\textbf{Core Views}                        & \multicolumn{1}{c|}{TRA\_PAGE}                                                                                                                                                                                                                        \\ \hline
-		\textbf{Path}                              & \url{http://<domain>/api/transaction=<transactionID>}                                                                                                                                                          \\ \hline
+		\textbf{Path}                              & \url{http://<domain>/api/transaction?id=<transactionID>}                                                                                                                                                          \\ \hline
 		\textbf{Verb}                              & \multicolumn{1}{c|}{GET}                                                                                                                                                                                                \\ \hline
 		\textbf{Input}                             & \multicolumn{1}{c|}{transactionID}                                                                                                                                                                                           \\ \hline
 		\textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\      "clienteID": "EFACSA",\\     "repvendaID": "VENDEDOR",\\    "produtos": [\{ "produtoID": 243,\\ "preco": 22.3,\\ "iva": 21,\\ "desconto": 0\},\\ ...],\\ "data": "2016-10-09 15:12:23" \}\end{tabular} \\ \hline
@@ -623,12 +623,46 @@ OUTWARD PATHS                                                  & \begin{tabular}
 		\textbf{Webservice ID}                     & \multicolumn{1}{c|}{get\_article}                                                                                                                                                                                        \\ \hline
 		\multicolumn{1}{|l|}{\textbf{Description}} & Retorna um artigo.                                                                                                                                                                                    \\ \hline
 		\textbf{Core Views}                        & \multicolumn{1}{c|}{PRO\_PAGE}                                                                                                                                                                                                                        \\ \hline
-		\textbf{Path}                              & \url{http://<domain>/api/article=<articleID>}                                                                                                                                                          \\ \hline
+		\textbf{Path}                              & \url{http://<domain>/api/article?id=<articleID>}                                                                                                                                                          \\ \hline
 		\textbf{Verb}                              & \multicolumn{1}{c|}{GET}                                                                                                                                                                                                \\ \hline
 		\textbf{Input}                             & \multicolumn{1}{c|}{articleID}                                                                                                                                                                                           \\ \hline
-		\textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\  "nome": "nome artigo",\\ "descricao": "descricao artigo",\\ "preco\_atual": 12.5,\\ "iva\_atual": 13 \\ \}\end{tabular} \\ \hline
+		\textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\  "nome": "nome artigo",\\ "descricao": "descricao artigo",\\ "preco\_atual": 12.5,\\ "iva\_atual": 13, \\ "stock\_total": 100, \\ "stock\_disponivel": 85 \\ \}\end{tabular} \\ \hline
 	\end{tabular}
 \end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Tabela do método get\_all\_articles}
+	\label{my-label}
+	\begin{tabular}{|c|l|}
+		\hline
+		\textbf{Webservice ID}                     & \multicolumn{1}{c|}{get\_all\_article}                                                                                                                                                                                        \\ \hline
+		\multicolumn{1}{|l|}{\textbf{Description}} & Retorna todos os artigos.                                                                                                                                                                                    \\ \hline
+		\textbf{Core Views}                        & \multicolumn{1}{c|}{CAT\_PAGE}                                                                                                                                                                                                                        \\ \hline
+		\textbf{Path}                              & \url{http://<domain>/api/articles}                                                                                                                                                          \\ \hline
+		\textbf{Verb}                              & \multicolumn{1}{c|}{GET}                                                                                                                                                                                                \\ \hline
+		\textbf{Input}                             & \multicolumn{1}{c|}{}                                                                                                                                                                                           \\ \hline
+		\textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\  "artigos": [ \\ \{"nome": "nome artigo",\\ "descricao": "descricao artigo",\\ "preco\_atual": 12.5,\\ "iva\_atual": 13, \\ "stock\_total": 100, \\ "stock\_disponivel": 85  \}, ... ] \\ \}\end{tabular} \\ \hline
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\caption{Tabela do método get\_all\_articles}
+	\label{my-label}
+	\begin{tabular}{|c|l|}
+		\hline
+		\textbf{Webservice ID}                     & \multicolumn{1}{c|}{get\_warehouse\_stock}                                                                                                                                                                                        \\ \hline
+		\multicolumn{1}{|l|}{\textbf{Description}} & Retorna o stock de um artigo específico num armazém.                                                                                                                                                                                    \\ \hline
+		\textbf{Core Views}                        & \multicolumn{1}{c|}{PRO\_PAGE}                                                                                                                                                                                                                        \\ \hline
+		\textbf{Path}                              & \url{http://<domain>/api/warehouse\_article?article=<articleID>&warehouse=<warehouseID>}                                                                                                                                                          \\ \hline
+		\textbf{Verb}                              & \multicolumn{1}{c|}{GET}                                                                                                                                                                                                \\ \hline
+		\textbf{Input}                             & \multicolumn{1}{c|}{artigoID, armazemID}                                                                                                                                                                                           \\ \hline
+		\textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\  "stock": 100 \\ \}\end{tabular} \\ \hline
+	\end{tabular}
+\end{table}
+
 
 \subsection{Administrador}
 
