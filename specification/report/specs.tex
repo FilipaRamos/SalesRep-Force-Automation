@@ -42,7 +42,7 @@
 \usepackage[document]{ragged2e}
 \usepackage{listings}
 \usepackage{xcolor}
-\usepackage[margin=0.8in]{geometry}		
+\usepackage[margin=0.5in]{geometry}		
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{url}
@@ -200,7 +200,6 @@ A aplicação web será desenvolvida utilizando Node.js. Porque com este trabalh
 
 \subsection{Funcionalidades}
 
-\hspace*{-2cm}
 \begin{table}[H]
 \centering
 \caption{Descrição das funcionalidades do software.}
@@ -407,6 +406,29 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \end{tabular}
 \end{table}
 
+\subsection{Catalog Page}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=9cm, height = 10.5cm]{SINF_cataloguepage.png}
+  \caption{Core View da -----------}
+  \label{uml}
+\end{figure}
+
+-----------------------
+
+\subsection{Administration Page}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=9cm, height = 10.5cm]{SINF_administrationpage.png}
+  \caption{Core View da ---------------}
+  \label{uml}
+\end{figure}
+
+-----------------------
+
+\newpage
 \section{Interoperabilidade}
 
 \subsection{Clientes}
@@ -436,7 +458,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \textbf{Webservice ID}                     & \multicolumn{1}{c|}{get\_all\_clients}                                                                                                                                                                                        \\ \hline
 \multicolumn{1}{|l|}{\textbf{Description}} & Retorna todos os clientes.                                                                                                                                                                                    \\ \hline
 \textbf{Core Views}                        & HOM\_PAGE                                                                                                                                                                                                                          \\ \hline
-\textbf{Path}                              & \url{http://<domain>/api/user=<userID>}                                                                                                                                                          \\ \hline
+\textbf{Path}                              & \url{http://<domain>/api/clients}                                                                                                                                                          \\ \hline
 \textbf{Verb}                              & \multicolumn{1}{c|}{GET}                                                                                                                                                                                                \\ \hline
 \textbf{Input}                             & \multicolumn{1}{c|}{userID}                                                                                                                                                                                           \\ \hline
 \textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{  "Clientes": [ \\ \{ "id": "EFACSA",\\     "nome": "EFACEC",\\     "nome\_fiscal": "EFACEC SA",\\ \\      "morada": "Porto",\\      "telefone": 969509655,\\      "contribuinte": 989922455\\ \}, \\ \{ \\ "id":  "LIMA", \\ "nome":  "Empreendimentos do Lima", \\ "nome\_fiscal": "Empreendimentos do Lima, Lda", \\ "morada": "Bairro PSP", \\ "telefone": , \\ "contribuinte": 202075133 \\ \}  \\ ]\}
@@ -473,7 +495,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \multicolumn{1}{|l|}{\textbf{Description}} & Retorna as reuniões.                                                                                                                                                                                    \\ \hline
 \textbf{Core Views}                        & HOM\_PAGE
 \\ \hline
-\textbf{Path}                              & \url{http://<domain>/api/user=<userID>}                                                                                                                                                          \\ \hline
+\textbf{Path}                              & \url{http://<domain>/api/meetings}                                                                                                                                                          \\ \hline
 \textbf{Verb}                              & \multicolumn{1}{c|}{GET}                                                                                                                                                                                                \\ \hline
 \textbf{Input}                             & \multicolumn{1}{c|}{userID}                                                                                                                                                                                           \\ \hline
 \textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{ "Reunioes": [ \\ \{\\  "descricao": "Discussão dos novos produtos da empresa.", \\ 
