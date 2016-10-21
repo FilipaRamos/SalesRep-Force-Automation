@@ -1,0 +1,21 @@
+\select@language {portuguese}
+\contentsline {section}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{2}{section.1}
+\contentsline {section}{\numberline {2}Especifica\IeC {\c c}\IeC {\~a}o}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}Descri\IeC {\c c}\IeC {\~a}o}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Funcionalidades}{3}{subsection.2.2}
+\contentsline {section}{\numberline {3}Core Views}{4}{section.3}
+\contentsline {subsection}{\numberline {3.1}Client Page: Display of client information and transaction history}{4}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Homepage: Overview of schedule}{5}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Meeting Page: Overview of meeting}{6}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}New Client Page: Create page for new potencial client}{7}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}New Meeting Page: Schedule meeting with client}{8}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}New Order Page: Sell products to client}{9}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.7}Order Status Page: Overview of order status}{10}{subsection.3.7}
+\contentsline {subsection}{\numberline {3.8}Product Page: Overview of product}{11}{subsection.3.8}
+\contentsline {section}{\numberline {4}Interoperabilidade}{12}{section.4}
+\contentsline {subsection}{\numberline {4.1}Clientes}{12}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Reuni\IeC {\~o}es}{14}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Armaz\IeC {\'e}ns}{15}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Transa\IeC {\c c}\IeC {\~o}es}{16}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Artigos}{17}{subsection.4.5}
+\contentsline {section}{\numberline {5}Conclus\IeC {\~a}o}{17}{section.5}

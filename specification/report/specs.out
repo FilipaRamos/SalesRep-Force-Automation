@@ -1,0 +1,20 @@
+\BOOKMARK [1][-]{section.1}{Introdu\347\343o}{}% 1
+\BOOKMARK [1][-]{section.2}{Especifica\347\343o}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Descri\347\343o}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Funcionalidades}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Core Views}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Client Page: Display of client information and transaction history}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{Homepage: Overview of schedule}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.3}{Meeting Page: Overview of meeting}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.4}{New Client Page: Create page for new potencial client}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.5}{New Meeting Page: Schedule meeting with client}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.6}{New Order Page: Sell products to client}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.7}{Order Status Page: Overview of order status}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.8}{Product Page: Overview of product}{section.3}% 13
+\BOOKMARK [1][-]{section.4}{Interoperabilidade}{}% 14
+\BOOKMARK [2][-]{subsection.4.1}{Clientes}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.2}{Reuni\365es}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.3}{Armaz\351ns}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.4}{Transa\347\365es}{section.4}% 18
+\BOOKMARK [2][-]{subsection.4.5}{Artigos}{section.4}% 19
+\BOOKMARK [1][-]{section.5}{Conclus\343o}{}% 20
