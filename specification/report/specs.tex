@@ -48,6 +48,7 @@
 \usepackage{url}
 \usepackage{float}
 \usepackage{tabularx}
+\usepackage{booktabs}
 
 \graphicspath{ {images/} }
 
@@ -224,6 +225,181 @@ SEARCH                   & Procurar produtos e clientes                         
 
 \section{Core Views}
 
+\subsection{Client Page: Display of client information and transaction history}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=9cm, height = 10.5cm]{SINF_clientpage.png}
+  \caption{Core View da página de cliente.}
+  \label{uml}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Core View Client Page especificação.}
+\label{my-label}
+\begin{tabular}{@{}cl@{}}
+\toprule
+ID CORE VIEW                                                   & CLI\_PAGE                                                                                                                                                                                                                                                                                                                           \\ \midrule
+INWARD PATHS                                                   & \begin{tabular}[c]{@{}l@{}}-Homepage;\\ -Meeting Page;\\ -Order Page.\end{tabular}                                                                                                                                                                                                                                            \\
+OUTWARD PATHS                                                  & \begin{tabular}[c]{@{}l@{}}-Allows the user to see detailed client information;\\ -Displays complete history of pending, completed\\ and canceled orders;\\ -Allows starting a new order with the client;\\ - Display history of meetings with client;\\ -Allows scheduling a new meeting with the client.\end{tabular} \\
+\begin{tabular}[c]{@{}c@{}}ELEMENTS OF\\ THE CORE\end{tabular} & \begin{tabular}[c]{@{}l@{}}Client Information Summary, Order Information\\ Table, Context Tabs and New Order Button\end{tabular}                                                                                                                                                                                        \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Homepage: Overview of schedule}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=9cm, height = 10.5cm]{SINF_homepage.png}
+  \caption{Core View da página inicial.}
+  \label{uml}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Core View Homepage especificação.}
+\label{my-label}
+\begin{tabular}{@{}cl@{}}
+\hline
+ID CORE VIEW                                                   & HOM\_PAGE                                                                                                                                                                                                                                                             \\ \midrule
+INWARD PATHS                                                   & \begin{tabular}[c]{@{}l@{}}-Sign in;\\ -Home button\end{tabular}                                                                                                                                                                                                         \\ \midrule
+OUTWARD PATHS                                                  & \begin{tabular}[c]{@{}l@{}}-Allow user to quickly verify future meetings\\ and take relevant notes if necessary;\\ -Enables scheduling of new meetings with\\ existing clients;\\ -Allows user to add new clients and easily \\ access their information.\end{tabular} \\  \midrule 
+\begin{tabular}[c]{@{}c@{}}ELEMENTS OF\\ THE CORE\end{tabular} & \begin{tabular}[c]{@{}l@{}}Clients Grid, Meetings list, Meetings calendar,\\ Note text area\end{tabular}                                                                                                                                                               \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Meeting Page: Overview of meeting}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=9cm, height = 10.5cm]{SINF_meetingpage.png}
+  \caption{Core View da página das reuniões agendadas.}
+  \label{uml}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Core View Meeting Page especificação.}
+\label{my-label}
+\begin{tabular}{@{}cl@{}}
+\toprule
+ID CORE VIEW                                                   & VIE\_PAGE                                                                                                                                                                                                                               \\ \midrule
+INWARD PATHS                                                   & \begin{tabular}[c]{@{}l@{}}-Homepage;\\ -Client Page.\end{tabular}                                                                                                                                                                      \\
+OUTWARD PATHS                                                  & \begin{tabular}[c]{@{}l@{}}-Allows the user to see detailed client information;\\ -Allows the user to take relevant notes after the meeting;\\ -Shows the detailed list of selling opportunities proposed\\ to the client.\end{tabular} \\
+\begin{tabular}[c]{@{}c@{}}ELEMENTS OF\\ THE CORE\end{tabular} & \begin{tabular}[c]{@{}l@{}}Client Information Summary, Meeting Calendar, Notes \\ Text Area and Selling Opportunities List\end{tabular}                                                                                                 \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{New Client Page: Create page for new potencial client}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=9cm, height = 10.5cm]{SINF_newclient.png}
+  \caption{Core View da página para adicionar um cliente.}
+  \label{uml}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Core View New Client especificação.}
+\label{my-label}
+\begin{tabular}{@{}cl@{}}
+\toprule
+ID CORE VIEW                                                   & NEW\_CLI                             \\ \midrule
+INWARD PATHS                                                   & -Homepage.                           \\  \midrule
+OUTWARD PATHS                                                  & -Allows the creation of new clients. \\  \midrule
+\begin{tabular}[c]{@{}c@{}}ELEMENTS OF\\ THE CORE\end{tabular} & New Client Form                      \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{New Meeting Page: Schedule meeting with client}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=9cm, height = 10.5cm]{SINF_newmeeting.png}
+  \caption{Core View da página para adicionar uma reunião.}
+  \label{uml}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Core View New Meeting Page especificação.}
+\label{my-label}
+\begin{tabular}{@{}cl@{}}
+\toprule
+ID CORE VIEW                                                   & NEW\_MEE                                                                                                                                                                                                                                                                                          \\ \midrule
+INWARD PATHS                                                   & \begin{tabular}[c]{@{}l@{}}-Homepage;\\ -Client Page.\end{tabular}                                                                                                                                                                                                                                \\
+OUTWARD PATHS                                                  & \begin{tabular}[c]{@{}l@{}}-Enables the scheduling of new meetings with clients;\\ -Verifies if different meetings do not overlap each other;\\ -Enables to select the products to sell and access their \\ respective pages;\\ -Enables to take important notes before the meeting.\end{tabular} \\
+\begin{tabular}[c]{@{}c@{}}ELEMENTS OF\\ THE CORE\end{tabular} & \begin{tabular}[c]{@{}l@{}}Description Text Area, Meeting Data Picker, Client List\\ and Selling Opportunities List\end{tabular}                                                                                                                                                                  \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{New Order Page: Sell products to client}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=9cm, height = 10.5cm]{SINF_neworder.png}
+  \caption{Core View da página para adicionar um pedido de um cliente.}
+  \label{uml}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Core View New Order Page especificação.}
+\label{my-label}
+\begin{tabular}{@{}cl@{}}
+\toprule
+ID CORE VIEW                                                   & NEW\_TRA                                                                                                                                       \\ \midrule
+INWARD PATHS                                                   & \begin{tabular}[c]{@{}l@{}}-Client Page;\\ -Meeting Page.\end{tabular}                                                                         \\
+OUTWARD PATHS                                                  & \begin{tabular}[c]{@{}l@{}}-Allows user to see specific information about the client;\\ -Enables the creation of complete orders.\end{tabular} \\
+\begin{tabular}[c]{@{}c@{}}ELEMENTS OF\\ THE CORE\end{tabular} & \begin{tabular}[c]{@{}l@{}}Client Information Summary, New Order Table and Action\\ Buttons\end{tabular}                                       \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Order Status Page: Overview of order status}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=9cm, height = 10.5cm]{SINF_orderpage.png}
+  \caption{Core View da página onde se visualiza um pedido de um cliente.}
+  \label{uml}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Core View Order Status Page especificação.}
+\label{my-label}
+\begin{tabular}{@{}cl@{}}
+\toprule
+ID CORE VIEW                                                   & TRA\_PAGE                                                                                                                                                                         \\ \midrule
+INWARD PATHS                                                   & -Client Page.                                                                                                                                                                     \\
+OUTWARD PATHS                                                  & \begin{tabular}[c]{@{}l@{}}-Allows user to see the order status;\\ -Enables user to access client information;\\ -Enables user to see detailed information of order.\end{tabular} \\
+\begin{tabular}[c]{@{}c@{}}ELEMENTS OF\\ THE CORE\end{tabular} & \begin{tabular}[c]{@{}l@{}}Status Bar, Client Information Summary and Order\\ Information Table\end{tabular}                                                                      \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Product Page: Overview of product}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=9cm, height = 10.5cm]{SINF_productpage.png}
+  \caption{Core View da página de um produto e a sua disponibilidade em cada armazém.}
+  \label{uml}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Core View Product Page especificação.}
+\label{my-label}
+\begin{tabular}{@{}cl@{}}
+\toprule
+ID CORE VIEW                                                   & PRO\_PAGE                                                                                                                                                                                                                                                                   \\ \midrule
+INWARD PATHS                                                   & \begin{tabular}[c]{@{}l@{}}-Order Page;\\ -Meeting Page.\end{tabular}                                                                                                                                                                                                 \\
+OUTWARD PATHS                                                  & \begin{tabular}[c]{@{}l@{}}-Enables the user to see detailed information about a product;\\ -Enables the user to check availability of a product in several\\ warehouses and respective stock;\\ -Enables user to request a defined quantity of product units.\end{tabular} \\
+\begin{tabular}[c]{@{}c@{}}ELEMENTS OF\\ THE CORE\end{tabular} & Product Information Summary and Warehouse Table                                                                                                                                                                                                                             \\ \bottomrule
+\end{tabular}
+\end{table}
 
 \section{Interoperabilidade}
 
@@ -238,7 +414,7 @@ SEARCH                   & Procurar produtos e clientes                         
 \textbf{Webservice ID}                     & \multicolumn{1}{c|}{get\_client}                                                                                                                                                                                        \\ \hline
 \multicolumn{1}{|l|}{\textbf{Description}} & Retorna a informação de um cliente específico.                                                                                                                                                                                    \\ \hline
 \textbf{Core Views}                        & CLI\_PAGE                                                                                                                                                                                                                          \\ \hline
-\textbf{Path}                              & \url{http://sinf-scheduler.com/client=<clientID>}                                                                                                                                                          \\ \hline
+\textbf{Path}                              & \url{http://<domain>/api/client=<clientID>}                                                                                                                                                          \\ \hline
 \textbf{Verb}                              & \multicolumn{1}{c|}{GET}                                                                                                                                                                                                \\ \hline
 \textbf{Input}                             & \multicolumn{1}{c|}{clientID}                                                                                                                                                                                           \\ \hline
 \textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\      "id": "EFACSA",\\      "nome": "EFACEC",\\      "nome\_fiscal": "EFACEC SA",\\ \\      "morada": "Porto",\\      "telefone": 969509655,\\      "contribuinte": 989922455\\ \}\end{tabular} \\ \hline
@@ -254,7 +430,7 @@ SEARCH                   & Procurar produtos e clientes                         
 \textbf{Webservice ID}                     & \multicolumn{1}{c|}{get\_all\_clients}                                                                                                                                                                                        \\ \hline
 \multicolumn{1}{|l|}{\textbf{Description}} & Retorna todos os clientes.                                                                                                                                                                                    \\ \hline
 \textbf{Core Views}                        & HOM\_PAGE                                                                                                                                                                                                                          \\ \hline
-\textbf{Path}                              & \url{http://sinf-scheduler.com/homepage}                                                                                                                                                          \\ \hline
+\textbf{Path}                              & \url{http://<domain>/api/user=<userID>}                                                                                                                                                          \\ \hline
 \textbf{Verb}                              & \multicolumn{1}{c|}{GET}                                                                                                                                                                                                \\ \hline
 \textbf{Input}                             & \multicolumn{1}{c|}{userID}                                                                                                                                                                                           \\ \hline
 \textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{  "Clientes": [ \\ \{ "id": "EFACSA",\\     "nome": "EFACEC",\\     "nome\_fiscal": "EFACEC SA",\\ \\      "morada": "Porto",\\      "telefone": 969509655,\\      "contribuinte": 989922455\\ \}, \\ \{ \\ "id":  "LIMA", \\ "nome":  "Empreendimentos do Lima", \\ "nome\_fiscal": "Empreendimentos do Lima, Lda", \\ "morada": "Bairro PSP", \\ "telefone": , \\ "contribuinte": 202075133 \\ \}  \\ ]\}
@@ -272,7 +448,7 @@ SEARCH                   & Procurar produtos e clientes                         
 \textbf{Webservice ID}                     & \multicolumn{1}{c|}{add\_client}                                                                                                                                                                                        \\ \hline
 \multicolumn{1}{|l|}{\textbf{Description}} & Adiciona um cliente.                                                                                                                                                                                    \\ \hline
 \textbf{Core Views}                        & NEW\_CLI                                                                                                                                                                                                                         \\ \hline
-\textbf{Path}                              & \url{http://sinf-scheduler.com/new_client}                                                                                                                                                          \\ \hline
+\textbf{Path}                              & \url{http://<domain>/api}                                                                                                                                                          \\ \hline
 \textbf{Verb}                              & \multicolumn{1}{c|}{POST}                                                                                                                                                                                                \\ \hline
 \textbf{Input}                             & \multicolumn{1}{c|}{nome, nome\_fiscal, email, morada, telefone, contribuinte}                                                                                                                                                                                           \\ \hline
 \textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\  "resultado": "OK" \\ \}\end{tabular} \\ \hline
@@ -291,7 +467,7 @@ SEARCH                   & Procurar produtos e clientes                         
 \multicolumn{1}{|l|}{\textbf{Description}} & Retorna as reuniões.                                                                                                                                                                                    \\ \hline
 \textbf{Core Views}                        & HOM\_PAGE
 \\ \hline
-\textbf{Path}                              & \url{http://sinf-scheduler.com/homepage}                                                                                                                                                          \\ \hline
+\textbf{Path}                              & \url{http://<domain>/api/user=<userID>}                                                                                                                                                          \\ \hline
 \textbf{Verb}                              & \multicolumn{1}{c|}{GET}                                                                                                                                                                                                \\ \hline
 \textbf{Input}                             & \multicolumn{1}{c|}{userID}                                                                                                                                                                                           \\ \hline
 \textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{ "Reunioes": [ \\ \{\\  "descricao": "Discussão dos novos produtos da empresa.", \\ 
@@ -312,7 +488,7 @@ SEARCH                   & Procurar produtos e clientes                         
 \multicolumn{1}{|l|}{\textbf{Description}} & Adiciona uma reunião.                                                                                                                                                                                    \\ \hline
 \textbf{Core Views}                        & NEW\_MEE
 \\ \hline
-\textbf{Path}                              & \url{http://sinf-scheduler.com/new_meeting}                                                                                                                                                          \\ \hline
+\textbf{Path}                              & \url{http://<domain>/api}                                                                                                                                                          \\ \hline
 \textbf{Verb}                              & \multicolumn{1}{c|}{POST}                                                                                                                                                                                                \\ \hline
 \textbf{Input}                             & \multicolumn{1}{c|}{descricao, data, tempo, notas}                                                                                                                                                                                           \\ \hline
 \textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\  "resultado": "OK" \\ \}\end{tabular} \\ \hline
@@ -327,9 +503,9 @@ SEARCH                   & Procurar produtos e clientes                         
 \hline 
 \textbf{Webservice ID}                     & \multicolumn{1}{c|}{edit\_meeting}                                                                                                                                                                                        \\ \hline
 \multicolumn{1}{|l|}{\textbf{Description}} & Edita uma reunião.                                                                                                                                                                                    \\ \hline
-\textbf{Core Views}                        & EDIT\_MEE????????????
+\textbf{Core Views}                        & 
 \\ \hline
-\textbf{Path}                              & \url{http://sinf-scheduler.com/edit_meeting}                                                                                                                                                          \\ \hline
+\textbf{Path}                              & \url{http://<domain>/api}                                                                                                                                                          \\ \hline
 \textbf{Verb}                              & \multicolumn{1}{c|}{POST}                                                                                                                                                                                                \\ \hline
 \textbf{Input}                             & \multicolumn{1}{c|}{descricao, data, tempo, notas}                                                                                                                                                                                           \\ \hline
 \textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\  "resultado": "OK" \\ \}\end{tabular} \\ \hline
@@ -344,9 +520,9 @@ SEARCH                   & Procurar produtos e clientes                         
 \hline 
 \textbf{Webservice ID}                     & \multicolumn{1}{c|}{delete\_meeting}                                                                                                                                                                                        \\ \hline
 \multicolumn{1}{|l|}{\textbf{Description}} & Apaga uma reunião.                                                                                                                                                                                    \\ \hline
-\textbf{Core Views}                        & EDIT\_MEE????????????
+\textbf{Core Views}                        & 
 \\ \hline
-\textbf{Path}                              & \url{http://sinf-scheduler.com/edit_meeting}                                                                                                                                                          \\ \hline
+\textbf{Path}                              & \url{http://<domain>/api/meeting=<meetingID>}                                                                                                                                                          \\ \hline
 \textbf{Verb}                              & \multicolumn{1}{c|}{DELETE}                                                                                                                                                                                                \\ \hline
 \textbf{Input}                             & \multicolumn{1}{c|}{meetingID}                                                                                                                                                                                           \\ \hline
 \textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\  "resultado": "OK" \\ \}\end{tabular} \\ \hline
