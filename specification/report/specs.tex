@@ -406,27 +406,49 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \end{tabular}
 \end{table}
 
-\subsection{Catalog Page}
+\subsection{Catalog Page: List of products}
 
 \begin{figure}[H]
   \centering
     \includegraphics[width=9cm, height = 10.5cm]{SINF_cataloguepage.png}
-  \caption{Core View da -----------}
+  \caption{Core View da página do catalogo.}
   \label{uml}
 \end{figure}
 
------------------------
+\begin{table}[H]
+\centering
+\caption{Core View Catalog Page especificação.}
+\label{my-label}
+\begin{tabular}{@{}cl@{}}
+\toprule
+ID CORE VIEW                                                   & CAT\_PAGE                                                                                                                                                                                                                                                                   \\ \midrule
+INWARD PATHS                                                   & \begin{tabular}[c]{@{}l@{}}-Meeting Page;\\ -Administration Page;\\ -Search.\end{tabular}                                                                                                                                                                                                 \\ \midrule
+OUTWARD PATHS                                                  & \begin{tabular}[c]{@{}l@{}}-Allows the user to see the products for sale in detail.\end{tabular} \\ \midrule
+\begin{tabular}[c]{@{}c@{}}ELEMENTS OF\\ THE CORE\end{tabular} & Product List                                                                                                                                                                                                                             \\ \bottomrule
+\end{tabular}
+\end{table}
 
-\subsection{Administration Page}
+\subsection{Administration Page: Overview of sales and sales team}
 
 \begin{figure}[H]
   \centering
     \includegraphics[width=9cm, height = 10.5cm]{SINF_administrationpage.png}
-  \caption{Core View da ---------------}
+  \caption{Core View da página de administração.}
   \label{uml}
 \end{figure}
 
------------------------
+\begin{table}[H]
+\centering
+\caption{Core View Administration Page especificação.}
+\label{my-label}
+\begin{tabular}{@{}cl@{}}
+\toprule
+ID CORE VIEW                                                   & ADMIN\_PAGE                                                                                                                                                                                                                                                                   \\ \midrule
+INWARD PATHS                                                   & \begin{tabular}[c]{@{}l@{}}-Sign In.\end{tabular}                                                                                                                                                                                                 \\ \midrule
+OUTWARD PATHS                                                  & \begin{tabular}[c]{@{}l@{}}-Allows the user to see the sales representatives with the \\ most clients or  with the largest sales volume; \\ -Allows the user to see prospect clients or with the largest \\ sales volume; \\ -Enables the user to see an overview of sales, including the \\ best selling products.\end{tabular} \\ \midrule
+\begin{tabular}[c]{@{}c@{}}ELEMENTS OF\\ THE CORE\end{tabular} & Sales Representative List, Clients List and Sales Overview                                                                                                                                                                                                                             \\ \bottomrule
+\end{tabular}
+\end{table}
 
 \newpage
 \section{Interoperabilidade}
@@ -741,9 +763,6 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \section{Conclusão}
 \justify\normalsize
 Finda esta fase, consideram-se atingidos os objetivos definidos para esta primeira fase: foi feita a descrição do projeto – uma aplicação web que oferecerá funcionalidades de uma solução SFA. Enumeraram-se as funcionalidades a implementar e identificaram-se os pontos de ligação com o ERP Primavera.
-
-\bibliography{title_page_1}
-\bibliographystyle{plain}
 
 \end{titlepage}
 \end{document}
