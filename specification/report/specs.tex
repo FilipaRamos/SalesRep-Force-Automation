@@ -194,8 +194,9 @@ Realizado no âmbito da unidade curricular de Sistemas de Informação, o presen
 \subsection{Descrição}
 \justify\normalsize
 
-O projeto consiste no desenvolvimento de uma aplicação web que oferecerá as funcionalidades de uma solução SFA. Existirá uma camada de autenticação, através da qual os representantes de vendas deverão registar-se e autenticar-se, para que possam organizar da sua agenda, manter o registo dos seus contactos com clientes e registar ordens de venda. 
-A aplicação web será desenvolvida usando tecnologias web: (listar). Porque com este trabalho se pretende, também, adquirir conhecimentos no que respeita ao uso de um ERP – no caso, o Primavera – prevê-se, igualmente, a criação de um servidor back-end em C\#, que fara a comuniação com o Primavera, passando a informação à aplicação front-end atraves de uma API RESTful. 
+O projeto consiste no desenvolvimento de uma aplicação web que oferecerá as funcionalidades de uma solução SFA. Existirá uma camada de autenticação, através da qual os representantes de vendas deverão registar-se e autenticar-se, para que possam organizar da sua agenda, manter o registo dos seus contactos com clientes e registar ordens de venda.
+ 
+A aplicação web será desenvolvida utilizando Node.js. Porque com este trabalho se pretende, também, adquirir conhecimentos no que respeita ao uso de um ERP – no caso, o Primavera – prevê-se, igualmente, a criação de um servidor back-end em C\#, que fara a comuniação com o Primavera, passando a informação à aplicação front-end atraves de uma API RESTful. 
 
 \subsection{Funcionalidades}
 
@@ -505,8 +506,8 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \multicolumn{1}{|l|}{\textbf{Description}} & Edita uma reunião.                                                                                                                                                                                    \\ \hline
 \textbf{Core Views}                        & 
 \\ \hline
-\textbf{Path}                              & \url{http://<domain>/api}                                                                                                                                                          \\ \hline
-\textbf{Verb}                              & \multicolumn{1}{c|}{POST}                                                                                                                                                                                                \\ \hline
+\textbf{Path}                              & \url{http://<domain>/api/meeting}                                                                                                                                                          \\ \hline
+\textbf{Verb}                              & \multicolumn{1}{c|}{PUT}                                                                                                                                                                                                \\ \hline
 \textbf{Input}                             & \multicolumn{1}{c|}{descricao, data, tempo, notas}                                                                                                                                                                                           \\ \hline
 \textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\  "resultado": "OK" \\ \}\end{tabular} \\ \hline
 \end{tabular}
