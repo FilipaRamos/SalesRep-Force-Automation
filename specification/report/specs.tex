@@ -200,6 +200,7 @@ A aplicação web será desenvolvida utilizando Node.js. Porque com este trabalh
 
 \subsection{Funcionalidades}
 
+\hspace*{-2cm}
 \begin{table}[H]
 \centering
 \caption{Descrição das funcionalidades do software.}
@@ -207,14 +208,10 @@ A aplicação web será desenvolvida utilizando Node.js. Porque com este trabalh
 \begin{tabular}{|c|l|c|}
 \hline
 Funcionalidade           & Finalidade                                                                                                                                                   & CoreView  \\ \hline
-REGISTER\_REPRESENTATIVE           & Registar um representante de vendas  & ADMIN\_PAGE            
-& CoreView  \\ \hline
-VIEW\_TOP_REPRESENTATIVES           & Ver uma lista com os representantes de vendas com maior número de vendas & ADMIN\_PAGE
-& CoreView  \\ \hline
-VIEW\_STATISTICS           & Ver estatísticas de vendas, como volume total de vendas ou volume de vendas por vendedor  & ADMIN\_PAGE
-& CoreView  \\ \hline
-VIEW\_PRODUCT\_CATALOGUE           & Ver a lista de produtos  & CAT\_PAGE   
-& CoreView  \\ \hline
+REGISTER\_REPRESENTATIVE           & Registar um representante de vendas  & ADMIN\_PAGE    \\ \hline
+VIEW\_TOP\_REPRESENTATIVES           &  \begin{tabular}[c]{@{}l@{}}Ver uma lista com os representantes \\ de vendas com maior número de vendas.\end{tabular}  & ADMIN\_PAGE  \\ \hline
+VIEW\_STATISTICS           & \begin{tabular}[c]{@{}l@{}}Ver estatísticas de vendas, como volume total \\ de vendas ou volume de vendas por vendedor.\end{tabular}  & ADMIN\_PAGE  \\ \hline
+VIEW\_PRODUCT\_CATALOGUE           & Ver a lista de produtos  & CAT\_PAGE \\ \hline
 VIEW\_MEETINGS           & Consultar reuniões agendadas                                                                                                                                 & HOM\_PAGE \\ \hline
 VIEW\_PROSPECTS\_CLIENTS & Consultar lista de potenciais clientes                                                                                                                       & HOM\_PAGE \\ \hline
 VIEW\_TOP\_CLIENTS       & \begin{tabular}[c]{@{}l@{}}Consultar lista dos clientes com mais \\ encomendas\end{tabular}                                                                  & HOM\_PAGE \\ \hline
@@ -610,6 +607,79 @@ OUTWARD PATHS                                                  & \begin{tabular}
 		\textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\  "nome": "nome artigo",\\ "descricao": "descricao artigo",\\ "preco\_atual": 12.5,\\ "iva\_atual": 13 \\ \}\end{tabular} \\ \hline
 	\end{tabular}
 \end{table}
+
+\subsection{Administrador}
+
+\begin{table}[H]
+	\centering
+	\caption{Tabela do método get\_product\_stats.}
+	\label{my-label}
+	\begin{tabular}{|c|l|}
+		\hline
+		\textbf{Webservice ID}                     & \multicolumn{1}{c|}{get\_product\_stats}                                                                                                                                                                                        \\ \hline
+		\multicolumn{1}{|l|}{\textbf{Description}} & Retorna as estatísticas de um produto num certo intervalo de tempo.                                                                                                                                                                                    \\ \hline
+		\textbf{Core Views}                        & \multicolumn{1}{c|}{}                                                                                                                                                                                                                        \\ \hline
+		\textbf{Path}                              & \url{http://<domain>/api/article=<articleID>&time=<timePeriod>}                                                                                                                                                          \\ \hline
+		\textbf{Verb}                              & \multicolumn{1}{c|}{GET}                                                                                                                                                                                                \\ \hline
+		\textbf{Input}                             & \multicolumn{1}{c|}{articleID, time\_period}                                                                                                                                                                                           \\ \hline
+		\textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\  "nome": "nome artigo",\\ "vendas": 10000 \\ \}\end{tabular} \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Tabela do método get\_all\_product\_stats.}
+	\label{my-label}
+	\begin{tabular}{|c|l|}
+		\hline
+		\textbf{Webservice ID}                     & \multicolumn{1}{c|}{get\_all\_product\_stats}                                                                                                                                                                                        \\ \hline
+		\multicolumn{1}{|l|}{\textbf{Description}} & \begin{tabular}[c]{@{}l@{}}  Retorna estatísticas do número de produtos mais vendidos \\ no intervalo de tempo especificado.                                                                                                                                                                                   
+	\end{tabular} \\ \hline
+		\textbf{Core Views}                        & \multicolumn{1}{c|}{}                                                                                                                                                                                                                        \\ \hline
+		\textbf{Path}                              & \url{http://<domain>/api/article=<articleID>&time=<timePeriod>&nr=<nrP>}                                                                                                                                                                                                                                                             
+\\  \hline
+		\textbf{Verb}                              & \multicolumn{1}{c|}{GET}                                                                                                                                                                                                \\ \hline
+		\textbf{Input}                             & \multicolumn{1}{c|}{articleID, time\_period, nrProducts}                                                                                                                                                                                           \\ \hline
+		\textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\  "artigos": [ \\ \{ "nome": "CloroX",\\ "vendas": 10000 \}, \\  \{ "nome": "Flit",\\ "vendas": 5000 \}  ] \\ \}\end{tabular} \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Tabela do método get\_salesRep\_stats.}
+	\label{my-label}
+	\begin{tabular}{|c|l|}
+		\hline
+		\textbf{Webservice ID}                     & \multicolumn{1}{c|}{get\_salesRep\_stats}                                                                                                                                                                                        \\ \hline
+		\multicolumn{1}{|l|}{\textbf{Description}} & \begin{tabular}[c]{@{}l@{}}  Retorna estatísticas de vendas de um vendedore específico.               
+	\end{tabular} \\ \hline
+		\textbf{Core Views}                        & \multicolumn{1}{c|}{}                                                                                                                                                                                                                        \\ \hline
+		\textbf{Path}                              & \url{http://<domain>/api/salesRep=<salesRepID>&time=<timePeriod>}                                                                                                                                                                                                                                                             
+\\  \hline
+		\textbf{Verb}                              & \multicolumn{1}{c|}{GET}                                                                                                                                                                                                \\ \hline
+		\textbf{Input}                             & \multicolumn{1}{c|}{salesRepID, time\_period}                                                                                                                                                                                           \\ \hline
+		\textbf{Output}                            & \begin{tabular}[c]{@{}l@{}} \{ "nome": "João Claro",\\ "vendas": 10000 \}\end{tabular}  \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Tabela do método get\_all\_salesRep\_stats.}
+	\label{my-label}
+	\begin{tabular}{|c|l|}
+		\hline
+		\textbf{Webservice ID}                     & \multicolumn{1}{c|}{get\_all\_salesRep\_stats}                                                                                                                                                                                        \\ \hline
+		\multicolumn{1}{|l|}{\textbf{Description}} & \begin{tabular}[c]{@{}l@{}}  Retorna estatísticas de vendas do número de vendedores especificado.               
+	\end{tabular} \\ \hline
+		\textbf{Core Views}                        & \multicolumn{1}{c|}{}                                                                                                                                                                                                                        \\ \hline
+		\textbf{Path}                              & \url{http://<domain>/api/salesRep=<salesRepID>&time=<timePeriod>&nr=<nrS>}                                                                                                                                                                                                                                                             
+\\  \hline
+		\textbf{Verb}                              & \multicolumn{1}{c|}{GET}                                                                                                                                                                                                \\ \hline
+		\textbf{Input}                             & \multicolumn{1}{c|}{salesRepID, time\_period, nrSalesRep}                                                                                                                                                                                           \\ \hline
+		\textbf{Output}                            & \begin{tabular}[c]{@{}l@{}}\{\\  "vendedores": [ \\ \{ "nome": "João Claro",\\ "vendas": 10000 \}, \\  \{ "nome": "Joana Cabral",\\ "vendas": 3000 \}  ] \\ \}\end{tabular}  \\ \hline
+	\end{tabular}
+\end{table}
+
 
 
 \section{Conclusão}
