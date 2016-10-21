@@ -194,7 +194,7 @@ Realizado no âmbito da unidade curricular de Sistemas de Informação, o presen
 \subsection{Descrição}
 \justify\normalsize
 
-O projeto consiste no desenvolvimento de uma aplicação web que oferecerá as funcionalidades de uma solução SFA. Existirá uma camada de autenticação, através da qual os representantes de vendas deverão registar-se e autenticar-se, para que possam organizar da sua agenda, manter o registo dos seus contactos com clientes e registar ordens de venda.
+O projeto consiste no desenvolvimento de uma aplicação web que oferecerá as funcionalidades de uma solução SFA. Existirá uma camada de autenticação, através da qual um supervisor e os representantes de vendas deverão autenticar-se, para que possam organizar da sua agenda, manter o registo dos seus contactos com clientes e registar ordens de venda.
  
 A aplicação web será desenvolvida utilizando Node.js. Porque com este trabalho se pretende, também, adquirir conhecimentos no que respeita ao uso de um ERP – no caso, o Primavera – prevê-se, igualmente, a criação de um servidor back-end em C\#, que fara a comuniação com o Primavera, passando a informação à aplicação front-end atraves de uma API RESTful. 
 
@@ -207,6 +207,14 @@ A aplicação web será desenvolvida utilizando Node.js. Porque com este trabalh
 \begin{tabular}{|c|l|c|}
 \hline
 Funcionalidade           & Finalidade                                                                                                                                                   & CoreView  \\ \hline
+REGISTER\_REPRESENTATIVE           & Registar um representante de vendas  & ADMIN\_PAGE            
+& CoreView  \\ \hline
+VIEW\_TOP_REPRESENTATIVES           & Ver uma lista com os representantes de vendas com maior número de vendas & ADMIN\_PAGE
+& CoreView  \\ \hline
+VIEW\_STATISTICS           & Ver estatísticas de vendas, como volume total de vendas ou volume de vendas por vendedor  & ADMIN\_PAGE
+& CoreView  \\ \hline
+VIEW\_PRODUCT\_CATALOGUE           & Ver a lista de produtos  & CAT\_PAGE   
+& CoreView  \\ \hline
 VIEW\_MEETINGS           & Consultar reuniões agendadas                                                                                                                                 & HOM\_PAGE \\ \hline
 VIEW\_PROSPECTS\_CLIENTS & Consultar lista de potenciais clientes                                                                                                                       & HOM\_PAGE \\ \hline
 VIEW\_TOP\_CLIENTS       & \begin{tabular}[c]{@{}l@{}}Consultar lista dos clientes com mais \\ encomendas\end{tabular}                                                                  & HOM\_PAGE \\ \hline
@@ -606,7 +614,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 
 \section{Conclusão}
 \justify\normalsize
-Finda esta etapa, consideram-se atingidos os objetivos definidos para esta primeira fase: foi feita a descrição do projeto – uma aplicação web que oferecerá funcionalidades de uma solução SFA. Enumeram-se as funcionalidades a implementar – de entre as quais se desta-cam (exemplos) –, e identificaram-se os pontos de ligação com o ERP Primavera.
+Finda esta fase, consideram-se atingidos os objetivos definidos para esta primeira fase: foi feita a descrição do projeto – uma aplicação web que oferecerá funcionalidades de uma solução SFA. Enumeraram-se as funcionalidades a implementar e identificaram-se os pontos de ligação com o ERP Primavera.
 
 \bibliography{title_page_1}
 \bibliographystyle{plain}
