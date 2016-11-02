@@ -1,0 +1,42 @@
+<div class="widget widget-nopad">
+	<!-- widget-header -->
+	<div class="widget-header"> <i class="fa fa-fw fa-address-card"></i> Clientes
+		<!--TODO adicionar funcionalidade-->
+		<!--<input type="button" class="pull-right" value="Adicionar"></input>-->
+	</div>
+
+	<div class="widget-content">
+		<div class="widget big-stats-container">
+			<div class="widget-content">
+
+				<section ng-controller="CostumersController as costumerCtrl">
+					<ul class="nav nav-pills">
+						<li ng-class="{ active:costumerCtrl.isSet(1) }">
+							<a href ng-click="costumerCtrl.setTab(1)">Potenciais</a>
+						</li>
+						<li ng-class="{ active:costumerCtrl.isSet(2) }">
+							<a href ng-click="costumerCtrl.setTab(2)">Top</a>
+						</li>
+					</ul>
+
+					<div ng-show="costumerCtrl.isSet(1)">
+						<div class="list-group">
+							<div class="list-group-item" ng-repeat="costumer in costumerCtrl.costumers" ng-show="costumer.vendas==0">
+								<p><a href="clientes/{{costumer.id}}">{{costumer.nome}}</a><em class="pull-right">{{costumer.telefone}}</em></p>
+							</div>
+						</div>
+					</div>
+
+					<div ng-show="costumerCtrl.isSet(2)">
+						<div class="list-group">
+							<div class="list-group-item" ng-repeat="costumer in costumerCtrl.costumers | orderBy : '-vendas'">
+								<p><a href="clientes/{{costumer.id}}">{{costumer.nome}}</a> <em class="pull-right">{{costumer.vendas | currency:"€"}}</em></p>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<!-- /widget-content -->
+		</div>
+	</div>
+</div>
