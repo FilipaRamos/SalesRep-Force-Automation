@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="sfa">
+
+<head>
+    <title> <%= title %> </title>
+    <% include templates/header.ejs %>
+</head>
+
+
+<body>
+<div id="wrapper">
+    <% include templates/nav-bar.ejs %>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+
+            <% include templates/breadcrums.ejs %>
+
+            <div class="row">
+                <div class="span6">
+                    <div id="calendar"></div>
+                </div>
+                <div class="span6">
+                    <h3>Eventos</h3>
+                    <div id="upcomming"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--fullcalendar-->
+<script language="javascript" type="text/javascript" src="lib/fullcalendar/lib/moment.min.js"></script>
+<script language="javascript" type="text/javascript" src="lib/fullcalendar/fullcalendar.min.js"></script>
+<script language="javascript" type="text/javascript" src="lib/fullcalendar/locale/pt.js"></script>
+<script>
+    $(document).ready(function () {
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+
+        var eventList = $('#upcomming').fullCalendar({
+            weekends: false,
+            header: {
+                left: '',
+                center: '',
+                right: ''
+            },
+            views: {
+                listNext: {start: date, type: 'list', duration: {days: 4}}
+            },
+            defaultView: 'listNext',
+            events: events
+        });
+
+        var calendar = $('#calendar').fullCalendar({
+            weekends: false,
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            selectable: true,
+            selectHelper: true,
+            select: function (start, end, allDay) {
+                var title = prompt('Event Title:');
+                if (title) {
+                    calendar.fullCalendar('renderEvent',
+                            {
+                                title: title,
+                                start: start,
+                                end: end,
+                                allDay: allDay
+                            },
+                            true // make the event "stick"
+                    );
+                }
+                calendar.fullCalendar('unselect');
+            },
+            editable: true,
+            events: events
+        });
+    });
+</script>
+<!-- /fullcalendar -->
+</body>
+
+</html>

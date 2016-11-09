@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="sfa">
+
+<head>
+	<% include templates/header.ejs %>
+</head>
+
+
+<body>
+	<div id="wrapper">
+		<% include templates/nav-bar.ejs %>
+
+		<div id="page-wrapper">
+			<div class="container-fluid">
+
+				<% include templates/breadcrums.ejs %>
+
+				<div class="row">
+					<div class="span6">
+						<% include templates/costumer-listing.ejs %>
+					</div>
+
+					<div class="span6">
+						<% include templates/calendar.ejs %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
