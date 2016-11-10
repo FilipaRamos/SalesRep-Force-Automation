@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="sfa">
+
+<head>
+	<% include templates/comon/header.ejs %>
+	<link rel="stylesheet" type="text/css" href="stylesheets/pages/products.css" />
+</head>
+
+
+<body>
+	<div id="wrapper">
+		<% include templates/comon/nav-bar.ejs %>
+
+		<div id="page-wrapper">
+			<div class="container-fluid">
+
+				<% include templates/comon/breadcrums.ejs %>
+
+				<div class="row" ng-controller="ProductsController as productsCtrl">
+
+					<div class="col-md-3">
+						<p class="lead">Categorias </p>
+						<div class="list-group">
+							<div>
+								<a href="#" ng-click="productsCtrl.filterBy('all')" class="list-group-item">Todos</a>
+							</div>
+							<div ng-click="productsCtrl.filterBy(category.id)"
+									ng-repeat="category in productsCtrl.categories | orderBy: '-nome' " >
+								<a href="#" class="list-group-item">{{category.nome}}</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-9">
+
+						<div class="row">
+							<% include templates/products/product-preview.ejs %>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<% include templates/comon/footer.ejs %>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="javascripts/custom/products.js"></script>
+</body>
+
+</html>

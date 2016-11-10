@@ -1,0 +1,23 @@
+<div class="widget widget-nopad">
+    <!-- widget-header -->
+    <div class="widget-header"><i class="fa fa-fw fa-dropbox"></i> Armazéns
+    </div>
+
+    <div class="widget-content">
+        <div class="widget big-stats-container">
+            <div class="widget-content">
+
+                <section>
+                    <div class="list-group">
+                        <div class="list-group-item"
+                             ng-repeat="warehouse in productCtrl.warehouses | orderBy : '-stock'">
+                            <p>{{warehouse.nome}} {{warehouse.morada}} <em class="pull-right">{{warehouse.stock}}</em></p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <!-- /widget-content -->
+        </div>
+    </div>
+</div>

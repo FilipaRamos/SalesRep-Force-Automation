@@ -10,6 +10,9 @@ var users = require('./routes/users');
 
 var agenda = require('./routes/agenda');
 var costumers = require('./routes/costumers');
+var costumer = require('./routes/costumer');
+var products = require('./routes/products');
+var product = require('./routes/product');
 var new_costumer = require('./routes/new_costumer');
 var new_event = require('./routes/new_event');
 
@@ -27,10 +30,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// TODO review routing to cliente, produto
 app.use('/', index);
-app.use('/users', users);
 app.use('/agenda', agenda);
 app.use('/clientes', costumers);
+app.use('/cliente', costumer);
+app.use('/produtos', products);
+app.use('/produto', product);
 app.use('/novo_cliente', new_costumer);
 app.use('/novo_evento', new_event);
 

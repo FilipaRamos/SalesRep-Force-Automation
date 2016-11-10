@@ -2,29 +2,30 @@
 <html ng-app="sfa">
 
 <head>
-	<% include templates/header.ejs %>
+	<% include templates/comon/header.ejs %>
 </head>
-
 
 <body>
 	<div id="wrapper">
-		<% include templates/nav-bar.ejs %>
+		<% include templates/comon/nav-bar.ejs %>
 
 		<div id="page-wrapper">
 			<div class="container-fluid">
 
-				<% include templates/breadcrums.ejs %>
+				<% include templates/comon/breadcrums.ejs %>
 
 				<div class="row">
 					<div class="span6">
-						<% include templates/costumer-listing.ejs %>
+						<% include templates/costumers/costumer-listing.ejs %>
 					</div>
 
 					<div class="span6">
-						<% include templates/calendar.ejs %>
+						<% include templates/agenda/calendar.ejs %>
 					</div>
 				</div>
 			</div>
+
+			<% include templates/comon/footer.ejs %>
 		</div>
 	</div>
 </body>

@@ -8,7 +8,9 @@ app.controller('CostumersController', function () {
   this.newCostumer = {};
 
   this.addCostumer = function (product) {
-    costumers.push(this.newCostumer);
+    // TODO do form validation
+
+    this.costumers.push(this.newCostumer);
     this.newCostumer = {};
   };
 
