@@ -16,16 +16,16 @@
 
             <div class="row">
                 <div class="span12">
-                    <form action="/login" method="post">
+                    <form action="" method="post" ng-controller="NewEventController as newEventCtrl">
                         <div class="row">
                             <div class="span6">
-                                <!-- Description -->
+                                <!-- Event Type -->
                                 <div class="form-group row">
                                     <label for="event_type" class="col-sm-2 col-form-label"> Tipo de evento </label>
                                     <div class="col-sm-10">
-                                        <select class="form-control selectpicker">
-                                            <option value="---">Selecione um tipo</option>
-                                            <option value="---">Selecione um tipo</option>
+                                        <select class="form-control selectpicker"
+                                                ng-options="type.nome as type.nome for type in newEventCtrl.eventTypes"
+                                                ng-model="newEventCtrl.eventType">
                                         </select>
                                     </div>
                                 </div>
