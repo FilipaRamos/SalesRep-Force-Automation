@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="sfa">
+
+<head>
+    <% include templates/comon/header.ejs %>
+</head>
+
+
+<body>
+
+<div id="wrapper">
+    <% include templates/comon/nav-bar.ejs %>
+
+    <div id="page-wrapper">
+
+        <% include templates/costumers/costumer_info.ejs %>
+
+        <div class="widget widget-nopad">
+            <!-- widget-header -->
+            <div class="widget-header"><i class="fa fa-fw fa-address-card"></i> Oportunidades de Venda
+                <a href="/adicionar_produto" class="pull-right"><i class="fa fa-plus-square">&nbsp</i></a>
+            </div>
+
+            <div class="widget-content">
+                <div class="widget big-stats-container">
+                    <div class="widget-content">
+
+                        <section ng-controller="CostumersController as costumerCtrl">
+
+                            <div class="list-group">
+                                <div ng-repeat="order in costumerCtrl.orders">
+                                    <div class="list-group-item" ng-repeat="produto in order.produtos">
+                                        <p><a href="produto/{{produto.id}}">{{produto.id}}</a></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </section>
+                    </div>
+                    <!-- /widget-content -->
+                </div>
+            </div>
+        </div>
+
+        <!-- From to Add Notes -->
+        <div class="form-group">
+            <div class="form-group">
+                <label for="event-notes"> Notas: </label>
+                <textarea class="form-control" rows="5" id="event-notes" disabled>
+                    Fui ao jardim da Celeste. Giroflé giroflá.
+                    Fui ao jardim da Celeste. Giroflé flé flá.
+                    O que foste lá fazer? Giroflé giroflá.
+                    O que foste lá fazer? Giroflé flé flá.
+                </textarea>
+            </div>
+            <button type="button" class="btn btn-primary">Adicinar Nota</button>
+        </div>
+        <br>
+        <% include templates/agenda/calendar.ejs %>
+        <button type="button" class="btn btn-primary">Editar Evento</button>
+
+
+
+        <% include templates/comon/footer.ejs %>
+
+    </div>
+</div>
+<script type="text/javascript" src="javascripts/custom/costumer.js"></script>
+</body>
+</html>

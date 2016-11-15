@@ -32,7 +32,7 @@ var orders = [
                 cliente_id: "Firmino & Firmino LDA.",
                 produtos : [
                         { id: 31553, preco: 10.00, iva: 21, desconto: 0},
-                        { id: 51293, preco: 5.00, iva: 21, desconto: 2}
+                        { id: 51293, preco: 5.00, iva: 21, desconto: 2},
                 ],
                 status: 1,
                 total: 15.00,
@@ -65,5 +65,5 @@ var meetings = [
     { id: "12453253"},
     { id: "24564315"},
     { id: "85636346"},
-    { id: "74536190"},
+    { id: "74536190"}
 ];
