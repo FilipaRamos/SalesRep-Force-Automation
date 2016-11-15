@@ -2,6 +2,7 @@ var app = angular.module('sfa', []);
 
 app.controller('CostumersController', function () {
         this.costumer = costumer;
+        this.meetings = meetings;
         this.orders = orders;
 
         this.tab = 1;
@@ -27,7 +28,7 @@ var orders = [
                 data : new Date(2016, 03, 02)
         },
         {
-                id: 14452,
+                id: 16786,
                 cliente_id: "Firmino & Firmino LDA.",
                 produtos : [
                         { id: 31553, preco: 10.00, iva: 21, desconto: 0},
@@ -38,7 +39,7 @@ var orders = [
                 data : new Date(2016, 03, 06)
         },
         {
-                id: 14452,
+                id: 11302,
                 cliente_id: "FVUP - Faculdade da Vida.",
                 produtos : [
                         { id: 56853, preco: 7.00, iva: 21, desconto: 7},
@@ -59,3 +60,10 @@ var costumer = {
         contribuinte: 221009029,
         vendas: 2928.23
 };
+
+var meetings = [
+    { id: "12453253"},
+    { id: "24564315"},
+    { id: "85636346"},
+    { id: "74536190"},
+];
