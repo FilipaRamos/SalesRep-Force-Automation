@@ -1,4 +1,4 @@
-var app = angular.module('sfa', []);
+var app = angular.module('sfa', ['moment-picker']);
 
 /**
  * CostumersController
@@ -22,37 +22,34 @@ app.controller('NewEventController', function () {
 /**
  * OpportunitiesController
  */
-app.controller('OpportunitiesController', ['$scope', function ($scope) {
+app.controller('OpportunitiesController', function ($scope) {
     this.products = products;
     this.productOpportunities = [];
-    this.selectedProduct = {};
-
     this.categories = categories;
 
     this.addOpportunity = function () {
-        var e = document.getElementById("product-selector");
-        var productId = e.options[e.selectedIndex].value;
+        var selectBox = document.getElementById("product-selector");
+        var productId = selectBox.options[selectBox.selectedIndex].value;
 
-        console.log(productId);
-
-        // TODO correct this to find the product with id selected
-        this.selectedProduct = this.products.find(function (product) {
+        var selectedProduct = this.products.find(function (product) {
             return productId == product.id;
         });
 
-        console.log(this.selectedProduct);
-        this.productOpportunities.push(this.selectedProduct);
-        var index = this.products.indexOf(this.selectedProduct);
-        this.products.splice(index, 1);
-        //$scope.$apply();
-        //
+        if(selectedProduct && this.productOpportunities.indexOf(selectedProduct) == -1) {
+            this.productOpportunities.push(selectedProduct.id);
 
-        console.log(this.products);
+            var element = document.getElementById("product-" + productId);
+            element.parentNode.removeChild(element);
+        }
 
-        // TODO unselect product
-        this.selectedProduct = {};
+        $('#product-selector').selectpicker('val', '');
+        $('#product-selector').selectpicker('refresh');
     }
-}]);
+
+    this.isProductOpportunity = function(productId) {
+        return this.productOpportunities.indexOf(productId) != -1;
+    };
+});
 
 // TODO retrieve client list
 var categories = [
@@ -125,7 +122,59 @@ var products = [
 // TODO check event types
 var eventTypes = [{id: 1, nome: 'Reunião'}, {id: 2, nome: 'Telefonema'}, {id: 3, nome: 'Email'}];
 
+// TODO retrieve event list from primavera
+// TODO change event url so that on click it redirects to event page
+var date = new Date();
+var d = date.getDate();
+var m = date.getMonth();
+var y = date.getFullYear();
 
+var events = [
+    {
+        title: 'All Day Event',
+        start: new Date(y, m, 1)
+    },
+    {
+        title: 'Long Event',
+        start: new Date(y, m, d + 5),
+        end: new Date(y, m, d + 7)
+    },
+    {
+        id: 999,
+        title: 'Repeating Event',
+        start: new Date(y, m, d - 3, 16, 0),
+        allDay: false
+    },
+    {
+        id: 999,
+        title: 'Repeating Event',
+        start: new Date(y, m, d + 4, 16, 0),
+        allDay: false
+    },
+    {
+        title: 'Meeting',
+        start: new Date(y, m, d, 10, 30),
+        allDay: false
+    },
+    {
+        title: 'Lunch',
+        start: new Date(y, m, d, 12, 0),
+        end: new Date(y, m, d, 14, 0),
+        allDay: false
+    },
+    {
+        title: 'Birthday Party',
+        start: new Date(y, m, d + 1, 19, 0),
+        end: new Date(y, m, d + 1, 22, 30),
+        allDay: false
+    },
+    {
+        title: 'EGrappler.com',
+        start: new Date(y, m, 28),
+        end: new Date(y, m, 29),
+        url: 'http://EGrappler.com/'
+    }
+];
 
 // TODO retrieve client list
 var costumers = [

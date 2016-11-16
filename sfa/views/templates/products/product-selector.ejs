@@ -1,20 +1,19 @@
-<div class="row" ng-controller="OpportunitiesController as opportunitiesCtrl">
-    <!-- Products list -->
-    <div class="col-sm-5">
-        <select id="product-selector" class="form-control selectpicker"
-                title="Selecione um produto..." data-live-search="true">
-            <option ng-repeat="product in opportunitiesCtrl.products"
-                    value="{{product.id}}" data-subtext="   {{product.preco_atual}} €"
-                    data-tokens="{{product.categoria}}">{{product.nome}}
-            </option>
-        </select>
-        <button type="button" ng-click="opportunitiesCtrl.addOpportunity()"
-                class="btn btn-primary">Adicionar
-        </button>
-    </div>
-
-    <!-- TODO include template Products selected -->
-    <div class="col-sm-5">
-
-    </div>
+<!-- Products list -->
+<!-- TODO include template Products selected -->
+<div ng-repeat="product in opportunitiesCtrl.products"
+     ng-show="opportunitiesCtrl.isProductOpportunity(product.id)">{{product.nome}}
 </div>
+    
+<select id="product-selector" class="form-control selectpicker"
+        data-live-search-placeholder="Procurar por produto ou categoria..."
+        title="Produtos" data-live-search="true">
+    <option ng-repeat="product in opportunitiesCtrl.products"
+            value="{{product.id}}" data-subtext="&emsp;{{product.preco_atual}} €"
+            data-tokens="{{product.categoria}}"
+            id="product-{{product.id}}"
+            ng-show="opportunitiesCtrl.isProductOpportunity(product.id)==false">
+        {{product.nome}}
+    </option>
+</select>
+
+<button type="button" class="btn btn-primary" ng-click="opportunitiesCtrl.addOpportunity()">Adicionar</button>
