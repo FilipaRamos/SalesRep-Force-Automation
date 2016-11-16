@@ -52,7 +52,7 @@ namespace SalesForceAutomation.Lib_Primavera
                 return null;
         }
 
-        public static Lib_Primavera.Models.Cliente GetCliente(string codCliente)
+        public static Models.Cliente GetCliente(string codCliente)
         {
 
 
@@ -83,9 +83,9 @@ namespace SalesForceAutomation.Lib_Primavera
                 return null;
         }
 
-        public static Lib_Primavera.Models.RespostaErro UpdCliente(Lib_Primavera.Models.Cliente cliente)
+        public static Models.RespostaErro UpdCliente(Models.Cliente cliente)
         {
-            Lib_Primavera.Models.RespostaErro erro = new Models.RespostaErro();
+            Models.RespostaErro erro = new Models.RespostaErro();
 
 
             GcpBECliente objCli = new GcpBECliente();
@@ -140,10 +140,10 @@ namespace SalesForceAutomation.Lib_Primavera
         }
 
 
-        public static Lib_Primavera.Models.RespostaErro DelCliente(string codCliente)
+        public static Models.RespostaErro DelCliente(string codCliente)
         {
 
-            Lib_Primavera.Models.RespostaErro erro = new Models.RespostaErro();
+            Models.RespostaErro erro = new Models.RespostaErro();
             GcpBECliente objCli = new GcpBECliente();
 
 
@@ -187,10 +187,10 @@ namespace SalesForceAutomation.Lib_Primavera
 
 
 
-        public static Lib_Primavera.Models.RespostaErro InsereClienteObj(Models.Cliente cli)
+        public static Models.RespostaErro InsereClienteObj(Models.Cliente cli)
         {
 
-            Lib_Primavera.Models.RespostaErro erro = new Models.RespostaErro();
+            Models.RespostaErro erro = new Models.RespostaErro();
 
 
             GcpBECliente myCli = new GcpBECliente();
@@ -237,7 +237,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
         #region Artigo
 
-        public static Lib_Primavera.Models.Artigo GetArtigo(string codArtigo)
+        public static Models.Artigo GetArtigo(string codArtigo)
         {
 
             GcpBEArtigo objArtigo = new GcpBEArtigo();
@@ -365,7 +365,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
         public static Models.RespostaErro VGR_New(Models.DocCompra dc)
         {
-            Lib_Primavera.Models.RespostaErro erro = new Models.RespostaErro();
+            Models.RespostaErro erro = new Models.RespostaErro();
 
 
             GcpBEDocumentoCompra myGR = new GcpBEDocumentoCompra();
@@ -429,7 +429,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
         public static Models.RespostaErro Encomendas_New(Models.DocVenda dv)
         {
-            Lib_Primavera.Models.RespostaErro erro = new Models.RespostaErro();
+            Models.RespostaErro erro = new Models.RespostaErro();
             GcpBEDocumentoVenda myEnc = new GcpBEDocumentoVenda();
 
             GcpBELinhaDocumentoVenda myLin = new GcpBELinhaDocumentoVenda();
