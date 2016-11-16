@@ -18,13 +18,13 @@
                 <div class="span12">
                     <form action="" method="post" ng-controller="NewEventController as newEventCtrl">
                         <div class="row">
-                            <div class="span6">
+                            <div class="span12">
                                 <!-- Event Type -->
                                 <div class="form-group row">
                                     <label for="event_type" class="col-sm-2 col-form-label"> Tipo de evento </label>
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-5">
                                         <select class="form-control selectpicker"
-                                                ng-options="type.nome as type.nome for type in newEventCtrl.eventTypes"
+                                                ng-options="type as type.nome for type in newEventCtrl.eventTypes"
                                                 ng-model="newEventCtrl.eventType">
                                         </select>
                                     </div>
@@ -33,35 +33,52 @@
                                 <!-- Description -->
                                 <div class="form-group row">
                                     <label for="offer_description" class="col-sm-2 col-form-label"> Descrição </label>
-                                    <div class="col-sm-10">
-                                <textarea rows="3" cols="20" class="form-control" id="offer_description"
-                                          placeholder="Descrição ..."></textarea>
+                                    <div class="col-sm-5">
+                                        <textarea style="resize:vertical;" rows="3" cols="20" class="form-control"
+                                                  placeholder="Descrição ..."
+                                                  ng-model="newEventCtrl.descricao"></textarea>
                                     </div>
                                 </div>
 
                                 <!-- TODO add datetime input -->
+                                <div class="form-group row">
+                                    <!--    -->
+                                </div>
+
+                                <!-- Product -->
+                                <div class="form-group row">
+                                    <div class="col-sm-5">
+                                        <% include templates/products/product-selector.ejs %>
+                                    </div>
+                                </div>
+
+                                <!-- Costumer -->
+                                <div ng-hide="" class="form-group row">
+                                    <div class="col-sm-5">
+                                        <% include templates/costumers/costumer-selector.ejs %>
+                                    </div>
+                                </div>
 
                                 <!-- Notes -->
                                 <div class="form-group row">
                                     <label for="offer_description" class="col-sm-2 col-form-label"> Notas </label>
-                                    <div class="col-sm-10">
-                                <textarea rows="3" cols="20" class="form-control" id="offer_description"
-                                          placeholder="Notas ..."></textarea>
+                                    <div class="col-sm-5">
+                                        <textarea style="resize:vertical;" rows="3" cols="20" class="form-control"
+                                                  placeholder="Notas ..." ng-model="newEventCtrl.notes"></textarea>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="span6">
-                                <% include templates/costumers/costumer-finder.ejs %>
+                            <!-- Buttons -->
+                            <div class="form-group row">
+                                <div class="col-sm-5 pull-right">
+                                    <a href="/clientes" class="btn btn-primary"> Cancelar</a>
+                                    <button type="submit" class="btn btn-primary"> Criar evento</button>
+                                </div>
                             </div>
+
                         </div>
 
-                        <!-- Submit Button -->
-                        <div class="form-group row">
-                            <div class="offset-sm-2 col-sm-10">
-                                <button type="submit" id="submit_offer" class="btn btn-primary"> Criar evento</button>
-                            </div>
-                        </div>
                     </form>
                 </div>
             </div>

@@ -1,0 +1,20 @@
+<div class="row" ng-controller="OpportunitiesController as opportunitiesCtrl">
+    <!-- Products list -->
+    <div class="col-sm-5">
+        <select id="product-selector" class="form-control selectpicker"
+                title="Selecione um produto..." data-live-search="true">
+            <option ng-repeat="product in opportunitiesCtrl.products"
+                    value="{{product.id}}" data-subtext="   {{product.preco_atual}} €"
+                    data-tokens="{{product.categoria}}">{{product.nome}}
+            </option>
+        </select>
+        <button type="button" ng-click="opportunitiesCtrl.addOpportunity()"
+                class="btn btn-primary">Adicionar
+        </button>
+    </div>
+
+    <!-- TODO include template Products selected -->
+    <div class="col-sm-5">
+
+    </div>
+</div>

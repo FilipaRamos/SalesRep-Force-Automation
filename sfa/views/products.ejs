@@ -19,13 +19,13 @@
 				<div class="row" ng-controller="ProductsController as productsCtrl">
 
 					<div class="col-md-3">
-						<p class="lead">Categorias </p>
+						<p class="lead">Categorias</p>
 						<div class="list-group">
 							<div>
-								<a href="#" ng-click="productsCtrl.filterBy('all')" class="list-group-item">Todos</a>
+								<a href="#" ng-click="productsCtrl.filterBy('all')" class="list-group-item">Todos os produtos</a>
 							</div>
 							<div ng-click="productsCtrl.filterBy(category.id)"
-									ng-repeat="category in productsCtrl.categories | orderBy: '-nome' " >
+									ng-repeat="category in productsCtrl.categories | orderBy: 'nome' " >
 								<a href="#" class="list-group-item">{{category.nome}}</a>
 							</div>
 						</div>
