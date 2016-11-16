@@ -19,5 +19,13 @@ namespace SalesForceAutomation.Models
             set;
         }
 
+        public double PrecoMedio
+        {
+            get;
+            set;
+        }
+
+        public 
+
     }
 }

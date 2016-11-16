@@ -255,6 +255,8 @@ namespace SalesForceAutomation.Lib_Primavera
                     objArtigo = PriEngine.Engine.Comercial.Artigos.Edita(codArtigo);
                     myArt.CodArtigo = objArtigo.get_Artigo();
                     myArt.DescArtigo = objArtigo.get_Descricao();
+                    myArt.PrecoMedio = objArtigo.get_PCMedio();
+
 
                     return myArt;
                 }
