@@ -1,7 +1,7 @@
 var app = angular.module('sfa', []);
 
-app.controller('CostumersController', function () {
-        this.costumer = costumer;
+app.controller('CustomersController', function () {
+        this.customer = customer;
         this.meetings = meetings;
         this.orders = orders;
 
@@ -51,7 +51,7 @@ var orders = [
         }
 ];
 
-var costumer = {
+var customer = {
         id: "Manel LDA.",
         nome: 'Manel LDA.',
         nome_fiscal: "Manel LDA.",

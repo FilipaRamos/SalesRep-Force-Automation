@@ -1,17 +1,17 @@
 var app = angular.module('sfa', []);
 
 /**
- * CostumersController
+ * CustomersController
  */
-app.controller('CostumersController', function () {
-  this.costumers = costumers;
-  this.newCostumer = {};
+app.controller('CustomersController', function () {
+  this.customers = customers;
+  this.newCustomer = {};
 
-  this.addCostumer = function (product) {
+  this.addCustomer = function (product) {
     // TODO do form validation
 
-    this.costumers.push(this.newCostumer);
-    this.newCostumer = {};
+    this.customers.push(this.newCustomer);
+    this.newCustomer = {};
   };
 
   this.tab = 1;
@@ -86,7 +86,7 @@ var events = [
 ];
 
 // TODO retrieve client list
-var costumers = [
+var customers = [
   {
     id: "Exemplo2",
     nome: 'Exemplo2',

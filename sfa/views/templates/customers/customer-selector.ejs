@@ -1,0 +1,11 @@
+<div ng-controller="CustomersController as customersCtrl">
+    <select id="client-selector" class="form-control selectpicker"
+            data-live-search-placeholder="Procurar por nome..."
+            title="Cliente" data-live-search="true">
+        <option ng-repeat="customer in customersCtrl.customers"
+                value="{{customer.id}}" data-subtext="&emsp;{{customer.telefone}} ">
+            {{customer.nome}}
+        </option>
+    </select>
+</div>
+

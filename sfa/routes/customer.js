@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET. */
+/* GET ?id=clienteID. */
 router.get('/', function(req, res, next) {
-  res.render('new_costumer', {'title': 'Novo cliente', breadcrum: 'Novo cliente'});
+  res.render('customer', {title: 'Cliente', breadcrumb: 'Cliente', customerId: req.query.id});
 });
 
 module.exports = router;

@@ -1,0 +1,19 @@
+<div class="widget widget-nopad">
+    <div class="widget-content">
+        <div class="widget big-stats-container">
+            <div class="widget-content">
+                <section>
+
+                    <div class="list-group">
+                        <div ng-repeat="order in customerCtrl.orders">
+                            <div class="list-group-item" ng-repeat="produto in order.produtos">
+                                <p><a href="produto?id={{produto.id}}">{{produto.id}}</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

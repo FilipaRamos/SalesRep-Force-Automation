@@ -1,10 +1,10 @@
 var app = angular.module('sfa', ['moment-picker']);
 
 /**
- * CostumersController
+ * CustomersController
  */
-app.controller('CostumersController', function () {
-    this.costumers = costumers;
+app.controller('CustomersController', function () {
+    this.customers = customers;
 });
 
 /**
@@ -177,7 +177,7 @@ var events = [
 ];
 
 // TODO retrieve client list
-var costumers = [
+var customers = [
     {
         id: "Exemplo2",
         nome: 'Exemplo2',

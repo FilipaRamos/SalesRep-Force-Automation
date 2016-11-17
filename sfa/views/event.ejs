@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="sfa">
+
+<head>
+    <title> <%= title %> </title>
+    <% include templates/common/header.ejs %>
+</head>
+
+<body>
+<div id="wrapper">
+    <% include templates/common/nav-bar.ejs %>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+
+            <% include templates/common/breadcrumbs.ejs %>
+
+            <div class="row">
+                <div class="span12">
+
+                    <form action="" method="post" ng-controller="EventController as eventCtrl">
+                        <div class="row">
+                            <div class="span12">
+
+                                <!-- Event details-->
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label"> Detalhes </label>
+                                    <div class="col-sm-2">
+                                        {{eventCtrl.event.tipo}}
+                                        <br>
+                                        <i class="fa fa-calendar"></i> {{eventCtrl.event.data}}
+                                        <br>
+                                        <i class="fa fa-clock-o"></i>
+                                        {{eventCtrl.event.hora}}
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <!-- Event descritpion -->
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label"> Descrição </label>
+                                    <div class="col-sm-2">
+                                        {{eventCtrl.event.descricao}}
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <!-- Customer -->
+                                <div class="form-group row">
+                                    <label for="customer" class="col-sm-2 col-form-label">Cliente</label>
+                                    <div name="customer" class="col-sm-5">
+                                        <% include templates/customers/costumer-info.ejs %>
+                                    </div>
+                                </div>
+
+                                <!-- Products -->
+                                <div class="form-group row">
+                                    <label for="products" class="col-sm-2 col-form-label">Oportunidades</label>
+                                    <div name="procuts" class="col-sm-5">
+                                        <% include templates/products/opportunities-listing.ejs %>
+                                    </div>
+                                </div>
+
+                                <!-- Notes -->
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label"> Notas </label>
+                                    <div class="col-sm-5">{{eventCtrl.event.notas}}</div>
+                                </div>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="form-group row">
+                                <div class="col-sm-5 pull-right">
+                                    <button ng-click="eventCtrl.cancelEvent()" class="btn btn-primary">Remover</button>
+                                    <a href="/editar_evento?id={{eventCtrl.event.id}}" class="btn btn-primary">Editar</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <% include templates/common/footer.ejs %>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="javascripts/custom/event.js"></script>
+</body>
+</html>
