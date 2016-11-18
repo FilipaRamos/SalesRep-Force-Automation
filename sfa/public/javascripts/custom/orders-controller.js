@@ -3,6 +3,7 @@ var ordersModule = angular.module('ordersModule', []);
 /**
  * OrdersController
  */
+
 ordersModule.controller('OrdersController', function ($http, $location) {
     var self = this;
 
@@ -106,6 +107,60 @@ ordersModule.controller('NewOrderController', function ($http, $location) {
                 console.log(data);
             });
     };
+
+    // displays the order price
+    self.total = function(){
+        var total = 0;
+        self.products.forEach(function(element){
+            total += element.price;
+        });
+        return total;
+    };
+
+    // adds a product
+    self.addProduct = function(){
+        self.products.push(
+            {'id' : Math.floor((Math.random() * 99999) + 1),
+                'quantity': Math.floor((Math.random() * 5) + 1),
+                'price':  Math.floor((Math.random() * 10) + 1) });
+    };
+
+    // remove a product
+    self.removeProduct = function(){
+        if( self.selected >= 0) {
+            self.products.splice(self.getSelected(self.selected), 1);
+            self.selected = -1;
+        }
+    };
+
+    // edit a product
+    self.editProduct = function(){
+        if( self.selected >= 0) {
+            self.products[self.getSelected(self.selected)].quantity = Math.floor((Math.random() * 5) + 1);
+            self.products[self.getSelected(self.selected)].price = Math.floor((Math.random() * 10) + 1);
+        }
+    };
+
+    // allows product selection
+    self.selectProduct = function(id){
+       self.selected = id;
+    };
+
+    // get index of selected product
+    self.getSelected = function(id){
+        for (var i = 0; i < self.products.length ; i++){
+            if (self.products[i].id == id)
+                return i;
+        }
+    };
+
+    // array of products
+    self.products = [
+        {'id' : 15781, 'quantity' : 2, 'price' : 3 },
+        {'id' : 74694, 'quantity' : 4, 'price' : 1 }
+    ];
+
+    self.selected = -1;
 
 });
 
