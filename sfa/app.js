@@ -18,6 +18,7 @@ var product = require('./routes/product');
 var new_costumer = require('./routes/new_customer');
 var new_event = require('./routes/new_event');
 var new_order = require('./routes/new_order');
+var order_page = require('./routes/order');
 var oversight = require('./routes/oversight');
 
 var app = express();
@@ -41,6 +42,7 @@ app.use('/eventos', agenda);
 app.use('/evento', event);
 app.use('/criar_evento', new_event);
 app.use('/editar_evento', new_event);
+app.use('/encomenda', order_page);
 app.use('/clientes', customers);
 app.use('/cliente', costumer);
 app.use('/criar_cliente', new_costumer);
