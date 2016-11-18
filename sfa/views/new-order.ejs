@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include templates/common/header.ejs %>
+</head>
+
+<body ng-app="ordersModule">
+
+<div id="wrapper">
+
+    <% include templates/common/nav-bar.ejs %>
+    <% include templates/customers/customer-info.ejs %>
+    <% include templates/products/product-listing.ejs %>
+    <button type="button" class="btn btn-primary"> Encomendar </button>
+    <% include templates/common/footer.ejs %>
+</div>
+    <script src="javascripts/custom/orders-controller.js "></script>
+</body>
+</html>

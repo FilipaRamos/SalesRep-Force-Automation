@@ -17,6 +17,7 @@ var products = require('./routes/products');
 var product = require('./routes/product');
 var new_costumer = require('./routes/new_customer');
 var new_event = require('./routes/new_event');
+var new_order = require('./routes/new_order');
 var oversight = require('./routes/oversight');
 
 var app = express();
@@ -33,7 +34,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// TODO review routing to cliente, produto
 app.use('/', index);
 app.use('/entrar', login);
 app.use('/registar', register);
@@ -44,6 +44,7 @@ app.use('/editar_evento', new_event);
 app.use('/clientes', customers);
 app.use('/cliente', costumer);
 app.use('/criar_cliente', new_costumer);
+app.use('/nova_encomenda', new_order);
 app.use('/produtos', products);
 app.use('/produto', product);
 app.use('/supervisao', oversight);
