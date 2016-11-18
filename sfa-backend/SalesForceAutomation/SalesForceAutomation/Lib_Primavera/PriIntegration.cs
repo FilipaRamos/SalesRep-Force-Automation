@@ -50,15 +50,15 @@ namespace SalesForceAutomation.Lib_Primavera
             else
                 return null;
         }
-        /*
-        public static Models.Cliente GetCliente(string codCliente)
+
+        public static Models.Cliente get_client(string codCliente)
         {
 
 
             GcpBECliente objCli = new GcpBECliente();
 
 
-            Models.Cliente myCli = new Models.Cliente();
+            Models.Cliente cliente = new Models.Cliente();
 
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
@@ -66,12 +66,14 @@ namespace SalesForceAutomation.Lib_Primavera
                 if (PriEngine.Engine.Comercial.Clientes.Existe(codCliente) == true)
                 {
                     objCli = PriEngine.Engine.Comercial.Clientes.Edita(codCliente);
-                    myCli.CodCliente = objCli.get_Cliente();
-                    myCli.NomeCliente = objCli.get_Nome();
-                    myCli.Moeda = objCli.get_Moeda();
-                    myCli.NumContribuinte = objCli.get_NumContribuinte();
-                    myCli.Morada = objCli.get_Morada();
-                    return myCli;
+                    cliente.CodCliente = objCli.get_Cliente();
+                    cliente.Nome = objCli.get_Nome();
+                    cliente.NomeFiscal = objCli.get_NomeFiscal();
+                    cliente.Fac_Tel = objCli.get_Telefone();
+                    cliente.NumContribuinte = objCli.get_NumContribuinte();
+                    cliente.Fac_Mor = objCli.get_Morada();
+
+                    return cliente;
                 }
                 else
                 {
@@ -81,6 +83,8 @@ namespace SalesForceAutomation.Lib_Primavera
             else
                 return null;
         }
+
+        /*
 
         public static Models.RespostaErro UpdCliente(Models.Cliente cliente)
         {
