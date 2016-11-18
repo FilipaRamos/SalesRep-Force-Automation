@@ -17,10 +17,10 @@
 
             <% include templates/common/breadcrumbs.ejs %>
 
-            <div class="row-align-center">
+            <div class="row">
                 <div class="span12">
 
-                    <form action="" method="post" ng-controller="NewEventController as newEventCtrl">
+                    <form action="" method="post" ng-controller="EditEventController as newEventCtrl" ng-init="newEventCtrl.initCtrl()">
                         <div class="row">
                             <div class="span12">
 
@@ -81,11 +81,11 @@
                                     </div>
                                 </div>
 
-                                <!-- Customer -->
+                                <!-- Customer (non-editable) -->
                                 <div ng-hide="<%= customerId %> != ' '" class="form-group row">
                                     <label for="customer" class="col-sm-2 col-form-label">Cliente</label>
                                     <div name="customer" class="col-sm-5">
-                                        <% include templates/customers/customer-selector.ejs %>
+                                        {{newEventCtrl.newEvent.customer}}
                                     </div>
                                 </div>
 
@@ -120,8 +120,8 @@
                     </form>
                 </div>
             </div>
+            <% include templates/common/footer.ejs %>
         </div>
-        <% include templates/common/footer.ejs %>
     </div>
 </div>
 <script type="text/javascript" src="javascripts/custom/products-controller.js"></script>

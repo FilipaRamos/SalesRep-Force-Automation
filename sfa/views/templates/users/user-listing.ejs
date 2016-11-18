@@ -1,6 +1,6 @@
 <div class="widget widget-nopad">
     <!-- widget-header -->
-    <div class="widget-header"><i class="fa fa-fw fa-address-card"></i> Clientes
+    <div class="widget-header"><i class="fa fa-fw fa-address-card"></i> Vendedores
         <a href="/registar" class="pull-right"><i class="fa fa-plus-square">&nbsp</i></a>
     </div>
 
@@ -13,16 +13,16 @@
                         <li ng-class="{ active:usersCtrl.isSet(1) }">
                             <a href ng-click="usersCtrl.setTab(1)">Top</a>
                         </li>
-                        <li ng-class="{ active:usersCtrl.isSet(3) }">
-                            <a href ng-click="usersCtrl.setTab(3)">Todos</a>
+                        <li ng-class="{ active:usersCtrl.isSet(2) }">
+                            <a href ng-click="usersCtrl.setTab(2)">Todos</a>
                         </li>
                     </ul>
 
                     <div ng-show="usersCtrl.isSet(2)">
                         <div class="list-group">
                             <div class="list-group-item"
-                                 ng-repeat="customer in customersCtrl.customers | orderBy : '-vendas'">
-                                <p><a href="cliente?id={{customer.id}}">{{customer.nome}}</a> <em class="pull-right">{{customer.vendas
+                                 ng-repeat="user in usersCtrl.users | orderBy : '-nome'">
+                                <p><a href="/perfil?id={{user.id}}">{{user.nome}}</a> <em class="pull-right">{{user.vendas
                                         | currency:"€"}}</em></p>
                             </div>
                         </div>

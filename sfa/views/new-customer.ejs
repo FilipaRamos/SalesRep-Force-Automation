@@ -13,7 +13,7 @@
 
             <% include templates/common/breadcrumbs.ejs %>
 
-            <div class="row">
+            <div class="row-align-center">
                 <div class="span6">
                     <form ng-controller="NewCustomerController as customerCtrl" ng-submit="customerCtrl.addCustomer()">
 
@@ -23,7 +23,7 @@
                             <div class="col-sm-10">
                                 <input name="customer_name" ng-model="customerCtrl.newCustomer.nome"
                                        value="{{customerCtrl.newCustomer.nome}}"
-                                       type="text" class="form-control" placeholder="Nome do cliente..." required>
+                                       type="text" class="form-control" placeholder="Nome do cliente" required>
                             </div>
                         </div>
 
@@ -33,7 +33,7 @@
                             <div class="col-sm-10">
                                 <input name="fiscal_name" ng-model="customerCtrl.newCustomer.nome_fiscal"
                                        value="{{customerCtrl.newCustomer.nome_fiscal}}"
-                                       type="text" class="form-control" placeholder="Nome Fiscal ..." required>
+                                       type="text" class="form-control" placeholder="Nome fiscal" required>
                             </div>
                         </div>
 
@@ -43,7 +43,7 @@
                             <div class="col-sm-10">
                                 <input name="nif" ng-model="customerCtrl.newCustomer.contribuinte"
                                        value="{{customerCtrl.newCustomer.contribuinte}}"
-                                       type="text" class="form-control" placeholder="NIF ..." required>
+                                       type="text" class="form-control" placeholder="NIF" required>
                             </div>
                         </div>
 
@@ -53,7 +53,7 @@
                             <div class="col-sm-10">
                                 <input name="address" ng-model="customerCtrl.newCustomer.morada"
                                        value="{{customerCtrl.newCustomer.morada}}"
-                                       type="text" class="form-control" placeholder="Morada ...">
+                                       type="text" class="form-control" placeholder="Morada">
                             </div>
                         </div>
 
@@ -63,7 +63,7 @@
                             <div class="col-sm-10">
                                 <input name="email" ng-model="customerCtrl.newCustomer.email"
                                        value="{{customerCtrl.newCustomer.email}}"
-                                       type="email" class="form-control" placeholder="Email ...">
+                                       type="email" class="form-control" placeholder="Email">
                             </div>
                         </div>
 
@@ -73,7 +73,7 @@
                             <div class="col-sm-10">
                                 <input name="telephone" ng-model="customerCtrl.newCustomer.telefone"
                                        value="{{customerCtrl.newCustomer.telefone}}"
-                                       type="tel" class="form-control" placeholder="Telefone ...">
+                                       type="tel" class="form-control" placeholder="Telefone">
                             </div>
                         </div>
 

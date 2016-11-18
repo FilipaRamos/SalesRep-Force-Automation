@@ -124,7 +124,7 @@ eventsModule.controller('EventsController', function ($http, $location, $window)
                 select: function (start, end, allDay) {
                     self.calendar.fullCalendar('unselect');
                     var date = start._d.getDay() + '-' + start._d.getMonth() + '-' + start._d.getFullYear();
-                    $window.location.href = '/novo_evento?data="' + date + '"';
+                    $window.location.href = '/criar_evento?data="' + date + '"';
                 },
                 editable: false,
                 events: self.events,

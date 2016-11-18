@@ -22,41 +22,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="oversight.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/oversight.ejs">
+      <file leaf-file-name="edit-event.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/edit-event.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="27" column="22" selection-start-line="25" selection-start-column="16" selection-end-line="27" selection-end-column="22" />
+            <state relative-caret-position="-131">
+              <caret line="83" column="61" selection-start-line="83" selection-start-column="61" selection-end-line="83" selection-end-column="61" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="profile.ejs" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/profile.ejs">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="26" column="35" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
+            <state relative-caret-position="286">
+              <caret line="44" column="30" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user-info.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/templates/users/user-info.ejs">
+      <file leaf-file-name="new-customer.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/new-customer.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+            <state relative-caret-position="302">
+              <caret line="15" column="40" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="users-controller.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/custom/users-controller.js">
+      <file leaf-file-name="new-event.ejs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views/new-event.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="40" selection-start-line="0" selection-start-column="40" selection-end-line="0" selection-end-column="40" />
+            <state relative-caret-position="418">
+              <caret line="123" column="8" selection-start-line="123" selection-start-column="8" selection-end-line="123" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -79,32 +79,24 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/routes/event.js" />
-        <option value="$PROJECT_DIR$/views/new_costumer.ejs" />
-        <option value="$PROJECT_DIR$/views/new_customer.ejs" />
         <option value="$PROJECT_DIR$/public/javascripts/custom/agenda.js" />
         <option value="$PROJECT_DIR$/public/javascripts/custom/event.js" />
         <option value="$PROJECT_DIR$/public/javascripts/custom/new_event.js" />
         <option value="$PROJECT_DIR$/views/templates/common/nav-bar.ejs" />
         <option value="$PROJECT_DIR$/public/javascripts/custom/costumers-controller.js" />
         <option value="$PROJECT_DIR$/views/customers.ejs" />
-        <option value="$PROJECT_DIR$/views/templates/customers/customer-info.ejs" />
         <option value="$PROJECT_DIR$/views/customer.ejs" />
         <option value="$PROJECT_DIR$/views/templates/orders/order-listing.ejs" />
         <option value="$PROJECT_DIR$/views/templates/agenda/calendar-month.ejs" />
-        <option value="$PROJECT_DIR$/views/templates/agenda/calendar-min.ejs" />
         <option value="$PROJECT_DIR$/views/agenda.ejs" />
         <option value="$PROJECT_DIR$/views/templates/agenda/calendar-full.ejs" />
-        <option value="$PROJECT_DIR$/views/templates/agenda/event-list.ejs" />
         <option value="$PROJECT_DIR$/views/products.ejs" />
         <option value="$PROJECT_DIR$/views/product.ejs" />
         <option value="$PROJECT_DIR$/views/event.ejs" />
         <option value="$PROJECT_DIR$/public/javascripts/custom/products-controller.js" />
-        <option value="$PROJECT_DIR$/views/templates/agenda/event-listing.ejs" />
         <option value="$PROJECT_DIR$/views/new_event.ejs" />
         <option value="$PROJECT_DIR$/routes/supervisao.js" />
         <option value="$PROJECT_DIR$/routes/new_customer.js" />
-        <option value="$PROJECT_DIR$/routes/new_event.js" />
         <option value="$PROJECT_DIR$/views/templates/common/footer.ejs" />
         <option value="$PROJECT_DIR$/views/index.ejs" />
         <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
@@ -113,23 +105,31 @@
         <option value="$PROJECT_DIR$/routes/login.js" />
         <option value="$PROJECT_DIR$/views/login.ejs" />
         <option value="$PROJECT_DIR$/public/javascripts/custom/index-controller.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/custom/events-controller.js" />
         <option value="$PROJECT_DIR$/routes/customers.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/custom/customers-controller.js" />
-        <option value="$PROJECT_DIR$/views/templates/customers/customer-listing.ejs" />
         <option value="$PROJECT_DIR$/views/templates/customers/customer-selector.ejs" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/routes/profile.js" />
         <option value="$PROJECT_DIR$/views/templates/products/product-selector.ejs" />
-        <option value="$PROJECT_DIR$/views/new-event.ejs" />
-        <option value="$PROJECT_DIR$/views/new-customer.ejs" />
-        <option value="$PROJECT_DIR$/views/templates/users/user-listing.ejs" />
         <option value="$PROJECT_DIR$/public/javascripts/custom/oversight-controller.js" />
         <option value="$PROJECT_DIR$/views/oversight.ejs" />
         <option value="$PROJECT_DIR$/views/register.ejs" />
         <option value="$PROJECT_DIR$/views/templates/users/user-info.ejs" />
-        <option value="$PROJECT_DIR$/public/javascripts/custom/users-controller.js" />
         <option value="$PROJECT_DIR$/views/profile.ejs" />
+        <option value="$PROJECT_DIR$/public/javascripts/custom/users-controller.js" />
+        <option value="$PROJECT_DIR$/views/templates/users/user-listing.ejs" />
+        <option value="$PROJECT_DIR$/public/javascripts/custom/customers-controller.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/custom/orders-controller.js" />
+        <option value="$PROJECT_DIR$/views/templates/customers/customer-info.ejs" />
+        <option value="$PROJECT_DIR$/routes/new_event.js" />
+        <option value="$PROJECT_DIR$/routes/edit_event.js" />
+        <option value="$PROJECT_DIR$/views/edit-event.ejs" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/custom/events-controller.js" />
+        <option value="$PROJECT_DIR$/views/templates/agenda/calendar-min.ejs" />
+        <option value="$PROJECT_DIR$/views/templates/agenda/event-list.ejs" />
+        <option value="$PROJECT_DIR$/views/templates/agenda/event-listing.ejs" />
+        <option value="$PROJECT_DIR$/views/templates/customers/customer-listing.ejs" />
+        <option value="$PROJECT_DIR$/views/new-customer.ejs" />
+        <option value="$PROJECT_DIR$/views/new-event.ejs" />
       </list>
     </option>
   </component>
@@ -387,6 +387,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sfa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sfa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="custom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -402,9 +424,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="G:\Documents\GitHub\SalesRep-Force-Automation\sfa\public\javascripts\custom" />
-      <recent name="G:\Documents\GitHub\SalesRep-Force-Automation\sfa\views" />
       <recent name="G:\Documents\GitHub\SalesRep-Force-Automation\sfa\routes" />
+      <recent name="G:\Documents\GitHub\SalesRep-Force-Automation\sfa\views" />
+      <recent name="G:\Documents\GitHub\SalesRep-Force-Automation\sfa\public\javascripts\custom" />
       <recent name="G:\Documents\GitHub\SalesRep-Force-Automation\sfa\views\templates\users" />
       <recent name="G:\Documents\GitHub\SalesRep-Force-Automation\sfa\views\templates\agenda" />
     </key>
@@ -790,12 +812,12 @@
       <workItem from="1478717038857" duration="3562000" />
       <workItem from="1478798179315" duration="22401000" />
       <workItem from="1479204734614" duration="6482000" />
-      <workItem from="1479289140596" duration="84190000" />
+      <workItem from="1479289140596" duration="88711000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="131861000" />
+    <option name="totallyTimeSpent" value="136382000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1098" extended-state="6" />
@@ -848,62 +870,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/templates/agenda/calendar-min.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="42" selection-start-line="0" selection-start-column="33" selection-end-line="1" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/templates/agenda/calendar-full.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="12" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/custom/product.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="52" column="2" selection-start-line="32" selection-start-column="0" selection-end-line="52" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/customers.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/products.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/templates/products/products-preview.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="18" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/event.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/custom/new_event.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1162">
@@ -945,14 +911,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/new_customer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/new_event.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
           <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
@@ -1024,14 +982,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/custom/events-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/customers.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
@@ -1088,14 +1038,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-710">
-          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/templates/customers/customer-selector.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -1104,26 +1046,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/templates/customers/customer-listing.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="46" column="70" selection-start-line="46" selection-start-column="70" selection-end-line="46" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/users.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/custom/customers-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="121" column="21" selection-start-line="121" selection-start-column="21" selection-end-line="121" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -1160,34 +1086,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/new-event.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/new-customer.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/custom/oversight-controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="43" selection-start-line="0" selection-start-column="43" selection-end-line="0" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/templates/users/user-listing.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1200,18 +1102,74 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/templates/agenda/event-listing.ejs">
+    <entry file="file://$PROJECT_DIR$/views/customer.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="64" selection-start-line="3" selection-start-column="64" selection-end-line="3" selection-end-column="64" />
+        <state relative-caret-position="346">
+          <caret line="18" column="35" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/templates/agenda/event-list.ejs">
+    <entry file="file://$PROJECT_DIR$/views/customers.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="19" column="51" selection-start-line="19" selection-start-column="51" selection-end-line="19" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/templates/orders/order-listing.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/custom/customers-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4356">
+          <caret line="198" column="2" selection-start-line="164" selection-start-column="0" selection-end-line="198" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/templates/users/user-listing.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/custom/users-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="65" selection-start-line="0" selection-start-column="65" selection-end-line="0" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/custom/orders-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-220">
+          <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/templates/users/user-info.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/profile.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="31" column="60" selection-start-line="31" selection-start-column="60" selection-end-line="31" selection-end-column="60" />
           <folding />
         </state>
       </provider>
@@ -1224,34 +1182,98 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/templates/users/user-info.ejs">
+    <entry file="file://$PROJECT_DIR$/views/templates/customers/customer-info.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+        <state relative-caret-position="396">
+          <caret line="57" column="58" selection-start-line="57" selection-start-column="58" selection-end-line="57" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/custom/users-controller.js">
+    <entry file="file://$PROJECT_DIR$/routes/edit_event.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="40" selection-start-line="0" selection-start-column="40" selection-end-line="0" selection-end-column="40" />
+        <state relative-caret-position="154">
+          <caret line="7" column="44" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/customer.ejs">
+    <entry file="file://$PROJECT_DIR$/routes/new_event.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="18" column="35" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="35" />
+        <state relative-caret-position="176">
+          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/profile.ejs">
+    <entry file="file://$PROJECT_DIR$/views/edit-event.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="26" column="35" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
+        <state relative-caret-position="-131">
+          <caret line="83" column="61" selection-start-line="83" selection-start-column="61" selection-end-line="83" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/templates/agenda/calendar-min.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/templates/agenda/event-listing.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/templates/agenda/event-list.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/custom/events-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="126" column="51" selection-start-line="126" selection-start-column="51" selection-end-line="126" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/templates/customers/customer-listing.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="44" column="30" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/new-customer.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="15" column="40" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/new-event.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="123" column="8" selection-start-line="123" selection-start-column="8" selection-end-line="123" selection-end-column="8" />
           <folding />
         </state>
       </provider>
