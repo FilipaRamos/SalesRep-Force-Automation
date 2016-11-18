@@ -16,7 +16,7 @@
             <% include templates/common/breadcrumbs.ejs %>
 
             <div class="row-align-center">
-                <div class="span6">
+                <div class="span6" ng-init="customer = customerCtrl.customer">
                     <% include templates/customers/customer-info.ejs %>
                 </div>
 

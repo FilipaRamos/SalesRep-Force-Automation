@@ -148,7 +148,7 @@ eventsModule.controller('EventController', function ($http, $location) {
     self.initCtrl = function (id) {
         // TODO change this
         self.event = eventsTemp[0];
-        self.getEvent(id);
+        //self.getEvent(id);
     };
 
     /**

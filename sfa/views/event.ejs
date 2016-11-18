@@ -13,7 +13,7 @@
 
             <% include templates/common/breadcrumbs.ejs %>
 
-            <div class="row">
+            <div class="row-align-center">
                 <div class="span12">
 
                     <div ng-controller="EventController as eventCtrl" ng-init="eventCtrl.initCtrl(<% eventId %>)">
@@ -38,7 +38,7 @@
                                 <!-- Event descritpion -->
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label"> Descrição </label>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-5">
                                         {{eventCtrl.event.descricao}}
                                     </div>
                                 </div>
@@ -48,14 +48,14 @@
                                 <!-- Customer -->
                                 <div class="form-group row">
                                     <label for="customer" class="col-sm-2 col-form-label">Cliente</label>
-                                    <div name="customer" class="col-sm-5">
+                                    <div name="customer" class="col-sm-5" ng-init="customer=eventCtrl.costumer">
                                         <% include templates/customers/customer-info.ejs %>
                                     </div>
                                 </div>
 
                                 <!-- Products -->
                                 <div class="form-group row">
-                                    <label for="products" class="col-sm-2 col-form-label">Oportunidades</label>
+                                    <label for="products" class="col-sm-2 col-form-label">Oportunidades de venda</label>
                                     <div name="procuts" class="col-sm-5">
                                         <% include templates/products/opportunities-listing.ejs %>
                                     </div>

@@ -6,9 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 var login = require('./routes/login');
-//var sigin = require('./routes/signin');
+var register = require('./routes/register');
 var profile = require('./routes/profile');
 var agenda = require('./routes/agenda');
 var customers = require('./routes/customers');
@@ -37,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // TODO review routing to cliente, produto
 app.use('/', index);
 app.use('/entrar', login);
+app.use('/registar', register);
 app.use('/eventos', agenda);
 app.use('/evento', event);
 app.use('/criar_evento', new_event);
