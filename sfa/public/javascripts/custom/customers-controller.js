@@ -6,7 +6,7 @@ var customersModule = angular.module('customersModule', []);
 customersModule.controller('CustomersController', function ($http, $location) {
     var self = this;
 
-    self.costumers = [];
+    self.customers = [];
 
     /**
      * initiate controller

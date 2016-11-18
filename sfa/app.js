@@ -7,15 +7,16 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-
+var login = require('./routes/login');
 var agenda = require('./routes/agenda');
-var costumers = require('./routes/customers');
+var customers = require('./routes/customers');
 var costumer = require('./routes/customer');
 var event = require('./routes/event');
 var products = require('./routes/products');
 var product = require('./routes/product');
 var new_costumer = require('./routes/new_customer');
 var new_event = require('./routes/new_event');
+var oversight = require('./routes/oversight');
 
 var app = express();
 
@@ -33,14 +34,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // TODO review routing to cliente, produto
 app.use('/', index);
+app.use('/entrar', login);
 app.use('/eventos', agenda);
 app.use('/evento', event);
 app.use('/novo_evento', new_event);
-app.use('/clientes', costumers);
+app.use('/clientes', customers);
 app.use('/cliente', costumer);
 app.use('/novo_cliente', new_costumer);
 app.use('/produtos', products);
 app.use('/produto', product);
+app.use('/supervisao', oversight);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
