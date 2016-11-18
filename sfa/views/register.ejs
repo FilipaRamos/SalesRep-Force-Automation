@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include templates/common/header.ejs %>
+</head>
+
+<body ng-app="usersModule">
+<div id="wrapper">
+    <% include templates/common/nav-bar.ejs %>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+
+            <% include templates/common/breadcrumbs.ejs %>
+
+            <div class="container">
+                <form class="form-horizontal" role="form" ng-controller="NewUserController as userCtrl">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Nome</label>
+                        <div class="col-sm-5">
+                            <input type="text" id="name" ng-model="userCtrl.user.nome" placeholder="Nome" class="form-control" autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-5">
+                            <input type="email" id="email" ng-model="userCtrl.user.email" placeholder="Email" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 control-label">Palavra-passe</label>
+                        <div class="col-sm-5">
+                            <input type="password" id="password" placeholder="Palavra-passe" class="form-control">
+                            <br>
+                            <input type="password" id="password" placeholder="Repita a palavra-passe" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address" class="col-sm-2 control-label">Morada</label>
+                        <div class="col-sm-5">
+                            <input type="text" id="address" ng-model="userCtrl.user.morada" placeholder="Morada" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="col-sm-2 control-label">Telefone</label>
+                        <div class="col-sm-5">
+                            <input type="text" id="phone" ng-model="userCtrl.user.telefone" placeholder="Telefone" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-5 col-sm-offset-2">
+                            <button type="submit" class="btn btn-primary btn-block">Registar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <% include templates/common/footer.ejs %>
+    </div>
+</div>
+<script type="text/javascript" src="javascripts/custom/users-controller.js"></script>
+</body>
+</html>

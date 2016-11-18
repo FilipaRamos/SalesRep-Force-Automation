@@ -1,4 +1,4 @@
-var usersModule = angular.module('usersModule', []);
+var usersModule = angular.module('usersModule', ['eventsModule']);
 
 /**
 * LoginController
@@ -35,7 +35,7 @@ usersModule.controller('UsersController', function ($http, $location) {
      */
     self.initCtrl = function() {
         // TODO change this
-        self.users = customersTemp;
+        self.users = usersTemp;
         //self.getUsers();
     };
 
@@ -59,6 +59,33 @@ usersModule.controller('UsersController', function ($http, $location) {
     self.setTab = function (setTab) {
         self.tab = setTab;
     };
+});
+
+/**
+ * UserController
+ */
+usersModule.controller('UserController', function ($http, $location) {
+    var self = this;
+
+    self.user = {};
+
+    /**
+     * initiate controller
+     */
+    self.initCtrl = function(id) {
+        // TODO
+        self.user = usersTemp[0];
+    };
+
+    /**
+     * GET users list from API
+     */
+    self.getUsers = function () {
+        $http.get('api/vendedores').then(function (data) {
+            self.users = data;
+        });
+    };
+
 });
 
 // TODO retrieve client list

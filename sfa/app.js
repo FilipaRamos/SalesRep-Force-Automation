@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var login = require('./routes/login');
+//var sigin = require('./routes/signin');
+var profile = require('./routes/profile');
 var agenda = require('./routes/agenda');
 var customers = require('./routes/customers');
 var costumer = require('./routes/customer');
@@ -44,6 +46,7 @@ app.use('/novo_cliente', new_costumer);
 app.use('/produtos', products);
 app.use('/produto', product);
 app.use('/supervisao', oversight);
+app.use('/perfil', profile);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
