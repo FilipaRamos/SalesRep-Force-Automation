@@ -26,7 +26,7 @@ namespace SalesForceAutomation.Models
             set;
         }
 
-        public string Telefone
+        public string Fac_Tel
         {
             get;
             set;
@@ -38,7 +38,7 @@ namespace SalesForceAutomation.Models
             set;
         }
 
-        public string Morada
+        public string Fac_Mor
         {
             get;
             set;

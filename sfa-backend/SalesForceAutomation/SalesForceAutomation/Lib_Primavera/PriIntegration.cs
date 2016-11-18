@@ -16,33 +16,32 @@ namespace SalesForceAutomation.Lib_Primavera
 
         # region Cliente
 
-        public static List<Models.Cliente> ListaClientes()
+        public static List<Models.Cliente> get_all_clients()
         {
 
 
-            StdBELista objList;
+            StdBELista selectList;
 
             List<Models.Cliente> listClientes = new List<Models.Cliente>();
 
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
 
-                //objList = PriEngine.Engine.Comercial.Clientes.LstClientes();
+                selectList = PriEngine.Engine.Consulta("SELECT * FROM  CLIENTES");
 
-                objList = PriEngine.Engine.Consulta("SELECT Cliente, Nome, Moeda, NumContrib as NumContribuinte, Fac_Mor AS campo_exemplo FROM  CLIENTES");
-
-
-                while (!objList.NoFim())
+                while (!selectList.NoFim())
                 {
-                    listClientes.Add(new Models.Cliente
-                    {
-                        CodCliente = objList.Valor("Cliente"),
-                        NomeCliente = objList.Valor("Nome"),
-                        Moeda = objList.Valor("Moeda"),
-                        NumContribuinte = objList.Valor("NumContribuinte"),
-                        Morada = objList.Valor("campo_exemplo")
-                    });
-                    objList.Seguinte();
+                    Models.Cliente cliente = new Models.Cliente();
+
+                    cliente.CodCliente = selectList.Valor("Cliente");
+                    cliente.Nome = selectList.Valor("Nome");
+                    cliente.NomeFiscal = selectList.Valor("NomeFiscal");
+                    cliente.Fac_Tel = selectList.Valor("Fac_Tel");
+                    cliente.NumContribuinte = selectList.Valor("NumContrib");
+                    cliente.Fac_Mor = selectList.Valor("Fac_Mor");
+
+                    listClientes.Add(cliente);
+                    selectList.Seguinte();
 
                 }
 
@@ -51,7 +50,7 @@ namespace SalesForceAutomation.Lib_Primavera
             else
                 return null;
         }
-
+        /*
         public static Models.Cliente GetCliente(string codCliente)
         {
 
@@ -231,9 +230,9 @@ namespace SalesForceAutomation.Lib_Primavera
         }
 
 
-
+        */
         #endregion Cliente;   // -----------------------------  END   CLIENTE    -----------------------
-
+        
         // Probably done
         #region Artigo
 
@@ -339,9 +338,12 @@ namespace SalesForceAutomation.Lib_Primavera
                 }
 
             }
+            return null;
         }
 
         #endregion ArtigoArmazem
+
+        /*
 
         #region DocCompra
 
@@ -629,6 +631,6 @@ namespace SalesForceAutomation.Lib_Primavera
             return null;
         }
 
-        #endregion DocsVenda
+        #endregion DocsVenda*/
     }
 }
