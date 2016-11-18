@@ -315,6 +315,41 @@ namespace SalesForceAutomation.Lib_Primavera
 
         #endregion Artigo
 
+        #region Familias
+
+        public static List<Models.Familias> get_families()
+        {
+            StdBELista objList;
+
+            Models.Familias familia = new Models.Familias();
+            List<Models.Familias> listFamilies = new List<Models.Familias>();
+
+            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            {
+
+                objList = PriEngine.Engine.Consulta("SELECT * FROM  Familias");
+
+                while (!objList.NoFim())
+                {
+                    familia = new Models.Familias();
+                    familia.Familia = objList.Valor("Familia");
+
+                    listFamilies.Add(familia);
+                    objList.Seguinte();
+                }
+
+                return listFamilies;
+
+            }
+            else
+            {
+                return null;
+
+            }
+        }
+
+        #endregion Familias
+
         #region ArtigoArmazem
 
         public static List<Models.ArtigoArmazem> ListaArtigoArmazens(string artigoID)
