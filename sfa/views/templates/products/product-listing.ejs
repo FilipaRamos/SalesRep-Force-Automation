@@ -1,40 +1,14 @@
 <div class="widget widget-nopad">
     <!-- widget-header -->
     <div class="widget-header">
-        <i class="fa fa-fw fa-address-card"></i> Product Listing
+        <i class="fa fa-fw fa-address-card"></i> Lista de Produtos
     </div>
 
     <div class="widget-content">
         <div class="widget big-stats-container">
             <div class="widget-content">
                 <div class="container" ng-controller="NewOrderController as newOrderCtrl">
-                    <form>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>ID Produto</th>
-                                <th>Quantidade</th>
-                                <th>Preço</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="product in newOrderCtrl.products">
-                                <td>
-                                    <div><a href="/product/{{product.id}}">{{product.id}}</a></div>
-                                    <label><input type="radio" name="optradio"
-                                                  ng-click="newOrderCtrl.selectProduct(product.id)"></label>
-                                </td>
-                                <td>{{product.quantity}}</td>
-                                <td>{{product.price}}</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><b>TOTAL</b></td>
-                                <td>{{total()}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </form>
+                    <%include product-table.ejs %>
                     <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.addProduct()">Adicionar Produto</button>
                     <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.removeProduct()">Remover Produto</button>
                     <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.editProduct()">Editar Produto</button>

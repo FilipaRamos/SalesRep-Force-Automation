@@ -1,4 +1,4 @@
-var ordersModule = angular.module('ordersModule', []);
+var ordersModule = angular.module('ordersModule', ['customersModule']);
 
 /**
  * OrdersController

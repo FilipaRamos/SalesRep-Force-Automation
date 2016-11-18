@@ -1,0 +1,27 @@
+<form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID Produto</th>
+            <th>Quantidade</th>
+            <th>Preço</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="product in newOrderCtrl.products">
+            <td>
+                <div><a href="/product/{{product.id}}">{{product.id}}</a></div>
+                <label><input type="radio" name="optradio"
+                              ng-click="newOrderCtrl.selectProduct(product.id)"></label>
+            </td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.price}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><b>TOTAL</b></td>
+            <td>{{newOrderCtrl.total()}}</td>
+        </tr>
+        </tbody>
+    </table>
+</form>
