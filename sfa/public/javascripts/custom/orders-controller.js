@@ -112,7 +112,7 @@ ordersModule.controller('NewOrderController', function ($http, $location) {
     self.total = function(){
         var total = 0;
         self.products.forEach(function(element){
-            total += element.price;
+            total += ((element.iva/100)+1)*(element.price * element.quantity);
         });
         return total;
     };
@@ -122,7 +122,9 @@ ordersModule.controller('NewOrderController', function ($http, $location) {
         self.products.push(
             {'id' : Math.floor((Math.random() * 99999) + 1),
                 'quantity': Math.floor((Math.random() * 5) + 1),
-                'price':  Math.floor((Math.random() * 10) + 1) });
+                'price':  Math.floor((Math.random() * 10) + 1),
+                'iva': 21
+            });
     };
 
     // remove a product
@@ -138,6 +140,7 @@ ordersModule.controller('NewOrderController', function ($http, $location) {
         if( self.selected >= 0) {
             self.products[self.getSelected(self.selected)].quantity = Math.floor((Math.random() * 5) + 1);
             self.products[self.getSelected(self.selected)].price = Math.floor((Math.random() * 10) + 1);
+            self.products[self.getSelected(self.selected)].iva = Math.floor((Math.random() * 26) + 1);
         }
     };
 
@@ -156,8 +159,8 @@ ordersModule.controller('NewOrderController', function ($http, $location) {
 
     // array of products
     self.products = [
-        {'id' : 15781, 'quantity' : 2, 'price' : 3 },
-        {'id' : 74694, 'quantity' : 4, 'price' : 1 }
+        {'id' : 15781, 'quantity' : 2, 'price' : 3 , 'iva' : 23},
+        {'id' : 74694, 'quantity' : 4, 'price' : 1 , 'iva' : 21}
     ];
 
     self.selected = -1;

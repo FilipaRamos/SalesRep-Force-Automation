@@ -8,10 +8,48 @@
         <div class="widget big-stats-container">
             <div class="widget-content">
                 <div class="container" ng-controller="NewOrderController as newOrderCtrl">
-                    <%include product-table.ejs %>
-                    <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.addProduct()">Adicionar Produto</button>
-                    <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.removeProduct()">Remover Produto</button>
-                    <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.editProduct()">Editar Produto</button>
+                    <form>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>ID Produto</th>
+                                <th>Quantidade</th>
+                                <th>Preço Unitário</th>
+                                <th>IVA (%)</th>
+                                <th>Sub-Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="product in newOrderCtrl.products">
+                                <td>
+                                    <div><a href="/product/{{product.id}}">{{product.id}}</a></div>
+                                    <label><input type="radio" name="optradio"
+                                                  ng-click="newOrderCtrl.selectProduct(product.id)"></label>
+                                </td>
+                                <td>{{product.quantity}}</td>
+                                <td>{{product.price | currency:"€" }}</td>
+                                <td>{{product.iva}}</td>
+                                <td>{{(((product.iva/100)+1)*(product.price*product.quantity)) | currency:"€"}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><b>TOTAL</b></td>
+                                <td>{{newOrderCtrl.total() | currency:"€"}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+
+                    <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.addProduct()">Adicionar
+                        Produto
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.removeProduct()">Remover
+                        Produto
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.editProduct()">Editar Produto
+                    </button>
                 </div>
             </div>
             <!-- /widget-content -->
