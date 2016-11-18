@@ -234,7 +234,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
         #endregion Cliente;   // -----------------------------  END   CLIENTE    -----------------------
 
-
+        // Probably done
         #region Artigo
 
         public static Models.Artigo GetArtigo(string codArtigo)
@@ -256,6 +256,9 @@ namespace SalesForceAutomation.Lib_Primavera
                     myArt.CodArtigo = objArtigo.get_Artigo();
                     myArt.DescArtigo = objArtigo.get_Descricao();
                     myArt.PrecoMedio = objArtigo.get_PCMedio();
+                    myArt.IVA = objArtigo.get_IVA();
+                    myArt.QtDisponivel = objArtigo.get_StkActual() - objArtigo.get_QtReservada();
+                    myArt.StockAtual = objArtigo.get_StkActual();
 
 
                     return myArt;
@@ -285,8 +288,12 @@ namespace SalesForceAutomation.Lib_Primavera
                 while (!objList.NoFim())
                 {
                     art = new Models.Artigo();
-                    art.CodArtigo = objList.Valor("artigo");
-                    art.DescArtigo = objList.Valor("descricao");
+                    art.CodArtigo = objList.Valor("Artigo");
+                    art.DescArtigo = objList.Valor("Descricao");
+                    art.PrecoMedio = objList.Valor("PC_Medio");
+                    art.IVA = objList.Valor("IVA");
+                    art.QtDisponivel = objList.Valor("StkAtual") - objList.Valor("QtReservada");
+                    art.StockAtual = objList.Valor("STKMaximo");
 
                     listArts.Add(art);
                     objList.Seguinte();
@@ -305,7 +312,36 @@ namespace SalesForceAutomation.Lib_Primavera
 
         #endregion Artigo
 
+        #region ArtigoArmazem
 
+        public static List<Models.ArtigoArmazem> ListaArtigoArmazens(string artigoID)
+        {
+            GcpBEArtigoArmazens objList;
+
+            Models.ArtigoArmazem objArtArm;
+            List<Models.ArtigoArmazem> listArtigoArmazens = new List<Models.ArtigoArmazem>();
+
+            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            {
+
+                objList = PriEngine.Engine.Comercial.ArtigosArmazens.ListaArtigosArmazens(artigoID);
+
+                foreach(GcpBEArtigoArmazem artArmOffList in objList){
+                    
+                    objArtArm = new Models.ArtigoArmazem();
+
+                    objArtArm.ArtigoID = artigoID;
+                    objArtArm.ArmazemID = artArmOffList.get_Armazem();
+                    objArtArm.Morada = artArmOffList.get_Localizacao();
+                    objArtArm.Stock = artArmOffList.get_StkActual();
+
+                    listArtigoArmazens.Add(objArtArm);
+                }
+
+            }
+        }
+
+        #endregion ArtigoArmazem
 
         #region DocCompra
 

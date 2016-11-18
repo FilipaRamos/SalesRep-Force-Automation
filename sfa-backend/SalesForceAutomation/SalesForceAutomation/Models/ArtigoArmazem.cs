@@ -5,27 +5,31 @@ using System.Web;
 
 namespace SalesForceAutomation.Models
 {
-    public class Artigo
+    public class ArtigoArmazem
     {
-        public string CodArtigo
+
+        public string ArmazemID
         {
             get;
             set;
         }
 
-        public string DescArtigo
+        public string ArtigoID
         {
             get;
             set;
         }
 
-        public double PrecoMedio
+        public double Stock
         {
             get;
             set;
         }
 
-        public 
-
+        public string Morada
+        {
+            get;
+            set;
+        }
     }
 }
