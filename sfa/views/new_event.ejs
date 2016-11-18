@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html ng-app="sfa">
+<html>
 
 <head>
-    <title> <%= title %> </title>
     <% include templates/common/header.ejs %>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.js"></script>
     <script src="//cdn.rawgit.com/indrimuska/angular-moment-picker/master/dist/angular-moment-picker.min.js"></script>
@@ -11,7 +10,7 @@
 </head>
 
 <body>
-<div id="wrapper">
+<div id="wrapper" ng-app="newEventModule">
     <% include templates/common/nav-bar.ejs %>
     <div id="page-wrapper">
         <div class="container-fluid">
@@ -61,6 +60,7 @@
                                             <input class="form-control"
                                                    placeholder="Selecionar data"
                                                    ng-model="newEventCtrl.newEvent.date"
+                                                   ng-init="newEventCtrl.newEvent.date = <%= date %>"
                                                    ng-model-options="{ updateOn: 'blur' }">
                                         </div>
 
@@ -82,7 +82,7 @@
                                 </div>
 
                                 <!-- Customer -->
-                                <div class="form-group row">
+                                <div ng-hide="<%= customerId %> != ' '" class="form-group row">
                                     <label for="customer" class="col-sm-2 col-form-label">Cliente</label>
                                     <div name="customer" class="col-sm-5">
                                         <% include templates/customers/customer-selector.ejs %>
@@ -92,7 +92,7 @@
                                 <!-- Products -->
                                 <div class="form-group row">
                                     <label for="products" class="col-sm-2 col-form-label">Oportunidades</label>
-                                    <div name="procuts" class="col-sm-5" ng-controller="OpportunitiesController as opportunitiesCtrl">
+                                    <div name="procuts" class="col-sm-5">
                                         <% include templates/products/product-selector.ejs %>
                                     </div>
                                 </div>
@@ -124,6 +124,8 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="javascripts/custom/new_event.js"></script>
+<script type="text/javascript" src="javascripts/custom/products-controller.js"></script>
+<script type="text/javascript" src="javascripts/custom/customers-controller.js"></script>
+<script type="text/javascript" src="javascripts/custom/events-controller.js"></script>
 </body>
 </html>

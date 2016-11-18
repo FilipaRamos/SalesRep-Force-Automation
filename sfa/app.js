@@ -33,14 +33,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // TODO review routing to cliente, produto
 app.use('/', index);
-app.use('/agenda', agenda);
+app.use('/eventos', agenda);
+app.use('/evento', event);
+app.use('/novo_evento', new_event);
 app.use('/clientes', costumers);
 app.use('/cliente', costumer);
-app.use('/evento', event);
+app.use('/novo_cliente', new_costumer);
 app.use('/produtos', products);
 app.use('/produto', product);
-app.use('/novo_cliente', new_costumer);
-app.use('/novo_evento', new_event);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

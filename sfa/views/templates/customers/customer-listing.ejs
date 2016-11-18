@@ -8,32 +8,32 @@
         <div class="widget big-stats-container">
             <div class="widget-content">
 
-                <section ng-controller="CustomersController as customerCtrl">
+                <section ng-controller="CustomersController as customersCtrl" ng-init="customersCtrl.initCtrl()">
                     <ul class="nav nav-pills">
-                        <li ng-class="{ active:customerCtrl.isSet(1) }">
-                            <a href ng-click="customerCtrl.setTab(1)">Top</a>
+                        <li ng-class="{ active:customersCtrl.isSet(1) }">
+                            <a href ng-click="customersCtrl.setTab(1)">Top</a>
                         </li>
-                        <li ng-class="{ active:customerCtrl.isSet(2) }">
-                            <a href ng-click="customerCtrl.setTab(2)">Potenciais</a>
+                        <li ng-class="{ active:customersCtrl.isSet(2) }">
+                            <a href ng-click="customersCtrl.setTab(2)">Potenciais</a>
                         </li>
-                        <li ng-class="{ active:customerCtrl.isSet(3) }">
-                            <a href ng-click="customerCtrl.setTab(3)">Todos</a>
+                        <li ng-class="{ active:customersCtrl.isSet(3) }">
+                            <a href ng-click="customersCtrl.setTab(3)">Todos</a>
                         </li>
                     </ul>
 
-                    <div ng-show="customerCtrl.isSet(3)">
+                    <div ng-show="customersCtrl.isSet(3)">
                         <div class="list-group">
                             <div class="list-group-item"
-                                 ng-repeat="customer in customerCtrl.customers | orderBy : '-vendas'">
+                                 ng-repeat="customer in customersCtrl.customers | orderBy : '-vendas'">
                                 <p><a href="cliente?id={{customer.id}}">{{customer.nome}}</a> <em class="pull-right">{{customer.vendas
                                         | currency:"€"}}</em></p>
                             </div>
                         </div>
                     </div>
 
-                    <div ng-show="customerCtrl.isSet(2)">
+                    <div ng-show="customersCtrl.isSet(2)">
                         <div class="list-group">
-                            <div class="list-group-item" ng-repeat="customer in customerCtrl.customers"
+                            <div class="list-group-item" ng-repeat="customer in customersCtrl.customers"
                                  ng-show="customer.vendas==0">
                                 <p><a href="cliente?id={{customer.id}}">{{customer.nome}}</a><em class="pull-right">{{customer.telefone}}</em>
                                 </p>
@@ -41,10 +41,10 @@
                         </div>
                     </div>
 
-                    <div ng-show="customerCtrl.isSet(1)">
+                    <div ng-show="customersCtrl.isSet(1)">
                         <div class="list-group">
                             <div class="list-group-item"
-                                 ng-repeat="customer in customerCtrl.customers | orderBy : '-vendas' | limitTo : 10">
+                                 ng-repeat="customer in customersCtrl.customers | orderBy : '-vendas' | limitTo : 10">
                                 <p><a href="cliente?id={{customer.id}}">{{customer.nome}}</a> <em class="pull-right">{{customer.vendas
                                         | currency:"€"}}</em></p>
                             </div>

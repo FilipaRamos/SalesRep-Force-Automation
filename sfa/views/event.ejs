@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html ng-app="sfa">
+<html>
 
 <head>
-    <title> <%= title %> </title>
     <% include templates/common/header.ejs %>
 </head>
 
-<body>
+<body ng-app="eventsModule">
 <div id="wrapper">
     <% include templates/common/nav-bar.ejs %>
     <div id="page-wrapper">
@@ -17,7 +16,7 @@
             <div class="row">
                 <div class="span12">
 
-                    <form action="" method="post" ng-controller="EventController as eventCtrl">
+                    <div ng-controller="EventController as eventCtrl" ng-init="eventCtrl.initCtrl(<% eventId %>)">
                         <div class="row">
                             <div class="span12">
 
@@ -50,7 +49,7 @@
                                 <div class="form-group row">
                                     <label for="customer" class="col-sm-2 col-form-label">Cliente</label>
                                     <div name="customer" class="col-sm-5">
-                                        <% include templates/customers/costumer-info.ejs %>
+                                        <% include templates/customers/customer-info.ejs %>
                                     </div>
                                 </div>
 
@@ -79,13 +78,13 @@
 
                         </div>
 
-                    </form>
+                    </div>
                 </div>
             </div>
             <% include templates/common/footer.ejs %>
         </div>
     </div>
 </div>
-<script type="text/javascript" src="javascripts/custom/event.js"></script>
+<script type="text/javascript" src="javascripts/custom/events-controller.js"></script>
 </body>
 </html>

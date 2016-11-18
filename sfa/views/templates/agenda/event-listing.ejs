@@ -1,17 +1,17 @@
 <div class="widget widget-nopad">
     <!-- widget-header -->
-    <div class="widget-header"><i class="fa fa-fw fa-address-card"></i> Eventos
-        <a href="/novo_evento" class="pull-right"><i class="fa fa-plus-square">&nbsp</i></a>
+    <div class="widget-header"><i class="fa fa-fw fa-calendar"></i> Eventos
+        <a href="/novo_evento?clienteId={{customerCtrl.customer.id}}" class="pull-right"><i class="fa fa-plus-square">&nbsp</i></a>
     </div>
 
     <div class="widget-content">
         <div class="widget big-stats-container">
             <div class="widget-content">
 
-                <section ng-controller="CostumersController as costumerCtrl">
+                <section>
 
                     <div class="list-group">
-                        <div class="list-group-item" ng-repeat="meeting in costumerCtrl.meetings">
+                        <div class="list-group-item" ng-repeat="meeting in customerCtrl.events">
                             <p><a href="evento/{{meeting.id}}">{{meeting.id}}</a></p>
                         </div>
                     </div>
