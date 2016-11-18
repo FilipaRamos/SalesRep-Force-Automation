@@ -24,7 +24,7 @@
                     <% include templates/orders/order-listing.ejs %>
                 </div>
 
-                <div class="span6">
+                <div class="span6" ng-init="events=customerCtrl.events; customerId=customerCtrl.customer.id">
                     <% include templates/agenda/event-listing.ejs %>
                 </div>
             </div>

@@ -33,7 +33,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// TODO review routing to cliente, produto
 app.use('/', index);
 app.use('/entrar', login);
 app.use('/registar', register);
