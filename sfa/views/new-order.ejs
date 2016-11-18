@@ -10,11 +10,14 @@
 <div id="wrapper">
 
     <% include templates/common/nav-bar.ejs %>
-    <% include templates/customers/customer-info.ejs %>
+    <div class="" ng-controller="CustomerController as customerCtrl" ng-init="customerCtrl.initCtrl(<%=customerId %>); customer = customerCtrl.customer;">
+        <% include templates/customers/customer-info.ejs %>
+    </div>
     <% include templates/products/product-listing.ejs %>
     <button type="button" class="btn btn-primary"> Encomendar </button>
     <% include templates/common/footer.ejs %>
 </div>
+    <script src="javascripts/custom/customers-controller.js"></script>
     <script src="javascripts/custom/orders-controller.js "></script>
 </body>
 </html>
