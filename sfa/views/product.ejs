@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="sfa">
+<html>
 
 <head>
     <% include templates/common/header.ejs %>
@@ -7,7 +7,7 @@
 </head>
 
 
-<body>
+<body ng-app="productsModule">
 <div id="wrapper">
     <% include templates/common/nav-bar.ejs %>
 
@@ -16,7 +16,7 @@
 
             <% include templates/common/breadcrumbs.ejs %>
 
-            <div class="row" ng-controller="ProductController as productCtrl">
+            <div class="row" ng-controller="ProductController as productCtrl" ng-init="productCtrl.initCtrl(<%= productId %>)">
 
                 <div class="col-md-12">
 
@@ -37,7 +37,7 @@
 
                 <div class="col-md-12">
                     <div class="text-right">
-                        <a href="/nova_encomenda" class="btn btn-success">Fazer encomenda</a>
+                        <a href="/nova_encomenda?produtoId=<%= productId %>" class="btn btn-primary">Encomendar</a>
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="javascripts/custom/product.js"></script>
+<script type="text/javascript" src="javascripts/custom/products-controller.js"></script>
 </body>
 
 </html>

@@ -21,7 +21,7 @@
                             <tbody>
                             <tr ng-repeat="product in newOrderCtrl.products">
                                 <td>
-                                    <div><a href="/product/{{product.id}}">{{product.id}}</a></div>
+                                    <div><a href="/produto=?id={{product.id}}">{{product.id}}</a></div>
                                 </td>
                                 <td>{{product.quantity}}</td>
                                 <td>{{product.price | currency:"€" }}</td>

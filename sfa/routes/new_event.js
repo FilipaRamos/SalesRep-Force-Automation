@@ -5,9 +5,9 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('new-event', { title: 'Criar evento',
                             breadcrumb: 'Criar evento',
-                            date: req.query.data ? req.query.data : "''",
-                            customerId: req.query.clienteId ? req.query.clienteId : " "
-                          });
+                            date: req.query.data ? req.query.data : "null",
+                            customerId: req.query.clienteId ? req.query.clienteId : "null"
+  });
 });
 
 module.exports = router;

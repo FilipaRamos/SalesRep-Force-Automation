@@ -44,11 +44,18 @@ productsModule.controller('ProductsController', function () {
      */
     self.filteringBy = function(category){
         return self.filter === 'all' || self.filter === category;
-    }
+    };
 
     self.filterBy = function(category){
         self.filter = category;
-    }
+    };
+
+    self.isFilterEmpty = function () {
+      var result =  self.products.find(function (product) {
+          return product.categoria == self.filter;
+      })
+        return result == undefined && self.filter != 'all';
+    };
 });
 
 /**
@@ -138,7 +145,8 @@ var productsTemp = [
         iva_atual: 13,
         preco_atual: 22.12,
         stock_total: 100,
-        stock_disponivel: 85
+        stock_disponivel: 85,
+        categoria: "Cat2"
     },
     {
         id: "Exemplo4",
@@ -147,7 +155,7 @@ var productsTemp = [
         iva_atual: 13,
         preco_atual: 22.12,
         stock_total: 100,
-        stock_disponivel: 85
+        stock_disponivel: 85,
     },
     {
         id: "Exemplo5",

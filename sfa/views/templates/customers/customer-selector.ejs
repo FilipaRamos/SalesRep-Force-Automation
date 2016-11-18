@@ -1,9 +1,7 @@
 <div ng-controller="CustomersController as customersCtrl" ng-init="customersCtrl.initCtrl()">
-    <select id="client-selector" class="form-control selectpicker"
+    <select id="costumer-selector" class="form-control selectpicker"
             data-live-search-placeholder="Procurar por nome..."
-            title="Clientes" data-live-search="true"
-            ng-model="newEventCtrl.newEvent.costumer"
-            ng-init="newEventCtrl.newEvent.costumer = <%= customerId %>">
+            title="Clientes" data-live-search="true">
         <option ng-repeat="customer in customersCtrl.customers"
                 value="{{customer.id}}" data-subtext="&emsp;{{customer.telefone}} ">
             {{customer.nome}}

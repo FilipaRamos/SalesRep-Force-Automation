@@ -1,21 +1,20 @@
 <div ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.initCtrl()">
 
-    <!-- TODO include template Products selected -->
-    <div ng-repeat="product in productsCtrl.products"
-         ng-show="newEventCtrl.isProductOpportunity(product.id)">{{product.nome}}
-    </div>
-
     <select id="product-selector" class="form-control selectpicker"
             data-live-search-placeholder="Procurar por produto ou categoria..."
             title="Produtos" data-live-search="true">
         <option ng-repeat="product in productsCtrl.products"
                 value="{{product.id}}" data-subtext="&emsp;{{product.preco_atual}} €"
                 data-tokens="{{product.categoria}}"
-                id="product-{{product.id}}"
-                ng-show="newEventCtrl.isProductOpportunity(product.id)==false">
+                id="product-{{product.id}}">
             {{product.nome}}
         </option>
     </select>
 
-    <button type="button" class="btn btn-primary pull-right" ng-click="newEventCtrl.addOpportunity()">Adicionar</button>
+    <div class="pull-right">
+    <button type="button" class="btn btn-primary " ng-click="newEventCtrl.removeOpportunity()">Remover</button>
+        <button type="button" class="btn btn-primary " ng-click="newEventCtrl.addOpportunity()">Adicionar</button>
+    </div>
+    <!-- TODO include template Products selected -->
+        <% include opportunities-listing.ejs %>
 </div>

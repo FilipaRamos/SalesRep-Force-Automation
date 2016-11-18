@@ -22,9 +22,9 @@
                             <tbody>
                             <tr ng-repeat="product in newOrderCtrl.products">
                                 <td>
-                                    <div><a href="/product/{{product.id}}">{{product.id}}</a></div>
-                                    <label><input type="radio" name="optradio"
-                                                  ng-click="newOrderCtrl.selectProduct(product.id)"></label>
+                                    <div><span><input type="radio" name="optradio"
+                                                      id="{{product.id}}"></span>
+                                        <a href="/product/{{product.id}}">{{product.id}}</a></div>
                                 </td>
                                 <td>{{product.quantity}}</td>
                                 <td>{{product.price | currency:"€" }}</td>

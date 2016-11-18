@@ -1,19 +1,28 @@
-<div class="widget widget-nopad">
-    <div class="widget-content">
-        <div class="widget big-stats-container">
-            <div class="widget-content">
-                <section>
-
-                    <div class="list-group">
-                        <div ng-repeat="order in customerCtrl.orders">
-                            <div class="list-group-item" ng-repeat="produto in order.produtos">
-                                <p><a href="produto?id={{produto.id}}">{{produto.id}}</a></p>
-                            </div>
-                        </div>
-                    </div>
-
-                </section>
-            </div>
-        </div>
-    </div>
+<div ng-show="newEventCtrl.isProductOpportunity()" class="row">
+    <form>
+    <table class="table span7">
+        <thead>
+        <tr>
+            <th style="width: 30%;">Nome</th>
+            <th style="width: 50%;">Descrição</th>
+            <th style="width: 10%;">Iva</th>
+            <th style="width: 10%;">Preço</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="product in productsCtrl.products"
+            ng-show="newEventCtrl.isProductOpportunity(product.id)">
+            <td>
+                <label for="{{product.id}}">
+                    <span><input type="checkbox" id="{{product.id}}" ng-click="newEventCtrl.toggleOpportunitySelected(product.id)"/></span>&emsp;
+                    <a href="/produto?id={{product.id}}">{{product.nome}}</a>
+                </label>
+            </td>
+            <td>{{product.descricao}}</td>
+            <td>{{product.iva_atual}}%</td>
+            <td>{{product.preco_atual | currency:"€" }}</td>
+        </tr>
+        </tbody>
+    </table>
+    </form>
 </div>
