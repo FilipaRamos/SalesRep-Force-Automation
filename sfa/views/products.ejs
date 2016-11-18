@@ -19,6 +19,7 @@
             <div class="row" ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.initCtrl()">
 
                 <div class="col-md-3">
+
                     <p class="lead">Categorias</p>
                     <div class="list-group">
                         <div>
@@ -30,6 +31,9 @@
                             <a href="#{{category.nome}}" class="list-group-item">{{category.nome}}</a>
                         </div>
                     </div>
+
+                    <% include templates/products/product-search.ejs %>
+
                 </div>
 
                 <div class="col-md-9">
