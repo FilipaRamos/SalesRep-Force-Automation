@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html ng-app="customersModule">
+<html>
 
 <head>
     <% include templates/common/header.ejs %>
+    <link rel="stylesheet" type="text/css" href="stylesheets/pages/products.css"/>
 </head>
 
 
-<body>
+<body ng-app="customersModule">
 <div id="wrapper">
     <% include templates/common/nav-bar.ejs %>
 
@@ -15,16 +16,73 @@
 
             <% include templates/common/breadcrumbs.ejs %>
 
-            <div class="row">
-                <div class="span8">
-                    <% include templates/customers/customer-listing.ejs %>
+            <div class="row" ng-controller="CustomersController as customersCtrl" ng-init="customersCtrl.initCtrl()">
+
+                <div class="col-md-3">
+                    <p class="lead text-muted"><i class="fa fa-fw fa-eye"></i>Filtrar</p>
+
+                    <div class="list-group">
+                        <div>
+                            <a href="#all" ng-click="customersCtrl.setTab(1)" class="list-group-item">Todos os
+                                clientes</a>
+                        </div>
+                        <div>
+                            <a href="#prospect" ng-click="customersCtrl.setTab(2)" class="list-group-item">Potenciais
+                                clientes</a>
+                        </div>
+                        <div>
+                            <a href="#top" ng-click="customersCtrl.setTab(3)" class="list-group-item">Clientes com mais
+                                vendas</a>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <% include templates/customers/customer-search.ejs %>
+
+                </div>
+
+                <div class="col-md-9">
+
+                    <p class="lead"><i class="fa fa-fw fa-address-card"></i> Clientes
+                        <a href="/criar_cliente"><i class="fa fa-plus-square">&nbsp</i></a></p>
+
+                    <div ng-show="customersCtrl.isSet(3)">
+                        <div ng-repeat="customer in customersCtrl.customers | orderBy : '-vendas' | limitTo : 10">
+                            <% include templates/customers/customer-preview.ejs %>
+                        </div>
+
+                        <div ng-show="customersCtrl.customers.length == 0 && customersCtrl.isSet(3)">Não foram encontrados
+                            clientes...
+                        </div>
+                    </div>
+
+                    <div ng-show="customersCtrl.isSet(2)">
+                        <div ng-repeat="customer in customersCtrl.customers"
+                             ng-show="customer.vendas==0">
+                            <% include templates/customers/customer-preview.ejs %>
+                        </div>
+                    </div>
+
+                    <div ng-show="!customersCtrl.prospectCustomers() && customersCtrl.isSet(2)">Não foram encontrados
+                        clientes...
+                    </div>
+
+                    <div ng-show="customersCtrl.isSet(1)">
+                        <div ng-repeat="customer in customersCtrl.customers | orderBy : '-nome' ">
+                            <% include templates/customers/customer-preview.ejs %>
+                        </div>
+                        <div ng-show="customersCtrl.customers.length == 0 && customersCtrl.isSet(1)">Não foram encontrados clientes...</div>
+                    </div>
+
                 </div>
             </div>
         </div>
-
         <% include templates/common/footer.ejs %>
     </div>
 </div>
+
 <script type="text/javascript" src="javascripts/custom/customers-controller.js"></script>
 </body>
+
 </html>

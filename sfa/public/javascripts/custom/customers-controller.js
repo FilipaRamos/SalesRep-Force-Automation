@@ -11,7 +11,7 @@ customersModule.controller('CustomersController', function ($http, $location) {
     /**
      * initiate controller
      */
-    self.initCtrl = function(){
+    self.initCtrl = function () {
         // TODO change this
         self.customers = customersTemp;
         //self.getCustomers();
@@ -52,7 +52,7 @@ customersModule.controller('CustomerController', function ($http, $location) {
     /**
      * initiate controller
      */
-    self.initCtrl = function(id){
+    self.initCtrl = function (id) {
         self.getCustomer(id);
         self.getCustomerEvents();
         self.getCustomerOrders();
@@ -97,6 +97,14 @@ customersModule.controller('CustomerController', function ($http, $location) {
     self.setTab = function (setTab) {
         self.tab = setTab;
     };
+
+    self.prospectCustomers = function () {
+        var prospectCustomers = self.customers.filter(function (customer) {
+            return customer.vendas == 0;
+        });
+
+        return prospectCustomers.length > 0;
+    };
 });
 
 /**
@@ -110,7 +118,8 @@ customersModule.controller('NewCustomerController', function ($http, $location) 
     /**
      * initiate controller
      */
-    self.initCtrl = function(){};
+    self.initCtrl = function () {
+    };
 
     /**
      * Add customer through API
@@ -122,7 +131,7 @@ customersModule.controller('NewCustomerController', function ($http, $location) 
                 self.customers.push(self.newCustomer);
                 self.newCustomer = {};
 
-                $location.path('/clientes?id=' + data.id).replace();
+                $location.path('/cliente?id=' + data.id).replace();
             },
             function (data) {
                 console.log(data);
@@ -158,7 +167,7 @@ var customersTemp = [
         morada: "Porto",
         telefone: 919209872,
         contribuinte: 221009029,
-        vendas: 0
+        vendas: 12
     }
 ];
 

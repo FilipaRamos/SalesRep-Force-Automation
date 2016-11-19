@@ -19,8 +19,8 @@
             <div class="row" ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.initCtrl()">
 
                 <div class="col-md-3">
+                    <p class="lead text-muted"><i class="fa fa-fw fa-eye"></i>Filtrar</p>
 
-                    <p class="lead">Categorias</p>
                     <div class="list-group">
                         <div>
                             <a href="#" ng-click="productsCtrl.filterBy('all')" class="list-group-item">Todos os
@@ -32,19 +32,19 @@
                         </div>
                     </div>
 
+                    <br>
                     <% include templates/products/product-search.ejs %>
 
                 </div>
 
                 <div class="col-md-9">
+                    <p class="lead"><i class="fa fa-fw fa-address-card"></i> Produtos</p>
 
-                    <div class="row">
                         <div ng-repeat="product in productsCtrl.products"
                              ng-show="productsCtrl.filteringBy(product.categoria)">
                             <% include templates/products/product-preview.ejs %>
                         </div>
                         <div ng-show="productsCtrl.isFilterEmpty()">Não foram encontrados produtos...</div>
-                    </div>
 
                 </div>
 

@@ -1,0 +1,12 @@
+<div>
+    <select id="costumer-selector" class="form-control selectpicker"
+            data-live-search-placeholder="Procurar por nome..."
+            title="Procurar" data-live-search="true">
+        <option ng-repeat="customer in customersCtrl.customers"
+                value="{{customer.id}}" data-subtext="&emsp;{{customer.vendas}} €"
+                id="customer-{{customer.id}}">
+            {{customer.nome}}
+        </option>
+    </select>
+    <button type="button" class="btn btn-primary " ng-click="customersCtrl.goToCustomer()">Ver cliente</button>
+</div>
