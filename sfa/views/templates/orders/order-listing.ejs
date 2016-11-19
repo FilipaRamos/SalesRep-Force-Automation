@@ -1,7 +1,8 @@
 <div class="widget widget-nopad">
 
     <div class="widget-header"><i class="fa fa-fw fa-shopping-cart"></i> Encomendas
-        <a href="/nova_encomenda{{customerId? '?clienteId=' + customerId : ''}}" class="pull-right"><i class="fa fa-plus-square">&nbsp</i></a>
+        <a href="/nova_encomenda{{customer.id ? '?clienteId=' + customer.id : ''}}"
+           class="pull-right"><i class="fa fa-plus-square">&nbsp</i></a>
     </div>
 
     <div class="widget-content">
@@ -10,45 +11,84 @@
 
                 <section>
                     <ul class="nav nav-pills">
-                        <li ng-class="{ active:customerCtrl.isSet(1) }">
-                            <a href ng-click="customerCtrl.setTab(1)"> Em Curso </a>
+                        <li ng-class="{ active:currentCtrl.isSet(1) }">
+                            <a href ng-click="currentCtrl.setTab(1)"> Em Curso </a>
                         </li>
-                        <li ng-class="{ active:customerCtrl.isSet(2) }">
-                            <a href ng-click="customerCtrl.setTab(2)"> Completas </a>
+                        <li ng-class="{ active:currentCtrl.isSet(2) }">
+                            <a href ng-click="currentCtrl.setTab(2)"> Completas </a>
                         </li>
-                        <li ng-class="{ active:customerCtrl.isSet(3) }">
-                            <a href ng-click="customerCtrl.setTab(3)"> Canceladas </a>
+                        <li ng-class="{ active:currentCtrl.isSet(3) }">
+                            <a href ng-click="currentCtrl.setTab(3)"> Canceladas </a>
                         </li>
                     </ul>
 
-                    <div ng-show="customerCtrl.isSet(3)">
-                        <div class="list-group">
-                            <div class="list-group-item" ng-repeat="order in customerCtrl.orders | orderBy : '-data'"
-                                 ng-show="order.status==3">
-                                <p><a href="encomenda/{{order.id}}">{{order.id}}</a> <em class="pull-right">{{order.total
-                                        | currency:"€"}}</em></p>
-                            </div>
-                        </div>
+                    <div ng-show="currentCtrl.isSet(3)">
+                        <form>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%;">ID</th>
+                                    <th style="width: 30%;">Data</th>
+                                    <th style="width: 20%;" ng-show="currentCtrl.costumer.id">Cliente</th>
+                                    <th style="width: 30%;">Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="order in currentCtrl.orders | orderBy : '-data'" ng-show="order.status==3">
+                                    <td><a href="encomenda?id={{order.id}}">{{order.id}}</a></td>
+                                    <td>{{order.data}}</td>
+                                    <td ng-show="currentCtrl.costumer.id">{{order.cliente}}%</td>
+                                    <td>{{order.total | currency:"€" }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
 
-                    <div ng-show="customerCtrl.isSet(2)">
-                        <div class="list-group">
-                            <div class="list-group-item" ng-repeat="order in customerCtrl.orders | orderBy : '-data'"
-                                 ng-show="order.status==2">
-                                <p><a href="encomenda/{{order.id}}">{{order.id}}</a> <em class="pull-right">{{order.total
-                                        | currency:"€"}}</em></p>
-                            </div>
-                        </div>
+                    <div ng-show="currentCtrl.isSet(2)">
+                        <form>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%;">ID</th>
+                                    <th style="width: 30%;">Data</th>
+                                    <th style="width: 20%;" ng-show="currentCtrl.costumer.id">Cliente</th>
+                                    <th style="width: 30%;">Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="order in currentCtrl.orders | orderBy : '-data'" ng-show="order.status==2">
+                                    <td><a href="encomenda?id={{order.id}}">{{order.id}}</a></td>
+                                    <td>{{order.data}}</td>
+                                    <td ng-show="currentCtrl.costumer.id">{{order.cliente}}%</td>
+                                    <td>{{order.total | currency:"€" }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
 
-                    <div ng-show="customerCtrl.isSet(1)">
-                        <div class="list-group">
-                            <div class="list-group-item" ng-repeat="order in customerCtrl.orders | orderBy : '-data'"
-                                 ng-show="order.status==1">
-                                <p><a href="encomenda/{{order.id}}">{{order.id}}</a> <em class="pull-right">{{order.total
-                                        | currency:"€"}}</em></p>
-                            </div>
-                        </div>
+                    <div ng-show="currentCtrl.isSet(1)">
+                        <form>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%;">ID</th>
+                                    <th style="width: 30%;">Data</th>
+                                    <th style="width: 20%;" ng-show="currentCtrl.costumer.id">Cliente</th>
+                                    <th style="width: 30%;">Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="order in currentCtrl.orders | orderBy : '-data'" ng-show="order.status==1">
+                                    <td><a href="encomenda?id={{order.id}}">{{order.id}}</a></td>
+                                    <td>{{order.data}}</td>
+                                    <td ng-show="currentCtrl.costumer.id">{{order.cliente}}%</td>
+                                    <td>{{order.total | currency:"€" }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                 </section>
 

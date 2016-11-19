@@ -208,8 +208,24 @@ var ordersTemp = [
 ];
 
 var eventsTemp = [
-    {id: "12453253"},
-    {id: "24564315"},
-    {id: "85636346"},
-    {id: "74536190"}
+    {
+        id: "12453253",
+        tipo: "Reunião",
+        descricao: "some event"
+    },
+    {
+        id: "24564315",
+        tipo: "Reunião",
+        descricao: "some event"
+    },
+    {
+        id: "85636346",
+        tipo: "Reunião",
+        descricao: "some event"
+    },
+    {
+        id: "74536190",
+        tipo: "Reunião",
+        descricao: "some event"
+    }
 ];

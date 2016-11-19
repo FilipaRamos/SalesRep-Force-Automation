@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html ng-app="customersModule">
+<html>
 
 <head>
     <% include templates/common/header.ejs %>
 </head>
 
-<body>
+<body ng-app="customersModule">
 <div id="wrapper">
     <% include templates/common/nav-bar.ejs %>
 
@@ -20,7 +20,7 @@
                     <% include templates/customers/customer-info.ejs %>
                 </div>
 
-                <div class="span6">
+                <div class="span6" ng-init="orders = customerCtrl.orders; currentCtrl = customerCtrl">
                     <% include templates/orders/order-listing.ejs %>
                 </div>
 
