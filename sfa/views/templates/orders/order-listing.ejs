@@ -29,7 +29,7 @@
                                 <tr>
                                     <th style="width: 20%;">ID</th>
                                     <th style="width: 30%;">Data</th>
-                                    <th style="width: 20%;" ng-show="currentCtrl.costumer.id">Cliente</th>
+                                    <th style="width: 20%;" ng-hide="currentCtrl.customer.id">Cliente</th>
                                     <th style="width: 30%;">Total</th>
                                 </tr>
                                 </thead>
@@ -37,7 +37,7 @@
                                 <tr ng-repeat="order in currentCtrl.orders | orderBy : '-data'" ng-show="order.status==3">
                                     <td><a href="encomenda?id={{order.id}}">{{order.id}}</a></td>
                                     <td>{{order.data}}</td>
-                                    <td ng-show="currentCtrl.costumer.id">{{order.cliente}}%</td>
+                                    <td ng-hide="currentCtrl.customer.id">{{order.cliente}}</td>
                                     <td>{{order.total | currency:"€" }}</td>
                                 </tr>
                                 </tbody>
@@ -52,7 +52,7 @@
                                 <tr>
                                     <th style="width: 20%;">ID</th>
                                     <th style="width: 30%;">Data</th>
-                                    <th style="width: 20%;" ng-show="currentCtrl.costumer.id">Cliente</th>
+                                    <th style="width: 20%;" ng-hide="currentCtrl.customer.id">Cliente</th>
                                     <th style="width: 30%;">Total</th>
                                 </tr>
                                 </thead>
@@ -60,7 +60,7 @@
                                 <tr ng-repeat="order in currentCtrl.orders | orderBy : '-data'" ng-show="order.status==2">
                                     <td><a href="encomenda?id={{order.id}}">{{order.id}}</a></td>
                                     <td>{{order.data}}</td>
-                                    <td ng-show="currentCtrl.costumer.id">{{order.cliente}}%</td>
+                                    <td ng-hide="currentCtrl.customer.id">{{order.cliente}}</td>
                                     <td>{{order.total | currency:"€" }}</td>
                                 </tr>
                                 </tbody>
@@ -75,7 +75,7 @@
                                 <tr>
                                     <th style="width: 20%;">ID</th>
                                     <th style="width: 30%;">Data</th>
-                                    <th style="width: 20%;" ng-show="currentCtrl.costumer.id">Cliente</th>
+                                    <th style="width: 20%;" ng-hide="currentCtrl.customer.id">Cliente</th>
                                     <th style="width: 30%;">Total</th>
                                 </tr>
                                 </thead>
@@ -83,7 +83,7 @@
                                 <tr ng-repeat="order in currentCtrl.orders | orderBy : '-data'" ng-show="order.status==1">
                                     <td><a href="encomenda?id={{order.id}}">{{order.id}}</a></td>
                                     <td>{{order.data}}</td>
-                                    <td ng-show="currentCtrl.costumer.id">{{order.cliente}}%</td>
+                                    <td ng-hide="currentCtrl.customer.id">{{order.cliente}}</td>
                                     <td>{{order.total | currency:"€" }}</td>
                                 </tr>
                                 </tbody>

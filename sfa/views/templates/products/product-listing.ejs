@@ -7,59 +7,67 @@
     <div class="widget-content">
         <div class="widget big-stats-container">
             <div class="widget-content">
-                <div class="container" ng-controller="NewOrderController as newOrderCtrl">
-                    <form>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>ID Produto</th>
-                                <th>Quantidade</th>
-                                <th>Preço Unitário</th>
-                                <th>Desconto Unitário</th>
-                                <th>IVA</th>
-                                <th>Sub-Total</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="product in newOrderCtrl.products">
-                                <td>
-                                    <div><span>
-                                            <input type="radio" name="optradio" id="{{product.id}}"
-                                                   ng-click="newOrderCtrl.selectProduct(product.id)">
-                                        </span>
-                                        <a href="/product/{{product.id}}">{{product.id}}</a>
-                                    </div>
-                                </td>
-                                <td>{{product.quantity}}</td>
-                                <td>{{product.price | currency:"€" }}</td>
-                                <td>{{product.discount | currency:"€" }}</td>
-                                <td>{{product.iva}}%</td>
-                                <td>
-                                    {{(((product.iva/100)+1)*((product.price*product.quantity)-(product.discount*product.quantity)))
-                                    | currency:"€"}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><b>TOTAL</b></td>
-                                <td>{{newOrderCtrl.total() | currency:"€"}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </form>
 
-                    <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.addProduct()">Adicionar
-                        Produto
-                    </button>
-                    <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.removeProduct()">Remover
-                        Produto
-                    </button>
-                    <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.editProduct()">Editar Produto
-                    </button>
-                </div>
+                <section ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.initCtrl()">
+                    <ul class="nav nav-pills">
+                        <li ng-class="{ active:productsCtrl.isSet(1) }">
+                            <a href ng-click="productsCtrl.setTab(1)">Top</a>
+                        </li>
+                        <li ng-class="{ active:productsCtrl.isSet(2) }">
+                            <a href ng-click="productsCtrl.setTab(2)">Todos</a>
+                        </li>
+                    </ul>
+
+                    <div ng-show="productsCtrl.isSet(2)">
+                        <form>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Stock</th>
+                                    <th>Preço</th>
+                                    <th>Vendas</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="product in productsCtrl.products">
+                                    <td>
+                                        <a href="/produto?=id{{product.id}}">{{product.nome}}</a>
+                                    </td>
+                                    <td>{{product.stock | currency:"€" }}</td>
+                                    <td>{{product.preco_atual | currency:"€" }}</td>
+                                    <td>{{product.vendas}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+
+                    <div ng-show="productsCtrl.isSet(1)">
+                        <form>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Stock</th>
+                                    <th>Preço</th>
+                                    <th>Vendas</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="product in productsCtrl.products | orderBy: '-vendas' | limitTo: 10">
+                                    <td>
+                                        <a href="/produto?=id{{product.id}}">{{product.nome}}</a>
+                                    </td>
+                                    <td>{{product.stock | currency:"€" }}</td>
+                                    <td>{{product.preco_atual | currency:"€" }}</td>
+                                    <td>{{product.vendas}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </section>
             </div>
         </div>
     </div>

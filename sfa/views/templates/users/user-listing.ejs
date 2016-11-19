@@ -1,5 +1,4 @@
 <div class="widget widget-nopad">
-    <!-- widget-header -->
     <div class="widget-header"><i class="fa fa-fw fa-address-card"></i> Vendedores
         <a href="/registar" class="pull-right"><i class="fa fa-plus-square">&nbsp</i></a>
     </div>
@@ -19,27 +18,53 @@
                     </ul>
 
                     <div ng-show="usersCtrl.isSet(2)">
-                        <div class="list-group">
-                            <div class="list-group-item"
-                                 ng-repeat="user in usersCtrl.users | orderBy : '-nome'">
-                                <p><a href="/perfil?id={{user.id}}">{{user.nome}}</a> <em class="pull-right">{{user.vendas
-                                        | currency:"€"}}</em></p>
-                            </div>
-                        </div>
+                        <form>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%;">Nome</th>
+                                    <th style="width: 30%;">Morada</th>
+                                    <th style="width: 20%;">Telefone</th>
+                                    <th style="width: 30%;">Vendas</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="user in usersCtrl.users | orderBy : '-nome'">
+                                    <td><a href="perfil?id={{user.id}}">{{user.nome}}</a></td>
+                                    <td>{{user.morada}}</td>
+                                    <td>{{user.telefone}}</td>
+                                    <td>{{user.vendas | currency:"€" }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
 
                     <div ng-show="usersCtrl.isSet(1)">
-                        <div class="list-group">
-                            <div class="list-group-item"
-                                 ng-repeat="user in usersCtrl.users | orderBy : '-vendas' | limitTo : 10">
-                                <p><a href="/perfil?id={{user.id}}">{{user.nome}}</a> <em class="pull-right">{{user.vendas
-                                        | currency:"€"}}</em></p>
-                            </div>
-                        </div>
+                        <form>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%;">Nome</th>
+                                    <th style="width: 30%;">Morada</th>
+                                    <th style="width: 20%;">Telefone</th>
+                                    <th style="width: 30%;">Vendas</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="user in usersCtrl.users | orderBy : '-vendas' | limitTo : 10">
+                                    <td><a href="perfil?id={{user.id}}">{{user.nome}}</a></td>
+                                    <td>{{user.morada}}</td>
+                                    <td>{{user.telefone}}</td>
+                                    <td>{{user.vendas | currency:"€" }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
+
                 </section>
             </div>
-            <!-- /widget-content -->
         </div>
     </div>
 </div>

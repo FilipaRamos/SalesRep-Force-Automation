@@ -1,4 +1,4 @@
-var usersModule = angular.module('usersModule', ['customersModule']);
+var usersModule = angular.module('usersModule', []);
 
 /**
 * LoginController
@@ -68,6 +68,7 @@ usersModule.controller('UserController', function ($http, $location) {
     var self = this;
 
     self.user = {};
+    self.events = {};
 
     /**
      * initiate controller
@@ -76,6 +77,7 @@ usersModule.controller('UserController', function ($http, $location) {
         // TODO
         self.user = usersTemp[0];
         //self.getUser(id);
+        //self.getUserEvents(id);
     };
 
     /**
@@ -83,6 +85,15 @@ usersModule.controller('UserController', function ($http, $location) {
      */
     self.getUser = function (id) {
         $http.get('api/vendedores?id=' + id).then(function (data) {
+            self.user = data;
+        });
+    };
+
+    /**
+     * GET user's event list from API
+     */
+    self.getUserEvents = function (id) {
+        $http.get('api/Eventos?id=' + id).then(function (data) {
             self.user = data;
         });
     };

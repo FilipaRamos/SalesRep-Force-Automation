@@ -56,6 +56,18 @@ productsModule.controller('ProductsController', function () {
       })
         return result == undefined && self.filter != 'all';
     };
+
+    /**
+     * Products tab handlers
+     */
+    self.tab = 1;
+    self.isSet = function (checkTab) {
+        return self.tab === checkTab;
+    };
+
+    self.setTab = function (setTab) {
+        self.tab = setTab;
+    };
 });
 
 /**

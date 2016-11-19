@@ -10,6 +10,7 @@ eventsModule.controller('EventsController', function ($http, $location, $window)
     self.events = [];
     self.calendar = null;
     self.eventList = null;
+    self.showAll = false;
 
     /**
      * initiate controller
@@ -91,7 +92,7 @@ eventsModule.controller('EventsController', function ($http, $location, $window)
         });
     };
 
-    self.initEventList = function () {
+    self.initFutureEventList = function () {
         $(document).ready(function () {
             self.eventList = $('#upcomming').fullCalendar({
                 weekends: false,
@@ -108,6 +109,15 @@ eventsModule.controller('EventsController', function ($http, $location, $window)
                 noEventsMessage: 'Não foram encontrados eventos...'
             });
         });
+    };
+
+    self.changeView = function () {
+        self.showAll = !self.showAll;
+        var newView = self.showAll ? 'listYear' : 'listNext';
+        self.eventList.fullCalendar('changeView', newView);
+
+        var label = self.showAll ? 'Ver futuros' : 'Ver todos';
+        $("#change-view").html(label);
     };
 
     self.initFullCalendar = function () {

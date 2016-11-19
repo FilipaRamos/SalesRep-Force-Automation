@@ -48,8 +48,6 @@ ordersModule.controller('OrderController', function ($http, $location) {
     var self = this;
 
     self.order = ordersTemp[0];
-    self.events = eventsTemp;
-    self.orders = ordersTemp;
 
     /**
      * initiate controller
@@ -64,16 +62,6 @@ ordersModule.controller('OrderController', function ($http, $location) {
     self.getOrder = function (id) {
         $http.get('api/clientes?id=' + id).then(function (data) {
             self.costumer = data;
-        });
-    };
-
-    /**
-     * GET order orders list from API
-     */
-    self.getOrderOrders = function () {
-
-        $http.get('api/encomendas?clienteId=').then(function (data) {
-            self.costumerOrders = data;
         });
     };
 });
