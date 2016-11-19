@@ -15,15 +15,14 @@
 
             <div class="row-align-center">
                 <div class="span6">
-                    <form ng-controller="NewCustomerController as customerCtrl" ng-submit="customerCtrl.addCustomer()">
+                    <form ng-controller="EditCustomerController as customerCtrl"
+                          ng-init="customerCtrl.init(<%= id %>)" ng-submit="customerCtrl.saveCustomer()">
 
                         <!-- Customer Name -->
                         <div class="form-group row">
                             <label for="customer_name" class="col-sm-2 col-form-label"> Nome </label>
                             <div class="col-sm-10">
-                                <input name="customer_name" ng-model="customerCtrl.newCustomer.nome"
-                                       value="{{customerCtrl.newCustomer.nome}}"
-                                       type="text" class="form-control" placeholder="Nome do cliente" required>
+                                {{customerCtrl.customer.nome}}
                             </div>
                         </div>
 
@@ -31,9 +30,7 @@
                         <div class="form-group row">
                             <label for="fiscal_name" class="col-sm-2 col-form-label"> Nome Fiscal </label>
                             <div class="col-sm-10">
-                                <input name="fiscal_name" ng-model="customerCtrl.newCustomer.nome_fiscal"
-                                       value="{{customerCtrl.newCustomer.nome_fiscal}}"
-                                       type="text" class="form-control" placeholder="Nome fiscal" required>
+                                {{customerCtrl.customer.nome_fiscal}}
                             </div>
                         </div>
 
@@ -41,9 +38,7 @@
                         <div class="form-group row">
                             <label for="nif" class="col-sm-2 col-form-label"> NIF </label>
                             <div class="col-sm-10">
-                                <input name="nif" ng-model="customerCtrl.newCustomer.contribuinte"
-                                       value="{{customerCtrl.newCustomer.contribuinte}}"
-                                       type="text" class="form-control" placeholder="NIF" required>
+                                {{customerCtrl.customer.contribuinte}}
                             </div>
                         </div>
 
@@ -51,8 +46,8 @@
                         <div class="form-group row">
                             <label for="address" class="col-sm-2 col-form-label"> Morada </label>
                             <div class="col-sm-10">
-                                <input name="address" ng-model="customerCtrl.newCustomer.morada"
-                                       value="{{customerCtrl.newCustomer.morada}}"
+                                <input name="address" ng-model="customerCtrl.customer.morada"
+                                       value="{{customerCtrl.customer.morada}}"
                                        type="text" class="form-control" placeholder="Morada">
                             </div>
                         </div>
@@ -61,8 +56,8 @@
                         <div class="form-group row">
                             <label for="email" class="col-sm-2 col-form-label"> Email </label>
                             <div class="col-sm-10">
-                                <input name="email" ng-model="customerCtrl.newCustomer.email"
-                                       value="{{customerCtrl.newCustomer.email}}"
+                                <input name="email" ng-model="customerCtrl.customer.email"
+                                       value="{{customerCtrl.customer.email}}"
                                        type="email" class="form-control" placeholder="Email">
                             </div>
                         </div>
@@ -71,8 +66,8 @@
                         <div class="form-group row">
                             <label for="telephone" class="col-sm-2 col-form-label"> Telefone </label>
                             <div class="col-sm-10">
-                                <input name="telephone" ng-model="customerCtrl.newCustomer.telefone"
-                                       value="{{customerCtrl.newCustomer.telefone}}"
+                                <input name="telephone" ng-model="customerCtrl.customer.telefone"
+                                       value="{{customerCtrl.customer.telefone}}"
                                        type="tel" class="form-control" placeholder="Telefone">
                             </div>
                         </div>
@@ -80,7 +75,7 @@
                         <!-- Buttons -->
                         <div class="form-group row">
                             <div class="col-sm-10 col-sm-offset-2">
-                                <button type="submit" class="btn btn-primary btn-block"> Adicionar cliente</button>
+                                <button type="submit" class="btn btn-primary btn-block"> Guardar </button>
                             </div>
                         </div>
                     </form>

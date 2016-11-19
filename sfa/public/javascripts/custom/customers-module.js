@@ -39,6 +39,7 @@ customersModule.controller('CustomersController', function ($http, $location) {
     };
 });
 
+
 /**
  * CustomerController
  */
@@ -104,6 +105,41 @@ customersModule.controller('CustomerController', function ($http, $location) {
         });
 
         return prospectCustomers.length > 0;
+    };
+});
+
+/**
+ * EditCustomerController
+ */
+customersModule.controller('EditCustomerController', function ($http, $location) {
+    var self = this;
+
+    self.customer = customersTemp[0];
+
+    /**
+     * initiate controller
+     */
+    self.initCtrl = function (id) {
+        self.getCustomer(id);
+    };
+
+    /**
+     * GET customer info from API
+     */
+    self.getCustomer = function (id) {
+        $http.get('api/clientes?id=' + id).then(function (data) {
+            self.costumer = data;
+        });
+    };
+
+    /**
+     * POST customer info through API
+     */
+    self.saveCustomer = function () {
+        //TODO
+        $http.post('api/clientes?id=' + id).then(function (data) {
+            self.costumer = data;
+        });
     };
 });
 
