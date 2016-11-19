@@ -44,7 +44,7 @@ app.use('/registar', register);
 app.use('/eventos', agenda);
 app.use('/evento', event);
 app.use('/criar_evento', new_event);
-app.use('/editar_evento', new_event);
+app.use('/editar_evento', edit_event);
 app.use('/encomenda', order);
 app.use('/clientes', customers);
 app.use('/cliente', customer);

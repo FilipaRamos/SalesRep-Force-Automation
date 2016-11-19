@@ -198,7 +198,6 @@ newEventModule.controller('NewEventController', function ($http, $location) {
      */
     self.initCtrl = function () {
         self.getEventTypes();
-        self.getProductOpportunities();
     };
 
     /**
@@ -216,35 +215,124 @@ newEventModule.controller('NewEventController', function ($http, $location) {
     };
 
     /**
-     * GET product list from API
-     */
-    self.getProductOpportunities = function () {
-        $http.get('api/produtos').then(
-            function (data) {
-                self.productOpportunities = data;
-            },
-            function (data) {
-                console.log(data);
-            });
-    };
-
-    /**
-     * GET events list from API
-     */
-    self.getEvents = function () {
-        $http.get('api/eventos').then(
-            function (data) {
-                self.events = data;
-            },
-            function (data) {
-                console.log(data);
-            });
-    };
-
-    /**
      * Add event through API
      */
     self.addEvent = function () {
+        // TODO add form validation
+
+        $http.post('api/evento', self.newEvent).then(
+            function (data) {
+                $location.path('/eventos?id=' + data.id).replace();
+            },
+            function (data) {
+                console.log(data);
+            });
+    };
+
+    /**
+     * Product opportunities handlers
+     */
+    self.addOpportunity = function () {
+        var selectBox = document.getElementById("product-selector");
+        var productId = selectBox.options[selectBox.selectedIndex].value;
+
+        // add product to opportunities, if not present already
+        if (productId && self.productOpportunities.indexOf(productId) == -1) {
+            self.productOpportunities.push(productId);
+
+            $("#product-" + productId).toggle(false);
+        }
+
+        var selector = $('#product-selector');
+        selector.selectpicker('val', '');
+        selector.selectpicker('refresh');
+    }
+
+    self.toggleOpportunitySelected = function(id) {
+        var index = self.selectedOpportunities.indexOf(id);
+
+        if(index!=-1){
+            self.selectedOpportunities.splice(index, 1);
+        }else{
+            self.selectedOpportunities.push(id);
+        }
+    };
+
+    self.removeOpportunity = function () {
+
+        self.productOpportunities = self.productOpportunities.filter( function(el) {
+            if(self.selectedOpportunities.indexOf(el) == -1){
+                return true;
+            }
+
+            $("#product-" + el).toggle(true);
+            return false;
+        });
+
+        self.selectedOpportunities = [];
+
+        var selector = $('#product-selector');
+        selector.selectpicker('val', '');
+        selector.selectpicker('refresh');
+    }
+
+    self.isProductOpportunity = function (productId) {
+        if(productId) {
+            return self.productOpportunities.indexOf(productId) != -1;
+        }else{
+            return self.productOpportunities.length > 0;
+        }
+    };
+});
+
+/**
+ * EditEventController
+ */
+newEventModule.controller('EditEventController', function ($http, $location) {
+    var self = this;
+
+    self.event = {};
+    self.eventTypes = eventTypesTemp;
+    self.productOpportunities = [];
+    self.selectedOpportunities = [];
+
+    /**
+     * initiate controller
+     */
+    self.initCtrl = function (id) {
+       // self.getEvent(id);
+        //self.getEventTypes();
+    };
+
+    /**
+     * GET event info from API
+     */
+    self.getEvent = function (id) {
+        $http.get('api/eventos?id=' + id).then(function (data) {
+            self.event = data;
+
+            //TODO add product opportunities
+        })
+    };
+
+    /**
+     * GET event types list from API
+     */
+    self.getEventTypes = function () {
+        $http.get('api/tipos_evento').then(
+            function (data) {
+                self.eventTypes = data;
+                self.newEvent.eventType = self.eventTypes[0];
+            },
+            function (data) {
+                console.log(data);
+            });
+    };
+
+    /**
+     * Save event through API
+     */
+    self.saveEvent = function () {
         // TODO add form validation
 
         $http.post('api/evento', self.newEvent).then(
