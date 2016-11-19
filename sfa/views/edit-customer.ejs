@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include templates/common/header.ejs %>
+</head>
+
+<body ng-app="customersModule">
+<div id="wrapper">
+    <% include templates/common/nav-bar.ejs %>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+
+            <% include templates/common/breadcrumbs.ejs %>
+
+            <div class="row-align-center">
+                <div class="span6">
+                    <form ng-controller="NewCustomerController as customerCtrl" ng-submit="customerCtrl.addCustomer()">
+
+                        <!-- Customer Name -->
+                        <div class="form-group row">
+                            <label for="customer_name" class="col-sm-2 col-form-label"> Nome </label>
+                            <div class="col-sm-10">
+                                <input name="customer_name" ng-model="customerCtrl.newCustomer.nome"
+                                       value="{{customerCtrl.newCustomer.nome}}"
+                                       type="text" class="form-control" placeholder="Nome do cliente" required>
+                            </div>
+                        </div>
+
+                        <!-- Fiscal Name -->
+                        <div class="form-group row">
+                            <label for="fiscal_name" class="col-sm-2 col-form-label"> Nome Fiscal </label>
+                            <div class="col-sm-10">
+                                <input name="fiscal_name" ng-model="customerCtrl.newCustomer.nome_fiscal"
+                                       value="{{customerCtrl.newCustomer.nome_fiscal}}"
+                                       type="text" class="form-control" placeholder="Nome fiscal" required>
+                            </div>
+                        </div>
+
+                        <!-- NIF -->
+                        <div class="form-group row">
+                            <label for="nif" class="col-sm-2 col-form-label"> NIF </label>
+                            <div class="col-sm-10">
+                                <input name="nif" ng-model="customerCtrl.newCustomer.contribuinte"
+                                       value="{{customerCtrl.newCustomer.contribuinte}}"
+                                       type="text" class="form-control" placeholder="NIF" required>
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="form-group row">
+                            <label for="address" class="col-sm-2 col-form-label"> Morada </label>
+                            <div class="col-sm-10">
+                                <input name="address" ng-model="customerCtrl.newCustomer.morada"
+                                       value="{{customerCtrl.newCustomer.morada}}"
+                                       type="text" class="form-control" placeholder="Morada">
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-2 col-form-label"> Email </label>
+                            <div class="col-sm-10">
+                                <input name="email" ng-model="customerCtrl.newCustomer.email"
+                                       value="{{customerCtrl.newCustomer.email}}"
+                                       type="email" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+
+                        <!-- Telefone -->
+                        <div class="form-group row">
+                            <label for="telephone" class="col-sm-2 col-form-label"> Telefone </label>
+                            <div class="col-sm-10">
+                                <input name="telephone" ng-model="customerCtrl.newCustomer.telefone"
+                                       value="{{customerCtrl.newCustomer.telefone}}"
+                                       type="tel" class="form-control" placeholder="Telefone">
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="form-group row">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <button type="submit" class="btn btn-primary btn-block"> Adicionar cliente</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <% include templates/common/footer.ejs %>
+    </div>
+</div>
+
+<script type="text/javascript" src="javascripts/custom/customers-module.js"></script>
+</body>
+</html>

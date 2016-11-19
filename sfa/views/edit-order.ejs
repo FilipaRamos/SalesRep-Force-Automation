@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include templates/common/header.ejs %>
+</head>
+
+<body ng-app="ordersModule">
+<div id="wrapper">
+    <% include templates/common/nav-bar.ejs %>
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+
+            <% include templates/common/breadcrumbs.ejs %>
+
+            <div class="row-align-center">
+
+                <div class="span4" ng-controller="CustomerController as customerCtrl"
+                     ng-init="customerCtrl.initCtrl(<%= customerId %>); customer = customerCtrl.customer;">
+                    <% include templates/customers/customer-info.ejs %>
+                </div>
+
+                <div class="span12">
+                    <% include templates/orders/product-listing.ejs %>
+                </div>
+
+                <div class="span12">
+                    <button type="button" class="btn btn-primary"> Encomendar</button>
+                </div>
+
+            </div>
+        </div>
+        <% include templates/common/footer.ejs %>
+    </div>
+</div>
+    <script src="javascripts/custom/customers-module.js"></script>
+    <script src="javascripts/custom/orders-module.js "></script>
+</body>
+</html>
