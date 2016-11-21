@@ -6,7 +6,8 @@ using System.Web.Mvc;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using FirstREST.Lib_Primavera.Model;
+using SalesForceAutomation.Models;
+
 
 
 namespace SalesForceAutomation.Controllers
@@ -16,16 +17,17 @@ namespace SalesForceAutomation.Controllers
         //
         // GET: /Artigos/
 
-        public IEnumerable<Lib_Primavera.Model.Artigo> Get()
+        public IEnumerable<Models.Artigo> Get()
         {
+            Console.Write("HELOOOOOOO");
             return Lib_Primavera.PriIntegration.ListaArtigos();
         }
 
 
         // GET api/artigo/5    
-        public Artigo Get(string id)
+        public Models.Artigo Get(string id)
         {
-            Lib_Primavera.Model.Artigo artigo = Lib_Primavera.PriIntegration.GetArtigo(id);
+            Models.Artigo artigo = Lib_Primavera.PriIntegration.GetArtigo(id);
             if (artigo == null)
             {
                 throw new HttpResponseException(
