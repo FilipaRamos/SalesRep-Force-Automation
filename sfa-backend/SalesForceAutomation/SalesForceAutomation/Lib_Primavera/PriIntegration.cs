@@ -328,7 +328,7 @@ namespace SalesForceAutomation.Lib_Primavera
             {
 
                 objList = PriEngine.Engine.Consulta("SELECT * FROM  Familias");
-
+                
                 while (!objList.NoFim())
                 {
                     familia = new Models.Familias();
