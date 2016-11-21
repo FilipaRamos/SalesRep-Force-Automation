@@ -371,17 +371,17 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ArtigoArmazemController.cs" />
+    <Compile Include="Controllers\ArtigosController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\FamiliasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ArtigosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Lib_Primavera\PriEngine.cs" />
     <Compile Include="Lib_Primavera\PriIntegration.cs" />
-    <Compile Include="Models\Artigo.cs" />
     <Compile Include="Models\ArtigoArmazem.cs" />
+    <Compile Include="Models\Artigo.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Familias.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

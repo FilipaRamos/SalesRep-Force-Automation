@@ -14,6 +14,7 @@ namespace SalesForceAutomation.Lib_Primavera
     {
 
 
+
         # region Cliente
 
         public static List<Models.Cliente> get_all_clients()
@@ -237,7 +238,7 @@ namespace SalesForceAutomation.Lib_Primavera
         */
         #endregion Cliente;   // -----------------------------  END   CLIENTE    -----------------------
         
-        // Probably done
+        
         #region Artigo
 
         public static Models.Artigo GetArtigo(string codArtigo)
@@ -249,6 +250,8 @@ namespace SalesForceAutomation.Lib_Primavera
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
 
+                string company = SalesForceAutomation.Properties.Settings.Default["Company"].ToString();
+                Console.Write(company);
                 if (PriEngine.Engine.Comercial.Artigos.Existe(codArtigo) == false)
                 {
                     return null;
@@ -260,7 +263,6 @@ namespace SalesForceAutomation.Lib_Primavera
                     myArt.DescArtigo = objArtigo.get_Descricao();
                     myArt.PrecoMedio = objArtigo.get_PCMedio();
                     myArt.IVA = objArtigo.get_IVA();
-                    myArt.QtDisponivel = objArtigo.get_StkActual() - objArtigo.get_QtReservada();
                     myArt.StockAtual = objArtigo.get_StkActual();
 
 
@@ -286,16 +288,16 @@ namespace SalesForceAutomation.Lib_Primavera
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
 
-                objList = PriEngine.Engine.Comercial.Artigos.LstArtigos();
+                objList = PriEngine.Engine.Consulta("Select * FROM Artigo");
 
                 while (!objList.NoFim())
                 {
                     art = new Models.Artigo();
+
                     art.CodArtigo = objList.Valor("Artigo");
                     art.DescArtigo = objList.Valor("Descricao");
-                    art.PrecoMedio = objList.Valor("PC_Medio");
+                    art.PrecoMedio = objList.Valor("PCMedio");
                     art.IVA = objList.Valor("IVA");
-                    art.QtDisponivel = objList.Valor("StkAtual") - objList.Valor("QtReservada");
                     art.StockAtual = objList.Valor("STKMaximo");
 
                     listArts.Add(art);
@@ -361,7 +363,6 @@ namespace SalesForceAutomation.Lib_Primavera
 
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
-
                 objList = PriEngine.Engine.Comercial.ArtigosArmazens.ListaArtigosArmazens(artigoID);
 
                 foreach(GcpBEArtigoArmazem artArmOffList in objList){
@@ -377,15 +378,16 @@ namespace SalesForceAutomation.Lib_Primavera
                 }
 
             }
-            return null;
+
+            return listArtigoArmazens;
         }
 
         #endregion ArtigoArmazem
 
-        /*
+        
 
         #region DocCompra
-
+        /*
 
         public static List<Models.DocCompra> VGR_List()
         {
@@ -500,12 +502,12 @@ namespace SalesForceAutomation.Lib_Primavera
             }
         }
 
-
+        */
         #endregion DocCompra
 
 
         #region DocsVenda
-
+        /*
         public static Models.RespostaErro Encomendas_New(Models.DocVenda dv)
         {
             Models.RespostaErro erro = new Models.RespostaErro();
@@ -568,23 +570,23 @@ namespace SalesForceAutomation.Lib_Primavera
 
 
 
-        public static List<Models.DocVenda> Encomendas_List()
+        public static List<Model.DocVenda> Encomendas_List()
         {
 
             StdBELista objListCab;
             StdBELista objListLin;
-            Models.DocVenda dv = new Models.DocVenda();
-            List<Models.DocVenda> listdv = new List<Models.DocVenda>();
-            Models.LinhaDocVenda lindv = new Models.LinhaDocVenda();
-            List<Models.LinhaDocVenda> listlindv = new
-            List<Models.LinhaDocVenda>();
+            Model.DocVenda dv = new Model.DocVenda();
+            List<Model.DocVenda> listdv = new List<Model.DocVenda>();
+            Model.LinhaDocVenda lindv = new Model.LinhaDocVenda();
+            List<Model.LinhaDocVenda> listlindv = new
+            List<Model.LinhaDocVenda>();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            if (PriEngine.InitializeCompany(FirstREST.Properties.Settings.Default.Company.Trim(), FirstREST.Properties.Settings.Default.User.Trim(), FirstREST.Properties.Settings.Default.Password.Trim()) == true)
             {
                 objListCab = PriEngine.Engine.Consulta("SELECT id, Entidade, Data, NumDoc, TotalMerc, Serie From CabecDoc where TipoDoc='ECL'");
                 while (!objListCab.NoFim())
                 {
-                    dv = new Models.DocVenda();
+                    dv = new Model.DocVenda();
                     dv.id = objListCab.Valor("id");
                     dv.Entidade = objListCab.Valor("Entidade");
                     dv.NumDoc = objListCab.Valor("NumDoc");
@@ -592,11 +594,11 @@ namespace SalesForceAutomation.Lib_Primavera
                     dv.TotalMerc = objListCab.Valor("TotalMerc");
                     dv.Serie = objListCab.Valor("Serie");
                     objListLin = PriEngine.Engine.Consulta("SELECT idCabecDoc, Artigo, Descricao, Quantidade, Unidade, PrecUnit, Desconto1, TotalILiquido, PrecoLiquido from LinhasDoc where IdCabecDoc='" + dv.id + "' order By NumLinha");
-                    listlindv = new List<Models.LinhaDocVenda>();
+                    listlindv = new List<Model.LinhaDocVenda>();
 
                     while (!objListLin.NoFim())
                     {
-                        lindv = new Models.LinhaDocVenda();
+                        lindv = new Model.LinhaDocVenda();
                         lindv.IdCabecDoc = objListLin.Valor("idCabecDoc");
                         lindv.CodArtigo = objListLin.Valor("Artigo");
                         lindv.DescArtigo = objListLin.Valor("Descricao");
@@ -618,7 +620,6 @@ namespace SalesForceAutomation.Lib_Primavera
             }
             return listdv;
         }
-
 
 
 
@@ -669,7 +670,7 @@ namespace SalesForceAutomation.Lib_Primavera
             }
             return null;
         }
-
-        #endregion DocsVenda*/
+        */
+        #endregion DocsVenda
     }
 }

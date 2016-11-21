@@ -31,12 +31,6 @@ namespace SalesForceAutomation.Models
             set;
         }
 
-        public double QtDisponivel
-        {
-            get;
-            set;
-        }
-
         public double StockAtual
         {
             get;
