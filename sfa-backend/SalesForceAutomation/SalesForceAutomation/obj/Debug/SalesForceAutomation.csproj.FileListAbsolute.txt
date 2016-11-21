@@ -114,6 +114,7 @@ C:\Users\user\Documents\GitHub\SalesRep-Force-Automation\sfa-backend\SalesForceA
 C:\Users\user\Documents\GitHub\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\bin\zh-Hant\System.Spatial.resources.dll
 C:\Users\user\Documents\GitHub\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\obj\Debug\SalesForceAutomation.dll
 C:\Users\user\Documents\GitHub\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\obj\Debug\SalesForceAutomation.pdb
+<<<<<<< HEAD
 C:\Users\user\Desktop\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\bin\SalesForceAutomation.dll.config
 C:\Users\user\Desktop\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\bin\SalesForceAutomation.dll
 C:\Users\user\Desktop\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\bin\SalesForceAutomation.pdb
@@ -230,3 +231,5 @@ C:\Users\user\Desktop\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation
 C:\Users\user\Desktop\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\obj\Debug\SalesForceAutomation.csprojResolveAssemblyReference.cache
 C:\Users\user\Desktop\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\obj\Debug\SalesForceAutomation.dll
 C:\Users\user\Desktop\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\obj\Debug\SalesForceAutomation.pdb
+=======
+>>>>>>> 52814a9e9581aeb3de75b66491a450ea2a704520
