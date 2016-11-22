@@ -3,7 +3,7 @@
     padding: 0;
     line-height: 36px;
     list-style: none;
-    background-color: #e6e9ed
+    background-color: #e6e9ed;
 }
 .breadcrumb-arrow li:first-child a {
     border-radius: 4px 0 0 4px;
@@ -39,6 +39,7 @@
     background-color: #3bafda;
     border: 1px solid #3bafda
 }
+
 .breadcrumb-arrow li:first-child a {
     padding-left: 10px
 }
