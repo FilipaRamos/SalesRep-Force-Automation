@@ -3,7 +3,7 @@ var productsModule = angular.module('productsModule', []);
 /**
  * ProductsController
  */
-productsModule.controller('ProductsController', function () {
+productsModule.controller('ProductsController', function ($http) {
     var self = this;
 
     self.products = [];
@@ -17,7 +17,7 @@ productsModule.controller('ProductsController', function () {
         // TODO change this
         self.products = productsTemp;
         self.categories = categoriesTemp;
-        //self.getProducts();
+        self.getProducts();
         //self.getProductCategories();
     };
 
@@ -25,8 +25,14 @@ productsModule.controller('ProductsController', function () {
      * GET products list from API
      */
     self.getProducts = function () {
-        $http.get('api/produtos').then(function (data) {
-            self.products = data;
+        $http({
+            method: 'GET',
+            url:'http://172.16.1.51:49338/api/artigos',
+        }).then(function (data) {
+            console.log(data);
+            self.products = data.data;
+        }, function (data) {
+            console.log(data);
         });
     };
 
@@ -34,7 +40,7 @@ productsModule.controller('ProductsController', function () {
      * GET categories list from API
      */
     self.getCategories = function () {
-        $http.get('api/categorias').then(function (data) {
+        $http.get('api/Familias').then(function (data) {
             self.products = data;
         });
     };
@@ -52,7 +58,7 @@ productsModule.controller('ProductsController', function () {
 
     self.isFilterEmpty = function () {
       var result =  self.products.find(function (product) {
-          return product.categoria == self.filter;
+          return product.Familia == self.filter;
       })
         return result == undefined && self.filter != 'all';
     };
@@ -125,66 +131,63 @@ productsModule.controller('ProductController', function ($http, $location) {
 // TODO retrieve client list
 var categoriesTemp = [
     {
-        id: "Cat1",
-        nome: 'Processadores'
+        Familia: 'Processadores'
     },
     {
-        id: "Cat2",
-        nome: 'Gráficas'
+        Familia: 'Gráficas'
     },
     {
-        id: "Cat3",
-        nome: 'Outros'
+        Familia: 'Outros'
     }
 ];
 
 // TODO retrieve client list
 var productsTemp = [
     {
-        id: "Exemplo2",
+        CodArtigo: "Exemplo2",
         nome: 'ProdutoExemplo2',
-        descricao: "Produto descrição ....",
-        iva_atual: 13,
-        preco_atual: 22.12,
-        stock_total: 100,
+        DescArtigo: "Produto descrição ....",
+        IVA: 13,
+        PrecoMedio: 22.12,
+        StockAtual: 100,
         stock_disponivel: 85,
-        categoria: "Cat1"
+        Familia: "Processadores"
     },
     {
-        id: "Exemplo3",
+        CodArtigo: "Exemplo3",
         nome: 'ProdutoExemplo3',
-        descricao: "Produto descrição ....",
-        iva_atual: 13,
-        preco_atual: 22.12,
-        stock_total: 100,
+        DescArtigo: "Produto descrição ....",
+        IVA: 13,
+        PrecoMedio: 22.12,
+        StockAtual: 100,
         stock_disponivel: 85,
-        categoria: "Cat2"
+        Familia: "Cat2"
     },
     {
-        id: "Exemplo4",
+        CodArtigo: "Exemplo4",
         nome: 'ProdutoExemplo4',
-        descricao: "Produto descrição ....",
-        iva_atual: 13,
-        preco_atual: 22.12,
-        stock_total: 100,
+        DescArtigo: "Produto descrição ....",
+        IVA: 13,
+        PrecoMedio: 22.12,
+        StockAtual: 100,
         stock_disponivel: 85,
     },
     {
-        id: "Exemplo5",
+        CodArtigo: "Exemplo5",
         nome: 'ProdutoExemplo2',
-        descricao: "Produto descrição ....",
-        iva_atual: 13,
-        preco_atual: 22.12,
-        stock_total: 100,
+        DescArtigo: "Produto descrição ....",
+        IVA: 13,
+        PrecoMedio: 22.12,
+        StockAtual: 100,
         stock_disponivel: 85
     },
     {
-        id: "Exemplo",
+        CodArtigo: "Exemplo",
         nome: 'ProdutoExemplo5',
-        descricao: "Produto descrição ....",
-        iva_atual: 13,
-        preco_atual: 22.12,
-        stock_total: 100,
+        DescArtigo: "Produto descrição ....",
+        IVA: 13,
+        PrecoMedio: 22.12,
+        StockAtual: 100,
         stock_disponivel: 85
     }
 ];
@@ -192,21 +195,18 @@ var productsTemp = [
 // TODO retrieve or generate warehouse list
 var warehousesTemp = [
     {
-        id: "Exemplo2",
-        nome: 'nome 1',
-        morada: 'morada exemplo',
-        stock: 10
+        ArmazemID: "Exemplo2",
+        Morada: 'morada exemplo',
+        Stock: 10
     },
     {
-        id: "Exemplo2",
-        nome: 'nome 2',
-        morada: 'morada exemplo',
-        stock: 10
+        ArmazemID: "Exemplo2",
+        Morada: 'morada exemplo',
+        Stock: 10
     },
     {
-        id: "Exemplo2",
-        nome: 'nome 3',
-        morada: 'morada exemplo',
-        stock: 10
+        ArmazemID: "Exemplo2",
+        Morada: 'morada exemplo',
+        Stock: 10
     }
 ];

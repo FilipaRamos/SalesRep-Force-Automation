@@ -180,29 +180,29 @@ customersModule.controller('NewCustomerController', function ($http, $location) 
 var customersTemp = [
     {
         id: "Exemplo2",
-        nome: 'Exemplo2',
-        nome_fiscal: "Exemplo2",
-        morada: "Porto",
-        telefone: 919209872,
-        contribuinte: 221009029,
+        Nome: 'Exemplo2',
+        NomeFiscal: "Exemplo2",
+        Fac_Mor: "Porto",
+        Fac_Tel: 919209872,
+        NumContribuinte: 221009029,
         vendas: 2928.23
     },
     {
         id: "EFACECSA",
-        nome: 'EFACEC',
-        nome_fiscal: "EFACEC SA",
-        morada: "Porto",
-        telefone: 919209872,
-        contribuinte: 221009029,
+        Nome: 'EFACEC',
+        NomeFiscal: "EFACEC SA",
+        Fac_Mor: "Porto",
+        Fac_Tel: 919209872,
+        NumContribuinte: 221009029,
         vendas: 2922328.23
     },
     {
         id: "Exemplo3",
-        nome: 'Exemplo3',
-        nome_fiscal: "Exemplo3",
-        morada: "Porto",
-        telefone: 919209872,
-        contribuinte: 221009029,
+        Nome: 'Exemplo3',
+        NomeFiscal: "Exemplo3",
+        Fac_Mor: "Porto",
+        Fac_Tel: 919209872,
+        NumContribuinte: 221009029,
         vendas: 12
     }
 ];

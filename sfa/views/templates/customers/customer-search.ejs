@@ -5,7 +5,7 @@
         <option ng-repeat="customer in customersCtrl.customers"
                 value="{{customer.id}}" data-subtext="&emsp;{{customer.vendas}} €"
                 id="customer-{{customer.id}}">
-            {{customer.nome}}
+            {{customer.Nome}}
         </option>
     </select>
     <button type="button" class="btn btn-primary " ng-click="customersCtrl.goToCustomer()">Ver cliente</button>

@@ -4,8 +4,8 @@
             data-live-search-placeholder="Procurar por nome ou categoria..."
             title="Produtos" data-live-search="true">
         <option ng-repeat="product in productsCtrl.products"
-                value="{{product.id}}" data-subtext="&emsp;{{product.preco_atual}} €"
-                data-tokens="{{product.categoria}}"
+                value="{{product.id}}" data-subtext="&emsp;{{product.PrecoMedio}} €"
+                data-tokens="{{product.Familia}}"
                 id="product-{{product.id}}">
             {{product.nome}}
         </option>

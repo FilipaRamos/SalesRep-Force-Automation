@@ -13,7 +13,7 @@
                     <div class="form-group row">
                         <label for="customer_name" class="col-sm-2 col-form-label"> Nome </label>
                         <div name=customer_name" class="col-sm-5">
-                            {{customer.nome}}
+                            {{customer.Nome}}
                         </div>
                     </div>
 
@@ -21,7 +21,7 @@
                     <div class="form-group row">
                         <label for="fiscal_name" class="col-sm-2 col-form-label"> Nome fiscal </label>
                         <div name="fiscal_name" class="col-sm-5">
-                            {{customer.nome_fiscal}}
+                            {{customer.NomeFiscal}}
                         </div>
                     </div>
 
@@ -29,15 +29,15 @@
                     <div class="form-group row">
                         <label for="nif" class="col-sm-2 col-form-label"> NIF </label>
                         <div name="nif" class="col-sm-5">
-                            {{customer.contribuinte}}
+                            {{customer.NumContribuinte}}
                         </div>
                     </div>
 
                     <!-- Address -->
-                    <div class="form-group row" ng-show="{{customer.morada}}">
+                    <div class="form-group row" ng-show="{{customer.Fac_Mor}}">
                         <label for="address" class="col-sm-2 col-form-label"> Morada </label>
                         <div name="address" class="col-sm-5">
-                            {{customer.morada}}
+                            {{customer.Fac_Mor}}
                         </div>
                     </div>
 
@@ -50,10 +50,10 @@
                     </div>
 
                     <!-- Telefone -->
-                    <div class="form-group row" ng-show="{{customer.telefone}}">
+                    <div class="form-group row" ng-show="{{customer.Fac_Tel}}">
                         <label for="telephone" class="col-sm-2 col-form-label"> Telefone </label>
                         <div name="telephone" class="col-sm-5">
-                            {{customer.telefone}}
+                            {{customer.Fac_Tel}}
                         </div>
                     </div>
 

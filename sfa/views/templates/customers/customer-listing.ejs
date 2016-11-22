@@ -32,10 +32,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr ng-repeat="customer in customersCtrl.customers | orderBy : '-nome'">
-                                    <td><a href="cliente?id={{customer.id}}">{{customer.nome}}</a></td>
-                                    <td>{{customer.morada}}</td>
-                                    <td>{{customer.telefone}}</td>
+                                <tr ng-repeat="customer in customersCtrl.customers | orderBy : '-Nome'">
+                                    <td><a href="cliente?id={{customer.id}}">{{customer.Nome}}</a></td>
+                                    <td>{{customer.Fac_Mor}}</td>
+                                    <td>{{customer.Fac_Tel}}</td>
                                     <td>{{customer.vendas | currency:"€" }}</td>
                                 </tr>
                                 </tbody>
@@ -57,9 +57,9 @@
                                 <tbody>
                                 <tr ng-repeat="customer in customersCtrl.customers"
                                     ng-show="customer.vendas==0">
-                                    <td><a href="cliente?id={{customer.id}}">{{customer.nome}}</a></td>
-                                    <td>{{customer.morada}}</td>
-                                    <td>{{customer.telefone}}</td>
+                                    <td><a href="cliente?id={{customer.id}}">{{customer.Nome}}</a></td>
+                                    <td>{{customer.Fac_Mor}}</td>
+                                    <td>{{customer.Fac_Tel}}</td>
                                     <td>{{customer.vendas | currency:"€" }}</td>
                                 </tr>
                                 </tbody>
@@ -80,9 +80,9 @@
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="customer in customersCtrl.customers | orderBy : '-vendas' | limitTo : 10">
-                                    <td><a href="cliente?id={{customer.id}}">{{customer.nome}}</a></td>
-                                    <td>{{customer.morada}}</td>
-                                    <td>{{customer.telefone}}</td>
+                                    <td><a href="cliente?id={{customer.id}}">{{customer.Nome}}</a></td>
+                                    <td>{{customer.Fac_Mor}}</td>
+                                    <td>{{customer.Fac_Tel}}</td>
                                     <td>{{customer.vendas | currency:"€" }}</td>
                                 </tr>
                                 </tbody>

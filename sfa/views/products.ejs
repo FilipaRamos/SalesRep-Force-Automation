@@ -26,9 +26,9 @@
                             <a href="#" ng-click="productsCtrl.filterBy('all')" class="list-group-item">Todos os
                                 produtos</a>
                         </div>
-                        <div ng-click="productsCtrl.filterBy(category.id)"
+                        <div ng-click="productsCtrl.filterBy(category.Familia)"
                              ng-repeat="category in productsCtrl.categories | orderBy: 'nome' ">
-                            <a href="#{{category.nome}}" class="list-group-item">{{category.nome}}</a>
+                            <a href="#{{category.Familia}}" class="list-group-item">{{category.Familia}}</a>
                         </div>
                     </div>
 
@@ -41,7 +41,7 @@
                     <p class="lead"><i class="fa fa-fw fa-address-card"></i> Produtos</p>
 
                         <div ng-repeat="product in productsCtrl.products"
-                             ng-show="productsCtrl.filteringBy(product.categoria)">
+                             ng-show="productsCtrl.filteringBy(product.Familia)">
                             <% include templates/products/product-preview.ejs %>
                         </div>
                         <div ng-show="productsCtrl.isFilterEmpty()">Não foram encontrados produtos...</div>

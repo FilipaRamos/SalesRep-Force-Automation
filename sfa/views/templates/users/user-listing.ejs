@@ -31,7 +31,7 @@
                                 <tbody>
                                 <tr ng-repeat="user in usersCtrl.users | orderBy : '-nome'">
                                     <td><a href="perfil?id={{user.id}}">{{user.nome}}</a></td>
-                                    <td>{{user.morada}}</td>
+                                    <td>{{user.Morada}}</td>
                                     <td>{{user.telefone}}</td>
                                     <td>{{user.vendas | currency:"€" }}</td>
                                 </tr>
@@ -54,7 +54,7 @@
                                 <tbody>
                                 <tr ng-repeat="user in usersCtrl.users | orderBy : '-vendas' | limitTo : 10">
                                     <td><a href="perfil?id={{user.id}}">{{user.nome}}</a></td>
-                                    <td>{{user.morada}}</td>
+                                    <td>{{user.Morada}}</td>
                                     <td>{{user.telefone}}</td>
                                     <td>{{user.vendas | currency:"€" }}</td>
                                 </tr>

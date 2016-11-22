@@ -476,47 +476,47 @@ var productsTemp = [
         id: "Exemplo1",
         nome: 'ProdutoExemplo2',
         descricao: "Produto descrição ....",
-        iva_atual: 13,
-        preco_atual: 22.12,
-        stock_total: 100,
+        IVA: 13,
+        PrecoMedio: 22.12,
+        StockAtual: 100,
         stock_disponivel: 85,
-        categoria: 'Cat1'
+        Familia: 'Cat1'
     },
     {
         id: "Exemplo2",
         nome: 'ProdutoExemplo3',
         descricao: "Produto descrição ....",
-        iva_atual: 13,
-        preco_atual: 22.12,
-        stock_total: 100,
+        IVA: 13,
+        PrecoMedio: 22.12,
+        StockAtual: 100,
         stock_disponivel: 85,
-        categoria: 'Cat2'
+        Familia: 'Cat2'
     },
     {
         id: "Exemplo3",
         nome: 'ProdutoExemplo4',
         descricao: "Produto descrição ....",
-        iva_atual: 13,
-        preco_atual: 22.12,
-        stock_total: 100,
+        IVA: 13,
+        PrecoMedio: 22.12,
+        StockAtual: 100,
         stock_disponivel: 85
     },
     {
         id: "Exemplo4",
         nome: 'ProdutoExemplo5',
         descricao: "Produto descrição ....",
-        iva_atual: 13,
-        preco_atual: 22.12,
-        stock_total: 100,
+        IVA: 13,
+        PrecoMedio: 22.12,
+        StockAtual: 100,
         stock_disponivel: 85
     },
     {
         id: "Exemplo5",
         nome: 'ProdutoExemplo6',
         descricao: "Produto descrição ....",
-        iva_atual: 13,
-        preco_atual: 22.12,
-        stock_total: 100,
+        IVA: 13,
+        PrecoMedio: 22.12,
+        StockAtual: 100,
         stock_disponivel: 85
     }
 ];

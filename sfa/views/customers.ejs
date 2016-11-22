@@ -69,7 +69,7 @@
                     </div>
 
                     <div ng-show="customersCtrl.isSet(1)">
-                        <div ng-repeat="customer in customersCtrl.customers | orderBy : '-nome' ">
+                        <div ng-repeat="customer in customersCtrl.customers | orderBy : '-Nome' ">
                             <% include templates/customers/customer-preview.ejs %>
                         </div>
                         <div ng-show="customersCtrl.customers.length == 0 && customersCtrl.isSet(1)">Não foram encontrados clientes...</div>

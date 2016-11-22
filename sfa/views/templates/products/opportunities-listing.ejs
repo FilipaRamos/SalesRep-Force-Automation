@@ -3,7 +3,7 @@
     <table class="table span7">
         <thead>
         <tr>
-            <th style="width: 30%;">Nome</th>
+            <th style="width: 30%;">ID</th>
             <th style="width: 50%;">Descrição</th>
             <th style="width: 10%;">Iva</th>
             <th style="width: 10%;">Preço</th>
@@ -11,16 +11,16 @@
         </thead>
         <tbody>
         <tr ng-repeat="product in productsCtrl.products"
-            ng-show="newEventCtrl.isProductOpportunity(product.id)">
+            ng-show="newEventCtrl.isProductOpportunity(product.CodArtigo)">
             <td>
-                <label for="{{product.id}}">
-                    <span><input type="checkbox" id="{{product.id}}" ng-click="newEventCtrl.toggleOpportunitySelected(product.id)"/></span>&emsp;
-                    <a href="/produto?id={{product.id}}">{{product.nome}}</a>
+                <label for="{{product.CodArtigo}}">
+                    <span><input type="checkbox" id="{{product.CodArtigo}}" ng-click="newEventCtrl.toggleOpportunitySelected(product.CodArtigo)"/></span>&emsp;
+                    <a href="/produto?id={{product.CodArtigo}}">{{product.CodArtigo}}</a>
                 </label>
             </td>
-            <td>{{product.descricao}}</td>
-            <td>{{product.iva_atual}}%</td>
-            <td>{{product.preco_atual | currency:"€" }}</td>
+            <td>{{product.DescArtigo}}</td>
+            <td>{{product.IVA}}%</td>
+            <td>{{product.PrecoMedio | currency:"€" }}</td>
         </tr>
         </tbody>
     </table>

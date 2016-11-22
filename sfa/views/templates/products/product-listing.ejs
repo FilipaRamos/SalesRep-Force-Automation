@@ -32,10 +32,10 @@
                                 <tbody>
                                 <tr ng-repeat="product in productsCtrl.products">
                                     <td>
-                                        <a href="/produto?=id{{product.id}}">{{product.nome}}</a>
+                                        <a href="/produto?=id{{product.id}}">{{product.Nome}}</a>
                                     </td>
                                     <td>{{product.stock | currency:"€" }}</td>
-                                    <td>{{product.preco_atual | currency:"€" }}</td>
+                                    <td>{{product.PrecoMedio | currency:"€" }}</td>
                                     <td>{{product.vendas}}</td>
                                 </tr>
                                 </tbody>
@@ -57,10 +57,10 @@
                                 <tbody>
                                 <tr ng-repeat="product in productsCtrl.products | orderBy: '-vendas' | limitTo: 10">
                                     <td>
-                                        <a href="/produto?=id{{product.id}}">{{product.nome}}</a>
+                                        <a href="/produto?=id{{product.id}}">{{product.Nome}}</a>
                                     </td>
                                     <td>{{product.stock | currency:"€" }}</td>
-                                    <td>{{product.preco_atual | currency:"€" }}</td>
+                                    <td>{{product.PrecoMedio | currency:"€" }}</td>
                                     <td>{{product.vendas}}</td>
                                 </tr>
                                 </tbody>
