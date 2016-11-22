@@ -19,6 +19,9 @@
             <div class="row" ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.initCtrl()">
 
                 <div class="col-md-3">
+                    <% include templates/products/product-search.ejs %>
+                    <br>
+
                     <p class="lead text-muted"><i class="fa fa-fw fa-eye"></i>Filtrar</p>
 
                     <div class="list-group">
@@ -32,12 +35,17 @@
                         </div>
                     </div>
 
-                    <br>
-                    <% include templates/products/product-search.ejs %>
+
 
                 </div>
 
-                <div class="col-md-9">
+                <div ng-show="productsCtrl.loading" class="col-md-9">
+                    <p class="lead"><i class="fa fa-fw fa-address-card"></i> Produtos</p>
+
+                    <% include templates/common/loading.ejs %>
+                </div>
+
+                <div ng-hide="productsCtrl.loading" class="col-md-9">
                     <p class="lead"><i class="fa fa-fw fa-address-card"></i> Produtos</p>
 
                         <div ng-repeat="product in productsCtrl.products"

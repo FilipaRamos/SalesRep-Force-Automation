@@ -3,11 +3,13 @@
             data-live-search-placeholder="Procurar por nome ou categoria..."
             title="Procurar" data-live-search="true">
         <option ng-repeat="product in productsCtrl.products"
-                value="{{product.id}}" data-subtext="&emsp;{{product.PrecoMedio}} €"
+                value="{{CodArtigo}}" data-subtext="&emsp;{{product.PrecoMedio}} €"
                 data-tokens="{{product.Familia}}"
-                id="product-{{product.id}}">
-            {{product.Nome}}
+                id="product-{{product.CodArtigo}}">
+            {{product.CodArtigo}}
         </option>
     </select>
-    <button type="button" class="btn btn-primary " ng-click="productsCtrl.goToPrduct()">Ver produto</button>
+    <div>
+        <button type="button" class="btn btn-primary " ng-click="productsCtrl.goToProduct()">Ver produto</button>
+    </div>
 </div>

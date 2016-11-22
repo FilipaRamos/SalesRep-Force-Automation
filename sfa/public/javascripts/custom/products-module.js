@@ -1,11 +1,11 @@
 var productsModule = angular.module('productsModule', []);
-
 /**
  * ProductsController
  */
-productsModule.controller('ProductsController', function ($http) {
+productsModule.controller('ProductsController', function ($http, $scope, $location) {
     var self = this;
 
+    self.loading = true;
     self.products = [];
     self.categories = [];
     self.filter = 'all';
@@ -13,53 +13,79 @@ productsModule.controller('ProductsController', function ($http) {
     /**
      * initiate controller
      */
-    self.initCtrl = function() {
-        // TODO change this
-        self.products = productsTemp;
-        self.categories = categoriesTemp;
+    self.initCtrl = function () {
         self.getProducts();
-        //self.getProductCategories();
+        self.getCategories();
+        // TODO deal with product categories
     };
 
     /**
      * GET products list from API
      */
     self.getProducts = function () {
-        $http({
-            method: 'GET',
-            url:'http://172.16.1.51:49338/api/artigos',
-        }).then(function (data) {
-            console.log(data);
+        $http.get(API_URL + '/api/artigos').then(function (data) {
             self.products = data.data;
+
+            self.updateProductList();
+            self.loading = false;
         }, function (data) {
+            console.log('Erro ao obter lista de produtos.');
             console.log(data);
         });
+    };
+
+    /**
+     * Update the list from API
+     */
+    self.updateProductList = function () {
+        var selector = $('#product-selector');
+
+        for (productIndex in self.products) {
+            var product = self.products[productIndex];
+            var productOption = '<option value="' + product.CodArtigo + '" data-subtext="&emsp;' + product.PrecoMedio + '€" data-tokens="' + product.Familia + '" id="product-' + product.CodArtigo + '">' + product.CodArtigo + '</option>';
+            selector.append(productOption);
+        }
+
+        selector.selectpicker('refresh');
+    };
+
+    /**
+     * Redirect to selected product page
+     */
+    self.goToProduct = function () {
+        var productId = $("#product-selector option:selected").text().trim();
+        if (productId) {
+            window.location.replace('produto?id="' + productId + '"');
+        }
     };
 
     /**
      * GET categories list from API
      */
     self.getCategories = function () {
-        $http.get('api/Familias').then(function (data) {
-            self.products = data;
+        $http.get(API_URL + '/api/Familias').then(function (data) {
+            self.categories = data.data;
+        }, function (data) {
+            console.log('Erro ao obter lista de famílias.');
+            console.log(data);
         });
     };
 
     /**
      * Category filter handlers
      */
-    self.filteringBy = function(category){
+    self.filteringBy = function (category) {
         return self.filter === 'all' || self.filter === category;
     };
 
-    self.filterBy = function(category){
+    self.filterBy = function (category) {
         self.filter = category;
     };
 
     self.isFilterEmpty = function () {
-      var result =  self.products.find(function (product) {
-          return product.Familia == self.filter;
-      })
+        var result = self.products.find(function (product) {
+            return product.Familia == self.filter;
+        })
         return result == undefined && self.filter != 'all';
     };
 
@@ -82,36 +108,43 @@ productsModule.controller('ProductsController', function ($http) {
 productsModule.controller('ProductController', function ($http, $location) {
     var self = this;
 
+    self.loadingInfo = true;
+    self.loadingWarehouses = true;
     self.product = {};
     self.warehouses = [];
 
     /**
      * initiate controller
      */
-    self.initCtrl = function(id){
-        // TODO change this
-        self.product = productsTemp[0];
-        self.warehouses = warehousesTemp;
-
-        //self.getProduct(id);
-        //self.getProductWarehouses(id);
+    self.initCtrl = function (id) {
+        console.log(id);
+        self.getProduct(id);
+        self.getProductWarehouses(id);
     };
 
     /**
      * GET product info from API
      */
     self.getProduct = function (id) {
-        $http.get('api/produtos?id=' + id).then(function (data) {
-            self.product = data;
+        $http.get(API_URL + '/api/Artigos/' + id).then(function (data) {
+            self.product = data.data;
+            self.loadingInfo = false;
+        }, function (data) {
+            console.log('Erro ao informação sobre o produto ' + id);
+            console.log(data);
         });
     };
 
     /**
      * GET product's warehouses list from API
      */
-    self.getWarehouses = function (id) {
-        $http.get('api/armazens?produtoId=' +  id).then(function (data) {
-            self.costumerOrders = data;
+    self.getProductWarehouses = function (id) {
+        $http.get(API_URL + '/api/ArtigoArmazem/' + id).then(function (data) {
+            self.warehouses = data.data;
+            self.loadingWarehouses = false;
+        }, function (data) {
+            console.log('Erro ao informação sobre armazéns do produto ' + id);
+            console.log(data);
         });
     };
 
@@ -127,86 +160,3 @@ productsModule.controller('ProductController', function ($http, $location) {
         self.tab = setTab;
     };
 });
-
-// TODO retrieve client list
-var categoriesTemp = [
-    {
-        Familia: 'Processadores'
-    },
-    {
-        Familia: 'Gráficas'
-    },
-    {
-        Familia: 'Outros'
-    }
-];
-
-// TODO retrieve client list
-var productsTemp = [
-    {
-        CodArtigo: "Exemplo2",
-        nome: 'ProdutoExemplo2',
-        DescArtigo: "Produto descrição ....",
-        IVA: 13,
-        PrecoMedio: 22.12,
-        StockAtual: 100,
-        stock_disponivel: 85,
-        Familia: "Processadores"
-    },
-    {
-        CodArtigo: "Exemplo3",
-        nome: 'ProdutoExemplo3',
-        DescArtigo: "Produto descrição ....",
-        IVA: 13,
-        PrecoMedio: 22.12,
-        StockAtual: 100,
-        stock_disponivel: 85,
-        Familia: "Cat2"
-    },
-    {
-        CodArtigo: "Exemplo4",
-        nome: 'ProdutoExemplo4',
-        DescArtigo: "Produto descrição ....",
-        IVA: 13,
-        PrecoMedio: 22.12,
-        StockAtual: 100,
-        stock_disponivel: 85,
-    },
-    {
-        CodArtigo: "Exemplo5",
-        nome: 'ProdutoExemplo2',
-        DescArtigo: "Produto descrição ....",
-        IVA: 13,
-        PrecoMedio: 22.12,
-        StockAtual: 100,
-        stock_disponivel: 85
-    },
-    {
-        CodArtigo: "Exemplo",
-        nome: 'ProdutoExemplo5',
-        DescArtigo: "Produto descrição ....",
-        IVA: 13,
-        PrecoMedio: 22.12,
-        StockAtual: 100,
-        stock_disponivel: 85
-    }
-];
-
-// TODO retrieve or generate warehouse list
-var warehousesTemp = [
-    {
-        ArmazemID: "Exemplo2",
-        Morada: 'morada exemplo',
-        Stock: 10
-    },
-    {
-        ArmazemID: "Exemplo2",
-        Morada: 'morada exemplo',
-        Stock: 10
-    },
-    {
-        ArmazemID: "Exemplo2",
-        Morada: 'morada exemplo',
-        Stock: 10
-    }
-];

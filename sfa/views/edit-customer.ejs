@@ -16,7 +16,7 @@
             <div class="row-align-center">
                 <div class="span6">
                     <form ng-controller="EditCustomerController as customerCtrl"
-                          ng-init="customerCtrl.init(<%= id %>)" ng-submit="customerCtrl.saveCustomer()">
+                          ng-init="customerCtrl.init('<%= id %>')" ng-submit="customerCtrl.saveCustomer()">
 
                         <!-- Customer Name -->
                         <div class="form-group row">

@@ -6,24 +6,54 @@ var customersModule = angular.module('customersModule', []);
 customersModule.controller('CustomersController', function ($http, $location) {
     var self = this;
 
+    self.loading = true;
     self.customers = [];
 
     /**
      * initiate controller
      */
     self.initCtrl = function () {
-        // TODO change this
-        self.customers = customersTemp;
-        //self.getCustomers();
+        self.getCustomers();
     };
 
     /**
      * GET customers list from API
      */
     self.getCustomers = function () {
-        $http.get('api/clientes').then(function (data) {
-            self.customers = data;
+        $http.get(API_URL + '/api/Cliente').then(function (data) {
+            self.customers = data.data;
+
+            self.updateCustomerList();
+            self.loading = false;
+        }, function (data) {
+            console.log('Erro ao obter lista de clientes.');
+            console.log(data);
         });
+    };
+
+    /**
+     * Update the list from API
+     */
+    self.updateCustomerList = function () {
+        var selector = $('#customer-selector');
+
+        for (customerIndex in self.customers) {
+            var customer = self.customers[customerIndex];
+            var customerOption = '<option value="' + customer.CodCliente + '" data-subtext="&emsp;' + customer.vendas + '€" " id="customer-' + customer.CodCliente + '">' + customer.CodCliente + '</option>';
+            selector.append(customerOption);
+        }
+
+        selector.selectpicker('refresh');
+    };
+
+    /**
+     * Redirect to selected customer pages
+     */
+    self.goToCustomer = function () {
+        var customerId = $("#customer-selector option:selected").text().trim();
+        if (customerId) {
+            window.location.replace('produto?id="' + customerId + '"');
+        }
     };
 
     /**
@@ -46,7 +76,8 @@ customersModule.controller('CustomersController', function ($http, $location) {
 customersModule.controller('CustomerController', function ($http, $location) {
     var self = this;
 
-    self.customer = customersTemp[0];
+    self.loading = true;
+    self.customer = {};
     self.events = eventsTemp;
     self.orders = ordersTemp;
 
@@ -55,23 +86,28 @@ customersModule.controller('CustomerController', function ($http, $location) {
      */
     self.initCtrl = function (id) {
         self.getCustomer(id);
-        self.getCustomerEvents();
-        self.getCustomerOrders();
+        self.getCustomerEvents(id);
+        self.getCustomerOrders(id);
     };
 
     /**
      * GET customer info from API
      */
     self.getCustomer = function (id) {
-        $http.get('api/clientes?id=' + id).then(function (data) {
-            self.costumer = data;
+        console.log(id);
+        $http.get(API_URL + '/api/Cliente/' + id).then(function (data) {
+            self.customer = data.data;
+            self.loading = false;
+        }, function (data) {
+            console.log('Erro ao obter informação de cliente ' + id);
+            console.log(data);
         });
     };
 
     /**
      * GET customer orders list from API
      */
-    self.getCustomerOrders = function () {
+    self.getCustomerOrders = function (id) {
 
         $http.get('api/encomendas?clienteId=').then(function (data) {
             self.costumerOrders = data;
@@ -81,7 +117,7 @@ customersModule.controller('CustomerController', function ($http, $location) {
     /**
      * GET customer events list from API
      */
-    self.getCustomerEvents = function () {
+    self.getCustomerEvents = function (id) {
         $http.get('api/eventos?clienteId=').then(function (data) {
             self.costumerEvents = data;
         });

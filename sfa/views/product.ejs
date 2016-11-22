@@ -16,11 +16,16 @@
 
             <% include templates/common/breadcrumbs.ejs %>
 
-            <div class="row" ng-controller="ProductController as productCtrl" ng-init="productCtrl.initCtrl(<%= productId %>)">
+            <div class="row" ng-controller="ProductController as productCtrl"
+                 ng-init="productCtrl.initCtrl('<%= productId %>')">
 
                 <div class="col-md-12">
 
-                    <div class="thumbnail">
+                    <div ng-show="productCtrl.loadingInfo" class="col-md-9">
+                        <% include templates/common/loading.ejs %>
+                    </div>
+
+                    <div ng-hide="productCtrl.loadingInfo" class="thumbnail">
                         <div class="caption-full">
                             <h4 class="pull-right">{{productCtrl.product.PrecoMedio | currency:"€"}}</h4>
                             <h4>{{productCtrl.product.CodArtigo}}</h4>

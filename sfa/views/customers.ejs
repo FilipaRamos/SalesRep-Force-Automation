@@ -19,6 +19,10 @@
             <div class="row" ng-controller="CustomersController as customersCtrl" ng-init="customersCtrl.initCtrl()">
 
                 <div class="col-md-3">
+
+                    <% include templates/customers/customer-search.ejs %>
+                    <br>
+
                     <p class="lead text-muted"><i class="fa fa-fw fa-eye"></i>Filtrar</p>
 
                     <div class="list-group">
@@ -36,13 +40,14 @@
                         </div>
                     </div>
 
-                    <br>
-
-                    <% include templates/customers/customer-search.ejs %>
-
                 </div>
 
-                <div class="col-md-9">
+                <div ng-show="customersCtrl.loading" class="col-md-9">
+                    <p class="lead"><i class="fa fa-fw fa-address-card"></i> Produtos</p>
+                    <% include templates/common/loading.ejs %>
+                </div>
+
+                <div ng-hide="customersCtrl.loading" class="col-md-9">
 
                     <p class="lead"><i class="fa fa-fw fa-address-card"></i> Clientes
                         <a href="/criar_cliente"><i class="fa fa-plus-square">&nbsp</i></a></p>
