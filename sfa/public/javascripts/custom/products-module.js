@@ -55,7 +55,7 @@ productsModule.controller('ProductsController', function ($http, $scope, $locati
     self.goToProduct = function () {
         var productId = $("#product-selector option:selected").text().trim();
         if (productId) {
-            window.location.replace('produto?id="' + productId + '"');
+            window.location.replace('produto?id=' + productId);
         }
     };
 
@@ -117,7 +117,6 @@ productsModule.controller('ProductController', function ($http, $location) {
      * initiate controller
      */
     self.initCtrl = function (id) {
-        console.log(id);
         self.getProduct(id);
         self.getProductWarehouses(id);
     };

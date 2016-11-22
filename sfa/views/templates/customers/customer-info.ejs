@@ -1,23 +1,23 @@
 <div class="widget widget-nopad">
     <div class="widget-header">
         <i class="fa fa-fw fa-address-card"></i> Dados do cliente
-        <a href="/editar_cliente?id={{customerCtrl.customer.id}}" class="pull-right"><i class="fa fa-pencil-square">&nbsp</i></a>
+        <a href="/editar_cliente?id={{currentCtrl.customer.CodCliente}}" class="pull-right"><i class="fa fa-pencil-square">&nbsp</i></a>
     </div>
 
     <div class="widget-content">
         <div class="container row-align-center">
-            <div ng-show="customerCtrl.loading" class="span10">
+            <div ng-show="currentCtrl.loading" class="span10">
                 <% include ../common/loading.ejs %>
             </div>
 
-            <div  ng-hide="customerCtrl.loading"  class="span10">
+            <div  ng-hide="currentCtrl.loading"  class="span10">
                 <form role="form">
 
                     <!-- Customer Name -->
                     <div class="form-group row">
                         <label for="customer_name" class="col-sm-2 col-form-label"> Nome </label>
                         <div name=customer_name" class="col-sm-5">
-                            {{customer.Nome}}
+                            {{currentCtrl.customer.Nome}}
                         </div>
                     </div>
 
@@ -25,7 +25,7 @@
                     <div class="form-group row">
                         <label for="fiscal_name" class="col-sm-2 col-form-label"> Nome fiscal </label>
                         <div name="fiscal_name" class="col-sm-5">
-                            {{customer.NomeFiscal}}
+                            {{currentCtrl.customer.NomeFiscal}}
                         </div>
                     </div>
 
@@ -33,7 +33,7 @@
                     <div class="form-group row">
                         <label for="nif" class="col-sm-2 col-form-label"> NIF </label>
                         <div name="nif" class="col-sm-5">
-                            {{customer.NumContribuinte}}
+                            {{currentCtrl.customer.NumContribuinte}}
                         </div>
                     </div>
 
@@ -41,7 +41,7 @@
                     <div class="form-group row" ng-show="{{customer.Fac_Mor}}">
                         <label for="address" class="col-sm-2 col-form-label"> Morada </label>
                         <div name="address" class="col-sm-5">
-                            {{customer.Fac_Mor}}
+                            {{currentCtrl.customer.Fac_Mor}}
                         </div>
                     </div>
 
@@ -49,7 +49,7 @@
                     <div class="form-group row" ng-show="{{customer.email}}">
                         <label for="email" class="col-sm-2 col-form-label"> Email </label>
                         <div name="email" class="col-sm-5">
-                            {{ccustomer.email}}
+                            {{currentCtrl.ccustomer.email}}
                         </div>
                     </div>
 
@@ -57,7 +57,7 @@
                     <div class="form-group row" ng-show="{{customer.Fac_Tel}}">
                         <label for="telephone" class="col-sm-2 col-form-label"> Telefone </label>
                         <div name="telephone" class="col-sm-5">
-                            {{customer.Fac_Tel}}
+                            {{currentCtrl.customer.Fac_Tel}}
                         </div>
                     </div>
 
@@ -66,7 +66,7 @@
                         <label for="total-sales" class="col-sm-2 col-form-label control-label"> Total de
                             vendas </label>
                         <div name="total-sales" class="col-sm-5">
-                            {{customer.vendas | currency: "€"}}
+                            {{currentCtrl.customer.vendas | currency: "€"}}
                         </div>
                     </div>
                 </form>

@@ -7,18 +7,25 @@
             <% include ../common/loading.ejs %>
         </div>
 
-        <div class="widget big-stats-container">
+        <div ng-hide="productCtrl.loadingWarehouses" class="widget big-stats-container">
             <div class="widget-content">
 
-                <section>
-                    <div class="list-group">
-                        <div class="list-group-item"
-                             ng-repeat="warehouse in productCtrl.warehouses | orderBy : '-stock'">
-                            <p>{{warehouse.ArmazemID}} {{warehouse.Morada}} <em class="pull-right">{{warehouse.Stock}}</em></p>
-                        </div>
-                    </div>
-                </section>
-
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Morada</th>
+                        <th>Stock</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="warehouse in productCtrl.warehouses | orderBy : '-ArmazemID'">
+                        <td>{{warehouse.ArmazemID}}</td>
+                        <td>{{warehouse.Morada}}</td>
+                        <td>{{warehouse.ArmazemID}}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

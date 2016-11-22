@@ -22,7 +22,6 @@ customersModule.controller('CustomersController', function ($http, $location) {
     self.getCustomers = function () {
         $http.get(API_URL + '/api/Cliente').then(function (data) {
             self.customers = data.data;
-
             self.updateCustomerList();
             self.loading = false;
         }, function (data) {
@@ -39,7 +38,7 @@ customersModule.controller('CustomersController', function ($http, $location) {
 
         for (customerIndex in self.customers) {
             var customer = self.customers[customerIndex];
-            var customerOption = '<option value="' + customer.CodCliente + '" data-subtext="&emsp;' + customer.vendas + '€" " id="customer-' + customer.CodCliente + '">' + customer.CodCliente + '</option>';
+            var customerOption = '<option value="' + customer.CodCliente + '" data-subtext="&emsp;' + customer.vendas + '€" " id="customer-' + customer.CodCliente + '">' + customer.Nome + '</option>';
             selector.append(customerOption);
         }
 
@@ -50,9 +49,9 @@ customersModule.controller('CustomersController', function ($http, $location) {
      * Redirect to selected customer pages
      */
     self.goToCustomer = function () {
-        var customerId = $("#customer-selector option:selected").text().trim();
+        var customerId = $("#customer-selector option:selected").val();
         if (customerId) {
-            window.location.replace('produto?id="' + customerId + '"');
+            window.location.replace('cliente?id=' + customerId);
         }
     };
 
@@ -94,7 +93,6 @@ customersModule.controller('CustomerController', function ($http, $location) {
      * GET customer info from API
      */
     self.getCustomer = function (id) {
-        console.log(id);
         $http.get(API_URL + '/api/Cliente/' + id).then(function (data) {
             self.customer = data.data;
             self.loading = false;
