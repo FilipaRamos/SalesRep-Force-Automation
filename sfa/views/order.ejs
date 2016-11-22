@@ -6,15 +6,24 @@
 </head>
 
 <body ng-app="ordersModule">
-
 <div id="wrapper">
-
     <% include templates/common/nav-bar.ejs %>
-    <div class="" ng-controller="CustomerController as customerCtrl" ng-init="customerCtrl.initCtrl(<%=customerId %>); customer = customerCtrl.customer;">
-        <% include templates/customers/customer-info.ejs %>
+    <div id="page-wrapper">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb-arrow">
+                <li><a href="#">Ready To Ship</a></li>
+                <li><a href="#">Shipped</a></li>
+                <li class="actual"><a href="#">Delivered</a></li>
+                <li class="active"><span>Completed</span></li>
+            </ol>
+        </div>
+        <div class="" ng-controller="CustomerController as customerCtrl"
+             ng-init="customerCtrl.initCtrl(<%= customerId %>); customer = customerCtrl.customer;">
+            <% include templates/customers/customer-info.ejs %>
+        </div>
+        <% include templates/products/product-table.ejs %>
+        <% include templates/common/footer.ejs %>
     </div>
-    <% include templates/products/product-table.ejs %>
-    <% include templates/common/footer.ejs %>
 </div>
 <script src="javascripts/custom/customers-module.js"></script>
 <script src="javascripts/custom/orders-module.js "></script>
