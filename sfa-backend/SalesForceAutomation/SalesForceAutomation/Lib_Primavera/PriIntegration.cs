@@ -7,13 +7,12 @@ using Interop.StdPlatBS900;
 using Interop.StdBE900;
 using Interop.GcpBE900;
 using ADODB;
+using Interop.ICrmBS900;
 
 namespace SalesForceAutomation.Lib_Primavera
 {
     public class PriIntegration
     {
-
-
 
         # region Cliente
 
@@ -57,7 +56,6 @@ namespace SalesForceAutomation.Lib_Primavera
 
 
             GcpBECliente objCli = new GcpBECliente();
-
 
             Models.Cliente cliente = new Models.Cliente();
 
@@ -238,7 +236,6 @@ namespace SalesForceAutomation.Lib_Primavera
         */
         #endregion Cliente;   // -----------------------------  END   CLIENTE    -----------------------
         
-        
         #region Artigo
 
         public static Models.Artigo GetArtigo(string codArtigo)
@@ -384,8 +381,6 @@ namespace SalesForceAutomation.Lib_Primavera
 
         #endregion ArtigoArmazem
 
-        
-
         #region DocCompra
         /*
 
@@ -504,7 +499,6 @@ namespace SalesForceAutomation.Lib_Primavera
 
         */
         #endregion DocCompra
-
 
         #region DocsVenda
         /*
@@ -672,5 +666,46 @@ namespace SalesForceAutomation.Lib_Primavera
         }
         */
         #endregion DocsVenda
+
+        #region Reuniao
+
+        public static List<Models.Reuniao> get_all_meetings()
+        {
+
+            StdBELista selectList;
+
+            Models.Reuniao reuniao;
+
+            List<Models.Reuniao> listReunioes = new List<Models.Reuniao>();
+
+            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            {
+
+                selectList = PriEngine.Engine.Consulta("SELECT * FROM Tarefas LEFT JOIN TiposTarefa ON TipoActividade = 'REUN'");
+
+                while(!selectList.NoFim())
+                {
+                    Console.WriteLine(selectList.NumLinhas());
+                    reuniao = new Models.Reuniao();
+
+                    reuniao.CodReuniao = selectList.Valor("Id");
+                    reuniao.CodUtilizador = selectList.Valor("Utilizador");
+                    reuniao.Descricao = selectList.Valor("Resumo");
+                    reuniao.Prioridade = selectList.Valor("Prioridade");
+                    reuniao.DataInicio = selectList.Valor("DataInicio");
+                    reuniao.DataFim = selectList.Valor("DataFim");
+
+                    listReunioes.Add(reuniao);
+                    selectList.Seguinte();
+                    
+                }
+
+                return listReunioes;
+            }
+            else
+                return null;
+        }
+
+        #endregion Reuniao
     }
 }
