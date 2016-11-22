@@ -37,5 +37,11 @@ namespace SalesForceAutomation.Models
             set;
         }
 
+        public string Familia
+        {
+            get;
+            set;
+        }
+
     }
 }

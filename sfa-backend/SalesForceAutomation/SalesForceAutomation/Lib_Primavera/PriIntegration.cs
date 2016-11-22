@@ -296,6 +296,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     art.PrecoMedio = objList.Valor("PCMedio");
                     art.IVA = objList.Valor("IVA");
                     art.StockAtual = objList.Valor("STKMaximo");
+                    art.Familia = objList.Valor("Familia");
 
                     listArts.Add(art);
                     objList.Seguinte();
@@ -332,6 +333,7 @@ namespace SalesForceAutomation.Lib_Primavera
                 {
                     familia = new Models.Familias();
                     familia.Familia = objList.Valor("Familia");
+                    familia.Descricao = objList.Valor("Descricao");
 
                     listFamilies.Add(familia);
                     objList.Seguinte();

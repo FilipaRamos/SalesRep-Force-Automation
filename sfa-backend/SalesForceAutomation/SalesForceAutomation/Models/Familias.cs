@@ -14,5 +14,11 @@ namespace SalesForceAutomation.Models
             get;
             set;
         }
+
+        public string Descricao
+        {
+            get;
+            set;
+        }
     }
 }
