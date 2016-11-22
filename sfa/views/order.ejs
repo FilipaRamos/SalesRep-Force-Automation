@@ -10,6 +10,14 @@
 <div id="wrapper">
 
     <% include templates/common/nav-bar.ejs %>
+    <div class="container">
+        <ol class="breadcrumb breadcrumb-arrow">
+            <li><a href="#">Ready To Ship</a></li>
+            <li><a href="#">Shipped</a></li>
+            <li><a href="#">Delivered</a></li>
+            <li class="active"><span>Completed</span></li>
+        </ol>
+    </div>
     <div class="" ng-controller="CustomerController as customerCtrl" ng-init="customerCtrl.initCtrl(<%=customerId %>); customer = customerCtrl.customer;">
         <% include templates/customers/customer-info.ejs %>
     </div>
