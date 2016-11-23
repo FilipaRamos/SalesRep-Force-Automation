@@ -641,14 +641,14 @@ namespace SalesForceAutomation.Lib_Primavera
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
 
-                selectList = PriEngine.Engine.Consulta("SELECT * FROM Tarefas LEFT JOIN TiposTarefa ON TipoActividade = 'REUN'");
+                selectList = PriEngine.Engine.Consulta("SELECT Tarefas.Id AS RId, * FROM Tarefas LEFT JOIN TiposTarefa ON TipoActividade = 'REUN'");
 
                 while(!selectList.NoFim())
                 {
                     Console.WriteLine(selectList.NumLinhas());
                     reuniao = new Models.Reuniao();
 
-                    reuniao.CodReuniao = selectList.Valor("Id");
+                    reuniao.CodReuniao = selectList.Valor("RId");
                     reuniao.CodVendedor = selectList.Valor("CriadoPor");
                     reuniao.Descricao = selectList.Valor("Descricao");
                     reuniao.Notas = selectList.Valor("Resumo");
@@ -678,13 +678,8 @@ namespace SalesForceAutomation.Lib_Primavera
 
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
-                StdBELista selectList;
-                selectList = PriEngine.Engine.Consulta("SELECT * FROM Tarefas LEFT JOIN TiposTarefa ON TipoActividade = 'REUN' WHERE Tarefas.Id='{694B9704-DBCD-406C-947D-7CBEEAE65B29}'");
-                Debug.WriteLine(selectList.NumLinhas());
-
                 if (PriEngine.Engine.CRM.Actividades.Existe(codReuniao) == false)
                 {
-                    Debug.WriteLine("NOT FOUND");
                     return null;
                 }
                 else

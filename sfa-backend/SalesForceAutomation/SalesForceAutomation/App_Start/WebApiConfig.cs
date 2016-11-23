@@ -9,7 +9,7 @@ namespace SalesForceAutomation
     {
         public static void Register(HttpConfiguration config)
         {
-           // config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
+            //config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

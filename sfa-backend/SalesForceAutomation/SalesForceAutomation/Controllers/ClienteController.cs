@@ -12,7 +12,6 @@ namespace SalesForceAutomation.Controllers
 {
     public class ClienteController : ApiController
     {
-        //
         // GET: /Cliente/
 
         public IEnumerable<Models.Cliente> Get()
@@ -60,6 +59,7 @@ namespace SalesForceAutomation.Controllers
             }
         }
 
+        // POST: /cliente/id
         public HttpResponseMessage Post(Cliente cliente)
         {
             RespostaErro erro = new RespostaErro();
