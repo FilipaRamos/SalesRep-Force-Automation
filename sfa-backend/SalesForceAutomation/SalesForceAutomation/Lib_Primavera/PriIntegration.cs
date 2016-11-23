@@ -29,7 +29,7 @@ namespace SalesForceAutomation.Lib_Primavera
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
 
-                selectList = PriEngine.Engine.Consulta("SELECT Cliente, Nome, NomeFiscal, Fac_Tel, NumContrib, Fac_Mor FROM  CLIENTES");
+                selectList = PriEngine.Engine.Consulta("SELECT Cliente, Nome, NomeFiscal, Fac_Tel, NumContrib, B2BEnderecoMail, Fac_Mor FROM  CLIENTES");
 
                 while (!selectList.NoFim())
                 {
@@ -800,5 +800,177 @@ namespace SalesForceAutomation.Lib_Primavera
 
         #endregion OportunidadeVenda
 
+        #region Encomenda
+
+        public static List<Models.Encomenda> get_all_sales()
+        {
+            StdBELista objListDoc;
+            StdBELista objListDocLines;
+
+            Models.Encomenda sale;
+            Models.LinhaEncomenda saleLine;
+            List<Models.LinhaEncomenda> saleLineList;
+            List<Models.Encomenda> saleList = new List<Models.Encomenda>();
+
+
+            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            {
+
+                objListDoc = PriEngine.Engine.Consulta("SELECT id, Entidade, Data, NumDoc, TotalMerc, Serie FROM CabecDoc WHERE TipoDoc = 'ECL'");
+
+                while (!objListDoc.NoFim())
+                {
+                    sale = new Models.Encomenda();
+
+                    sale.Id = objListDoc.Valor("id");
+                    sale.Entidade = objListDoc.Valor("Entidade");
+                    sale.Data = objListDoc.Valor("Data");
+                    sale.NumDoc = objListDoc.Valor("NumDoc");
+                    sale.TotalMerc = objListDoc.Valor("TotalMerc");
+                    sale.Serie = objListDoc.Valor("Serie");
+
+                    objListDocLines = PriEngine.Engine.Consulta("Select IdCabecDoc, Artigo, Descricao, Quantidade, Unidade, PrecUnit, Desconto1, TotalIliquido, PrecoLiquido FROM LinhasDoc WHERE IdCabecDoc='" + sale.Id + "'");
+                    saleLineList = new List<Models.LinhaEncomenda>();
+
+                    while (!objListDocLines.NoFim())
+                    {
+                        saleLine = new Models.LinhaEncomenda();
+
+                        saleLine.CodArtigo = objListDocLines.Valor("Artigo");
+                        saleLine.DescArtigo = objListDocLines.Valor("Descricao");
+                        saleLine.Desconto = objListDocLines.Valor("Desconto1");
+                        saleLine.IdCabecDoc = objListDocLines.Valor("IdCabecDoc");
+                        saleLine.Quantidade = objListDocLines.Valor("Quantidade");
+                        saleLine.TotalLiquido = objListDocLines.Valor("PrecoLiquido");
+                        saleLine.TotalILiquido = objListDocLines.Valor("TotalIliquido");
+                        saleLine.Unidade = objListDocLines.Valor("Unidade");
+                        saleLine.PrecoUnitario = objListDocLines.Valor("PrecUnit");
+
+                        saleLineList.Add(saleLine);
+
+                        objListDocLines.Seguinte();
+                    }
+
+                    sale.LinhasDoc = saleLineList;
+
+                    saleList.Add(sale);
+                    objListDoc.Seguinte();
+                }
+            }
+
+            return saleList;
+        }
+
+
+        public static Models.Encomenda get_sale(string id)
+        {
+            StdBELista objListDoc;
+            StdBELista objListDocLines;
+
+            Models.Encomenda sale = new Models.Encomenda();
+            Models.LinhaEncomenda saleLine = new Models.LinhaEncomenda();
+            List<Models.LinhaEncomenda> saleLineList = new List<Models.LinhaEncomenda>();
+
+            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
+            {
+                objListDoc = PriEngine.Engine.Consulta("SELECT id, Entidade, Data, NumDoc, TotalMerc, Serie FROM CabecDoc WHERE TipoDoc = 'ECL' AND id = '" + id + "'");
+
+                sale.Id = objListDoc.Valor("id");
+                sale.Entidade = objListDoc.Valor("Entidade");
+                sale.Data = objListDoc.Valor("Data");
+                sale.NumDoc = objListDoc.Valor("NumDoc");
+                sale.TotalMerc = objListDoc.Valor("TotalMerc");
+                sale.Serie = objListDoc.Valor("Serie");
+
+                objListDocLines = PriEngine.Engine.Consulta("Select IdCabecDoc, Artigo, Descricao, Quantidade, Unidade, PrecUnit, Desconto1, TotalIliquido, PrecoLiquido FROM LinhasDoc WHERE IdCabecDoc='" + sale.Id + "'");
+                saleLineList = new List<Models.LinhaEncomenda>();
+
+                while (!objListDocLines.NoFim())
+                {
+                    saleLine = new Models.LinhaEncomenda();
+
+                    saleLine.CodArtigo = objListDocLines.Valor("Artigo");
+                    saleLine.DescArtigo = objListDocLines.Valor("Descricao");
+                    saleLine.Desconto = objListDocLines.Valor("Desconto1");
+                    saleLine.IdCabecDoc = objListDocLines.Valor("IdCabecDoc");
+                    saleLine.Quantidade = objListDocLines.Valor("Quantidade");
+                    saleLine.TotalLiquido = objListDocLines.Valor("PrecoLiquido");
+                    saleLine.TotalILiquido = objListDocLines.Valor("TotalIliquido");
+                    saleLine.Unidade = objListDocLines.Valor("Unidade");
+                    saleLine.PrecoUnitario = objListDocLines.Valor("PrecUnit");
+
+                    saleLineList.Add(saleLine);
+
+                    objListDocLines.Seguinte();
+                }
+
+                sale.LinhasDoc = saleLineList;
+            }
+
+            return sale;
+        }
+
+        public static Models.RespostaErro new_sale(Models.Encomenda dv)
+        {
+            Models.RespostaErro erro = new Models.RespostaErro();
+            GcpBEDocumentoVenda myEnc = new GcpBEDocumentoVenda();
+
+            GcpBELinhaDocumentoVenda myLin = new GcpBELinhaDocumentoVenda();
+
+            GcpBELinhasDocumentoVenda myLinhas = new GcpBELinhasDocumentoVenda();
+
+            // TODO GIL check if this is correct
+            Interop.GcpBE900.PreencheRelacaoVendas rl = new Interop.GcpBE900.PreencheRelacaoVendas();
+            List<Models.LinhaEncomenda> lstlindv = new List<Models.LinhaEncomenda>();
+
+            try
+            {
+                if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+                {
+                    // Atribui valores ao cabecalho do doc
+                    //myEnc.set_DataDoc(dv.Data);
+                    myEnc.set_Entidade(dv.Entidade);
+                    myEnc.set_Serie(dv.Serie);
+                    myEnc.set_Tipodoc("ECL");
+                    myEnc.set_TipoEntidade("C");
+                    // Linhas do documento para a lista de linhas
+                    lstlindv = dv.LinhasDoc;
+                    //PriEngine.Engine.Comercial.Vendas.PreencheDadosRelacionados(myEnc, rl);
+                    PriEngine.Engine.Comercial.Vendas.PreencheDadosRelacionados(myEnc);
+                    foreach (Models.LinhaEncomenda lin in lstlindv)
+                    {
+                        PriEngine.Engine.Comercial.Vendas.AdicionaLinha(myEnc, lin.CodArtigo, lin.Quantidade, "", "", lin.PrecoUnitario, lin.Desconto);
+                    }
+
+
+                    // PriEngine.Engine.Comercial.Compras.TransformaDocumento(
+
+                    PriEngine.Engine.IniciaTransaccao();
+                    //PriEngine.Engine.Comercial.Vendas.Edita Actualiza(myEnc, "Teste");
+                    PriEngine.Engine.Comercial.Vendas.Actualiza(myEnc, "Teste");
+                    PriEngine.Engine.TerminaTransaccao();
+                    erro.Erro = 0;
+                    erro.Descricao = "Sucesso";
+                    return erro;
+                }
+                else
+                {
+                    erro.Erro = 1;
+                    erro.Descricao = "Erro ao abrir empresa";
+                    return erro;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                PriEngine.Engine.DesfazTransaccao();
+                erro.Erro = 1;
+                erro.Descricao = ex.Message;
+                return erro;
+            }
+        }
+
+        #endregion
     }
 }
