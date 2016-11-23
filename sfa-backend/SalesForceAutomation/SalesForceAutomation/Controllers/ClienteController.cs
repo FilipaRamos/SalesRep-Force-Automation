@@ -19,7 +19,7 @@ namespace SalesForceAutomation.Controllers
             return Lib_Primavera.PriIntegration.get_all_clients();
         }
 
-        // GET: /cliente/id
+        // GET: /cliente/:id
         public Cliente Get(string id)
         {
             Models.Cliente cliente = Lib_Primavera.PriIntegration.get_client(id);
@@ -34,7 +34,7 @@ namespace SalesForceAutomation.Controllers
             }
         }
 
-        // PUT: /cliente/id
+        // PUT: /cliente/:id
         public HttpResponseMessage Put(string id, Cliente cliente)
         {
 
@@ -59,7 +59,7 @@ namespace SalesForceAutomation.Controllers
             }
         }
 
-        // POST: /cliente/id
+        // POST: /cliente/
         public HttpResponseMessage Post(Cliente cliente)
         {
             RespostaErro erro = new RespostaErro();

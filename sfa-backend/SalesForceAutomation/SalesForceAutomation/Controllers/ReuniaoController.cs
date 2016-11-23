@@ -11,19 +11,16 @@ namespace SalesForceAutomation.Controllers
     public class ReuniaoController : ApiController
     {
 
-        // GET: /Reuniao/
+        // GET /Reuniao/
 
         public IEnumerable<Models.Reuniao> Get()
         {
             return Lib_Primavera.PriIntegration.get_all_meetings();
         }
 
-        // GET /Reuniao/id
+        // GET /Reuniao/:id
         public Models.Reuniao Get(string id)
         {
-            Debug.WriteLine(id);
-            Debug.WriteLine("\n\n");
-
             Models.Reuniao reuniao = Lib_Primavera.PriIntegration.GetReuniao(id);
             if (reuniao == null)
             {
