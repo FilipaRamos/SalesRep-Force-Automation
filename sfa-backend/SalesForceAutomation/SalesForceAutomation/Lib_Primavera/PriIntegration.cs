@@ -8,6 +8,8 @@ using Interop.StdBE900;
 using Interop.GcpBE900;
 using ADODB;
 using Interop.ICrmBS900;
+using Interop.CrmBE900;
+using System.Diagnostics;
 
 namespace SalesForceAutomation.Lib_Primavera
 {
@@ -691,21 +693,64 @@ namespace SalesForceAutomation.Lib_Primavera
                     reuniao = new Models.Reuniao();
 
                     reuniao.CodReuniao = selectList.Valor("Id");
-                    reuniao.CodUtilizador = selectList.Valor("Utilizador");
-                    reuniao.Descricao = selectList.Valor("Resumo");
+                    reuniao.CodVendedor = selectList.Valor("CriadoPor");
+                    reuniao.Descricao = selectList.Valor("Descricao");
+                    reuniao.Notas = selectList.Valor("Resumo");
                     reuniao.Prioridade = selectList.Valor("Prioridade");
                     reuniao.DataInicio = selectList.Valor("DataInicio");
                     reuniao.DataFim = selectList.Valor("DataFim");
+                    reuniao.TodoDia = selectList.Valor("TodoDia");
+                    reuniao.Duracao = selectList.Valor("Duracao");
+                    reuniao.ContactoCliente = selectList.Valor("IdContactoPrincipal");
+                    reuniao.Oportunidade = selectList.Valor("IDCabecOVenda");
 
                     listReunioes.Add(reuniao);
                     selectList.Seguinte();
-                    
                 }
 
                 return listReunioes;
             }
             else
                 return null;
+        }
+
+        public static Models.Reuniao GetReuniao(string codReuniao)
+        {
+            Debug.WriteLine(codReuniao);
+            
+            Models.Reuniao reuniao = new Models.Reuniao();
+
+            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            {
+                if (PriEngine.Engine.CRM.Actividades.Existe(codReuniao) == false)
+                {
+                    Debug.WriteLine("NOT FOUND");
+                    return null;
+                }
+                else
+                {
+                    CrmBEActividade objReuniao = PriEngine.Engine.CRM.Actividades.Edita(codReuniao);
+                    reuniao.CodReuniao = objReuniao.get_ID();
+                    reuniao.CodVendedor = objReuniao.get_CriadoPor();
+                    reuniao.Descricao = objReuniao.get_Descricao();
+                    reuniao.Notas = objReuniao.get_Resumo();
+                    reuniao.Prioridade = Int32.Parse(objReuniao.get_Prioridade());
+                    reuniao.DataInicio = objReuniao.get_DataInicio();
+                    reuniao.DataFim = objReuniao.get_DataFim();
+                    reuniao.TodoDia = objReuniao.get_TodoDia();
+                    reuniao.Duracao = objReuniao.get_Duracao();
+                    reuniao.ContactoCliente = objReuniao.get_IDContactoPrincipal();
+                    reuniao.Oportunidade = objReuniao.get_IDCabecOVenda();
+
+                    return reuniao;
+                }
+
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
         #endregion Reuniao

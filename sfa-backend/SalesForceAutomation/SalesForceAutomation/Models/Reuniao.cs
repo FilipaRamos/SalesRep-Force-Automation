@@ -16,7 +16,7 @@ namespace SalesForceAutomation.Models
             set;
         }
 
-        public string CodUtilizador
+        public string CodVendedor
         {
             get;
             set;
@@ -41,6 +41,36 @@ namespace SalesForceAutomation.Models
         }
 
         public int Prioridade
+        {
+            get;
+            set;
+        }
+
+        public string Notas
+        {
+            get;
+            set;    
+        }
+
+        public bool TodoDia
+        {
+            get;
+            set;
+        }
+
+        public int Duracao
+        {
+            get;
+            set;
+        }
+
+        public string ContactoCliente
+        {
+            get;
+            set;
+        }
+
+        public string Oportunidade
         {
             get;
             set;
