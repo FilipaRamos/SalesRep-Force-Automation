@@ -29,7 +29,7 @@ namespace SalesForceAutomation.Lib_Primavera
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
 
-                selectList = PriEngine.Engine.Consulta("SELECT * FROM  CLIENTES");
+                selectList = PriEngine.Engine.Consulta("SELECT Cliente, Nome, NomeFiscal, Fac_Tel, NumContrib, Fac_Mor FROM  CLIENTES");
 
                 while (!selectList.NoFim())
                 {
@@ -329,7 +329,7 @@ namespace SalesForceAutomation.Lib_Primavera
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
 
-                objList = PriEngine.Engine.Consulta("SELECT * FROM  Familias");
+                objList = PriEngine.Engine.Consulta("SELECT Familia, Descricao FROM  Familias");
                 
                 while (!objList.NoFim())
                 {
@@ -754,5 +754,46 @@ namespace SalesForceAutomation.Lib_Primavera
         }
 
         #endregion Reuniao
+
+        #region OportunidadeVenda
+
+        public static Models.OportunidadeVenda get_oportVenda(string id)
+        {
+
+            Models.OportunidadeVenda oport = new Models.OportunidadeVenda();
+
+            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            {
+                if (PriEngine.Engine.CRM.OportunidadesVenda.Existe(id))
+                {
+
+                    CrmBEOportunidadeVenda venda = PriEngine.Engine.CRM.OportunidadesVenda.Edita(id);
+
+                    oport.Id = venda.get_ID();
+                    oport.NumEncomenda = venda.get_NumEncomenda();
+                    oport.Entidade = venda.get_Entidade();
+                    oport.CicloVenda = venda.get_CicloVenda();
+
+                    Debug.WriteLine(oport.CicloVenda);
+
+                    CrmBECicloVenda cicloVenda = PriEngine.Engine.CRM.CiclosVenda.Edita(oport.CicloVenda);
+                    StdBECampos campos = cicloVenda.get_CamposUtil();
+                    int i = campos.NumItens;
+                    Debug.WriteLine(i);
+
+                    return oport;
+
+                }else{
+                    Debug.WriteLine("Oportunidade de venda não existe");
+                    return null;
+                }
+            }else{
+                return null;
+            }
+
+        }
+
+        #endregion OportunidadeVenda
+
     }
 }

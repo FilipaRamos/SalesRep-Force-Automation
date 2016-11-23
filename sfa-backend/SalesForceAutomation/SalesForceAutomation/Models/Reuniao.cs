@@ -76,5 +76,11 @@ namespace SalesForceAutomation.Models
             set;
         }
 
+        public string Tipo
+        {
+            get;
+            set;
+        }
+
     }
 }
