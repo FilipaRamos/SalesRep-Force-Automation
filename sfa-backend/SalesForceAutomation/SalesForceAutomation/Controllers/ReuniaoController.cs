@@ -18,23 +18,24 @@ namespace SalesForceAutomation.Controllers
             return Lib_Primavera.PriIntegration.get_all_meetings();
         }
 
-        // GET api/Reuniao/5    
+        // GET /Reuniao/id
         public Models.Reuniao Get(string id)
         {
             Debug.WriteLine(id);
             Debug.WriteLine("\n\n");
 
             Models.Reuniao reuniao = Lib_Primavera.PriIntegration.GetReuniao(id);
-          /*  if (reuniao == null)
+            if (reuniao == null)
             {
                 throw new HttpResponseException(
                   Request.CreateResponse(HttpStatusCode.NotFound));
             }
             else
-            {*/
+            {
                 return reuniao;
-           // }
+            }
         }
+
 
     }
 }

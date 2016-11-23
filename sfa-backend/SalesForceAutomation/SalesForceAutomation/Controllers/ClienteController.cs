@@ -12,7 +12,6 @@ namespace SalesForceAutomation.Controllers
 {
     public class ClienteController : ApiController
     {
-        //
         // GET: /Cliente/
 
         public IEnumerable<Models.Cliente> Get()
@@ -34,6 +33,51 @@ namespace SalesForceAutomation.Controllers
                 return cliente;
             }
         }
+
+        // PUT: /cliente/id
+        public HttpResponseMessage Put(string id, Cliente cliente)
+        {
+
+            RespostaErro erro = new RespostaErro();
+
+            try
+            {
+                erro = Lib_Primavera.PriIntegration.AtualizaCliente(cliente);
+                if (erro.Erro == 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, erro.Descricao);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, erro.Descricao);
+                }
+            }
+
+            catch (Exception exc)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, erro.Descricao);
+            }
+        }
+
+        // POST: /cliente/id
+        public HttpResponseMessage Post(Cliente cliente)
+        {
+            RespostaErro erro = new RespostaErro();
+            erro = Lib_Primavera.PriIntegration.InsereCliente(cliente);
+
+            if (erro.Erro == 0)
+            {
+                var response = Request.CreateResponse(HttpStatusCode.Created, cliente);
+                return response;
+            }
+
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+        }
+
 
     }
 }
