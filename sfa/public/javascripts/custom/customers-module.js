@@ -24,6 +24,7 @@ customersModule.controller('CustomersController', function ($http, $location) {
             self.customers = data.data;
             self.updateCustomerList();
             self.loading = false;
+            console.log(self.customers);
         }, function (data) {
             console.log('Erro ao obter lista de clientes.');
             console.log(data);
@@ -38,7 +39,7 @@ customersModule.controller('CustomersController', function ($http, $location) {
 
         for (customerIndex in self.customers) {
             var customer = self.customers[customerIndex];
-            var customerOption = '<option value="' + customer.CodCliente + '" data-subtext="&emsp;' + customer.vendas + '€" " id="customer-' + customer.CodCliente + '">' + customer.Nome + '</option>';
+            var customerOption = '<option value="' + customer.CodCliente + '" data-subtext="&emsp;' + customer.Fac_Tel + '" " id="customer-' + customer.CodCliente + '">' + customer.Nome + '</option>';
             selector.append(customerOption);
         }
 
@@ -96,6 +97,7 @@ customersModule.controller('CustomerController', function ($http, $location) {
         $http.get(API_URL + '/api/Cliente/' + id).then(function (data) {
             self.customer = data.data;
             self.loading = false;
+            console.log(self.customer);
         }, function (data) {
             console.log('Erro ao obter informação de cliente ' + id);
             console.log(data);
@@ -209,37 +211,6 @@ customersModule.controller('NewCustomerController', function ($http, $location) 
     };
 
 });
-
-// TODO retrieve client list
-var customersTemp = [
-    {
-        id: "Exemplo2",
-        Nome: 'Exemplo2',
-        NomeFiscal: "Exemplo2",
-        Fac_Mor: "Porto",
-        Fac_Tel: 919209872,
-        NumContribuinte: 221009029,
-        vendas: 2928.23
-    },
-    {
-        id: "EFACECSA",
-        Nome: 'EFACEC',
-        NomeFiscal: "EFACEC SA",
-        Fac_Mor: "Porto",
-        Fac_Tel: 919209872,
-        NumContribuinte: 221009029,
-        vendas: 2922328.23
-    },
-    {
-        id: "Exemplo3",
-        Nome: 'Exemplo3',
-        NomeFiscal: "Exemplo3",
-        Fac_Mor: "Porto",
-        Fac_Tel: 919209872,
-        NumContribuinte: 221009029,
-        vendas: 12
-    }
-];
 
 var ordersTemp = [
     {

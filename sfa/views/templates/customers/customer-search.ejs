@@ -1,7 +1,7 @@
 <div>
     <select id="customer-selector" class="form-control selectpicker"
             data-live-search-placeholder="Procurar por nome..."
-            title="Procurar" data-live-search="true">
+            title="Procurar" data-live-search="true" data-dropup-auto="false" data-live-search-normalize="true">
         <option ng-repeat="customer in customersCtrl.customers"
                 value="{{customer.CodCliente}}" data-subtext="&emsp;{{customer.vendas}} €"
                 id="customer-{{customer.CodCliente}}">

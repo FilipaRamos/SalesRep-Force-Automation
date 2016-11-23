@@ -15,8 +15,6 @@ productsModule.controller('ProductsController', function ($http, $scope, $locati
      */
     self.initCtrl = function () {
         self.getProducts();
-        self.getCategories();
-        // TODO deal with product categories
     };
 
     /**
@@ -26,8 +24,8 @@ productsModule.controller('ProductsController', function ($http, $scope, $locati
         $http.get(API_URL + '/api/artigos').then(function (data) {
             self.products = data.data;
 
-            self.updateProductList();
             self.loading = false;
+            self.getCategories();
         }, function (data) {
             console.log('Erro ao obter lista de produtos.');
             console.log(data);
@@ -42,7 +40,7 @@ productsModule.controller('ProductsController', function ($http, $scope, $locati
 
         for (productIndex in self.products) {
             var product = self.products[productIndex];
-            var productOption = '<option value="' + product.CodArtigo + '" data-subtext="&emsp;' + product.PrecoMedio + '€" data-tokens="' + product.Familia + '" id="product-' + product.CodArtigo + '">' + product.CodArtigo + '</option>';
+            var productOption = '<option value="' + product.CodArtigo + '" data-subtext="&emsp;' + product.PrecoMedio + '€" data-tokens="" id="product-' + product.CodArtigo + '">' + product.CodArtigo + '</option>';
             selector.append(productOption);
         }
 
@@ -65,6 +63,14 @@ productsModule.controller('ProductsController', function ($http, $scope, $locati
     self.getCategories = function () {
         $http.get(API_URL + '/api/Familias').then(function (data) {
             self.categories = data.data;
+
+            for(productIndex in self.products){
+                var product = self.products[productIndex];
+                $("#product-" + product.CodArtigo).attr('data-subtext', self.getCategory(product.Familia));
+            }
+
+            var selector = $('#product-selector');
+            selector.selectpicker('refresh');
         }, function (data) {
             console.log('Erro ao obter lista de famílias.');
             console.log(data);
@@ -87,6 +93,18 @@ productsModule.controller('ProductsController', function ($http, $scope, $locati
             return product.Familia == self.filter;
         })
         return result == undefined && self.filter != 'all';
+    };
+
+    self.getCategory = function (id) {
+        var category = self.categories.find(function (category) {
+            return category.Familia == id;
+        });
+
+        if(category) {
+            return category.Descricao;
+        }else{
+            return '';
+        }
     };
 
     /**

@@ -1,4 +1,5 @@
-<div class="widget widget-nopad">
+<div class="widget widget-nopad" ng-controller="CustomersController as customersCtrl"
+     ng-init="customersCtrl.initCtrl()">
     <div class="widget-header"><i class="fa fa-fw fa-address-card"></i> Clientes
         <a href="/criar_cliente" class="pull-right"><i class="fa fa-plus-square">&nbsp</i></a>
     </div>
@@ -7,7 +8,11 @@
         <div class="widget big-stats-container">
             <div class="widget-content">
 
-                <section ng-controller="CustomersController as customersCtrl" ng-init="customersCtrl.initCtrl()">
+                <div ng-show="customersCtrl.loading">
+                    <% include ../common/loading.ejs %>
+                </div>
+
+                <section ng-hide="customersCtrl.loading">
                     <ul class="nav nav-pills">
                         <li ng-class="{ active:customersCtrl.isSet(1) }">
                             <a href ng-click="customersCtrl.setTab(1)">Top</a>
@@ -33,7 +38,7 @@
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="customer in customersCtrl.customers | orderBy : '-Nome'">
-                                    <td><a href="cliente?id={{customer.id}}">{{customer.Nome}}</a></td>
+                                    <td><a href="cliente?id={{customer.CodCliente}}">{{customer.Nome}}</a></td>
                                     <td>{{customer.Fac_Mor}}</td>
                                     <td>{{customer.Fac_Tel}}</td>
                                     <td>{{customer.vendas | currency:"€" }}</td>
@@ -57,7 +62,7 @@
                                 <tbody>
                                 <tr ng-repeat="customer in customersCtrl.customers"
                                     ng-show="customer.vendas==0">
-                                    <td><a href="cliente?id={{customer.id}}">{{customer.Nome}}</a></td>
+                                    <td><a href="cliente?id={{customer.CodCliente}}">{{customer.Nome}}</a></td>
                                     <td>{{customer.Fac_Mor}}</td>
                                     <td>{{customer.Fac_Tel}}</td>
                                     <td>{{customer.vendas | currency:"€" }}</td>
@@ -80,14 +85,14 @@
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="customer in customersCtrl.customers | orderBy : '-vendas' | limitTo : 10">
-                                    <td><a href="cliente?id={{customer.id}}">{{customer.Nome}}</a></td>
+                                    <td><a href="cliente?id={{customer.CodCliente}}">{{customer.Nome}}</a></td>
                                     <td>{{customer.Fac_Mor}}</td>
                                     <td>{{customer.Fac_Tel}}</td>
                                     <td>{{customer.vendas | currency:"€" }}</td>
                                 </tr>
                                 </tbody>
                             </table>
-                            </form>
+                        </form>
                     </div>
                 </section>
             </div>

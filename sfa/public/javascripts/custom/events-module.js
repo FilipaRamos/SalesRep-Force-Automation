@@ -236,6 +236,8 @@ newEventModule.controller('NewEventController', function ($http, $location) {
         var selectBox = document.getElementById("product-selector");
         var productId = selectBox.options[selectBox.selectedIndex].value;
 
+        console.log(productId);
+        
         // add product to opportunities, if not present already
         if (productId && self.productOpportunities.indexOf(productId) == -1) {
             self.productOpportunities.push(productId);
@@ -256,6 +258,8 @@ newEventModule.controller('NewEventController', function ($http, $location) {
         }else{
             self.selectedOpportunities.push(id);
         }
+        
+        console.log(self.selectedOpportunities);
     };
 
     self.removeOpportunity = function () {

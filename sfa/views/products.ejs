@@ -29,12 +29,11 @@
                             <a href="#" ng-click="productsCtrl.filterBy('all')" class="list-group-item">Todos os
                                 produtos</a>
                         </div>
-                        <div ng-click="productsCtrl.filterBy(category.Familia)"
-                             ng-repeat="category in productsCtrl.categories | orderBy: 'nome' ">
-                            <a href="#{{category.Familia}}" class="list-group-item">{{category.Familia}}</a>
+                        <div ng-repeat="category in productsCtrl.categories | orderBy: 'nome' "
+                             ng-click="productsCtrl.filterBy(category.Familia)">
+                            <a href="#{{category.Descricao}}" class="list-group-item">{{category.Descricao}}</a>
                         </div>
                     </div>
-
 
 
                 </div>
@@ -48,11 +47,11 @@
                 <div ng-hide="productsCtrl.loading" class="col-md-9">
                     <p class="lead"><i class="fa fa-fw fa-address-card"></i> Produtos</p>
 
-                        <div ng-repeat="product in productsCtrl.products"
-                             ng-show="productsCtrl.filteringBy(product.Familia)">
-                            <% include templates/products/product-preview.ejs %>
-                        </div>
-                        <div ng-show="productsCtrl.isFilterEmpty()">Não foram encontrados produtos...</div>
+                    <div ng-repeat="product in productsCtrl.products"
+                         ng-show="productsCtrl.filteringBy(product.Familia)">
+                        <% include templates/products/product-preview.ejs %>
+                    </div>
+                    <div ng-show="productsCtrl.isFilterEmpty()">Não foram encontrados produtos...</div>
 
                 </div>
 
