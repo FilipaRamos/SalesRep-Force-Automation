@@ -44,5 +44,11 @@ namespace SalesForceAutomation.Models
             set;
         }
 
+        public string Email
+        {
+            get;
+            set;
+        }
+
     }
 }

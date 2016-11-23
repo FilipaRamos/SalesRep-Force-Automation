@@ -28,7 +28,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
-
+                //selectList = PriEngine.Engine.Comercial.Clientes.LstClientes();
                 selectList = PriEngine.Engine.Consulta("SELECT * FROM  CLIENTES");
 
                 while (!selectList.NoFim())
@@ -41,6 +41,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     cliente.Fac_Tel = selectList.Valor("Fac_Tel");
                     cliente.NumContribuinte = selectList.Valor("NumContrib");
                     cliente.Fac_Mor = selectList.Valor("Fac_Mor");
+                    cliente.Email = selectList.Valor("B2BEnderecoMail");
 
                     listClientes.Add(cliente);
                     selectList.Seguinte();
@@ -73,6 +74,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     cliente.Fac_Tel = objCli.get_Telefone();
                     cliente.NumContribuinte = objCli.get_NumContribuinte();
                     cliente.Fac_Mor = objCli.get_Morada();
+                    cliente.Email = objCli.get_B2BEnderecoMail();
 
                     return cliente;
                 }
@@ -85,132 +87,29 @@ namespace SalesForceAutomation.Lib_Primavera
                 return null;
         }
 
-        /*
 
-        public static Models.RespostaErro UpdCliente(Models.Cliente cliente)
+        public static Models.RespostaErro InsereCliente(Models.Cliente cliente)
         {
-            Models.RespostaErro erro = new Models.RespostaErro();
+
+           Models.RespostaErro erro = new Models.RespostaErro();
 
 
-            GcpBECliente objCli = new GcpBECliente();
+            GcpBECliente newCliente = new GcpBECliente();
 
             try
             {
-
-                if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+                if (PriEngine.InitializeCompany(Properties.Settings.Default.Company.Trim(), Properties.Settings.Default.User.Trim(), Properties.Settings.Default.Password.Trim()) == true)
                 {
 
-                    if (PriEngine.Engine.Comercial.Clientes.Existe(cliente.CodCliente) == false)
-                    {
-                        erro.Erro = 1;
-                        erro.Descricao = "O cliente não existe";
-                        return erro;
-                    }
-                    else
-                    {
+                    newCliente.set_Cliente(cliente.CodCliente);
+                    newCliente.set_Nome(cliente.Nome);
+                    newCliente.set_NomeFiscal(cliente.NomeFiscal);
+                    newCliente.set_NumContribuinte(cliente.NumContribuinte);
+                    newCliente.set_Morada(cliente.Fac_Mor);
+                    newCliente.set_Telefone(cliente.Fac_Tel);
+                    newCliente.set_B2BEnderecoMail(cliente.Email);
 
-                        objCli = PriEngine.Engine.Comercial.Clientes.Edita(cliente.CodCliente);
-                        objCli.set_EmModoEdicao(true);
-
-                        objCli.set_Nome(cliente.NomeCliente);
-                        objCli.set_NumContribuinte(cliente.NumContribuinte);
-                        objCli.set_Moeda(cliente.Moeda);
-                        objCli.set_Morada(cliente.Morada);
-
-                        PriEngine.Engine.Comercial.Clientes.Actualiza(objCli);
-
-                        erro.Erro = 0;
-                        erro.Descricao = "Sucesso";
-                        return erro;
-                    }
-                }
-                else
-                {
-                    erro.Erro = 1;
-                    erro.Descricao = "Erro ao abrir a empresa";
-                    return erro;
-
-                }
-
-            }
-
-            catch (Exception ex)
-            {
-                erro.Erro = 1;
-                erro.Descricao = ex.Message;
-                return erro;
-            }
-
-        }
-
-
-        public static Models.RespostaErro DelCliente(string codCliente)
-        {
-
-            Models.RespostaErro erro = new Models.RespostaErro();
-            GcpBECliente objCli = new GcpBECliente();
-
-
-            try
-            {
-
-                if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
-                {
-                    if (PriEngine.Engine.Comercial.Clientes.Existe(codCliente) == false)
-                    {
-                        erro.Erro = 1;
-                        erro.Descricao = "O cliente não existe";
-                        return erro;
-                    }
-                    else
-                    {
-
-                        PriEngine.Engine.Comercial.Clientes.Remove(codCliente);
-                        erro.Erro = 0;
-                        erro.Descricao = "Sucesso";
-                        return erro;
-                    }
-                }
-
-                else
-                {
-                    erro.Erro = 1;
-                    erro.Descricao = "Erro ao abrir a empresa";
-                    return erro;
-                }
-            }
-
-            catch (Exception ex)
-            {
-                erro.Erro = 1;
-                erro.Descricao = ex.Message;
-                return erro;
-            }
-
-        }
-
-
-
-        public static Models.RespostaErro InsereClienteObj(Models.Cliente cli)
-        {
-
-            Models.RespostaErro erro = new Models.RespostaErro();
-
-
-            GcpBECliente myCli = new GcpBECliente();
-
-            try
-            {
-                if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
-                {
-
-                    myCli.set_Cliente(cli.CodCliente);
-                    myCli.set_Nome(cli.NomeCliente);
-                    myCli.set_NumContribuinte(cli.NumContribuinte);
-                    myCli.set_Moeda(cli.Moeda);
-                    myCli.set_Morada(cli.Morada);
-
-                    PriEngine.Engine.Comercial.Clientes.Actualiza(myCli);
+                    PriEngine.Engine.Comercial.Clientes.Actualiza(newCliente);
 
                     erro.Erro = 0;
                     erro.Descricao = "Sucesso";
@@ -235,7 +134,62 @@ namespace SalesForceAutomation.Lib_Primavera
         }
 
 
-        */
+        public static Models.RespostaErro AtualizaCliente(Models.Cliente cliente)
+        {
+            Models.RespostaErro erro = new Models.RespostaErro();
+
+
+            GcpBECliente objCli = new GcpBECliente();
+
+            try
+            {
+
+                if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+                {
+
+                    if (PriEngine.Engine.Comercial.Clientes.Existe(cliente.CodCliente) == false)
+                    {
+                        erro.Erro = 1;
+                        erro.Descricao = "O cliente não existe.";
+                        return erro;
+                    }
+                    else
+                    {
+                        objCli = PriEngine.Engine.Comercial.Clientes.Edita(cliente.CodCliente);
+                        objCli.set_EmModoEdicao(true);
+
+                        objCli.set_Nome(cliente.Nome);
+                        objCli.set_NomeFiscal(cliente.NomeFiscal);
+                        objCli.set_NumContribuinte(cliente.NumContribuinte);
+                        objCli.set_Morada(cliente.Fac_Mor);
+                        objCli.set_Telefone(cliente.Fac_Tel);
+                        objCli.set_B2BEnderecoMail(cliente.Email);
+
+                        PriEngine.Engine.Comercial.Clientes.Actualiza(objCli);
+
+                        erro.Erro = 0;
+                        erro.Descricao = "Sucesso.";
+                        return erro;
+                    }
+                }
+                else
+                {
+                    erro.Erro = 1;
+                    erro.Descricao = "Erro ao abrir a empresa.";
+                    return erro;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                erro.Erro = 1;
+                erro.Descricao = ex.Message;
+                return erro;
+            }
+
+        }
+
         #endregion Cliente;   // -----------------------------  END   CLIENTE    -----------------------
         
         #region Artigo
@@ -287,6 +241,7 @@ namespace SalesForceAutomation.Lib_Primavera
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
 
+                //  objList = PriEngine.Engine.Comercial.Artigos.LstArtigos();
                 objList = PriEngine.Engine.Consulta("Select * FROM Artigo");
 
                 while (!objList.NoFim())
@@ -329,6 +284,7 @@ namespace SalesForceAutomation.Lib_Primavera
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
 
+                //objList = PriEngine.Engine.Comercial.Familias.?
                 objList = PriEngine.Engine.Consulta("SELECT * FROM  Familias");
                 
                 while (!objList.NoFim())
@@ -722,6 +678,10 @@ namespace SalesForceAutomation.Lib_Primavera
 
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
+                StdBELista selectList;
+                selectList = PriEngine.Engine.Consulta("SELECT * FROM Tarefas LEFT JOIN TiposTarefa ON TipoActividade = 'REUN' WHERE Tarefas.Id='{694B9704-DBCD-406C-947D-7CBEEAE65B29}'");
+                Debug.WriteLine(selectList.NumLinhas());
+
                 if (PriEngine.Engine.CRM.Actividades.Existe(codReuniao) == false)
                 {
                     Debug.WriteLine("NOT FOUND");
