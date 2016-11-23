@@ -726,14 +726,18 @@ namespace SalesForceAutomation.Lib_Primavera
                     oport.Id = venda.get_ID();
                     oport.NumEncomenda = venda.get_NumEncomenda();
                     oport.Entidade = venda.get_Entidade();
-                    oport.CicloVenda = venda.get_CicloVenda();
+                    oport.Oportunidade = venda.get_Oportunidade();
 
-                    Debug.WriteLine(oport.CicloVenda);
+                    StdBELista selectList = PriEngine.Engine.Consulta("SELECT Artigo FROM PropostasOPV RIGHT JOIN LinhasPropostasOPV ON LinhasPropostasOPV.IdOportunidade = PropostasOPV.IdOportunidade WHERE PropostasOPV.IdOportunidade = '" + oport.Id + "'");
 
-                    CrmBECicloVenda cicloVenda = PriEngine.Engine.CRM.CiclosVenda.Edita(oport.CicloVenda);
-                    StdBECampos campos = cicloVenda.get_CamposUtil();
-                    int i = campos.NumItens;
-                    Debug.WriteLine(i);
+                    oport.Artigos = new List<string>();
+
+                    while (!selectList.NoFim())
+                    {
+                        oport.Artigos.Add(selectList.Valor("Artigo"));
+
+                        selectList.Seguinte();
+                    }
 
                     return oport;
 
@@ -744,6 +748,53 @@ namespace SalesForceAutomation.Lib_Primavera
             }else{
                 return null;
             }
+
+        }
+
+        public static Models.RespostaErro InsereOportunidade(Models.OportunidadeVenda oport)
+        {
+
+            Models.RespostaErro erro = new Models.RespostaErro();
+
+            CrmBEOportunidadeVenda newVenda = new CrmBEOportunidadeVenda();
+
+            try
+            {
+                if (PriEngine.InitializeCompany(Properties.Settings.Default.Company.Trim(), Properties.Settings.Default.User.Trim(), Properties.Settings.Default.Password.Trim()) == true)
+                {
+
+                    newVenda.set_ID(oport.Id);
+                    newVenda.set_NumEncomenda((int) oport.NumEncomenda);
+                    newVenda.set_Entidade(oport.Entidade);
+                    newVenda.set_Oportunidade(oport.Oportunidade);
+
+                    PriEngine.Engine.CRM.OportunidadesVenda.Actualiza(newVenda);
+                    PriEngine.Engine.CRM.PropostasOPV.ActualizaValorAtributo(oport.Id, 1, "IdOportunidade", oport.Id);
+
+                    for (int i = 0; i < oport.Artigos.Count; i++)
+                    {
+                        PriEngine.Engine.CRM.PropostasOPV.PreencheLinhaProposta("EUR", oport.Artigos[i], 0, "C", oport.Entidade, null);
+                    }
+
+                    erro.Erro = 0;
+                    erro.Descricao = "Sucesso";
+                    return erro;
+                }
+                else
+                {
+                    erro.Erro = 1;
+                    erro.Descricao = "Erro ao abrir empresa";
+                    return erro;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                erro.Erro = 1;
+                erro.Descricao = ex.Message;
+                return erro;
+            }
+
 
         }
 
