@@ -16,13 +16,7 @@ eventsModule.controller('EventsController', function ($http, $location, $window)
      * initiate controller
      */
     self.initCtrl = function (calendarType) {
-        // TODO change this
-        //self.getEvents();
-        self.events = eventsTemp;
-        self.events.forEach(function (event) {
-            event.url = '/evento?id=' + event.id;
-            event.title = event.descricao ? event.descricao : event.title;
-        });
+        self.getEvents();
 
         if(calendarType=='min') {
             self.initMinCalendar();
@@ -35,40 +29,33 @@ eventsModule.controller('EventsController', function ($http, $location, $window)
      * GET events list from API
      */
     self.getEvents = function () {
-        $http.get('api/eventos').then(
-            function (data) {
-                self.events = data;
+        $http.get(API_URL + '/api/Reuniao/').then(function (data) {
+                self.events = data.data;
+                console.log(data.data);
 
-                // set url so that it goes to event page when clicked
-                that.events.forEach(function (event) {
-                    event.url = '/evento?id=' + event.id;
+                // set info to be displayed
+                self.events.forEach(function (event) {
+                    event.url = '/evento?id=' + event.CodReuniao;
+                    event.title = event.Descricao;
+                    event.start = event.DataInicio;
+                    event.end = event.TodoDia ? undefined : event.DataFim;
+                    event.allDay = event.TodoDia;
                 });
 
                 if(self.calendar){
-                    // set info to be displayed
-                    self.events.forEach(function (event) {
-                        event.url = '/evento?id=' + event.id;
-                        event.title = event.cliente;
-                    });
-
                     self.calendar.fullCalendar('removeEvents');
                     self.calendar.fullCalendar('addEventSource', self.events);
                     self.calendar.fullCalendar('refetchEvents');
                 }
 
                 if(self.eventList){
-                    // set info to be displayed
-                    self.events.forEach(function (event) {
-                        event.url = '/evento?id=' + event.id;
-                        event.title = event.cliente + event.descricao;
-                    });
-
                     self.eventList.fullCalendar('removeEvents');
                     self.eventList.fullCalendar('addEventSource', self.events);
                     self.eventList.fullCalendar('refetchEvents');
                 }
             },
             function (data) {
+                console.log("Erro ao listar eventos.");
                 console.log(data);
             });
     };
@@ -156,18 +143,21 @@ eventsModule.controller('EventController', function ($http, $location) {
      * initiate controller
      */
     self.initCtrl = function (id) {
-        // TODO change this
-        self.event = eventsTemp[0];
-        //self.getEvent(id);
+        self.getEvent(id);
     };
 
     /**
      * GET event info from API
      */
     self.getEvent = function (id) {
-        $http.get('api/eventos?id=' + id).then(function (data) {
-            self.event = data;
-        })
+        $http.get(API_URL + '/api/Reuniao/' + id).then(function (data) {
+                self.event = data.data;
+                console.log(data.data);
+            },
+            function (data) {
+                console.log("Erro ao obter evento " + id);
+                console.log(data);
+            });
     };
 
     self.cancelEvent = function () {
@@ -468,59 +458,5 @@ var eventsTemp = [
         start: new Date(y, m, 28),
         end: new Date(y, m, 29),
         url: 'http://EGrappler.com/'
-    }
-];
-
-// TODO retrieve client list
-var eventTypesTemp = [{id:1, nome: "Reunião"}, {id:2, nome: "Telefonema"}, {id:3, nome: "Visita"}];
-
-// TODO retrieve client list
-var productsTemp = [
-    {
-        id: "Exemplo1",
-        nome: 'ProdutoExemplo2',
-        descricao: "Produto descrição ....",
-        IVA: 13,
-        PrecoMedio: 22.12,
-        StockAtual: 100,
-        stock_disponivel: 85,
-        Familia: 'Cat1'
-    },
-    {
-        id: "Exemplo2",
-        nome: 'ProdutoExemplo3',
-        descricao: "Produto descrição ....",
-        IVA: 13,
-        PrecoMedio: 22.12,
-        StockAtual: 100,
-        stock_disponivel: 85,
-        Familia: 'Cat2'
-    },
-    {
-        id: "Exemplo3",
-        nome: 'ProdutoExemplo4',
-        descricao: "Produto descrição ....",
-        IVA: 13,
-        PrecoMedio: 22.12,
-        StockAtual: 100,
-        stock_disponivel: 85
-    },
-    {
-        id: "Exemplo4",
-        nome: 'ProdutoExemplo5',
-        descricao: "Produto descrição ....",
-        IVA: 13,
-        PrecoMedio: 22.12,
-        StockAtual: 100,
-        stock_disponivel: 85
-    },
-    {
-        id: "Exemplo5",
-        nome: 'ProdutoExemplo6',
-        descricao: "Produto descrição ....",
-        IVA: 13,
-        PrecoMedio: 22.12,
-        StockAtual: 100,
-        stock_disponivel: 85
     }
 ];

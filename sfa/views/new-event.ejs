@@ -24,7 +24,16 @@
                         <div class="row">
                             <div class="span12">
 
-                                <!-- Event Type -->
+                                <!-- Event Code -->
+                                <div class="form-group row">
+                                    <label for="event_id" class="col-sm-2 col-form-label"> ID </label>
+                                    <div class="col-sm-7">
+                                        <input name="event_id" ng-model="newEventCtrl.newEvent.CodReuniao"
+                                               type="text" class="form-control" placeholder="ID de evento" required>
+                                    </div>
+                                </div>
+
+                                <!-- Event Type
                                 <div class="form-group row">
                                     <label for="event-type" class="col-sm-2 col-form-label"> Tipo de evento </label>
                                     <div class="col-sm-7">
@@ -34,7 +43,7 @@
                                                 ng-model="newEventCtrl.newEvent.eventType">
                                         </select>
                                     </div>
-                                </div>
+                                </div>-->
 
                                 <!-- Description -->
                                 <div class="form-group row">
@@ -42,7 +51,7 @@
                                     <div class="col-sm-7">
                                         <textarea style="resize:vertical;" rows="3" cols="20" class="form-control"
                                                   placeholder="Descrição"
-                                                  ng-model="newEventCtrl.newEvent.descricao"></textarea>
+                                                  ng-model="newEventCtrl.newEvent.Descricao"></textarea>
                                     </div>
                                 </div>
 
@@ -66,18 +75,32 @@
 
                                         <br>
 
-                                        <div class="input-group"
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="false" ng-model="newEventCtrl.newEvent.TodoDia">Todo dia</label>
+                                        </div>
+
+                                        <br>
+
+                                        <div ng-hide="newEventCtrl.newEvent.TodoDia" class="input-group"
                                              moment-picker="newEventCtrl.newEvent.time"
                                              format="HH:mm" locale="pt">
                                             <span class="input-group-addon">
                                                 <i class="fa fa-clock-o"></i>
                                             </span>
                                             <input class="form-control"
-                                                   placeholder="Selecionar hora"
+                                                   placeholder="Selecionar hora de início"
                                                    ng-model="newEventCtrl.newEvent.time"
                                                    ng-model-options="{ updateOn: 'blur' }">
                                         </div>
+                                    </div>
+                                </div>
 
+                                <div ng-hide="newEventCtrl.newEvent.TodoDia" class="form-group row">
+                                    <label for="event_duration" class="col-sm-2 col-form-label"> Duração </label>
+                                    <div class="col-sm-7">
+                                        <input name="event_duration" ng-model="newEventCtrl.newEvent.Duracao"
+                                               min="0" max="10000" step="15"
+                                               type="number" class="form-control" placeholder="Duração em minutos">
                                     </div>
                                 </div>
 

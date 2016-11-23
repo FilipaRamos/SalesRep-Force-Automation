@@ -1,5 +1,12 @@
 var customersModule = angular.module('customersModule', []);
 
+customersModule.config(function ($httpProvider) {
+    $httpProvider.defaults.headers.common = {};
+    $httpProvider.defaults.headers.post = {};
+    $httpProvider.defaults.headers.put = {};
+    $httpProvider.defaults.headers.patch = {};
+});
+
 /**
  * CustomersController
  */
@@ -150,7 +157,7 @@ customersModule.controller('CustomerController', function ($http, $location) {
 customersModule.controller('EditCustomerController', function ($http, $location) {
     var self = this;
 
-    self.customer = customersTemp[0];
+    self.customer = {};
 
     /**
      * initiate controller
@@ -163,18 +170,25 @@ customersModule.controller('EditCustomerController', function ($http, $location)
      * GET customer info from API
      */
     self.getCustomer = function (id) {
-        $http.get('api/clientes?id=' + id).then(function (data) {
-            self.costumer = data;
+        console.log(id);
+        $http.get(API_URL + '/api/Cliente/' + id).then(function (data) {
+            self.customer = data.data;
+            self.loading = false;
+            console.log(self.customer);
+        }, function (data) {
+            console.log('Erro ao obter informação de cliente ' + id);
+            console.log(data);
         });
     };
 
     /**
-     * POST customer info through API
+     * PUT customer info through API
      */
     self.saveCustomer = function () {
-        //TODO
-        $http.post('api/clientes?id=' + id).then(function (data) {
-            self.costumer = data;
+        //TODO form verification
+        $http.put(API_URL + '/api/Cliente/' + self.customer.CodCliente, self.customer).then(function (data) {
+            self.costumer = data.data;
+            console.log(data);
         });
     };
 });

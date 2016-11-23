@@ -16,7 +16,7 @@
             <div class="row-align-center">
                 <div class="span12">
 
-                    <div ng-controller="EventController as eventCtrl" ng-init="eventCtrl.initCtrl('<% id %>')">
+                    <div ng-controller="EventController as eventCtrl" ng-init="eventCtrl.initCtrl('<%= id %>')">
                         <div class="row">
                             <div class="span12">
 
@@ -24,12 +24,13 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label"> Detalhes </label>
                                     <div class="col-sm-2">
-                                        {{eventCtrl.event.tipo}}
-                                        <br>
-                                        <i class="fa fa-calendar"></i> {{eventCtrl.event.data}}
+                                        {{eventCtrl.event.CodReuniao}}
+                                        <!--{{eventCtrl.event.tipo}}
+                                        <br>-->
+                                        <i class="fa fa-calendar"></i> {{eventCtrl.event.DataInicio}}
                                         <br>
                                         <i class="fa fa-clock-o"></i>
-                                        {{eventCtrl.event.hora}}
+                                        {{eventCtrl.event.DataInicio}}
                                     </div>
                                 </div>
 
@@ -39,7 +40,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label"> Descrição </label>
                                     <div class="col-sm-5">
-                                        {{eventCtrl.event.descricao}}
+                                        {{eventCtrl.event.Descricao}}
                                     </div>
                                 </div>
 
@@ -64,7 +65,7 @@
                                 <!-- Notes -->
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label"> Notas </label>
-                                    <div class="col-sm-5">{{eventCtrl.event.notas}}</div>
+                                    <div class="col-sm-5">{{eventCtrl.event.Notas}}</div>
                                 </div>
                             </div>
 
