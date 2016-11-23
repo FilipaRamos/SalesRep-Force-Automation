@@ -64,7 +64,7 @@ namespace SalesForceAutomation.Models
             set;
         }
 
-        public string ContactoCliente
+        public string Entidade
         {
             get;
             set;

@@ -36,7 +36,6 @@ namespace SalesForceAutomation.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
-
         }
 
     }
