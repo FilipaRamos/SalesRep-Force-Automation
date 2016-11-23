@@ -707,6 +707,55 @@ namespace SalesForceAutomation.Lib_Primavera
 
         }
 
+        public static Models.RespostaErro PostReuniao(Models.Reuniao reuniao)
+        {
+
+            Models.RespostaErro erro = new Models.RespostaErro();
+
+            CrmBEActividade actividade = new CrmBEActividade();
+
+            try
+            {
+                if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+                {
+
+                    actividade.set_ID(reuniao.CodReuniao);
+                    actividade.set_IDTipoActividade("REUN");
+                    actividade.set_CriadoPor(reuniao.CodVendedor);
+                    actividade.set_Descricao(reuniao.Descricao);
+                    actividade.set_DataInicio(reuniao.DataInicio);
+                    actividade.set_DataFim(reuniao.DataFim);
+                    actividade.set_Resumo(reuniao.Notas);
+                    actividade.set_Prioridade(reuniao.Prioridade.ToString());
+                    actividade.set_TodoDia(reuniao.TodoDia);
+                    actividade.set_IDContactoPrincipal(reuniao.ContactoCliente);
+                    actividade.set_IDCabecOVenda(reuniao.Oportunidade);
+
+                    PriEngine.Engine.CRM.Actividades.Actualiza(actividade);
+
+                    erro.Erro = 0;
+                    erro.Descricao = "Sucesso";
+                    return erro;
+                }
+                else
+                {
+                    erro.Erro = 1;
+                    erro.Descricao = "Erro ao abrir empresa";
+                    return erro;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                PriEngine.Engine.DesfazTransaccao();
+                erro.Erro = 1;
+                erro.Descricao = ex.Message;
+                return erro;
+            }
+
+        }
+
         #endregion Reuniao
 
         #region OportunidadeVenda
