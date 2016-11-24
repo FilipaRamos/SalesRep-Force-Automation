@@ -42,7 +42,7 @@ namespace SalesForceAutomation.Controllers
 
             if (erro.Erro == 0)
             {
-                var response = Request.CreateResponse(HttpStatusCode.Created, meeting);
+                var response = Request.CreateResponse(HttpStatusCode.Created, erro.Data);
                 return response;
             }
 

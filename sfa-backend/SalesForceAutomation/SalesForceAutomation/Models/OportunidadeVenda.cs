@@ -8,8 +8,19 @@ namespace SalesForceAutomation.Models
 {
     public class OportunidadeVenda
     {
+         public string CodReuniao
+         {
+             get;
+             set;
+         }
 
-        public string Id
+        public string Descricao
+        {
+            get;
+            set;
+        }
+
+        public string CodVendedor
         {
             get;
             set;
@@ -27,7 +38,7 @@ namespace SalesForceAutomation.Models
             set;
         }
 
-        public string Oportunidade
+        public string Id
         {
             get;
             set;

@@ -14,5 +14,8 @@ namespace SalesForceAutomation.Models
         public string Descricao
         { get; set; }
 
+        public Object Data
+        { get; set; }
+
     }
 }

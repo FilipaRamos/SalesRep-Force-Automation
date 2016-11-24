@@ -12,9 +12,8 @@ namespace SalesForceAutomation.Controllers
 {
     public class OportunidadeVendaController : ApiController
     {
-        //
+        
         // GET: /OportunidadeVenda/
-
         public Models.OportunidadeVenda Get(string id)
         {
             return Lib_Primavera.PriIntegration.get_oportVenda(id);
