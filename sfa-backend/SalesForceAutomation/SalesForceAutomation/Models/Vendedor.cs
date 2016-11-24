@@ -5,47 +5,48 @@ using System.Web;
 
 namespace SalesForceAutomation.Models
 {
-    public class Encomenda
+    public class Vendedor
     {
-        public string Id
+        public string VendedorID
         {
             get;
             set;
         }
-        public string Entidade
+        public string Nome
         {
             get;
             set;
         }
-        public int NumDoc
+        public double Comissao
         {
             get;
             set;
         }
-        public DateTime Data
+        public string Morada
         {
             get;
             set;
         }
-        public string Responsavel
+        public string Localidade
         {
             get;
             set;
         }
-        public double TotalMerc
+        public string CPostal
         {
             get;
             set;
         }
-        public string Serie
+        public string Telemovel
         {
             get;
             set;
         }
-        public List<Models.LinhaEncomenda> LinhasDoc
+        public string Email
         {
             get;
             set;
         }
+        
     }
 }

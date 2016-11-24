@@ -373,11 +373,16 @@
     <Compile Include="Controllers\ArtigoArmazemController.cs" />
     <Compile Include="Controllers\ArtigosController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\EncomendasClienteController.cs" />
     <Compile Include="Controllers\EncomendasController.cs" />
+    <Compile Include="Controllers\EncomendasVendedorController.cs" />
     <Compile Include="Controllers\FamiliasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OportunidadeVendaController.cs" />
     <Compile Include="Controllers\ReuniaoController.cs" />
+    <Compile Include="Controllers\VendasArtigoController.cs" />
+    <Compile Include="Controllers\VendasVendedorController.cs" />
+    <Compile Include="Controllers\VendedoresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -392,6 +397,9 @@
     <Compile Include="Models\OportunidadeVenda.cs" />
     <Compile Include="Models\RespostaErro.cs" />
     <Compile Include="Models\Reuniao.cs" />
+    <Compile Include="Models\VendasArtigo.cs" />
+    <Compile Include="Models\VendasVendedor.cs" />
+    <Compile Include="Models\Vendedor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -399,6 +407,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="Util\Tools.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
