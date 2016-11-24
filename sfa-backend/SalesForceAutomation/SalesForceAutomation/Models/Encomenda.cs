@@ -27,6 +27,11 @@ namespace SalesForceAutomation.Models
             get;
             set;
         }
+        public string Responsavel
+        {
+            get;
+            set;
+        }
         public double TotalMerc
         {
             get;
