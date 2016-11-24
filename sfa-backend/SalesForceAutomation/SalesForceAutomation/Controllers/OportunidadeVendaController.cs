@@ -16,7 +16,7 @@ namespace SalesForceAutomation.Controllers
         // GET: /OportunidadeVenda/
         public Models.OportunidadeVenda Get(string id)
         {
-            return Lib_Primavera.PriIntegration.get_oportVenda(id);
+            return Lib_Primavera.PriIntegration.GetOportunidade(id);
         }
 
         // POST: /OportunidadeVenda
@@ -36,6 +36,8 @@ namespace SalesForceAutomation.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
         }
+
+       
 
     }
 }

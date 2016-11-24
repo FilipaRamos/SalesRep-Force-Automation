@@ -10,6 +10,7 @@ using ADODB;
 using Interop.ICrmBS900;
 using Interop.CrmBE900;
 using System.Diagnostics;
+using System.Collections;
 
 namespace SalesForceAutomation.Lib_Primavera
 {
@@ -865,37 +866,35 @@ namespace SalesForceAutomation.Lib_Primavera
 
         #region OportunidadeVenda
 
-        public static Models.OportunidadeVenda get_oportVenda(string id)
+        public static Models.OportunidadeVenda GetOportunidade(string id)
         {
 
             Models.OportunidadeVenda oport = new Models.OportunidadeVenda();
 
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
-                if (PriEngine.Engine.CRM.OportunidadesVenda.Existe(id))
+                if (PriEngine.Engine.CRM.OportunidadesVenda.ExisteID(id))
                 {
 
-                    CrmBEOportunidadeVenda venda = PriEngine.Engine.CRM.OportunidadesVenda.Edita(id);
+                    CrmBEOportunidadeVenda oportVenda = PriEngine.Engine.CRM.OportunidadesVenda.EditaID(id);
 
-                    oport.Id = venda.get_ID();
-                    oport.NumEncomenda = venda.get_NumEncomenda();
-                    oport.Entidade = venda.get_Entidade();
+                    oport.Id = oportVenda.get_ID();
+                    oport.NumEncomenda = oportVenda.get_NumEncomenda();
+                    oport.Entidade = oportVenda.get_Entidade();
+                    Debug.WriteLine(oportVenda.get_ID());
 
-                    StdBELista selectList = PriEngine.Engine.Consulta("SELECT Artigo FROM PropostasOPV RIGHT JOIN LinhasPropostasOPV ON LinhasPropostasOPV.IdOportunidade = PropostasOPV.IdOportunidade WHERE PropostasOPV.IdOportunidade = '" + oport.Id + "'");
-
+                    // obter lista de artigos associados à oportunidade
+                    CrmBELinhasPropostaOPV listaOportunidades = PriEngine.Engine.CRM.PropostasOPV.Edita(oport.Id, 1).get_Linhas();
                     oport.Artigos = new List<string>();
-
-                    while (!selectList.NoFim())
+                    foreach (CrmBELinhaPropostaOPV oportunidade in listaOportunidades)
                     {
-                        oport.Artigos.Add(selectList.Valor("Artigo"));
-
-                        selectList.Seguinte();
+                        oport.Artigos.Add(oportunidade.get_Artigo());
                     }
 
                     return oport;
 
                 }else{
-                    Debug.WriteLine("Oportunidade de venda não existe");
+                    Debug.WriteLine("Oportunidade de venda não existe.");
                     return null;
                 }
             }else{
@@ -936,14 +935,34 @@ namespace SalesForceAutomation.Lib_Primavera
                     PriEngine.Engine.CRM.OportunidadesVenda.Actualiza(novaOport);
                     PriEngine.Engine.CRM.Actividades.ActualizaValorAtributo(oport.CodReuniao, "IDCabecOVenda", novaOport.get_ID());
                     oport.Id = novaOport.get_ID();
-                   
-                    // TODO check if this is necessary?!?!?
-                    PriEngine.Engine.CRM.PropostasOPV.ActualizaValorAtributo(novaOport.get_ID(), 1, "IdOportunidade", novaOport.get_ID());
+
+                    /****************************************************************************************************
+                     *                                     criar PropostaVenda
+                     ****************************************************************************************************/
+                    CrmBEPropostaOPV proposta = new CrmBEPropostaOPV();
+                    proposta.set_IdOportunidade(novaOport.get_ID());
+                    proposta.set_NumProposta(1);
+
+
+                    /****************************************************************************************************
+                     *                                     criar LinhasPropostaVenda
+                     ****************************************************************************************************/
+                    CrmBELinhasPropostaOPV linhasProposta = new CrmBELinhasPropostaOPV();
 
                     for (int i = 0; i < oport.Artigos.Count; i++)
                     {
-                        PriEngine.Engine.CRM.PropostasOPV.PreencheLinhaProposta("EUR", oport.Artigos[i], 0, "C", oport.Entidade);
+                        // preencher linha de proposta
+                        CrmBELinhaPropostaOPV linhaProposta = PriEngine.Engine.CRM.PropostasOPV.PreencheLinhaProposta("EUR", oport.Artigos[i], 0, "C", oport.Entidade);
+                        linhaProposta.set_IdOportunidade(novaOport.get_ID());
+                        linhaProposta.set_NumProposta(1);
+                        linhasProposta.Insere(linhaProposta);                        
                     }
+
+                    /****************************************************************************************************
+                     *                                     guardar linhas e atualizar PropostaVenda
+                     ****************************************************************************************************/
+                    proposta.set_Linhas(linhasProposta);
+                    PriEngine.Engine.CRM.PropostasOPV.Actualiza(proposta);
 
                     erro.Erro = 0;
                     erro.Descricao = "Sucesso";
@@ -961,10 +980,9 @@ namespace SalesForceAutomation.Lib_Primavera
             {
                 erro.Erro = 1;
                 erro.Descricao = ex.Message;
+                Debug.WriteLine(ex.Message);
                 return erro;
-            }
-
-
+            }   
         }
 
         #endregion OportunidadeVenda
@@ -1255,7 +1273,6 @@ namespace SalesForceAutomation.Lib_Primavera
         }
 
         #endregion
-
 
         #region Administration
 
