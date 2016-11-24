@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>System.Web.Http.Cors</name>
+  </assembly>
+  <members>
+    <member name="T:System.Web.Http.CorsHttpConfigurationExtensions">
+      <summary>Metodi di estensione correlati a CORS per <see cref="T:System.Web.Http.HttpConfiguration" />.</summary>
+    </member>
+    <member name="M:System.Web.Http.CorsHttpConfigurationExtensions.EnableCors(System.Web.Http.HttpConfiguration)">
+      <summary>Attiva il supporto per CORS.</summary>
+      <param name="httpConfiguration">Classe <see cref="T:System.Web.Http.HttpConfiguration" />.</param>
+    </member>
+    <member name="M:System.Web.Http.CorsHttpConfigurationExtensions.EnableCors(System.Web.Http.HttpConfiguration,System.Web.Http.Cors.ICorsPolicyProvider)">
+      <summary>Attiva il supporto per CORS.</summary>
+      <param name="httpConfiguration">Classe <see cref="T:System.Web.Http.HttpConfiguration" />.</param>
+      <param name="defaultPolicyProvider">Interfaccia <see cref="T:System.Web.Http.Cors.ICorsPolicyProvider" /> predefinita.</param>
+      <exception cref="T:System.ArgumentNullException">httpConfiguration</exception>
+    </member>
+    <member name="M:System.Web.Http.CorsHttpConfigurationExtensions.GetCorsEngine(System.Web.Http.HttpConfiguration)">
+      <summary>Ottiene <see cref="T:System.Web.Cors.ICorsEngine" /> da <see cref="T:System.Web.Http.HttpConfiguration" />.</summary>
+      <returns>Classe <see cref="T:System.Web.Cors.ICorsEngine" />.</returns>
+      <param name="httpConfiguration">Classe <see cref="T:System.Web.Http.HttpConfiguration" />.</param>
+      <exception cref="T:System.ArgumentNullException">httpConfiguration</exception>
+    </member>
+    <member name="M:System.Web.Http.CorsHttpConfigurationExtensions.GetCorsPolicyProviderFactory(System.Web.Http.HttpConfiguration)">
+      <summary>Ottiene <see cref="T:System.Web.Http.Cors.ICorsPolicyProviderFactory" /> da <see cref="T:System.Web.Http.HttpConfiguration" />.</summary>
+      <returns>Classe <see cref="T:System.Web.Http.Cors.ICorsPolicyProviderFactory" />.</returns>
+      <param name="httpConfiguration">Classe <see cref="T:System.Web.Http.HttpConfiguration" />.</param>
+      <exception cref="T:System.ArgumentNullException">httpConfiguration</exception>
+    </member>
+    <member name="M:System.Web.Http.CorsHttpConfigurationExtensions.SetCorsEngine(System.Web.Http.HttpConfiguration,System.Web.Cors.ICorsEngine)">
+      <summary>Imposta <see cref="T:System.Web.Cors.ICorsEngine" /> su <see cref="T:System.Web.Http.HttpConfiguration" />.</summary>
+      <param name="httpConfiguration">Classe <see cref="T:System.Web.Http.HttpConfiguration" />.</param>
+      <param name="corsEngine">Classe <see cref="T:System.Web.Cors.ICorsEngine" />.</param>
+      <exception cref="T:System.ArgumentNullException">httpConfiguration o corsEngine</exception>
+    </member>
+    <member name="M:System.Web.Http.CorsHttpConfigurationExtensions.SetCorsPolicyProviderFactory(System.Web.Http.HttpConfiguration,System.Web.Http.Cors.ICorsPolicyProviderFactory)">
+      <summary>Imposta <see cref="T:System.Web.Http.Cors.ICorsPolicyProviderFactory" /> su <see cref="T:System.Web.Http.HttpConfiguration" />.</summary>
+      <param name="httpConfiguration">Classe <see cref="T:System.Web.Http.HttpConfiguration" />.</param>
+      <param name="corsPolicyProviderFactory">Classe <see cref="T:System.Web.Http.Cors.ICorsPolicyProviderFactory" />.</param>
+      <exception cref="T:System.ArgumentNullException">httpConfiguration o corsPolicyProviderFactory</exception>
+    </member>
+    <member name="T:System.Web.Http.Cors.AttributeBasedPolicyProviderFactory">
+      <summary>Implementazione dell'oggetto <see cref="T:System.Web.Http.Cors.ICorsPolicyProviderFactory" /> che restituisce l'oggetto <see cref="T:System.Web.Http.Cors.ICorsPolicyProvider" /> dall'attributo del controller o dell'azione.</summary>
+    </member>
+    <member name="M:System.Web.Http.Cors.AttributeBasedPolicyProviderFactory.#ctor">
+      <summary>Inizializza una nuova istanza della classe <see cref="T:System.Web.Http.Cors.AttributeBasedPolicyProviderFactory" />.</summary>
+    </member>
+    <member name="P:System.Web.Http.Cors.AttributeBasedPolicyProviderFactory.DefaultPolicyProvider">
+      <summary>Ottiene o imposta l'interfaccia <see cref="T:System.Web.Http.Cors.ICorsPolicyProvider" /> predefinita.</summary>
+      <returns>Interfaccia <see cref="T:System.Web.Http.Cors.ICorsPolicyProvider" /> predefinita.</returns>
+    </member>
+    <member name="M:System.Web.Http.Cors.AttributeBasedPolicyProviderFactory.GetCorsPolicyProvider(System.Net.Http.HttpRequestMessage)">
+      <summary>Ottiene l'interfaccia <see cref="T:System.Web.Http.Cors.ICorsPolicyProvider" /> per la richiesta.</summary>
+      <returns>Classe <see cref="T:System.Web.Http.Cors.ICorsPolicyProvider" />.</returns>
+      <param name="request">Richiesta.</param>
+      <exception cref="T:System.ArgumentNullException">richiesta</exception>
+    </member>
+    <member name="T:System.Web.Http.Cors.CorsHttpRequestMessageExtensions">
+      <summary>Metodi di estensione correlati a CORS per <see cref="T:System.Net.Http.HttpRequestMessage" />.</summary>
+    </member>
+    <member name="M:System.Web.Http.Cors.CorsHttpRequestMessageExtensions.GetCorsRequestContext(System.Net.Http.HttpRequestMessage)">
+      <summary>Ottiene l'oggetto <see cref="T:System.Web.Cors.CorsRequestContext" /> per una richiesta specifica.</summary>
+      <returns>Classe <see cref="T:System.Web.Cors.CorsRequestContext" />.</returns>
+      <param name="request">Classe <see cref="T:System.Net.Http.HttpRequestMessage" />.</param>
+      <exception cref="T:System.ArgumentNullException">richiesta</exception>
+    </member>
+    <member name="T:System.Web.Http.Cors.CorsHttpResponseMessageExtensions">
+      <summary>Metodi di estensione correlati a CORS per <see cref="T:System.Net.Http.HttpResponseMessage" />.</summary>
+    </member>
+    <member name="M:System.Web.Http.Cors.CorsHttpResponseMessageExtensions.WriteCorsHeaders(System.Net.Http.HttpResponseMessage,System.Web.Cors.CorsResult)">
+      <summary>Scrive le intestazioni CORS sulla risposta.</summary>
+      <param name="response">Classe <see cref="T:System.Net.Http.HttpResponseMessage" />.</param>
+      <param name="corsResult">Classe <see cref="T:System.Web.Cors.CorsResult" />.</param>
+      <exception cref="T:System.ArgumentNullException">risposta o corsResult</exception>
+    </member>
+    <member name="T:System.Web.Http.Cors.CorsMessageHandler">
+      <summary>Oggetto <see cref="T:System.Net.Http.DelegatingHandler" /> personalizzato per la gestione delle richieste CORS.</summary>
+    </member>
+    <member name="M:System.Web.Http.Cors.CorsMessageHandler.#ctor(System.Web.Http.HttpConfiguration)">
+      <summary>Inizializza una nuova istanza della classe <see cref="T:System.Web.Http.Cors.CorsMessageHandler" />.</summary>
+      <param name="httpConfiguration">Classe <see cref="T:System.Web.Http.HttpConfiguration" />.</param>
+      <exception cref="T:System.ArgumentNullException">httpConfiguration</exception>
+    </member>
+    <member name="M:System.Web.Http.Cors.CorsMessageHandler.HandleCorsPreflightRequestAsync(System.Net.Http.HttpRequestMessage,System.Web.Cors.CorsRequestContext,System.Threading.CancellationToken)">
+      <summary>Gestisce la richiesta preliminare specificata da CORS.</summary>
+      <returns>Oggetto <see cref="T:System.Threading.Tasks.Task`1" />.</returns>
+      <param name="request">Richiesta.</param>
+      <param name="corsRequestContext">Contesto della richiesta CORS.</param>
+      <param name="cancellationToken">Token di annullamento.</param>
+      <exception cref="T:System.ArgumentNullException">richiesta o corsRequestContext</exception>
+    </member>
+    <member name="M:System.Web.Http.Cors.CorsMessageHandler.HandleCorsRequestAsync(System.Net.Http.HttpRequestMessage,System.Web.Cors.CorsRequestContext,System.Threading.CancellationToken)">
+      <summary>Gestisce la richiesta CORS effettiva.</summary>
+      <returns>Classe <see cref="T:System.Threading.Tasks.Task`1" />.</returns>
+      <param name="request">Classe <see cref="T:System.Net.Http.HttpRequestMessage" />.</param>
+      <param name="corsRequestContext">Classe <see cref="T:System.Web.Cors.CorsRequestContext" />.</param>
+      <param name="cancellationToken">Classe <see cref="T:System.Threading.CancellationToken" />.</param>
+      <exception cref="T:System.ArgumentNullException">richiesta o corsRequestContext</exception>
+    </member>
+    <member name="M:System.Web.Http.Cors.CorsMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+      <summary>Invia una richiesta HTTP al gestore interno per inviarla al server come operazione asincrona.</summary>
+      <returns>Restituisce <see cref="T:System.Threading.Tasks.Task`1" />.Oggetto attività che rappresenta l'operazione asincrona.</returns>
+      <param name="request">Messaggio di richiesta HTTP da inviare al server.</param>
+      <param name="cancellationToken">Token di annullamento per annullare l'operazione.</param>
+    </member>
+    <member name="T:System.Web.Http.Cors.DisableCorsAttribute">
+      <summary>Questa classe definisce un attributo che può essere applicato a un'azione o a un controller per disattivare CORS.</summary>
+    </member>
+    <member name="M:System.Web.Http.Cors.DisableCorsAttribute.#ctor">
+      <summary>Inizializza una nuova istanza della classe <see cref="T:System.Web.Http.Cors.DisableCorsAttribute" />.</summary>
+    </member>
+    <member name="M:System.Web.Http.Cors.DisableCorsAttribute.GetCorsPolicyAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+      <summary>Ottiene il criterio CORS in modo asincrono.</summary>
+      <returns>Attività appena creata per questa operazione.</returns>
+      <param name="request">Richiesta.</param>
+      <param name="cancellationToken">Il token di annullamento assegnato per questa operazione.</param>
+    </member>
+    <member name="T:System.Web.Http.Cors.EnableCorsAttribute">
+      <summary>Questa classe definisce un attributo che può essere applicato a un'azione o a un controller per attivare CORS. Per impostazione predefinita, sono consentite tutte le origini, tutti i metodi e tutte le intestazioni.</summary>
+    </member>
+    <member name="M:System.Web.Http.Cors.EnableCorsAttribute.#ctor(System.String,System.String,System.String)">
+      <summary>Inizializza una nuova istanza della classe <see cref="T:System.Web.Http.Cors.EnableCorsAttribute" />.</summary>
+      <param name="origins">Elenco di origini separate da virgole a cui è consentito accedere alla risorsa. Usare "*" per consentire tutto.</param>
+      <param name="headers">Elenco di intestazioni separate da virgole supportate dalla risorsa. Usare "*" per consentire tutto. Usare null o una stringa vuota per non consentirne nessuna.</param>
+      <param name="methods">Elenco di intestazioni separate da virgole supportate dalla risorsa. Usare "*" per consentire tutto. Usare null o una stringa vuota per non consentirne nessuna.   Nota:   i verbi HTTP fanno distinzione tra maiuscole e minuscole. Se non si usa "*", è necessario usare le lettere maiuscole quando i specificano operazioni GET, PUT, POST, DELETE e così via.   Ad esempio:   var cors = new EnableCorsAttribute("http://localhost:1234", "*", "GET,PUT,POST,DELETE");  </param>
+    </member>
+    <member name="M:System.Web.Http.Cors.EnableCorsAttribute.#ctor(System.String,System.String,System.String,System.String)">
+      <summary>Inizializza una nuova istanza della classe <see cref="T:System.Web.Http.Cors.EnableCorsAttribute" />.</summary>
+      <param name="origins">Elenco di origini separate da virgole a cui è consentito accedere alla risorsa. Usare "*" per consentire tutto.</param>
+      <param name="headers">Elenco di intestazioni separate da virgole supportate dalla risorsa. Usare "*" per consentire tutto. Usare null o una stringa vuota per non consentirne nessuna.</param>
+      <param name="methods">Elenco di intestazioni separate da virgole supportate dalla risorsa. Usare "*" per consentire tutto. Usare null o una stringa vuota per non consentirne nessuna.</param>
+      <param name="exposedHeaders">Elenco di intestazioni separate da virgole che la risorsa può usare e a cui può essere esposta. Usare null o una stringa vuota per non esporre alcuna intestazione.</param>
+    </member>
+    <member name="P:System.Web.Http.Cors.EnableCorsAttribute.ExposedHeaders">
+      <summary>Ottiene le intestazioni che risorsa potrebbe usare e che possono essere esposte.</summary>
+    </member>
+    <member name="M:System.Web.Http.Cors.EnableCorsAttribute.GetCorsPolicyAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)"></member>
+    <member name="P:System.Web.Http.Cors.EnableCorsAttribute.Headers">
+      <summary>Ottiene le intestazioni supportate dalla risorsa.</summary>
+    </member>
+    <member name="P:System.Web.Http.Cors.EnableCorsAttribute.Methods">
+      <summary>Ottiene i metodi supportati dalla risorsa.</summary>
+    </member>
+    <member name="P:System.Web.Http.Cors.EnableCorsAttribute.Origins">
+      <summary>Ottiene le origini a cui è consentito accedere alla risorsa.</summary>
+    </member>
+    <member name="P:System.Web.Http.Cors.EnableCorsAttribute.PreflightMaxAge">
+      <summary>Ottiene o imposta il numero di secondi durante i quali i risultati della richiesta preliminare possono essere memorizzati nella cache.</summary>
+    </member>
+    <member name="P:System.Web.Http.Cors.EnableCorsAttribute.SupportsCredentials">
+      <summary>Ottiene o imposta un valore indicante se la risorsa supporta le credenziali dell'utente nella richiesta.</summary>
+    </member>
+    <member name="T:System.Web.Http.Cors.ICorsPolicyProvider">
+      <summary>Fornisce un'astrazione per ottenere l'oggetto <see cref="T:System.Web.Cors.CorsPolicy" />.</summary>
+    </member>
+    <member name="M:System.Web.Http.Cors.ICorsPolicyProvider.GetCorsPolicyAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+      <summary>Ottiene la classe <see cref="T:System.Web.Cors.CorsPolicy" />.</summary>
+      <returns>Classe <see cref="T:System.Web.Cors.CorsPolicy" />.</returns>
+      <param name="request">Richiesta.</param>
+      <param name="cancellationToken">Token di annullamento.</param>
+    </member>
+    <member name="T:System.Web.Http.Cors.ICorsPolicyProviderFactory">
+      <summary>Fornisce un'astrazione per ottenere l'oggetto <see cref="T:System.Web.Http.Cors.ICorsPolicyProvider" />.</summary>
+    </member>
+    <member name="M:System.Web.Http.Cors.ICorsPolicyProviderFactory.GetCorsPolicyProvider(System.Net.Http.HttpRequestMessage)">
+      <summary>Ottiene l'interfaccia <see cref="T:System.Web.Http.Cors.ICorsPolicyProvider" /> per la richiesta.</summary>
+      <returns>Classe <see cref="T:System.Web.Http.Cors.ICorsPolicyProvider" />.</returns>
+      <param name="request">Richiesta.</param>
+    </member>
+    <member name="T:System.Web.Http.Cors.Tracing.TraceCategories">
+      <summary>Nomi di categoria di cui viene tenuta traccia dall'implementazione di traccia CORS predefinita.</summary>
+    </member>
+    <member name="F:System.Web.Http.Cors.Tracing.TraceCategories.CorsCategory">
+      <summary>Categoria di traccia per gli eventi correlati a CORS.</summary>
+    </member>
+  </members>
+</doc>

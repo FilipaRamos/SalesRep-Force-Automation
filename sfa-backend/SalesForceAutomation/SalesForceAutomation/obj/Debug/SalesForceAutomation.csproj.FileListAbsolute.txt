@@ -36,7 +36,6 @@ C:\Users\user\Documents\GitHub\SalesRep-Force-Automation\sfa-backend\SalesForceA
 C:\Users\user\Documents\GitHub\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\bin\Microsoft.Threading.Tasks.Extensions.Desktop.dll
 C:\Users\user\Documents\GitHub\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\bin\Microsoft.Threading.Tasks.Extensions.dll
 C:\Users\user\Documents\GitHub\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\user\Documents\GitHub\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 C:\Users\user\Documents\GitHub\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\bin\Newtonsoft.Json.dll
 C:\Users\user\Documents\GitHub\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\bin\System.Net.Http.Formatting.dll
 C:\Users\user\Documents\GitHub\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\bin\System.Spatial.dll
@@ -230,3 +229,7 @@ C:\Users\user\Desktop\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation
 C:\Users\user\Desktop\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\obj\Debug\SalesForceAutomation.csprojResolveAssemblyReference.cache
 C:\Users\user\Desktop\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\obj\Debug\SalesForceAutomation.dll
 C:\Users\user\Desktop\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\obj\Debug\SalesForceAutomation.pdb
+C:\Users\user\Documents\GitHub\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\bin\System.Web.Cors.dll
+C:\Users\user\Documents\GitHub\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\bin\System.Web.Http.Cors.dll
+C:\Users\user\Documents\GitHub\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\bin\System.Web.Http.Cors.xml
+C:\Users\user\Documents\GitHub\SalesRep-Force-Automation\sfa-backend\SalesForceAutomation\SalesForceAutomation\bin\it\System.Web.Http.Cors.resources.dll

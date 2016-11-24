@@ -107,6 +107,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     newCliente.set_Morada(cliente.Fac_Mor);
                     newCliente.set_Telefone(cliente.Fac_Tel);
                     newCliente.set_B2BEnderecoMail(cliente.Email);
+                    newCliente.set_Moeda("EUR");
 
                     PriEngine.Engine.Comercial.Clientes.Actualiza(newCliente);
 
@@ -126,6 +127,7 @@ namespace SalesForceAutomation.Lib_Primavera
             {
                 erro.Erro = 1;
                 erro.Descricao = ex.Message;
+                Debug.WriteLine(ex.Message);
                 return erro;
             }
 

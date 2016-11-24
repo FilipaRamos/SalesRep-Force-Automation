@@ -33,7 +33,7 @@ namespace SalesForceAutomation.Controllers
             }
         }
 
-        // PUT: /cliente/
+        // PUT: /cliente/:id
         public HttpResponseMessage Put(string id, Cliente cliente)
         {
 
@@ -44,7 +44,7 @@ namespace SalesForceAutomation.Controllers
                 erro = Lib_Primavera.PriIntegration.PutCliente(cliente);
                 if (erro.Erro == 0)
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, erro.Descricao);
+                    return Request.CreateResponse(HttpStatusCode.OK, cliente);
                 }
                 else
                 {
@@ -72,7 +72,7 @@ namespace SalesForceAutomation.Controllers
 
             else
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, erro.Descricao);
             }
 
         }
