@@ -40,7 +40,7 @@ namespace SalesForceAutomation.Models
             set;
         }
 
-        public int Prioridade
+        public string Prioridade
         {
             get;
             set;

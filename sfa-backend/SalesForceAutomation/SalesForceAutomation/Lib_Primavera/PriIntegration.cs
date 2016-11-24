@@ -651,7 +651,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     reuniao.CodVendedor = selectList.Valor("CriadoPor");
                     reuniao.Descricao = selectList.Valor("Descricao");
                     reuniao.Notas = selectList.Valor("Resumo");
-                    reuniao.Prioridade = selectList.Valor("Prioridade");
+                    reuniao.Prioridade = selectList.Valor("Prioridade").ToString();
                     reuniao.DataInicio = selectList.Valor("DataInicio");
                     reuniao.DataFim = selectList.Valor("DataFim");
                     reuniao.TodoDia = selectList.Valor("TodoDia");
@@ -688,7 +688,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     reuniao.CodVendedor = objReuniao.get_CriadoPor();
                     reuniao.Descricao = objReuniao.get_Descricao();
                     reuniao.Notas = objReuniao.get_Resumo();
-                    reuniao.Prioridade = Int32.Parse(objReuniao.get_Prioridade());
+                    reuniao.Prioridade = objReuniao.get_Prioridade();
                     reuniao.DataInicio = objReuniao.get_DataInicio();
                     reuniao.DataFim = objReuniao.get_DataFim();
                     reuniao.TodoDia = objReuniao.get_TodoDia();
@@ -778,20 +778,28 @@ namespace SalesForceAutomation.Lib_Primavera
                     }
                     else
                     {
+                        Debug.WriteLine("Entrei aqui");
                         actividade = PriEngine.Engine.CRM.Actividades.Edita(meeting.CodReuniao);
                         actividade.set_EmModoEdicao(true);
+                        Debug.WriteLine("Entrei em modo de edição");
 
-                        actividade.set_ID(meeting.CodReuniao);
-                        actividade.set_IDTipoActividade("REUN");
+                        actividade.set_IDTipoActividade("694B9704-DBCD-406C-947D-7CBEEAE65B29");
                         actividade.set_CriadoPor(meeting.CodVendedor);
+                        //Debug.WriteLine(meeting.CodVendedor);
                         actividade.set_Descricao(meeting.Descricao);
+                        Debug.WriteLine(meeting.Descricao);
                         actividade.set_DataInicio(meeting.DataInicio);
+                        Debug.WriteLine(meeting.DataInicio);
                         actividade.set_DataFim(meeting.DataFim);
+                        Debug.WriteLine(meeting.DataFim);
                         actividade.set_Resumo(meeting.Notas);
+                        Debug.WriteLine(meeting.Notas);
                         actividade.set_Prioridade(meeting.Prioridade.ToString());
+                        Debug.WriteLine(meeting.Prioridade.ToString());
                         actividade.set_TodoDia(meeting.TodoDia);
+                        Debug.WriteLine(meeting.TodoDia);
                         actividade.set_EntidadePrincipal(meeting.Entidade);
-                        actividade.set_IDCabecOVenda(meeting.Oportunidade);
+                        Debug.WriteLine(meeting.Entidade);
 
                         PriEngine.Engine.CRM.Actividades.Actualiza(actividade);
 
