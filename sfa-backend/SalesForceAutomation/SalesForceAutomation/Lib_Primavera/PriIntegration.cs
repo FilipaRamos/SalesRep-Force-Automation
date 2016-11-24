@@ -765,7 +765,7 @@ namespace SalesForceAutomation.Lib_Primavera
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
 
-                objListDoc = PriEngine.Engine.Consulta("SELECT id, Entidade, Data, NumDoc, TotalMerc, Serie FROM CabecDoc WHERE TipoDoc = 'ECL'");
+                objListDoc = PriEngine.Engine.Consulta("SELECT id, Entidade, Data, NumDoc, TotalMerc, Serie FROM CabecDoc WHERE TipoDoc = 'ECL' ORDER BY Data DESC");
 
                 while (!objListDoc.NoFim())
                 {
@@ -868,54 +868,52 @@ namespace SalesForceAutomation.Lib_Primavera
 
             GcpBELinhasDocumentoVenda myLinhas = new GcpBELinhasDocumentoVenda();
 
-            // TODO GIL check if this is correct
+            
             Interop.GcpBE900.PreencheRelacaoVendas rl = new Interop.GcpBE900.PreencheRelacaoVendas();
             List<Models.LinhaEncomenda> lstlindv = new List<Models.LinhaEncomenda>();
 
-            try
+
+            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
             {
-                if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+                
+                myEnc.set_DataDoc(DateTime.Now);
+                myEnc.set_Entidade(dv.Entidade);
+                myEnc.set_Serie(dv.Serie);
+                myEnc.set_Tipodoc("ECL");
+                myEnc.set_TipoEntidade("C");
+                
+                lstlindv = dv.LinhasDoc;
+                
+                PriEngine.Engine.Comercial.Vendas.PreencheDadosRelacionados(myEnc);
+
+                foreach (Models.LinhaEncomenda lin in lstlindv)
                 {
-                    // Atribui valores ao cabecalho do doc
-                    //myEnc.set_DataDoc(dv.Data);
-                    myEnc.set_Entidade(dv.Entidade);
-                    myEnc.set_Serie(dv.Serie);
-                    myEnc.set_Tipodoc("ECL");
-                    myEnc.set_TipoEntidade("C");
-                    // Linhas do documento para a lista de linhas
-                    lstlindv = dv.LinhasDoc;
-                    //PriEngine.Engine.Comercial.Vendas.PreencheDadosRelacionados(myEnc, rl);
-                    PriEngine.Engine.Comercial.Vendas.PreencheDadosRelacionados(myEnc);
-                    foreach (Models.LinhaEncomenda lin in lstlindv)
-                    {
-                        PriEngine.Engine.Comercial.Vendas.AdicionaLinha(myEnc, lin.CodArtigo, lin.Quantidade, "", "", lin.PrecoUnitario, lin.Desconto);
-                    }
+                    PriEngine.Engine.Comercial.Vendas.AdicionaLinha(myEnc, lin.CodArtigo, lin.Quantidade, "", "", lin.PrecoUnitario, lin.Desconto);
+                }
 
+                PriEngine.Engine.IniciaTransaccao();
 
-                    // PriEngine.Engine.Comercial.Compras.TransformaDocumento(
-
-                    PriEngine.Engine.IniciaTransaccao();
-                    //PriEngine.Engine.Comercial.Vendas.Edita Actualiza(myEnc, "Teste");
+                try
+                {
                     PriEngine.Engine.Comercial.Vendas.Actualiza(myEnc, "Teste");
                     PriEngine.Engine.TerminaTransaccao();
                     erro.Erro = 0;
                     erro.Descricao = "Sucesso";
                     return erro;
                 }
-                else
+                catch (Exception e)
                 {
-                    erro.Erro = 1;
-                    erro.Descricao = "Erro ao abrir empresa";
+                    PriEngine.Engine.DesfazTransaccao();
+                    erro.Erro = 2;
+                    erro.Descricao = "Erro ao submeter a encomenda";
                     return erro;
-
                 }
 
             }
-            catch (Exception ex)
+            else
             {
-                PriEngine.Engine.DesfazTransaccao();
                 erro.Erro = 1;
-                erro.Descricao = ex.Message;
+                erro.Descricao = "Erro ao abrir empresa";
                 return erro;
             }
         }
