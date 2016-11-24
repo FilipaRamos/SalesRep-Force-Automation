@@ -707,6 +707,52 @@ namespace SalesForceAutomation.Lib_Primavera
 
         }
 
+        #region ClienteReuniao
+
+        public static List<Models.Reuniao> GetReuniaoCliente(string codEntidade)
+        {
+            Debug.WriteLine(codEntidade);
+
+            StdBELista selectList;
+            Models.Reuniao reuniao;
+
+            List<Models.Reuniao> listReunioes = new List<Models.Reuniao>();
+
+            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            {
+
+                selectList = PriEngine.Engine.Consulta("SELECT Tarefas.Id AS RId, * FROM Tarefas LEFT JOIN TiposTarefa ON TipoActividade = 'REUN' WHERE EntidadePrincipal = '" + codEntidade + "'");
+
+                while (!selectList.NoFim())
+                {
+
+                    reuniao = new Models.Reuniao();
+
+                    reuniao.CodReuniao = selectList.Valor("RId");
+                    reuniao.CodVendedor = selectList.Valor("CriadoPor");
+                    reuniao.Descricao = selectList.Valor("Descricao");
+                    reuniao.Notas = selectList.Valor("Resumo");
+                    reuniao.Prioridade = selectList.Valor("Prioridade").ToString();
+                    reuniao.DataInicio = selectList.Valor("DataInicio");
+                    reuniao.DataFim = selectList.Valor("DataFim");
+                    reuniao.TodoDia = selectList.Valor("TodoDia");
+                    reuniao.Duracao = selectList.Valor("Duracao");
+                    reuniao.Entidade = selectList.Valor("EntidadePrincipal");
+                    reuniao.Oportunidade = selectList.Valor("IDCabecOVenda");
+
+                    listReunioes.Add(reuniao);
+                    selectList.Seguinte();
+                }
+
+                return listReunioes;
+            }
+            else
+                return null;
+
+        }
+
+        #endregion ClienteReuniao
+
         public static Models.RespostaErro PostReuniao(Models.Reuniao reuniao)
         {
             Models.RespostaErro erro = new Models.RespostaErro();
