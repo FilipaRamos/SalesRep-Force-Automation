@@ -160,8 +160,8 @@ eventsModule.controller('EventController', function ($http, $location) {
             });
     };
 
-    self.cancelEvent = function () {
-        $http.post('api/remove_evento?id=').then(
+    self.cancelEvent = function (id) {
+        $http.delete(API_URL + '/api/Reuniao/' + id).then(
             function (data) {
                 $location.path('/agenda').replace();
             },
@@ -174,20 +174,24 @@ eventsModule.controller('EventController', function ($http, $location) {
 /**
  * NewEventController
  */
-newEventModule.controller('NewEventController', function ($http, $location) {
+newEventModule.controller('NewEventController', function ($http) {
     var self = this;
 
     self.newEvent = {};
-    self.eventTypes = eventTypesTemp;
-    self.newEvent.eventType = self.eventTypes[0];
+    self.salesRep;
+    self.eventTypes = [];
+    self.newEvent.eventType = null;
     self.productOpportunities = [];
     self.selectedOpportunities = [];
 
     /**
      * initiate controller
      */
-    self.initCtrl = function () {
-        self.getEventTypes();
+    self.initCtrl = function (idSalesRep) {
+        //self.getEventTypes();
+        self.salesRep = idSalesRep | 1;     // TODO change this
+        self.newEvent.Prioridade = 1;
+        console.log('this is a test');
     };
 
     /**
@@ -210,9 +214,37 @@ newEventModule.controller('NewEventController', function ($http, $location) {
     self.addEvent = function () {
         // TODO add form validation
 
-        $http.post('api/evento', self.newEvent).then(
+        // set time variables
+        if(!self.newEvent.TodoDia){
+            var startDate = new Date();
+            startDate.setDate(self.newEvent.startDate);
+            startDate.setTime(self.newEvent.startTime);
+            self.newEvent.DataInicio = startDate;
+
+            var endDate = new Date();
+            endDate.setDate(self.newEvent.endDate);
+            endDate.setTime(self.newEvent.endTime);
+            self.newEvent.DataFim = endDate;
+        }
+
+        // set product opportunities
+        self.newEvent.Artigos = self.productOpportunities;
+
+        // set customer ID
+        var selectBox = document.getElementById("customer-selector");
+        var customerId = selectBox.options[selectBox.selectedIndex].value;
+        self.newEvent.Entidade = customerId;
+
+        console.log(customerId);
+
+        self.newEvent.CodVendedor = self.salesRep;
+
+        console.log(self.newEvent);
+
+        $http.post(API_URL + '/api/Reuniao/', self.newEvent).then(
             function (data) {
-                $location.path('/eventos?id=' + data.id).replace();
+                console.log(data);
+                window.location.replace('/eventos?id=' + self.newEvent.CodReuniao);
             },
             function (data) {
                 console.log(data);
@@ -226,6 +258,7 @@ newEventModule.controller('NewEventController', function ($http, $location) {
         var selectBox = document.getElementById("product-selector");
         var productId = selectBox.options[selectBox.selectedIndex].value;
 
+        console.log('here');
         console.log(productId);
         
         // add product to opportunities, if not present already
@@ -293,7 +326,7 @@ newEventModule.controller('EditEventController', function ($http, $location) {
     /**
      * initiate controller
      */
-    self.initCtrl = function (id) {
+    self.initCtrl = function (idEvent) {
        // self.getEvent(id);
         //self.getEventTypes();
     };
@@ -327,13 +360,13 @@ newEventModule.controller('EditEventController', function ($http, $location) {
      * Save event through API
      */
     self.saveEvent = function () {
-        // TODO add form validation
+        // TODO add form validation; change
 
-        $http.post('api/evento', self.newEvent).then(
-            function (data) {
-                $location.path('/eventos?id=' + data.id).replace();
+        $http.get(API_URL + '/api/Reuniao/' + id, self.event).then(function (data) {
+                self.event = data.data;
             },
             function (data) {
+                console.log("Erro ao obter evento " + id);
                 console.log(data);
             });
     };
@@ -393,70 +426,3 @@ newEventModule.controller('EditEventController', function ($http, $location) {
         }
     };
 });
-
-// TODO retrieve event list from primavera
-// TODO change event url so that on click it redirects to event page
-var date = new Date();
-var d = date.getDate();
-var m = date.getMonth();
-var y = date.getFullYear();
-
-var eventsTemp = [
-    {
-        id: 1,
-        tipo: 'Reunião',
-        data: '12-3-2017',
-        hora: '12:40',
-        descricao: 'Dar a conhecer novos produtos',
-        oportunidades: [],
-        notas: 'Não esquecer.',
-        title: 'All Day Event',
-        start: new Date(y, m, 1)
-    },
-    {
-        id: 2,
-        title: 'Long Event',
-        start: new Date(y, m, d + 5),
-        end: new Date(y, m, d + 7)
-    },
-    {
-        id: 3,
-        title: 'Repeating Event',
-        start: new Date(y, m, d - 3, 16, 0),
-        allDay: false
-    },
-    {
-        id: 4,
-        title: 'Repeating Event',
-        start: new Date(y, m, d + 4, 16, 0),
-        allDay: false
-    },
-    {
-        id: 5,
-        title: 'Meeting',
-        start: new Date(y, m, d, 10, 30),
-        allDay: false,
-        url: '/evento?id=1'
-    },
-    {
-        id: 6,
-        title: 'Lunch',
-        start: new Date(y, m, d, 12, 0),
-        end: new Date(y, m, d, 14, 0),
-        allDay: false
-    },
-    {
-        id: 7,
-        title: 'Birthday Party',
-        start: new Date(y, m, d + 1, 19, 0),
-        end: new Date(y, m, d + 1, 22, 30),
-        allDay: false
-    },
-    {
-        id: 8,
-        title: 'EGrappler.com',
-        start: new Date(y, m, 28),
-        end: new Date(y, m, 29),
-        url: 'http://EGrappler.com/'
-    }
-];

@@ -6,11 +6,11 @@
 
     <div class="widget-content">
         <div class="container row-align-center">
-            <div ng-show="currentCtrl.loading" class="span10">
+            <div ng-show="currentCtrl.loadingInfo" class="span10">
                 <% include ../common/loading.ejs %>
             </div>
 
-            <div  ng-hide="currentCtrl.loading"  class="span10">
+            <div  ng-hide="currentCtrl.loadingInfo"  class="span10">
                 <form role="form">
 
                     <!-- Customer Name -->
@@ -38,7 +38,7 @@
                     </div>
 
                     <!-- Address -->
-                    <div class="form-group row" ng-show="{{customer.Fac_Mor}}">
+                    <div class="form-group row" ng-show="currentCtrl.customer.Fac_Mor">
                         <label for="address" class="col-sm-2 col-form-label"> Morada </label>
                         <div name="address" class="col-sm-5">
                             {{currentCtrl.customer.Fac_Mor}}
@@ -46,15 +46,15 @@
                     </div>
 
                     <!-- Email -->
-                    <div class="form-group row" ng-show="{{customer.email}}">
+                    <div class="form-group row" ng-show="currentCtrl.customer.Email">
                         <label for="email" class="col-sm-2 col-form-label"> Email </label>
                         <div name="email" class="col-sm-5">
-                            {{currentCtrl.ccustomer.email}}
+                            {{currentCtrl.customer.Email}}
                         </div>
                     </div>
 
                     <!-- Telefone -->
-                    <div class="form-group row" ng-show="{{customer.Fac_Tel}}">
+                    <div class="form-group row" ng-show="currentCtrl.customer.Fac_Tel">
                         <label for="telephone" class="col-sm-2 col-form-label"> Telefone </label>
                         <div name="telephone" class="col-sm-5">
                             {{currentCtrl.customer.Fac_Tel}}
@@ -62,11 +62,11 @@
                     </div>
 
                     <!-- Total de Vendas -->
-                    <div class="form-group row">
+                    <div ng-show="currentCtrl.currentCtrl.customer.Vendas" class="form-group row">
                         <label for="total-sales" class="col-sm-2 col-form-label control-label"> Total de
                             vendas </label>
                         <div name="total-sales" class="col-sm-5">
-                            {{currentCtrl.customer.vendas | currency: "€"}}
+                            {{currentCtrl.customer.Vendas | currency: "€"}}
                         </div>
                     </div>
                 </form>

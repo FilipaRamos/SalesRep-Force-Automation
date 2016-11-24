@@ -83,10 +83,12 @@ customersModule.controller('CustomersController', function ($http, $location) {
 customersModule.controller('CustomerController', function ($http, $location) {
     var self = this;
 
-    self.loading = true;
+    self.loadingInfo = true;
+    self.loadingOrders = true;
+    self.loadingEvents = true;
     self.customer = {};
-    self.events = eventsTemp;
-    self.orders = ordersTemp;
+    self.events = [];
+    self.orders = [];
 
     /**
      * initiate controller
@@ -103,7 +105,7 @@ customersModule.controller('CustomerController', function ($http, $location) {
     self.getCustomer = function (id) {
         $http.get(API_URL + '/api/Cliente/' + id).then(function (data) {
             self.customer = data.data;
-            self.loading = false;
+            self.loadingInfo = false;
             console.log(self.customer);
         }, function (data) {
             console.log('Erro ao obter informação de cliente ' + id);
@@ -115,9 +117,13 @@ customersModule.controller('CustomerController', function ($http, $location) {
      * GET customer orders list from API
      */
     self.getCustomerOrders = function (id) {
-
-        $http.get('api/encomendas?clienteId=').then(function (data) {
-            self.costumerOrders = data;
+        $http.get(API_URL + '/api/EncomendasCliente/' + id).then(function (data) {
+            self.orders = data.data;
+            self.loadingOrders = false;
+            console.log(self.orders);
+        }, function (data) {
+            console.log('Erro ao obter informação de cliente ' + id);
+            console.log(data);
         });
     };
 
@@ -125,8 +131,13 @@ customersModule.controller('CustomerController', function ($http, $location) {
      * GET customer events list from API
      */
     self.getCustomerEvents = function (id) {
-        $http.get('api/eventos?clienteId=').then(function (data) {
-            self.costumerEvents = data;
+        $http.get(API_URL + '/api/Cliente/' + id).then(function (data) {
+            self.events = data.data;
+            self.loadingEvents = false;
+            console.log(self.events);
+        }, function (data) {
+            console.log('Erro ao obter informação de cliente ' + id);
+            console.log(data);
         });
     };
 
@@ -185,11 +196,31 @@ customersModule.controller('EditCustomerController', function ($http, $location)
      * PUT customer info through API
      */
     self.saveCustomer = function () {
-        //TODO form verification
-        $http.put(API_URL + '/api/Cliente/' + self.customer.CodCliente, self.customer).then(function (data) {
-            self.costumer = data.data;
-            console.log(data);
-        });
+        // TODO do form validation
+        console.log(self.newCustomer);
+
+        self.waitingAPIResponse = true;
+
+        $http({
+            method: 'PUT',
+            url: API_URL + '/api/Cliente/' + self.customer.CodCliente,
+            headers: {'Content-Type': 'application/json'},
+            data: self.newCustomer
+        }).then(
+            function (data) {
+                console.log(data);
+                if(data.status==200) {
+                    window.location.replace('/Cliente?id=' + self.customer.CodCliente);
+                }else{
+                    self.waitingAPIResponse = false;
+                    self.errorMessage = data.data;
+                }
+            },
+            function (data) {
+                console.log(data);
+                self.waitingAPIResponse = false;
+                self.errorMessage = data.data;
+            });
     };
 });
 
@@ -200,6 +231,7 @@ customersModule.controller('NewCustomerController', function ($http, $location) 
     var self = this;
 
     self.newCustomer = {};
+    self.waitingAPIResponse = false;
 
     /**
      * initiate controller
@@ -212,75 +244,29 @@ customersModule.controller('NewCustomerController', function ($http, $location) 
      */
     self.addCustomer = function () {
         // TODO do form validation
-        $http.post('api/cliente', self.newCustomer).then(
-            function (data) {
-                self.customers.push(self.newCustomer);
-                self.newCustomer = {};
+        console.log(self.newCustomer);
 
-                $location.path('/cliente?id=' + data.id).replace();
+        self.waitingAPIResponse = true;
+
+        $http({
+            method: 'POST',
+            url: API_URL + '/api/Cliente',
+            headers: {'Content-Type': 'application/json'},
+            data: self.newCustomer
+        }).then(
+            function (data) {
+                console.log(data);
+                if(data.status==201) {
+                    window.location.replace('/Cliente?id=' + self.newCustomer.CodCliente);
+                }else{
+                    self.waitingAPIResponse = false;
+                    self.errorMessage = data.data;
+                }
             },
             function (data) {
                 console.log(data);
+                self.waitingAPIResponse = false;
+                self.errorMessage = data.data;
             });
     };
-
 });
-
-var ordersTemp = [
-    {
-        id: 14351,
-        cliente_id: "Manel LDA.",
-        produtos: [
-            {id: 61653, preco: 32.00, iva: 21, desconto: 0},
-            {id: 61893, preco: 21.00, iva: 21, desconto: 0}
-        ],
-        status: 2,
-        total: 53.00,
-        data: new Date(2016, 03, 02)
-    },
-    {
-        id: 16786,
-        cliente_id: "Firmino & Firmino LDA.",
-        produtos: [
-            {id: 31553, preco: 10.00, iva: 21, desconto: 0},
-            {id: 51293, preco: 5.00, iva: 21, desconto: 2},
-        ],
-        status: 1,
-        total: 15.00,
-        data: new Date(2016, 03, 06)
-    },
-    {
-        id: 11302,
-        cliente_id: "FVUP - Faculdade da Vida.",
-        produtos: [
-            {id: 56853, preco: 7.00, iva: 21, desconto: 7},
-            {id: 41223, preco: 2.00, iva: 21, desconto: 1}
-        ],
-        status: 3,
-        total: 9.00,
-        data: new Date(2016, 06, 05)
-    }
-];
-
-var eventsTemp = [
-    {
-        id: "12453253",
-        tipo: "Reunião",
-        descricao: "some event"
-    },
-    {
-        id: "24564315",
-        tipo: "Reunião",
-        descricao: "some event"
-    },
-    {
-        id: "85636346",
-        tipo: "Reunião",
-        descricao: "some event"
-    },
-    {
-        id: "74536190",
-        tipo: "Reunião",
-        descricao: "some event"
-    }
-];

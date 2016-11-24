@@ -71,8 +71,8 @@
                         <div class="form-group row">
                             <label for="email" class="col-sm-2 col-form-label"> Email </label>
                             <div class="col-sm-10">
-                                <input name="email" ng-model="customerCtrl.newCustomer.email"
-                                       value="{{customerCtrl.newCustomer.email}}"
+                                <input name="email" ng-model="customerCtrl.newCustomer.Email"
+                                       value="{{customerCtrl.newCustomer.Email}}"
                                        type="email" class="form-control" placeholder="Email">
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                         <!-- Buttons -->
                         <div class="form-group row">
                             <div class="col-sm-10 col-sm-offset-2">
-                                <button type="submit" class="btn btn-primary btn-block"> Adicionar cliente</button>
+                                <button type="submit" class="btn btn-primary btn-block" ng-disabled="customerCtrl.waitingAPIResponse"> Adicionar cliente</button>
                             </div>
                         </div>
                     </form>

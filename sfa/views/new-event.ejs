@@ -20,19 +20,10 @@
             <div class="row-align-center">
                 <div class="span12">
 
-                    <form action="" method="post" ng-controller="NewEventController as newEventCtrl">
+                    <!-- TODO add sales rep to init-->
+                    <form ng-controller="NewEventController as newEventCtrl" ng-init="newEventCtrl.initCtrl()">
                         <div class="row">
                             <div class="span12">
-
-                                <!-- Event Code -->
-                                <div class="form-group row">
-                                    <label for="event_id" class="col-sm-2 col-form-label"> ID </label>
-                                    <div class="col-sm-7">
-                                        <input name="event_id" ng-model="newEventCtrl.newEvent.CodReuniao"
-                                               type="text" class="form-control" placeholder="ID de evento" required>
-                                    </div>
-                                </div>
-
                                 <!-- Event Type
                                 <div class="form-group row">
                                     <label for="event-type" class="col-sm-2 col-form-label"> Tipo de evento </label>
@@ -61,15 +52,15 @@
                                     <div name="date-time" class="col-sm-7">
 
                                         <div class="input-group"
-                                             moment-picker="newEventCtrl.newEvent.date"
+                                             moment-picker="newEventCtrl.newEvent.startDate"
                                              format="DD-MM-YYYY" locale="pt">
                                             <span class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </span>
                                             <input class="form-control"
-                                                   placeholder="Selecionar data"
-                                                   ng-model="newEventCtrl.newEvent.date"
-                                                   ng-init="newEventCtrl.newEvent.date = <%= date %>"
+                                                   placeholder="Selecionar data de início"
+                                                   ng-model="newEventCtrl.newEvent.startDate"
+                                                   ng-init="newEventCtrl.newEvent.startDate = <%= date %>"
                                                    ng-model-options="{ updateOn: 'blur' }">
                                         </div>
 
@@ -82,14 +73,28 @@
                                         <br>
 
                                         <div ng-hide="newEventCtrl.newEvent.TodoDia" class="input-group"
-                                             moment-picker="newEventCtrl.newEvent.time"
+                                             moment-picker="newEventCtrl.newEvent.startTime"
                                              format="HH:mm" locale="pt">
                                             <span class="input-group-addon">
                                                 <i class="fa fa-clock-o"></i>
                                             </span>
                                             <input class="form-control"
                                                    placeholder="Selecionar hora de início"
-                                                   ng-model="newEventCtrl.newEvent.time"
+                                                   ng-model="newEventCtrl.newEvent.startTime"
+                                                   ng-model-options="{ updateOn: 'blur' }">
+                                        </div>
+
+                                        <br>
+
+                                        <div ng-hide="newEventCtrl.newEvent.TodoDia" class="input-group"
+                                             moment-picker="newEventCtrl.newEvent.endTime"
+                                             format="HH:mm" locale="pt">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-clock-o"></i>
+                                            </span>
+                                            <input class="form-control"
+                                                   placeholder="Selecionar hora de fim"
+                                                   ng-model="newEventCtrl.newEvent.endTime"
                                                    ng-model-options="{ updateOn: 'blur' }">
                                         </div>
                                     </div>
@@ -117,7 +122,7 @@
                                     <label for="offer_description" class="col-sm-2 col-form-label"> Notas </label>
                                     <div class="col-sm-7">
                                         <textarea style="resize:vertical;" rows="3" cols="20" class="form-control"
-                                                  placeholder="Notas" ng-model="newEventCtrl.newEvent.notes"></textarea>
+                                                  placeholder="Notas" ng-model="newEventCtrl.newEvent.Notas"></textarea>
                                     </div>
                                 </div>
 
@@ -134,7 +139,7 @@
                                 <!-- Buttons -->
                                 <div class="form-group row">
                                     <div class="col-sm-7 col-sm-offset-2">
-                                        <button type="submit" class="btn btn-primary btn-block"> Criar evento</button>
+                                        <button type="button" ng-click="newEventCtrl.addEvent()" class="btn btn-primary btn-block"> Criar evento</button>
                                     </div>
                                 </div>
                             </div>

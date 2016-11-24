@@ -7,7 +7,16 @@
 
     <div class="widget-content">
         <div class="widget big-stats-container">
-            <div class="widget-content">
+            <div ng-show="currentCtrl.loadingOrders" class="span10">
+                <% include ../common/loading.ejs %>
+            </div>
+
+            <div ng-show="!currentCtrl.loadingOrders && currentCtrl.orders.length == 0" class="span10">
+                Não foram encontradas encomendas...
+            </div>
+
+            <div class="widget-content" ng-hide="currentCtrl.loadingOrders || currentCtrl.orders.length == 0">
+
 
                 <section>
                     <ul class="nav nav-pills">
