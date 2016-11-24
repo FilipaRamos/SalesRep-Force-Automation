@@ -394,6 +394,7 @@
     <Compile Include="Controllers\ArtigoArmazemController.cs" />
     <Compile Include="Controllers\ArtigosController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\ClienteReuniaoController.cs" />
     <Compile Include="Controllers\EncomendasClienteController.cs" />
     <Compile Include="Controllers\EncomendasController.cs" />
     <Compile Include="Controllers\EncomendasVendedorController.cs" />
@@ -557,6 +558,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ClienteReuniao\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
