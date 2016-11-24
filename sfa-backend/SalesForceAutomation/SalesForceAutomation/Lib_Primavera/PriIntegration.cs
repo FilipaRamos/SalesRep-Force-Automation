@@ -771,7 +771,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     if (PriEngine.Engine.CRM.Actividades.Existe(meeting.CodReuniao) == false)
                     {
                         erro.Erro = 1;
-                        erro.Descricao = "O cliente não existe.";
+                        erro.Descricao = "A reunião não existe.";
                         return erro;
                     }
                     else
