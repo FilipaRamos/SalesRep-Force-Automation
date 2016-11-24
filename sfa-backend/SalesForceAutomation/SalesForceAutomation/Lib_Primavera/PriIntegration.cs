@@ -712,15 +712,28 @@ namespace SalesForceAutomation.Lib_Primavera
             Models.RespostaErro erro = new Models.RespostaErro();
 
             CrmBEActividade actividade = new CrmBEActividade();
+            CrmBEOportunidadeVenda oport = new CrmBEOportunidadeVenda();
+            /*CrmBEOportunidadeVenda oport = new CrmBEOportunidadeVenda();
+            CrmBECicloVenda ciclo = new CrmBECicloVenda();
+            
+            CrmBELinhaOVendaCicloVenda cenas = new CrmBELinhaOVendaCicloVenda();*/
+
+            CrmBECicloVenda cabecCicloVenda = new CrmBECicloVenda();
+            CrmBELinhaCicloVenda linhaCicloVenda = new CrmBELinhaCicloVenda();
 
             try
             {
                 if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
                 {
 
-                    actividade.set_ID(reuniao.CodReuniao);
-                    actividade.set_IDTipoActividade("REUN");
-                    actividade.set_CriadoPor(reuniao.CodVendedor);
+                    /*// criar CabecCicloVenda
+                    cabecCicloVenda.set_CicloVenda("C_" + DateTime.Now.ToString("yyyyMMddHHmmssfff"));
+                    cabecCicloVenda.set_Descricao(reuniao.Descricao);
+                    cabecCicloVenda.set_Activo(true);
+                    cabecCicloVenda.set_PorDefeito(false);*/
+
+                    // criar Tarefa
+                    actividade.set_IDTipoActividade("694B9704-DBCD-406C-947D-7CBEEAE65B29");
                     actividade.set_Descricao(reuniao.Descricao);
                     actividade.set_DataInicio(reuniao.DataInicio);
                     actividade.set_DataFim(reuniao.DataFim);
@@ -728,9 +741,61 @@ namespace SalesForceAutomation.Lib_Primavera
                     actividade.set_Prioridade(reuniao.Prioridade.ToString());
                     actividade.set_TodoDia(reuniao.TodoDia);
                     actividade.set_EntidadePrincipal(reuniao.Entidade);
-                    actividade.set_IDCabecOVenda(reuniao.Oportunidade);
+
+                    StdBELista listVendedores = PriEngine.Engine.Consulta("SELECT Vendedor FROM Vendedores");
+
+                    string id = listVendedores.Valor("Vendedor");
+                                        
+                    // criar OportunidadeVenda
+                    oport.set_CriadoPor(reuniao.CodVendedor);
+                    oport.set_ID(DateTime.Now.ToString("yyyyMMddHHmmssfff"));
+                    oport.set_Descricao(reuniao.Descricao);
+                    oport.set_Entidade(reuniao.Entidade);
+                    oport.set_TipoEntidade("C");
+                    oport.set_DataCriacao(DateTime.Now);
+                    oport.set_DataExpiracao(DateTime.Now.AddDays(30));
+                    oport.set_Moeda("EUR");
+                    oport.set_Oportunidade("OPV001");
+                    oport.set_CicloVenda(PriEngine.Engine.CRM.CiclosVenda.CicloPorDefeito());
+                    oport.set_Vendedor(listVendedores.Valor("Vendedor"));
+
+                    PriEngine.Engine.CRM.OportunidadesVenda.Actualiza(oport);
+
+                    string idCabecVenda = oport.get_ID();
+                    actividade.set_IDCabecOVenda(oport.get_ID());
 
                     PriEngine.Engine.CRM.Actividades.Actualiza(actividade);
+
+                    /*ciclo.set_CicloVenda("CV_" + DateTime.Now.ToString());
+                    ciclo.set_Descricao(reuniao.Descricao);
+
+                    PriEngine.Engine.CRM.CiclosVenda.Actualiza(ciclo);
+
+                    linhaCicloVenda.set_ID("L_" + DateTime.Now.ToString());
+                    linhaCicloVenda.set_CicloVenda(ciclo.get_CicloVenda());
+
+                    cenas.set_IDLinhaCicloVenda(linhaCicloVenda.get_ID());
+                    cenas.set_Linha(10);
+                    cenas.set_IDCabecOVenda(DateTime.Now.ToString("yyyyMMddHHmmssfff"));
+
+                    PriEngine.Engine.CRM.OportunidadesVenda.ActualizaValorAtributoLinhaCicloID(cenas.get_IDCabecOVenda(), "L_" + DateTime.Now.ToString(), "CicloVenda", ciclo.get_CicloVenda());*/
+
+                    /*
+                    ciclo.set_CicloVenda("C_" + DateTime.Now.ToString("yyyyMMddHHmmssfff"));
+                    ciclo.set_LinhasCiclo(linhaCicloVenda);
+
+                    // criar oportunidade de venda
+                    
+
+                    PriEngine.Engine.CRM.OportunidadesVenda.CriaActividadeFaseCicloVenda(oport.get_ID(), );
+                    PriEngine.Engine.CRM.OportunidadesVenda.DaCicloVendaDaFase("F1");
+                    PriEngine.Engine.CRM.OportunidadesVenda.Actualiza(oport);
+
+                   // string idCabecVenda = oport.get_ID()
+                    actividade.set_IDCabecOVenda(oport.get_ID());*/
+
+                   
+                    Debug.WriteLine("PASSEIIIIIIIIIIIIIIIIIIIIII");
 
                     erro.Erro = 0;
                     erro.Descricao = "Sucesso";
@@ -747,9 +812,9 @@ namespace SalesForceAutomation.Lib_Primavera
             }
             catch (Exception ex)
             {
-                PriEngine.Engine.DesfazTransaccao();
                 erro.Erro = 1;
                 erro.Descricao = ex.Message;
+                Debug.WriteLine("ERRO!!! ---" + ex.Message);
                 return erro;
             }
 
@@ -820,8 +885,6 @@ namespace SalesForceAutomation.Lib_Primavera
         {
 
             Models.RespostaErro erro = new Models.RespostaErro();
-
-            CrmBEActividade actividade = new CrmBEActividade();
 
             try
             {
