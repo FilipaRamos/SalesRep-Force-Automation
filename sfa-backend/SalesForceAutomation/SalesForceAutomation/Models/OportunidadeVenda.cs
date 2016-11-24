@@ -27,13 +27,13 @@ namespace SalesForceAutomation.Models
             set;
         }
 
-        public string CicloVenda
+        public string Oportunidade
         {
             get;
             set;
         }
 
-        public string Artigo
+        public List<string> Artigos
         {
             get;
             set;

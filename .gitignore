@@ -6,3 +6,4 @@ specification/report/specs.toc
 bin/
 sfa-backend/SalesForceAutomation/SalesForceAutomation.v12.suo
 sfa-backend/SalesForceAutomation/SalesForceAutomation.sln
+obj/

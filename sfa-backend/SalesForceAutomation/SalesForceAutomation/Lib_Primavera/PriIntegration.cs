@@ -21,7 +21,6 @@ namespace SalesForceAutomation.Lib_Primavera
         public static List<Models.Cliente> get_all_clients()
         {
 
-
             StdBELista selectList;
 
             List<Models.Cliente> listClientes = new List<Models.Cliente>();
@@ -656,7 +655,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     reuniao.DataFim = selectList.Valor("DataFim");
                     reuniao.TodoDia = selectList.Valor("TodoDia");
                     reuniao.Duracao = selectList.Valor("Duracao");
-                    reuniao.ContactoCliente = selectList.Valor("IdContactoPrincipal");
+                    reuniao.Entidade = selectList.Valor("EntidadePrincipal");
                     reuniao.Oportunidade = selectList.Valor("IDCabecOVenda");
 
                     listReunioes.Add(reuniao);
@@ -693,7 +692,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     reuniao.DataFim = objReuniao.get_DataFim();
                     reuniao.TodoDia = objReuniao.get_TodoDia();
                     reuniao.Duracao = objReuniao.get_Duracao();
-                    reuniao.ContactoCliente = objReuniao.get_IDContactoPrincipal();
+                    reuniao.Entidade = objReuniao.get_EntidadePrincipal();
                     reuniao.Oportunidade = objReuniao.get_IDCabecOVenda();
 
                     return reuniao;
@@ -703,6 +702,162 @@ namespace SalesForceAutomation.Lib_Primavera
             else
             {
                 return null;
+            }
+
+        }
+
+        public static Models.RespostaErro PostReuniao(Models.Reuniao reuniao)
+        {
+
+            Models.RespostaErro erro = new Models.RespostaErro();
+
+            CrmBEActividade actividade = new CrmBEActividade();
+
+            try
+            {
+                if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+                {
+
+                    actividade.set_ID(reuniao.CodReuniao);
+                    actividade.set_IDTipoActividade("REUN");
+                    actividade.set_CriadoPor(reuniao.CodVendedor);
+                    actividade.set_Descricao(reuniao.Descricao);
+                    actividade.set_DataInicio(reuniao.DataInicio);
+                    actividade.set_DataFim(reuniao.DataFim);
+                    actividade.set_Resumo(reuniao.Notas);
+                    actividade.set_Prioridade(reuniao.Prioridade.ToString());
+                    actividade.set_TodoDia(reuniao.TodoDia);
+                    actividade.set_EntidadePrincipal(reuniao.Entidade);
+                    actividade.set_IDCabecOVenda(reuniao.Oportunidade);
+
+                    PriEngine.Engine.CRM.Actividades.Actualiza(actividade);
+
+                    erro.Erro = 0;
+                    erro.Descricao = "Sucesso";
+                    return erro;
+                }
+                else
+                {
+                    erro.Erro = 1;
+                    erro.Descricao = "Erro ao abrir empresa";
+                    return erro;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                PriEngine.Engine.DesfazTransaccao();
+                erro.Erro = 1;
+                erro.Descricao = ex.Message;
+                return erro;
+            }
+
+        }
+
+        public static Models.RespostaErro AtualizaReuniao(Models.Reuniao meeting)
+        {
+
+            Models.RespostaErro erro = new Models.RespostaErro();
+
+            CrmBEActividade actividade = new CrmBEActividade();
+
+            try
+            {
+
+                if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+                {
+
+                    if (PriEngine.Engine.CRM.Actividades.Existe(meeting.CodReuniao) == false)
+                    {
+                        erro.Erro = 1;
+                        erro.Descricao = "O cliente não existe.";
+                        return erro;
+                    }
+                    else
+                    {
+                        actividade = PriEngine.Engine.CRM.Actividades.Edita(meeting.CodReuniao);
+                        actividade.set_EmModoEdicao(true);
+
+                        actividade.set_ID(meeting.CodReuniao);
+                        actividade.set_IDTipoActividade("REUN");
+                        actividade.set_CriadoPor(meeting.CodVendedor);
+                        actividade.set_Descricao(meeting.Descricao);
+                        actividade.set_DataInicio(meeting.DataInicio);
+                        actividade.set_DataFim(meeting.DataFim);
+                        actividade.set_Resumo(meeting.Notas);
+                        actividade.set_Prioridade(meeting.Prioridade.ToString());
+                        actividade.set_TodoDia(meeting.TodoDia);
+                        actividade.set_EntidadePrincipal(meeting.Entidade);
+                        actividade.set_IDCabecOVenda(meeting.Oportunidade);
+
+                        PriEngine.Engine.CRM.Actividades.Actualiza(actividade);
+
+                        erro.Erro = 0;
+                        erro.Descricao = "Sucesso.";
+                        return erro;
+                    }
+                }
+                else
+                {
+                    erro.Erro = 1;
+                    erro.Descricao = "Erro ao abrir a empresa.";
+                    return erro;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                erro.Erro = 1;
+                erro.Descricao = ex.Message;
+                return erro;
+            }
+
+        }
+
+        public static Models.RespostaErro EliminaReuniao(Models.Reuniao meeting)
+        {
+
+            Models.RespostaErro erro = new Models.RespostaErro();
+
+            CrmBEActividade actividade = new CrmBEActividade();
+
+            try
+            {
+
+                if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+                {
+
+                    if (PriEngine.Engine.CRM.Actividades.Existe(meeting.CodReuniao) == false)
+                    {
+                        erro.Erro = 1;
+                        erro.Descricao = "O cliente não existe.";
+                        return erro;
+                    }
+                    else
+                    {
+                        PriEngine.Engine.CRM.Actividades.Remove(meeting.CodReuniao);
+
+                        erro.Erro = 0;
+                        erro.Descricao = "Sucesso.";
+                        return erro;
+                    }
+                }
+                else
+                {
+                    erro.Erro = 1;
+                    erro.Descricao = "Erro ao abrir a empresa.";
+                    return erro;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                erro.Erro = 1;
+                erro.Descricao = ex.Message;
+                return erro;
             }
 
         }
@@ -726,14 +881,18 @@ namespace SalesForceAutomation.Lib_Primavera
                     oport.Id = venda.get_ID();
                     oport.NumEncomenda = venda.get_NumEncomenda();
                     oport.Entidade = venda.get_Entidade();
-                    oport.CicloVenda = venda.get_CicloVenda();
+                    oport.Oportunidade = venda.get_Oportunidade();
 
-                    Debug.WriteLine(oport.CicloVenda);
+                    StdBELista selectList = PriEngine.Engine.Consulta("SELECT Artigo FROM PropostasOPV RIGHT JOIN LinhasPropostasOPV ON LinhasPropostasOPV.IdOportunidade = PropostasOPV.IdOportunidade WHERE PropostasOPV.IdOportunidade = '" + oport.Id + "'");
 
-                    CrmBECicloVenda cicloVenda = PriEngine.Engine.CRM.CiclosVenda.Edita(oport.CicloVenda);
-                    StdBECampos campos = cicloVenda.get_CamposUtil();
-                    int i = campos.NumItens;
-                    Debug.WriteLine(i);
+                    oport.Artigos = new List<string>();
+
+                    while (!selectList.NoFim())
+                    {
+                        oport.Artigos.Add(selectList.Valor("Artigo"));
+
+                        selectList.Seguinte();
+                    }
 
                     return oport;
 
@@ -744,6 +903,53 @@ namespace SalesForceAutomation.Lib_Primavera
             }else{
                 return null;
             }
+
+        }
+
+        public static Models.RespostaErro InsereOportunidade(Models.OportunidadeVenda oport)
+        {
+
+            Models.RespostaErro erro = new Models.RespostaErro();
+
+            CrmBEOportunidadeVenda newVenda = new CrmBEOportunidadeVenda();
+
+            try
+            {
+                if (PriEngine.InitializeCompany(Properties.Settings.Default.Company.Trim(), Properties.Settings.Default.User.Trim(), Properties.Settings.Default.Password.Trim()) == true)
+                {
+
+                    newVenda.set_ID(oport.Id);
+                    newVenda.set_NumEncomenda((int) oport.NumEncomenda);
+                    newVenda.set_Entidade(oport.Entidade);
+                    newVenda.set_Oportunidade(oport.Oportunidade);
+
+                    PriEngine.Engine.CRM.OportunidadesVenda.Actualiza(newVenda);
+                    PriEngine.Engine.CRM.PropostasOPV.ActualizaValorAtributo(oport.Id, 1, "IdOportunidade", oport.Id);
+
+                    for (int i = 0; i < oport.Artigos.Count; i++)
+                    {
+                        PriEngine.Engine.CRM.PropostasOPV.PreencheLinhaProposta("EUR", oport.Artigos[i], 0, "C", oport.Entidade, null);
+                    }
+
+                    erro.Erro = 0;
+                    erro.Descricao = "Sucesso";
+                    return erro;
+                }
+                else
+                {
+                    erro.Erro = 1;
+                    erro.Descricao = "Erro ao abrir empresa";
+                    return erro;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                erro.Erro = 1;
+                erro.Descricao = ex.Message;
+                return erro;
+            }
+
 
         }
 

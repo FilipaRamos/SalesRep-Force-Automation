@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SalesForceAutomation.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -33,6 +34,76 @@ namespace SalesForceAutomation.Controllers
             }
         }
 
+        // POST: /Reuniao
+        public HttpResponseMessage Post(Reuniao meeting)
+        {
+            RespostaErro erro = new RespostaErro();
+            erro = Lib_Primavera.PriIntegration.PostReuniao(meeting);
+
+            if (erro.Erro == 0)
+            {
+                var response = Request.CreateResponse(HttpStatusCode.Created, meeting);
+                return response;
+            }
+
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+        }
+
+        // PUT: /Reuniao/:id
+        public HttpResponseMessage Put(string id, Reuniao meeting)
+        {
+
+            RespostaErro erro = new RespostaErro();
+
+            try
+            {
+                erro = Lib_Primavera.PriIntegration.AtualizaReuniao(meeting);
+
+                if (erro.Erro == 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, erro.Descricao);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, erro.Descricao);
+                }
+            }
+
+            catch (Exception exc)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, erro.Descricao);
+            }
+        }
+
+        // DELETE: /Reuniao/:id
+        public HttpResponseMessage Delete(string id, Reuniao meeting)
+        {
+
+            RespostaErro erro = new RespostaErro();
+
+            try
+            {
+                erro = Lib_Primavera.PriIntegration.EliminaReuniao(meeting);
+
+                if (erro.Erro == 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, erro.Descricao);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, erro.Descricao);
+                }
+            }
+
+            catch (Exception exc)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, erro.Descricao);
+            }
+        }
 
     }
 }
