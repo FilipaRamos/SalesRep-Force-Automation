@@ -19,7 +19,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
         # region Cliente
 
-        public static List<Models.Cliente> get_all_clients()
+        public static List<Models.Cliente> GetClientes()
         {
 
             StdBELista selectList;
@@ -54,7 +54,7 @@ namespace SalesForceAutomation.Lib_Primavera
                 return null;
         }
 
-        public static Models.Cliente get_client(string codCliente)
+        public static Models.Cliente GetCliente(string codCliente)
         {
 
 
@@ -87,8 +87,7 @@ namespace SalesForceAutomation.Lib_Primavera
                 return null;
         }
 
-
-        public static Models.RespostaErro InsereCliente(Models.Cliente cliente)
+        public static Models.RespostaErro PostCliente(Models.Cliente cliente)
         {
 
             Models.RespostaErro erro = new Models.RespostaErro();
@@ -133,8 +132,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
         }
 
-
-        public static Models.RespostaErro AtualizaCliente(Models.Cliente cliente)
+        public static Models.RespostaErro PutCliente(Models.Cliente cliente)
         {
             Models.RespostaErro erro = new Models.RespostaErro();
 
@@ -628,7 +626,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
         #region Reuniao
 
-        public static List<Models.Reuniao> get_all_meetings()
+        public static List<Models.Reuniao> GetReunioes()
         {
 
             StdBELista selectList;
@@ -757,7 +755,7 @@ namespace SalesForceAutomation.Lib_Primavera
             }
         }
 
-        public static Models.RespostaErro AtualizaReuniao(Models.Reuniao meeting)
+        public static Models.RespostaErro PutReuniao(Models.Reuniao meeting)
         {
 
             Models.RespostaErro erro = new Models.RespostaErro();
@@ -818,7 +816,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
         }
 
-        public static Models.RespostaErro EliminaReuniao(Models.Reuniao meeting)
+        public static Models.RespostaErro DeleteReuniao(Models.Reuniao meeting)
         {
 
             Models.RespostaErro erro = new Models.RespostaErro();
@@ -866,7 +864,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
         #region OportunidadeVenda
 
-        public static Models.OportunidadeVenda GetOportunidade(string id)
+        public static Models.OportunidadeVenda GetOportunidadeVenda(string id)
         {
 
             Models.OportunidadeVenda oport = new Models.OportunidadeVenda();
@@ -903,7 +901,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
         }
 
-        public static Models.RespostaErro InsereOportunidade(Models.OportunidadeVenda oport)
+        public static Models.RespostaErro PostOportunidadeVenda(Models.OportunidadeVenda oport)
         {
 
             Models.RespostaErro erro = new Models.RespostaErro();
@@ -983,6 +981,77 @@ namespace SalesForceAutomation.Lib_Primavera
                 Debug.WriteLine(ex.Message);
                 return erro;
             }   
+        }
+
+        public static Models.RespostaErro PutOportunidadeVenda(Models.OportunidadeVenda oport)
+        {
+
+            Models.RespostaErro erro = new Models.RespostaErro();
+
+            CrmBEOportunidadeVenda oportunidade = new CrmBEOportunidadeVenda();
+
+            try
+            {
+                if (PriEngine.InitializeCompany(Properties.Settings.Default.Company.Trim(), Properties.Settings.Default.User.Trim(), Properties.Settings.Default.Password.Trim()) == true)
+                {
+
+                    if (PriEngine.Engine.CRM.OportunidadesVenda.ExisteID(oport.Id))
+                    {
+                        oportunidade = PriEngine.Engine.CRM.OportunidadesVenda.EditaID(oport.Id);
+                        oportunidade.set_Descricao(oport.Descricao);
+                        oportunidade.set_DataExpiracao(DateTime.Now.AddDays(30));
+
+                        // atualizar OportunidadeVenda
+                        PriEngine.Engine.CRM.OportunidadesVenda.Actualiza(oportunidade);
+
+
+                        /****************************************************************************************************
+                         *                                     criar novas LinhasPropostaVenda
+                         ****************************************************************************************************/
+                        CrmBELinhasPropostaOPV linhasProposta = new CrmBELinhasPropostaOPV();
+
+                        for (int i = 0; i < oport.Artigos.Count; i++)
+                        {
+                            // preencher linha de proposta
+                            CrmBELinhaPropostaOPV linhaProposta = PriEngine.Engine.CRM.PropostasOPV.PreencheLinhaProposta("EUR", oport.Artigos[i], 0, "C", oport.Entidade);
+                            linhaProposta.set_IdOportunidade(oport.Id);
+                            linhaProposta.set_NumProposta(1);
+                            linhasProposta.Insere(linhaProposta);
+                        }
+
+                        /****************************************************************************************************
+                         *                                     guardar linhas e atualizar PropostaVenda
+                         ****************************************************************************************************/
+                        CrmBEPropostaOPV proposta = PriEngine.Engine.CRM.PropostasOPV.Edita(oport.Id, 1);
+                        proposta.set_EmModoEdicao(true);
+                        proposta.set_Linhas(linhasProposta);
+                        PriEngine.Engine.CRM.PropostasOPV.Actualiza(proposta);
+
+                        erro.Erro = 0;
+                        erro.Descricao = "Sucesso";
+                        return erro;
+                    }
+                    else
+                    {
+                        erro.Erro = 1;
+                        erro.Descricao = "Oportunidade não encontrada.";
+                        return erro;
+                    }
+                }
+                else
+                {
+                    erro.Erro = 1;
+                    erro.Descricao = "Erro ao abrir empresa";
+                    return erro;
+                }
+            }
+            catch (Exception ex)
+            {
+                erro.Erro = 1;
+                erro.Descricao = ex.Message;
+                Debug.WriteLine(ex.Message);
+                return erro;
+            }
         }
 
         #endregion OportunidadeVenda

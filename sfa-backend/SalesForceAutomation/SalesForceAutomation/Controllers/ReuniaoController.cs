@@ -13,10 +13,9 @@ namespace SalesForceAutomation.Controllers
     {
 
         // GET /Reuniao/
-
         public IEnumerable<Models.Reuniao> Get()
         {
-            return Lib_Primavera.PriIntegration.get_all_meetings();
+            return Lib_Primavera.PriIntegration.GetReunioes();
         }
 
         // GET /Reuniao/:id
@@ -50,10 +49,9 @@ namespace SalesForceAutomation.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
-
         }
 
-        // PUT: /Reuniao/:id
+        // PUT: /Reuniao
         public HttpResponseMessage Put(string id, Reuniao meeting)
         {
 
@@ -61,7 +59,7 @@ namespace SalesForceAutomation.Controllers
 
             try
             {
-                erro = Lib_Primavera.PriIntegration.AtualizaReuniao(meeting);
+                erro = Lib_Primavera.PriIntegration.PutReuniao(meeting);
 
                 if (erro.Erro == 0)
                 {
@@ -87,7 +85,7 @@ namespace SalesForceAutomation.Controllers
 
             try
             {
-                erro = Lib_Primavera.PriIntegration.EliminaReuniao(meeting);
+                erro = Lib_Primavera.PriIntegration.DeleteReuniao(meeting);
 
                 if (erro.Erro == 0)
                 {
