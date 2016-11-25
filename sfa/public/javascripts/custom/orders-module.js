@@ -164,8 +164,8 @@ ordersModule.controller('NewOrderController', function ($http, $location) {
 ordersModule.controller('OrdersControllerAdmin', function ($http, $location) {
     var self = this;
 
-    self.orders = [];
     self.loading = true;
+    self.orders = [];
 
     /**
      * initiate controller
@@ -181,6 +181,10 @@ ordersModule.controller('OrdersControllerAdmin', function ($http, $location) {
         $http.get(API_URL + '/api/encomendas').then(function (data) {
             self.orders = data.data;
             self.loading=false;
+            console.log(self.orders);
+        }, function (data) {
+            console.log('Erro ao obter lista de encomendas.');
+            console.log(data.data);
         });
     };
 
