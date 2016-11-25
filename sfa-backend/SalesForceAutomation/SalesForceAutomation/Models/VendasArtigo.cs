@@ -17,5 +17,15 @@ namespace SalesForceAutomation.Models
             get;
             set;
         }
+        public double Stock
+        {
+            get;
+            set;
+        }
+        public double Preco
+        {
+            get;
+            set;
+        }
     }
 }
