@@ -1450,6 +1450,10 @@ namespace SalesForceAutomation.Lib_Primavera
             return salesRepList;
         }
 
+        #endregion
+
+        #region Statistics
+
         public static Models.VendasArtigo get_product_sales_value(string productID)
         {
             StdBELista objList;
@@ -1467,7 +1471,6 @@ namespace SalesForceAutomation.Lib_Primavera
 
             return productSales;
         }
-
         public static List<Models.VendasArtigo> get_all_product_sales_value()
         {
             StdBELista objList;
@@ -1495,8 +1498,6 @@ namespace SalesForceAutomation.Lib_Primavera
             return productSalesList;
         }
 
-
-
         public static Models.VendasVendedor get_salesRep_sales_value(string salesRepID)
         {
             StdBELista objList;
@@ -1515,7 +1516,6 @@ namespace SalesForceAutomation.Lib_Primavera
 
             return repSales;
         }
-
         public static List<Models.VendasVendedor> get_all_salesRep_sales_value()
         {
             StdBELista objList;
@@ -1542,6 +1542,58 @@ namespace SalesForceAutomation.Lib_Primavera
             }
 
             return repSalesList;
+        }
+
+        public static Models.VendasCliente get_client_sales_value(string clientID)
+        {
+            StdBELista objList;
+
+            Models.VendasCliente client = new Models.VendasCliente();
+
+            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
+            {
+                objList = PriEngine.Engine.Consulta("SELECT Clientes.Cliente AS ClienteID, Clientes.Fac_Mor AS Morada, Clientes.Fac_Tel AS Telefone, Clientes.Fac_Cp AS CodPost, Clientes.Fac_Local AS Localidade, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Clientes, LinhasDoc, CabecDoc WHERE Clientes.Cliente = CabecDoc.Entidade AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND Clientes.Cliente = '" + clientID + "' GROUP BY Clientes.Cliente, Clientes.Fac_Tel, Clientes.Fac_Mor, Clientes.Fac_Cp, Clientes.Fac_Local");
+
+                client.ClienteID = objList.Valor("ClienteID");
+                client.Vendas = objList.Valor("Soma");
+                client.Morada = objList.Valor("Morada");
+                client.Telefone = objList.Valor("Telefone");
+                client.Localidade = objList.Valor("Localidade");
+                client.CodPost = objList.Valor("CodPost");
+
+            }
+
+            return client;
+        }
+        public static List<Models.VendasCliente> get_all_clients_sales_value()
+        {
+            StdBELista objList;
+
+            Models.VendasCliente tmpClientSales;
+            List<Models.VendasCliente> clientList = new List<Models.VendasCliente>();
+
+            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
+            {
+                objList = PriEngine.Engine.Consulta("SELECT Clientes.Cliente AS ClienteID, Clientes.Fac_Mor AS Morada, Clientes.Fac_Tel AS Telefone, Clientes.Fac_Cp AS CodPost, Clientes.Fac_Local AS Localidade, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Clientes, LinhasDoc, CabecDoc WHERE Clientes.Cliente = CabecDoc.Entidade AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' GROUP BY Clientes.Cliente, Clientes.Fac_Tel, Clientes.Fac_Mor, Clientes.Fac_Cp, Clientes.Fac_Local");
+
+                while (!objList.NoFim())
+                {
+                    tmpClientSales = new Models.VendasCliente();
+
+                    tmpClientSales.ClienteID = objList.Valor("ClienteID");
+                    tmpClientSales.Vendas = objList.Valor("Soma");
+                    tmpClientSales.Morada = objList.Valor("Morada");
+                    tmpClientSales.Telefone = objList.Valor("Telefone");
+                    tmpClientSales.Localidade = objList.Valor("Localidade");
+                    tmpClientSales.CodPost = objList.Valor("CodPost");
+
+                    clientList.Add(tmpClientSales);
+                    objList.Seguinte();
+                }
+
+            }
+
+            return clientList;
         }
 
         #endregion

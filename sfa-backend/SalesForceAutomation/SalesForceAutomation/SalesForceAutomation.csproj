@@ -403,6 +403,7 @@
     <Compile Include="Controllers\OportunidadeVendaController.cs" />
     <Compile Include="Controllers\ReuniaoController.cs" />
     <Compile Include="Controllers\VendasArtigoController.cs" />
+    <Compile Include="Controllers\VendasClienteController.cs" />
     <Compile Include="Controllers\VendasVendedorController.cs" />
     <Compile Include="Controllers\VendedoresController.cs" />
     <Compile Include="Global.asax.cs">
@@ -420,6 +421,7 @@
     <Compile Include="Models\RespostaErro.cs" />
     <Compile Include="Models\Reuniao.cs" />
     <Compile Include="Models\VendasArtigo.cs" />
+    <Compile Include="Models\VendasCliente.cs" />
     <Compile Include="Models\VendasVendedor.cs" />
     <Compile Include="Models\Vendedor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -559,6 +561,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\ClienteReuniao\" />
+    <Folder Include="Views\VendasCliente\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
