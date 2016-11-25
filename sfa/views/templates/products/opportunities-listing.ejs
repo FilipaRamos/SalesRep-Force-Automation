@@ -14,7 +14,7 @@
             ng-show="newEventCtrl.isProductOpportunity(product.CodArtigo)">
             <td>
                 <label for="{{product.CodArtigo}}">
-                    <span><input type="checkbox" id="{{product.CodArtigo}}" ng-click="newEventCtrl.toggleOpportunitySelected(product.CodArtigo)"/></span>&emsp;
+                    <span><input ng-hide="eventCtrl" type="checkbox" id="{{product.CodArtigo}}" ng-click="newEventCtrl.toggleOpportunitySelected(product.CodArtigo)"/></span>&emsp;
                     <a href="/produto?id={{product.CodArtigo}}">{{product.CodArtigo}}</a>
                 </label>
             </td>

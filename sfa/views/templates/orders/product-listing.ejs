@@ -1,18 +1,19 @@
 <div class="widget widget-nopad">
 
     <div class="widget-header">
-        <i class="fa fa-fw fa-address-card"></i> Produtos
+        <i class="fa fa-fw fa-dropbox"></i> Produtos
     </div>
 
     <div class="widget-content">
         <div class="widget big-stats-container">
             <div class="widget-content">
-                <div class="container" ng-controller="NewOrderController as newOrderCtrl">
+                <div class="container">
                     <form>
-                        <table class="table">
+                        <table class="table" >
                             <thead>
                             <tr>
                                 <th>ID Produto</th>
+                                <th>Stock</th>
                                 <th>Quantidade</th>
                                 <th>Preço Unitário</th>
                                 <th>Desconto Unitário</th>
@@ -21,25 +22,28 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="product in newOrderCtrl.products">
+                            <tr ng-repeat="line in newOrderCtrl.linesDoc" ng-init="line.IVA = line.IVA ? line.IVA : 23;" id="{{line.CodArtigo}}">
                                 <td>
                                     <div><span>
-                                            <input type="radio" name="optradio" id="{{product.id}}"
-                                                   ng-click="newOrderCtrl.selectProduct(product.id)">
+                                            <input type="radio" name="optradio"
+                                                   ng-click="newOrderCtrl.selectProduct(line.CodArtigo)">
                                         </span>
-                                        <a href="/product/{{product.id}}">{{product.id}}</a>
+                                        <a href="/produto?id={{line.CodArtigo}}">{{line.CodArtigo}}</a>
                                     </div>
                                 </td>
-                                <td>{{product.quantity}}</td>
-                                <td>{{product.price | currency:"€" }}</td>
-                                <td>{{product.discount | currency:"€" }}</td>
-                                <td>{{product.iva}}%</td>
+                                <td>{{line.Stock}}</td>
+                                <td class="editable">{{line.Quantidade}}</td>
+                                <td>{{line.PrecoUnitario | currency:"€" }}</td>
+                                <td class="editable">{{line.Desconto | currency:"€" }}</td>
+                                <td>{{line.IVA}}%</td>
                                 <td>
-                                    {{(((product.iva/100)+1)*((product.price*product.quantity)-(product.discount*product.quantity)))
+                                    {{(((line.IVA/100)+1)*((line.PrecoUnitario*line.Quantidade)-(line.Desconto*line.Quantidade)))
                                     | currency:"€"}}
                                 </td>
                             </tr>
+
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -51,14 +55,9 @@
                         </table>
                     </form>
 
-                    <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.addProduct()">Adicionar
-                        Produto
-                    </button>
-                    <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.removeProduct()">Remover
-                        Produto
-                    </button>
-                    <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.editProduct()">Editar Produto
-                    </button>
+                    <br>
+
+
                 </div>
             </div>
         </div>

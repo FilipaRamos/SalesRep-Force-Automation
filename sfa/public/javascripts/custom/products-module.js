@@ -33,6 +33,19 @@ productsModule.controller('ProductsController', function ($http, $scope, $locati
     };
 
     /**
+     * Returns a product from the list of products
+     */
+    self.getProductById = function (id) {
+
+        for (var i = 0; i < self.products.length; i++) {
+            if (self.products[i].CodArtigo == id) {
+                return self.products[i];
+            }
+        }
+        return null;
+    };
+
+    /**
      * Update the list from API
      */
     self.updateProductList = function () {
@@ -64,7 +77,7 @@ productsModule.controller('ProductsController', function ($http, $scope, $locati
         $http.get(API_URL + '/api/Familias').then(function (data) {
             self.categories = data.data;
 
-            for(productIndex in self.products){
+            for (productIndex in self.products) {
                 var product = self.products[productIndex];
                 $("#product-" + product.CodArtigo).attr('data-subtext', self.getCategory(product.Familia));
             }
@@ -100,9 +113,9 @@ productsModule.controller('ProductsController', function ($http, $scope, $locati
             return category.Familia == id;
         });
 
-        if(category) {
+        if (category) {
             return category.Descricao;
-        }else{
+        } else {
             return '';
         }
     };

@@ -83,7 +83,7 @@ customersModule.controller('CustomersController', function ($http, $location) {
 customersModule.controller('CustomerController', function ($http, $location) {
     var self = this;
 
-    self.loadingInfo = true;
+    self.loadingCustomer = true;
     self.loadingOrders = true;
     self.loadingEvents = true;
     self.customer = {};
@@ -105,7 +105,7 @@ customersModule.controller('CustomerController', function ($http, $location) {
     self.getCustomer = function (id) {
         $http.get(API_URL + '/api/Cliente/' + id).then(function (data) {
             self.customer = data.data;
-            self.loadingInfo = false;
+            self.loadingCustomer = false;
             console.log(self.customer);
         }, function (data) {
             console.log('Erro ao obter informação de cliente ' + id);
@@ -131,7 +131,7 @@ customersModule.controller('CustomerController', function ($http, $location) {
      * GET customer events list from API
      */
     self.getCustomerEvents = function (id) {
-        $http.get(API_URL + '/api/Cliente/' + id).then(function (data) {
+        $http.get(API_URL + '/api/ClienteReuniao/' + id).then(function (data) {
             self.events = data.data;
             self.loadingEvents = false;
             console.log(self.events);
@@ -168,6 +168,7 @@ customersModule.controller('CustomerController', function ($http, $location) {
 customersModule.controller('EditCustomerController', function ($http, $location) {
     var self = this;
 
+    self.loadingCustomer = true;
     self.customer = {};
 
     /**
@@ -184,7 +185,7 @@ customersModule.controller('EditCustomerController', function ($http, $location)
         console.log(id);
         $http.get(API_URL + '/api/Cliente/' + id).then(function (data) {
             self.customer = data.data;
-            self.loading = false;
+            self.loadingCustomer = false;
             console.log(self.customer);
         }, function (data) {
             console.log('Erro ao obter informação de cliente ' + id);

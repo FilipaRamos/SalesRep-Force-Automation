@@ -5,7 +5,7 @@
     <% include templates/common/header.ejs %>
 </head>
 
-<body ng-app="eventsModule">
+<body ng-app="viewEventModule">
 <div id="wrapper">
     <% include templates/common/nav-bar.ejs %>
     <div id="page-wrapper">
@@ -23,14 +23,16 @@
                                 <!-- Event details-->
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label"> Detalhes </label>
-                                    <div class="col-sm-2">
-                                        {{eventCtrl.event.CodReuniao}}
-                                        <!--{{eventCtrl.event.tipo}}
-                                        <br>-->
-                                        <i class="fa fa-calendar"></i> {{eventCtrl.event.DataInicio}}
+                                    <div ng-show="eventCtrl.event.DataInicio" class="col-sm-2">
+                                        {{eventCtrl.event.Tipo ? eventCtrl.event.Tipo : "Reunião"}}
                                         <br>
-                                        <i class="fa fa-clock-o"></i>
-                                        {{eventCtrl.event.DataInicio}}
+                                        <i class="fa fa-calendar"></i>
+                                        {{eventCtrl.event.DataInicio | date:"dd-MM-yyyy" }}
+                                        <br>
+                                        <i ng-hide="eventCtrl.event.TodoDia" class="fa fa-clock-o"></i>
+                                        {{eventCtrl.event.TodoDia ? '' : eventCtrl.event.DataInicio | date:"HH:mm" }}
+                                        {{eventCtrl.event.TodoDia ? '' : " até " + (eventCtrl.event.DataFim | date:"HH:mm") }}
+                                        {{eventCtrl.event.TodoDia ? 'Todo o dia' : ''}}
                                     </div>
                                 </div>
 
@@ -49,13 +51,13 @@
                                 <!-- Customer -->
                                 <div class="form-group row">
                                     <label for="customer" class="col-sm-2 col-form-label">Cliente</label>
-                                    <div name="customer" class="col-sm-5" ng-init="customer=eventCtrl.costumer">
+                                    <div name="customer" class="col-sm-5" ng-init="currentCtrl = eventCtrl">
                                         <% include templates/customers/customer-info.ejs %>
                                     </div>
                                 </div>
 
                                 <!-- Products -->
-                                <div class="form-group row">
+                                <div ng-show="eventCtrl.isProductOpportunity()" class="form-group row" ng-init="productsCtrl = eventCtrl; newEventCtrl = eventCtrl;">
                                     <label for="products" class="col-sm-2 col-form-label">Oportunidades de venda</label>
                                     <div name="procuts" class="col-sm-5">
                                         <% include templates/products/opportunities-listing.ejs %>
@@ -72,8 +74,8 @@
                             <!-- Buttons -->
                             <div class="form-group row">
                                 <div class="col-sm-5 pull-right">
-                                    <button ng-click="eventCtrl.cancelEvent()" class="btn btn-primary">Remover</button>
-                                    <a href="/editar_evento?id={{eventCtrl.event.id}}" class="btn btn-primary">Editar</a>
+                                    <button ng-click="eventCtrl.cancelEvent(eventCtrl.event.CodReuniao)" class="btn btn-primary">Remover</button>
+                                    <a href="/editar_evento?id={{eventCtrl.event.CodReuniao}}" class="btn btn-primary">Editar</a>
                                 </div>
                             </div>
 
@@ -86,6 +88,7 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="javascripts/custom/products-module.js"></script>
 <script type="text/javascript" src="javascripts/custom/events-module.js"></script>
 </body>
 </html>

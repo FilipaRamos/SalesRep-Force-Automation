@@ -15,6 +15,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Morada</th>
+                        <th>Localização</th>
                         <th>Stock</th>
                     </tr>
                     </thead>
@@ -22,7 +23,8 @@
                     <tr ng-repeat="warehouse in productCtrl.warehouses | orderBy : '-ArmazemID'">
                         <td>{{warehouse.ArmazemID}}</td>
                         <td>{{warehouse.Morada}}</td>
-                        <td>{{warehouse.ArmazemID}}</td>
+                        <td>{{warehouse.Localizacao}}</td>
+                        <td>{{warehouse.Stock}}</td>
                     </tr>
                     </tbody>
                 </table>

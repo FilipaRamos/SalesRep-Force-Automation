@@ -1,7 +1,7 @@
 <div class="widget widget-nopad">
 
     <div class="widget-header"><i class="fa fa-fw fa-shopping-cart"></i> Encomendas
-        <a href="/nova_encomenda{{customer.id ? '?clienteId=' + customer.id : ''}}"
+        <a href="/nova_encomenda{{currentCtrl.customer.CodCliente ? '?clienteId=' + currentCtrl.customer.CodCliente : ''}}"
            class="pull-right"><i class="fa fa-plus-square">&nbsp</i></a>
     </div>
 

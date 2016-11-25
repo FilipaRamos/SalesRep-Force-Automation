@@ -1,0 +1,20 @@
+<div ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.initCtrl()">
+
+    <div name="products" class="col-sm-5">
+        <select id="product-selector" class="form-control selectpicker"
+                data-live-search-placeholder="Procurar por nome ou categoria..."
+                title="Produtos" data-live-search="true" data-dropup-auto="false" data-live-search-normalize="true">
+            <option ng-repeat="product in productsCtrl.products"
+                    value="{{product.CodArtigo}}" data-subtext="{{productsCtrl.getCategory(product.Familia)}}"
+                    id="product-{{product.CodArtigo}}">
+                {{product.CodArtigo}} - {{product.PrecoMedio}} €
+            </option>
+        </select>
+    </div>
+
+    <div class="col-sm-5">
+        <button type="button" class="btn btn-primary " ng-click="newOrderCtrl.removeProduct()">Remover</button>
+        <button type="button" class="btn btn-primary " ng-click="newOrderCtrl.editProduct()">Alterar</button>
+        <button type="button" class="btn btn-primary " ng-click="newOrderCtrl.addProduct(productsCtrl)">Adicionar</button>
+    </div>
+</div>

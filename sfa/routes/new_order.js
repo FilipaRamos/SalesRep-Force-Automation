@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     res.render('new-order', { title: 'Nova Encomenda',
         breadcrumb: 'Nova Encomenda',
-        customerId: req.query.clienteId
+        customerId: req.query.clienteId? req.query.clienteId : ''
     });
 });
 
