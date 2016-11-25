@@ -164,7 +164,7 @@ eventsModule.controller('EventController', function ($http, $location) {
 
                 self.getCustomer(self.event.Entidade);
 
-                if(self.event.Oportunidade){
+                if (self.event.Oportunidade) {
                     self.getProducts();
                     self.getProductOpportunities();
                 }
@@ -195,7 +195,7 @@ eventsModule.controller('EventController', function ($http, $location) {
     self.getProductOpportunities = function () {
         $http.get(API_URL + '/api/OportunidadeVenda/' + self.event.Oportunidade).then(function (data) {
                 self.productOpportunities = data.data.Artigos;
-                console.log(self.productOpportunities );
+                console.log(self.productOpportunities);
             },
             function (data) {
                 console.log("Erro ao obter oportunidades de venda " + id);
@@ -248,7 +248,6 @@ newEventModule.controller('NewEventController', function ($http) {
     var self = this;
 
     self.newEvent = {};
-    self.salesRep;
     self.eventTypes = [];
     self.newEvent.eventType = null;
     self.productOpportunities = [];
@@ -259,8 +258,17 @@ newEventModule.controller('NewEventController', function ($http) {
      * initiate controller
      */
     self.initCtrl = function (idSalesRep) {
-        self.newEvent.CodVendedor = idSalesRep ? idSalesRep : "1";
+        // TODO correct this to logged in user
+        self.newEvent.CodVendedor = "1";
         self.newEvent.Prioridade = "1";
+    };
+
+    self.setCustomer = function (id) {
+        if(id != 'null') {
+            self.newEvent.Entidade = id;
+        }else{
+            self.newEvent.Entidade = null;
+        }
     };
 
     /**
@@ -283,8 +291,8 @@ newEventModule.controller('NewEventController', function ($http) {
         // TODO add form validation
 
         // set time variables
-        self.newEvent.DataInicio =  self.newEvent.startDate + 'T' + (self.newEvent.TodoDia ? "00:00:00" : self.newEvent.startTime);
-        self.newEvent.DataFim =  self.newEvent.startDate + 'T' + (self.newEvent.TodoDia ? "23:59:59" : self.newEvent.endTime);
+        self.newEvent.DataInicio = self.newEvent.startDate + 'T' + (self.newEvent.TodoDia ? "00:00:00" : self.newEvent.startTime);
+        self.newEvent.DataFim = self.newEvent.startDate + 'T' + (self.newEvent.TodoDia ? "23:59:59" : self.newEvent.endTime);
 
         // set product opportunities
         self.newEvent.Artigos = self.productOpportunities;
@@ -292,7 +300,7 @@ newEventModule.controller('NewEventController', function ($http) {
         // set customer ID
         var selectBox = document.getElementById("customer-selector");
         var customerId = selectBox.options[selectBox.selectedIndex].value;
-        self.newEvent.Entidade = customerId;
+        self.newEvent.Entidade = customerId ? customerId : self.newEvent.Entidade;
 
         console.log(self.newEvent);
 
@@ -307,9 +315,9 @@ newEventModule.controller('NewEventController', function ($http) {
                 console.log(data);
                 self.newEvent.CodReuniao = data.data.CodReuniao;
 
-                if(self.productOpportunities.length == 0) {
+                if (self.productOpportunities.length == 0) {
                     window.location.replace('/evento?id=' + self.newEvent.CodReuniao);
-                }else{
+                } else {
                     self.createSalesOpportunity();
                 }
             },
@@ -322,11 +330,6 @@ newEventModule.controller('NewEventController', function ($http) {
      * Add event through API
      */
     self.createSalesOpportunity = function () {
-        // set customer ID
-        var selectBox = document.getElementById("customer-selector");
-        var customerId = selectBox.options[selectBox.selectedIndex].value;
-        self.newEvent.Entidade = customerId;
-
         var salesOpportunity = {};
         salesOpportunity.CodReuniao = self.newEvent.CodReuniao;
         salesOpportunity.Descricao = self.newEvent.Descricao;
@@ -336,6 +339,7 @@ newEventModule.controller('NewEventController', function ($http) {
 
         console.log(self.newEvent);
         console.log(salesOpportunity);
+
         $http({
             method: 'POST',
             url: API_URL + '/api/OportunidadeVenda/',

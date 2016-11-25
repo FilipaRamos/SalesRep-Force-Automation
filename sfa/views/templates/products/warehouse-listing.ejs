@@ -15,15 +15,13 @@
                     <tr>
                         <th>ID</th>
                         <th>Morada</th>
-                        <th>Localização</th>
                         <th>Stock</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="warehouse in productCtrl.warehouses | orderBy : '-ArmazemID'">
-                        <td>{{warehouse.ArmazemID}}</td>
-                        <td>{{warehouse.Morada}}</td>
-                        <td>{{warehouse.Localizacao}}</td>
+                    <tr ng-repeat="warehouse in productCtrl.warehouses | orderBy : '-Armazem'">
+                        <td>{{warehouse.Armazem}}</td>
+                        <td>{{warehouse.Morada}},{{warehouse.Localidade}} {{warehouse.CodPostal}} {{warehouse.Lote}}</td>
                         <td>{{warehouse.Stock}}</td>
                     </tr>
                     </tbody>

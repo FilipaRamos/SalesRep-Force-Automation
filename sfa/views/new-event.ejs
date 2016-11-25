@@ -110,7 +110,7 @@
                                 </div>
 
                                 <!-- Customer -->
-                                <div ng-hide="<%= customerId %> != null" class="form-group row">
+                                <div ng-hide="'<%= customerId %>' != 'null'" ng-init="newEventCtrl.setCustomer('<%= customerId %>');" class="form-group row">
                                     <label for="customer" class="col-sm-2 col-form-label">Cliente</label>
                                     <div name="customer" class="col-sm-7">
                                         <% include templates/customers/customer-selector.ejs %>
