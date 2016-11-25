@@ -1488,7 +1488,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
             {
-                objList = PriEngine.Engine.Consulta("SELECT Artigo.Artigo AS Artigo, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Artigo, LinhasDoc, CabecDoc WHERE Artigo.Artigo = LinhasDoc.Artigo AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' GROUP BY Artigo.Artigo");
+                objList = PriEngine.Engine.Consulta("SELECT Artigo.Artigo AS Artigo, SUM(LinhasDoc.PrecoLiquido) AS Soma, Artigo.STKActual AS STKActual, Artigo.PCUltimo AS PCUltimo FROM Artigo, LinhasDoc, CabecDoc WHERE Artigo.Artigo = LinhasDoc.Artigo AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' GROUP BY Artigo.Artigo, STKActual, PCUltimo");
 
                 while (!objList.NoFim())
                 {
@@ -1496,6 +1496,8 @@ namespace SalesForceAutomation.Lib_Primavera
 
                     tmpProdSales.ArtigoID = objList.Valor("Artigo");
                     tmpProdSales.Vendas = objList.Valor("Soma");
+                    tmpProdSales.Stock = objList.Valor("STKActual");
+                    tmpProdSales.Preco = objList.Valor("PCUltimo");
 
                     productSalesList.Add(tmpProdSales);
                     objList.Seguinte();
@@ -1533,19 +1535,25 @@ namespace SalesForceAutomation.Lib_Primavera
 
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
             {
-                objList = PriEngine.Engine.Consulta("SELECT Vendedores.Vendedor AS Vendedor, Vendedores.Nome AS Nome, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Vendedores, LinhasDoc, CabecDoc WHERE Vendedores.Vendedor = CabecDoc.Responsavel AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' GROUP BY Vendedores.Vendedor, Vendedores.Nome");
+                objList = PriEngine.Engine.Consulta("SELECT Vendedores.Vendedor AS Vendedor, Vendedores.Nome AS Nome, SUM(LinhasDoc.PrecoLiquido) AS Soma, Vendedores.Morada AS Morada, Vendedores.Telemovel AS Telemovel FROM Vendedores, LinhasDoc, CabecDoc WHERE Vendedores.Vendedor = CabecDoc.Responsavel AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' GROUP BY Vendedores.Vendedor, Vendedores.Nome, Vendedores.Morada, Vendedores.Telemovel");
 
-                while (!objList.NoFim())
+                try
                 {
-                    tmpRepSales = new Models.VendasVendedor();
+                    while (!objList.NoFim())
+                    {
+                        tmpRepSales = new Models.VendasVendedor();
 
-                    tmpRepSales.VendedorID = objList.Valor("Vendedor");
-                    tmpRepSales.Nome = objList.Valor("Nome");
-                    tmpRepSales.Vendas = objList.Valor("Soma");
+                        tmpRepSales.VendedorID = objList.Valor("Vendedor");
+                        tmpRepSales.Nome = objList.Valor("Nome");
+                        tmpRepSales.Vendas = objList.Valor("Soma");
+                        tmpRepSales.Morada = objList.Valor("Morada");
+                        tmpRepSales.Telemovel = objList.Valor("Telemovel");
 
-                    repSalesList.Add(tmpRepSales);
-                    objList.Seguinte();
+                        repSalesList.Add(tmpRepSales);
+                        objList.Seguinte();
+                    }
                 }
+                catch (Exception e) { }
 
             }
 

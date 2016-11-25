@@ -23,5 +23,17 @@ namespace SalesForceAutomation.Models
             get; 
             set; 
         }
+
+        public string Morada
+        {
+            get;
+            set;
+        }
+
+        public string Telemovel
+        {
+            get;
+            set;
+        }
     }
 }
