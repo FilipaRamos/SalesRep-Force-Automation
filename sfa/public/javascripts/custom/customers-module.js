@@ -122,7 +122,7 @@ customersModule.controller('CustomerController', function ($http, $location) {
             self.loadingOrders = false;
             console.log(self.orders);
         }, function (data) {
-            console.log('Erro ao obter informação de cliente ' + id);
+            console.log('Erro ao obter encomendas de cliente ' + id);
             console.log(data);
         });
     };
@@ -136,7 +136,7 @@ customersModule.controller('CustomerController', function ($http, $location) {
             self.loadingEvents = false;
             console.log(self.events);
         }, function (data) {
-            console.log('Erro ao obter informação de cliente ' + id);
+            console.log('Erro ao obter eventos de cliente ' + id);
             console.log(data);
         });
     };
@@ -269,5 +269,48 @@ customersModule.controller('NewCustomerController', function ($http, $location) 
                 self.waitingAPIResponse = false;
                 self.errorMessage = data.data;
             });
+    };
+});
+
+/**
+ * CustomersControllerAdmin
+ */
+customersModule.controller('CustomersControllerAdmin', function ($http, $location) {
+    var self = this;
+
+    self.loading = true;
+    self.customers = [];
+
+    /**
+     * initiate controller
+     */
+    self.initCtrl = function () {
+        self.getCustomersStats();
+    };
+
+    /**
+     * GET customers list from API
+     */
+    self.getCustomersStats = function () {
+        $http.get(API_URL + '/api/vendascliente').then(function (data) {
+            self.customers = data.data;
+            self.loading = false;
+            console.log(self.customers);
+        }, function (data) {
+            console.log('Erro ao obter lista de clientes.');
+            console.log(data);
+        });
+    };
+
+    /**
+     * Customer list tab handlers
+     */
+    self.tab = 1;
+    self.isSet = function (checkTab) {
+        return self.tab === checkTab;
+    };
+
+    self.setTab = function (setTab) {
+        self.tab = setTab;
     };
 });

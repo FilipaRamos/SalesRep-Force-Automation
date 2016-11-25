@@ -14,7 +14,7 @@
 
             <% include templates/common/breadcrumbs.ejs %>
 
-            <div class="row-align-center" ng-controller="NewOrderController as newOrderCtrl" ng-init="newOrderCtrl.initCtrl()">
+            <div class="row-align-center" ng-controller="NewOrderController as newOrderCtrl" ng-init="newOrderCtrl.initCtrl(); newOrderCtrl.setCustomer('<%= customerId %>');">
 
                 <div class="span6" ng-controller="CustomerController as customerCtrl"
                      ng-init="customerCtrl.initCtrl('<%= customerId %>'); currentCtrl = customerCtrl;">
@@ -31,7 +31,7 @@
 
                 <div class="span12">
                     <br>
-                    <button type="button" class="btn btn-primary pull-right"> Encomendar</button>
+                    <button type="button" class="btn btn-primary pull-right" ng-click="newOrderCtrl.addOrder()" ng-disabled="newOrderCtrl.waitingAPIResponse"> Encomendar</button>
                 </div>
 
             </div>

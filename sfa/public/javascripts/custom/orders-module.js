@@ -13,7 +13,7 @@ ordersModule.controller('OrdersController', function ($http, $location) {
     /**
      * initiate controller
      */
-    self.initCtrl = function(customerId){
+    self.initCtrl = function (customerId) {
         self.getOrders(customerId);
     };
 
@@ -46,12 +46,12 @@ ordersModule.controller('OrdersController', function ($http, $location) {
 ordersModule.controller('OrderController', function ($http, $location) {
     var self = this;
 
-    self.order = ordersTemp[0];
+    self.order = {};
 
     /**
      * initiate controller
      */
-    self.initCtrl = function(id){
+    self.initCtrl = function (id) {
         self.getOrder(id);
     };
 
@@ -59,7 +59,7 @@ ordersModule.controller('OrderController', function ($http, $location) {
      * GET order info from API
      */
     self.getOrder = function (id) {
-        $http.get('api/clientes?id=' + id).then(function (data) {
+        $http.get(API_URL + '/api/encomendas?id=' + id).then(function (data) {
             self.costumer = data;
         });
     };
@@ -78,7 +78,12 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
     /**
      * Initiate controller
      */
-    self.initCtrl = function(){};
+    self.initCtrl = function () {
+    };
+
+    self.setCustomer = function (id) {
+        self.newOrder.Entidade = id;
+    }
 
     /**
      * Add order through API
@@ -86,12 +91,22 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
     self.addOrder = function () {
         // TODO do form validation
 
-        $http.post('api/encomennda', self.newOrder).then(
-            function (data) {
-                self.orders.push(self.newOrder);
-                self.newOrder = {};
 
-                $location.path('/encomenda?id=' + data.id).replace();
+        self.waitingAPIResponse = true;
+
+        self.newOrder.Responsavel = "1"; // TODO change to vendedor loggin
+        self.newOrder.Serie = "A";
+        self.newOrder.LinhasDoc = self.linesDoc;
+
+        $http({
+            method: 'POST',
+            url: API_URL + '/api/Encomendas/',
+            headers: {'Content-Type': 'application/json'},
+            data: self.newOrder
+        }).then(
+            function (data) {
+                console.log(data);
+                window.location.replace('/encomenda?id=' + data.data.Id);
             },
             function (data) {
                 console.log(data);
@@ -99,56 +114,43 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
     };
 
     // displays the order price
-    self.total = function(){
+    self.total = function () {
         var total = 0;
-        self.products.forEach(function(element){
-            total += ((element.iva/100)+1)*((element.price * element.quantity) - (element.discount * element.quantity));
+        self.linesDoc.forEach(function (element) {
+            total += ((element.IVA / 100) + 1) * ((element.PrecoUnitario * element.Quantidade) - (element.Desconto * element.Quantidade));
         });
         return total;
     };
 
     // remove a product
-    self.removeProduct = function(){
-        if( self.selected >= 0) {
-            self.products.splice(self.getSelected(self.selected), 1);
-            self.selected = -1;
-        }
-    };
+    self.removeProduct = function () {
+        if (self.selected) {
+            var productIndex = self.products.indexOf(self.selected);
+            self.products.splice(productIndex, 1);
+            self.linesDoc.splice(productIndex, 1);
 
-    // edit a product
-    self.editProduct = function(){
-        
-    };
+            $("#product-" + self.selected).toggle(true);
 
-    // allows product selection
-    self.selectProduct = function(id){
-        if(self.selected){
-            $("#" + id + " .editable").forEach(function (element) {
-
-                console.log(element);
-            });
+            self.selected = null;
         }
 
-        self.selected = id;
-        console.log("NOW SELECTED " + id);
-
-        $("#" + id + " .editable").forEach(function (element) {
-
-            console.log(element);
-        });
-    };
-
-    // get index of selected product
-    self.getSelected = function(id){
-        for (var i = 0; i < self.products.length ; i++){
-            if (self.products[i].id == id)
-                return i;
-        }
+        var selector = $('#product-selector');
+        selector.selectpicker('val', '');
+        selector.selectpicker('refresh');
     };
 
     /**
-     * Product opportunities handlers
+     * Product handlers
      */
+    self.selectProduct = function (id) {
+        self.selected = id;
+        console.log("selected " + id);
+    };
+
+    self.isProductSelected = function (id) {
+        return self.selected == id;
+    }
+
     self.addProduct = function (productsCtrl) {
         var selectBox = document.getElementById("product-selector");
         var productId = selectBox.options[selectBox.selectedIndex].value;
@@ -161,7 +163,7 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
 
             console.log(product);
 
-            if(product) {
+            if (product) {
                 var lineEntry = {};
 
                 lineEntry.CodArtigo = product.CodArtigo;
@@ -180,44 +182,35 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
         var selector = $('#product-selector');
         selector.selectpicker('val', '');
         selector.selectpicker('refresh');
-    }
+    };
+});
 
-    self.toggleOpportunitySelected = function (id) {
-        var index = self.selectedOpportunities.indexOf(id);
+/**
+ * OrdersControllerAdmin
+ */
 
-        if (index != -1) {
-            self.selectedOpportunities.splice(index, 1);
-        } else {
-            self.selectedOpportunities.push(id);
-        }
+ordersModule.controller('OrdersControllerAdmin', function ($http, $location) {
+    var self = this;
 
-        console.log(self.selectedOpportunities);
+    self.orders = [];
+    self.loading = true;
+
+    /**
+     * initiate controller
+     */
+    self.initCtrl = function () {
+        self.getOrders();
     };
 
-    self.removeProduct = function () {
-        if(self.selected){
-            console.log()
-            var productIndex = self.products.indexOf(self.selected);
-            self.linesDoc.splice(productIndex, 1);
-            self.products.splice(productIndex, 1);
-
-            $("#product-" + self.selected).toggle(true);
-            self.selected = null;
-        }
-
-        var selector = $('#product-selector');
-        selector.selectpicker('val', '');
-        selector.selectpicker('refresh');
-    }
-
-    self.isProductOpportunity = function (productId) {
-        if (productId) {
-            return self.productOpportunities.indexOf(productId) != -1;
-        } else {
-            return self.productOpportunities.length > 0;
-        }
+    /**
+     * GET orders list from API
+     */
+    self.getOrders = function () {
+        $http.get(API_URL + '/api/encomendas').then(function (data) {
+            self.orders = data.data;
+            console.log(data.data);
+            self.loading = false;
+        });
     };
-
-    self.selected = -1;
 
 });
