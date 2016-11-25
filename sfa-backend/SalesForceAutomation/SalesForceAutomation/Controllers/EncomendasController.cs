@@ -38,6 +38,7 @@ namespace SalesForceAutomation.Controllers
 
             if (erro.Erro == 0)
             {
+                encomenda.Id = (string) erro.Data;
                 var response = Request.CreateResponse(HttpStatusCode.Created, encomenda);
                 return response;
             }

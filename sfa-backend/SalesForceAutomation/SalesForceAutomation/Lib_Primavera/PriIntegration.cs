@@ -734,6 +734,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     actividade.set_DataInicio(Convert.ToDateTime(reuniao.DataInicio));
                     actividade.set_DataFim(Convert.ToDateTime(reuniao.DataFim));
                     actividade.set_DataCriacao(DateTime.Now);
+                    actividade.set_CriadoPor(reuniao.CodVendedor);
                     actividade.set_Resumo(reuniao.Notas);
                     actividade.set_Prioridade(reuniao.Prioridade.ToString());
                     actividade.set_TodoDia(reuniao.TodoDia);
@@ -1287,6 +1288,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     PriEngine.Engine.TerminaTransaccao();
                     erro.Erro = 0;
                     erro.Descricao = "Sucesso";
+                    erro.Data = myEnc.get_ID();
                     return erro;
                 }
                 catch (Exception e)
