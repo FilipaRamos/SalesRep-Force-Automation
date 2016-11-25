@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     res.render('order', { title: 'Encomenda',
         breadcrumb: 'Encomenda',
-        customerId: req.query.clienteId
+        id: req.query.id
     });
 });
 

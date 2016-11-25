@@ -194,6 +194,7 @@ productsModule.controller('ProductController', function ($http, $location) {
 productsModule.controller('ProductAdminController', function ($http, $location) {
     var self = this;
 
+    self.products = [];
     self.loading = true;
 
     /**

@@ -5,27 +5,37 @@
     <% include templates/common/header.ejs %>
 </head>
 
-<body ng-app="ordersModule">
+<body ng-app="newOrderModule">
 <div id="wrapper">
     <% include templates/common/nav-bar.ejs %>
+
     <div id="page-wrapper">
-        <div class="container">
-            <ol class="breadcrumb breadcrumb-arrow">
-                <li><a href="#">Ready To Ship</a></li>
-                <li><a href="#">Shipped</a></li>
-                <li class="actual"><a href="#">Delivered</a></li>
-                <li class="active"><span>Completed</span></li>
-            </ol>
+        <div class="container-fluid" ng-controller="OrderController as newOrderCtrl">
+
+            <% include templates/common/breadcrumbs.ejs %>
+
+            <div class="row-align-center" ng-controller="CustomerController as customerCtrl" ng-init="newOrderCtrl.initCtrl('<%= id %>', customerCtrl);">
+
+                <div class="span6" ng-init="currentCtrl = customerCtrl;">
+                    <% include templates/customers/customer-info.ejs %>
+                </div>
+
+                <div class="span12" ng-init="showTick = false;">
+                    <% include templates/orders/product-listing.ejs %>
+                </div>
+
+                <div class="span12">
+                    <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.cancelOrder()" ng-disabled="newOrderCtrl.waitingAPIResponse"> Cancelar</button>
+                    <a href="/editar_encomenda?id={{newOrderCtrl.Id}}" class="btn btn-primary" ng-disabled="newOrderCtrl.waitingAPIResponse">Editar</a>
+                </div>
+
+            </div>
         </div>
-        <div class="" ng-controller="CustomerController as customerCtrl"
-             ng-init="customerCtrl.initCtrl(<%= customerId %>); customer = customerCtrl.customer;">
-            <% include templates/customers/customer-info.ejs %>
-        </div>
-        <% include templates/products/product-table.ejs %>
         <% include templates/common/footer.ejs %>
     </div>
 </div>
 <script src="javascripts/custom/customers-module.js"></script>
+<script src="javascripts/custom/products-module.js"></script>
 <script src="javascripts/custom/orders-module.js "></script>
 </body>
 </html>

@@ -9,13 +9,17 @@ ordersModule.controller('OrdersController', function ($http, $location) {
     var self = this;
 
     self.orders = [];
-    self.loading = true;
+    self.loadingOrders = true;
 
     /**
      * initiate controller
      */
     self.initCtrl = function (customerId) {
         self.getOrders(customerId);
+    };
+
+    self.orderScope = function (scope) {
+        return scope == 'all';
     };
 
     /**
@@ -25,8 +29,7 @@ ordersModule.controller('OrdersController', function ($http, $location) {
         $http.get(API_URL + '/api/Encomendas' + (customerId? '/Cliente/' + customerId : '')).then(function (data) {
             self.orders = data.data;
             console.log(data.data);
-            self.loading = false;
-            console.log(self.orders);
+            self.loadingOrders = false;
         }, function (data) {
             console.log('Erro ao obter lista de encomendas.');
             console.log(data.data);
@@ -54,11 +57,14 @@ ordersModule.controller('OrderController', function ($http, $location) {
     var self = this;
 
     self.order = {};
+    self.linesDoc = [];
+    self.customerCtrl = null;
 
     /**
      * initiate controller
      */
-    self.initCtrl = function (id) {
+    self.initCtrl = function (id, customerCtrl) {
+        self.customerCtrl = customerCtrl;
         self.getOrder(id);
     };
 
@@ -67,8 +73,23 @@ ordersModule.controller('OrderController', function ($http, $location) {
      */
     self.getOrder = function (id) {
         $http.get(API_URL + '/api/encomendas?id=' + id).then(function (data) {
-            self.costumer = data;
+            self.order = data.data;
+
+            self.linesDoc = self.order.LinhasDoc;
+            self.customerCtrl.initCtrl(self.order.Entidade);
+
+            console.log(data);
         });
+    };
+
+
+    // displays the order price
+    self.total = function () {
+        var total = 0;
+        self.linesDoc.forEach(function (element) {
+            total += ((element.IVA / 100) + 1) * ((element.PrecoUnitario * element.Quantidade) - (element.Desconto * element.Quantidade));
+        });
+        return total;
     };
 });
 

@@ -1,7 +1,8 @@
 <div class="widget widget-nopad">
     <div class="widget-header">
         <i class="fa fa-fw fa-address-card"></i> Dados do cliente
-        <a href="/editar_cliente?id={{currentCtrl.customer.CodCliente}}" class="pull-right"><i class="fa fa-pencil-square">&nbsp</i></a>
+        <a ng-show="editInfo == true;" href="/editar_cliente?id={{currentCtrl.customer.CodCliente}}" class="pull-right"><i class="fa fa-pencil-square">&nbsp</i></a>
+        <a ng-hide="editInfo == true;" href="/cliente?id={{currentCtrl.customer.CodCliente}}" class="pull-right"><i class="fa fa-external-link-square">&nbsp</i></a>
     </div>
 
     <div class="widget-content">

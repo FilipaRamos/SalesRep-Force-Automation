@@ -25,7 +25,7 @@
                             <tr ng-repeat="line in newOrderCtrl.linesDoc" ng-init="line.IVA = line.IVA ? line.IVA : 23;"
                                 id="{{line.CodArtigo}}">
                                 <td>
-                                    <div><span>
+                                    <div><span ng-hide="showTick==false;" >
                                             <input type="radio" name="optradio"
                                                    ng-click="newOrderCtrl.selectProduct(line.CodArtigo)">
                                         </span>

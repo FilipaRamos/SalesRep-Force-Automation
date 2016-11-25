@@ -4,11 +4,19 @@
         <i class="fa fa-fw fa-address-card"></i> Produtos
     </div>
 
-    <div class="widget-content">
-        <div class="widget big-stats-container">
+    <div class="widget-content" ng-controller="ProductAdminController as productsCtrl" ng-init="productsCtrl.initCtrl(); currentCtrl = productsCtrl">
+        <div class="widget big-stats-container" style="overflow-y: auto; height:445px;">
             <div class="widget-content">
 
-                <section ng-controller="ProductAdminController as productsCtrl" ng-init="productsCtrl.initCtrl()">
+                <div ng-show="currentCtrl.loading" class="span10">
+                    <% include ../common/loading.ejs %>
+                </div>
+
+                <div ng-show="!currentCtrl.loading && currentCtrl.products.length == 0" class="span10">
+                    Não foram encontradas encomendas...
+                </div>
+
+                <section ng-hide="currentCtrl.loading || currentCtrl.products.length == 0">
                     <ul class="nav nav-pills">
                         <li ng-class="{ active:productsCtrl.isSet(1) }">
                             <a href ng-click="productsCtrl.setTab(1)">Top</a>
