@@ -29,6 +29,7 @@ usersModule.controller('UsersController', function ($http, $location) {
     var self = this;
 
     self.users = [];
+    self.loading = true;
 
     /**
      * initiate controller
@@ -36,15 +37,17 @@ usersModule.controller('UsersController', function ($http, $location) {
     self.initCtrl = function() {
         // TODO change this
         self.users = usersTemp;
-        //self.getUsers();
+        self.getUsers();
     };
 
     /**
      * GET users list from API
      */
     self.getUsers = function () {
-        $http.get('api/vendedores').then(function (data) {
-            self.users = data;
+        $http.get(API_URL + '/api/vendasvendedor').then(function (data) {
+            self.users = data.data;
+            self.loading=false;
+            console.log(data.data);
         });
     };
 

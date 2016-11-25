@@ -177,3 +177,42 @@ productsModule.controller('ProductController', function ($http, $location) {
         self.tab = setTab;
     };
 });
+
+productsModule.controller('ProductAdminController', function ($http, $location) {
+    var self = this;
+
+    self.loading = true;
+
+    /**
+     * initiate admin controller
+     */
+    self.initCtrl = function() {
+        self.getProductsStats();
+    };
+
+    /**
+     * GET products stats from API
+     */
+    self.getProductsStats = function() {
+        $http.get(API_URL + '/api/vendasartigo').then(function (data) {
+            self.products = data.data;
+            self.loading = false;
+            console.log(data.data);
+        }, function (data) {
+            console.log('Erro ao obter lista de produtos.');
+            console.log(data);
+        });
+    };
+
+    /**
+     * Product list tab handlers
+     */
+    self.tab = 1;
+    self.isSet = function (checkTab) {
+        return self.tab === checkTab;
+    };
+
+    self.setTab = function (setTab) {
+        self.tab = setTab;
+    };
+});

@@ -270,3 +270,46 @@ customersModule.controller('NewCustomerController', function ($http, $location) 
             });
     };
 });
+
+/**
+ * CustomersControllerAdmin
+ */
+customersModule.controller('CustomersControllerAdmin', function ($http, $location) {
+    var self = this;
+
+    self.loading = true;
+    self.customers = [];
+
+    /**
+     * initiate controller
+     */
+    self.initCtrl = function () {
+        self.getCustomersStats();
+    };
+
+    /**
+     * GET customers list from API
+     */
+    self.getCustomersStats = function () {
+        $http.get(API_URL + '/api/vendascliente').then(function (data) {
+            self.customers = data.data;
+            self.loading = false;
+            console.log(self.customers);
+        }, function (data) {
+            console.log('Erro ao obter lista de clientes.');
+            console.log(data);
+        });
+    };
+
+    /**
+     * Customer list tab handlers
+     */
+    self.tab = 1;
+    self.isSet = function (checkTab) {
+        return self.tab === checkTab;
+    };
+
+    self.setTab = function (setTab) {
+        self.tab = setTab;
+    };
+});

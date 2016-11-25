@@ -29,11 +29,11 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr ng-repeat="user in usersCtrl.users | orderBy : '-nome'">
-                                    <td><a href="perfil?id={{user.id}}">{{user.nome}}</a></td>
+                                <tr ng-repeat="user in usersCtrl.users | orderBy : '-Nome'">
+                                    <td><a href="perfil?id={{user.VendedorID}}">{{user.Nome}}</a></td>
                                     <td>{{user.Morada}}</td>
-                                    <td>{{user.telefone}}</td>
-                                    <td>{{user.vendas | currency:"€" }}</td>
+                                    <td>{{user.Telemovel}}</td>
+                                    <td>{{user.Vendas | currency:"€" }}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -53,10 +53,10 @@
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="user in usersCtrl.users | orderBy : '-vendas' | limitTo : 10">
-                                    <td><a href="perfil?id={{user.id}}">{{user.nome}}</a></td>
+                                    <td><a href="perfil?id={{user.id}}">{{user.Nome}}</a></td>
                                     <td>{{user.Morada}}</td>
-                                    <td>{{user.telefone}}</td>
-                                    <td>{{user.vendas | currency:"€" }}</td>
+                                    <td>{{user.Telemovel}}</td>
+                                    <td>{{user.Vendas | currency:"€" }}</td>
                                 </tr>
                                 </tbody>
                             </table>

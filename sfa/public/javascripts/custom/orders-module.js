@@ -157,6 +157,46 @@ ordersModule.controller('NewOrderController', function ($http, $location) {
 
 });
 
+/**
+ * OrdersControllerAdmin
+ */
+
+ordersModule.controller('OrdersControllerAdmin', function ($http, $location) {
+    var self = this;
+
+    self.orders = [];
+    self.loading = true;
+
+    /**
+     * initiate controller
+     */
+    self.initCtrl = function(){
+        self.getOrders();
+    };
+
+    /**
+     * GET orders list from API
+     */
+    self.getOrders = function () {
+        $http.get(API_URL + '/api/encomendas').then(function (data) {
+            self.orders = data.data;
+            self.loading=false;
+        });
+    };
+
+    /**
+     * Order tab handlers
+     */
+    self.tab = 1;
+    self.isSet = function (checkTab) {
+        return self.tab === checkTab;
+    };
+
+    self.setTab = function (setTab) {
+        self.tab = setTab;
+    };
+});
+
 var ordersTemp = [
     {
         id: 14351,
