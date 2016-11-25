@@ -4,7 +4,7 @@
     </div>
 
     <div class="widget-content">
-        <div class="widget big-stats-container">
+        <div class="widget big-stats-container" style="overflow-y: auto; height:400px;">
             <div class="widget-content">
 
                 <div ng-show="currentCtrl.loadingEvents" class="span10">
@@ -22,6 +22,7 @@
                             <thead>
                             <tr>
                                 <!--<th style="width: 15%;">Tipo</th>-->
+                                <th style="width: 10%;">ID</th>
                                 <th style="width: 20%;">Data</th>
                                 <th style="width: 15%;">Duração</th>
                                 <th style="width: 45%;">Descrição</th>
@@ -30,11 +31,11 @@
                             </thead>
                             <tbody>
                             <tr ng-repeat="event in currentCtrl.events | orderBy : '-DataInicio'">
-                                <!--<td><a href="evento?id={{event.id}}">{{event.tipo}}</a></td>-->
+                                <td><a href="evento?id={{event.CodReuniao}}">{{event.CodReuniao}}</a></td>
                                 <td>{{event.DataInicio}}</td>
                                 <td>{{event.TodoDia ? 'Todo o dia' : event.Duracao}}</td>
                                 <td>{{event.Descricao}}</td>
-                                <td ng-hide="currentCtrl.customer.CodCliente">{{event.cliente}}</td>
+                                <td ng-hide="currentCtrl.customer.CodCliente">{{event.Entidade}}</td>
                             </tr>
                             </tbody>
                         </table>

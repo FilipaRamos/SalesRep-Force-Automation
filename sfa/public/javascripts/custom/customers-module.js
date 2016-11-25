@@ -99,6 +99,10 @@ customersModule.controller('CustomerController', function ($http, $location) {
         self.getCustomerOrders(id);
     };
 
+    self.orderScope = function (scope) {
+        return scope == 'customer';
+    };
+
     /**
      * GET customer info from API
      */
@@ -120,7 +124,8 @@ customersModule.controller('CustomerController', function ($http, $location) {
         $http.get(API_URL + '/api/EncomendasCliente/' + id).then(function (data) {
             self.orders = data.data;
             self.loadingOrders = false;
-            console.log(self.orders);
+            console.log(data);
+            console.log('whha???');
         }, function (data) {
             console.log('Erro ao obter encomendas de cliente ' + id);
             console.log(data);

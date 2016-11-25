@@ -37,7 +37,7 @@ eventsModule.controller('EventsController', function ($http, $location, $window)
                 // set info to be displayed
                 self.events.forEach(function (event) {
                     event.url = '/evento?id=' + event.CodReuniao;
-                    event.title = event.Descricao;
+                    event.title = event.Descricao + ' - ' + event.Entidade;
                     event.start = event.DataInicio;
                     event.end = event.TodoDia ? undefined : event.DataFim;
                     event.allDay = event.TodoDia;
@@ -307,7 +307,7 @@ newEventModule.controller('NewEventController', function ($http) {
                 console.log(data);
                 self.newEvent.CodReuniao = data.data.CodReuniao;
 
-                if(self.productOpportunities.empty) {
+                if(self.productOpportunities.length == 0) {
                     window.location.replace('/evento?id=' + self.newEvent.CodReuniao);
                 }else{
                     self.createSalesOpportunity();

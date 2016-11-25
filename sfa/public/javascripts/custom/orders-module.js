@@ -9,6 +9,7 @@ ordersModule.controller('OrdersController', function ($http, $location) {
     var self = this;
 
     self.orders = [];
+    self.loading = true;
 
     /**
      * initiate controller
@@ -21,11 +22,17 @@ ordersModule.controller('OrdersController', function ($http, $location) {
      * GET orders list from API
      */
     self.getOrders = function (customerId) {
-        // TODO adapt to specific customer
-        $http.get('api/clientes').then(function (data) {
-            self.orders = data;
+        $http.get(API_URL + '/api/Encomendas' + (customerId? '/Cliente/' + customerId : '')).then(function (data) {
+            self.orders = data.data;
+            console.log(data.data);
+            self.loading = false;
+            console.log(self.orders);
+        }, function (data) {
+            console.log('Erro ao obter lista de encomendas.');
+            console.log(data.data);
         });
     };
+
 
     /**
      * Order tab handlers
@@ -183,38 +190,4 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
         selector.selectpicker('val', '');
         selector.selectpicker('refresh');
     };
-});
-
-/**
- * OrdersControllerAdmin
- */
-
-ordersModule.controller('OrdersControllerAdmin', function ($http, $location) {
-    var self = this;
-
-    self.loading = true;
-    self.orders = [];
-
-    /**
-     * initiate controller
-     */
-    self.initCtrl = function () {
-        self.getOrders();
-    };
-
-    /**
-     * GET orders list from API
-     */
-    self.getOrders = function () {
-        $http.get(API_URL + '/api/encomendas').then(function (data) {
-            self.orders = data.data;
-            console.log(data.data);
-            self.loading = false;
-            console.log(self.orders);
-        }, function (data) {
-            console.log('Erro ao obter lista de encomendas.');
-            console.log(data.data);
-        });
-    };
-
 });
