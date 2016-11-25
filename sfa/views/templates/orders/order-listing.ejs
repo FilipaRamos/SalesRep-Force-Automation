@@ -12,30 +12,30 @@
 
                 <section ng-controller="OrdersControllerAdmin as ordersCtrl" ng-init="ordersCtrl.initCtrl()">
                     <ul class="nav nav-pills">
-                        <li ng-class="{ active:currentCtrl.isSet(1) }">
-                            <a href ng-click="currentCtrl.setTab(1)"> Por Cliente </a>
+                        <li ng-class="{ active:ordersCtrl.isSet(1) }">
+                            <a href ng-click="ordersCtrl.setTab(1)"> Por Cliente </a>
                         </li>
-                        <li ng-class="{ active:currentCtrl.isSet(2) }">
-                            <a href ng-click="currentCtrl.setTab(2)"> Por Vendedor </a>
+                        <li ng-class="{ active:ordersCtrl.isSet(2) }">
+                            <a href ng-click="ordersCtrl.setTab(2)"> Por Vendedor </a>
                         </li>
                     </ul>
 
-                    <div ng-show="currentCtrl.isSet(2)">
+                    <div ng-show="ordersCtrl.isSet(2)">
                         <form>
                             <table class="table">
                                 <thead>
                                 <tr>
                                     <th style="width: 20%;">ID</th>
                                     <th style="width: 30%;">Data</th>
-                                    <th style="width: 20%;" ng-hide="currentCtrl.customer.Responsavel">Responsavel</th>
+                                    <th style="width: 20%;" ng-hide="ordersCtrl.customer.Responsavel">ID Responsavel</th>
                                     <th style="width: 30%;">Total das Mercadorias</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr ng-repeat="order in currentCtrl.orders | orderBy : '-data' |  limitTo: 10">
-                                    <td><a href="encomenda?id={{order.Responsavel}}">{{order.Responsavel}}</a></td>
+                                <tr ng-repeat="order in ordersCtrl.orders | orderBy : '-data' |  limitTo: 10">
+                                    <td><a href="encomenda?id={{order.Id}}">{{order.Id}}</a></td>
                                     <td>{{order.Data}}</td>
-                                    <td ng-hide="currentCtrl.customer.id">{{order.Entidade}}</td>
+                                    <td ng-hide="ordersCtrl.customer.Responsavel">{{order.Responsavel}}</td>
                                     <td>{{order.TotalMerc}}</td>
                                 </tr>
                                 </tbody>
@@ -43,23 +43,23 @@
                         </form>
                     </div>
 
-                    <div ng-show="currentCtrl.isSet(1)">
+                    <div ng-show="ordersCtrl.isSet(1)">
                         <form>
                             <table class="table">
                                 <thead>
                                 <tr>
                                     <th style="width: 20%;">ID</th>
                                     <th style="width: 30%;">Data</th>
-                                    <th style="width: 20%;" ng-hide="currentCtrl.customer.Cliente">Cliente</th>
+                                    <th style="width: 20%;" ng-hide="ordersCtrl.customer.Cliente">Cliente</th>
                                     <th style="width: 30%;">Total das Mercadorias</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr ng-repeat="order in currentCtrl.orders | orderBy : '-data' | limitTo: 10">
+                                <tr ng-repeat="order in ordersCtrl.orders | orderBy : '-data' | limitTo: 10">
                                     <td><a href="encomenda?id={{order.Id}}">{{order.Id}}</a></td>
                                     <td>{{order.Data}}</td>
-                                    <td ng-hide="currentCtrl.customer.id">{{order.Entidade}}</td>
-                                    <td>{{order.total | currency:"€" }}</td>
+                                    <td ng-hide="ordersCtrl.customer.id">{{order.Entidade}}</td>
+                                    <td>{{order.TotalMerc}}</td>
                                 </tr>
                                 </tbody>
                             </table>
