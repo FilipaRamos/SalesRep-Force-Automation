@@ -314,6 +314,7 @@ namespace SalesForceAutomation.Lib_Primavera
         {
             GcpBEArtigoArmazens objList;
 
+
             Models.ArtigoArmazem objArtArm;
             List<Models.ArtigoArmazem> listArtigoArmazens = new List<Models.ArtigoArmazem>();
 
@@ -326,9 +327,16 @@ namespace SalesForceAutomation.Lib_Primavera
                     objArtArm = new Models.ArtigoArmazem();
 
                     objArtArm.ArtigoID = artigoID;
-                    objArtArm.ArmazemID = artArmOffList.get_Armazem();
-                    objArtArm.Morada = artArmOffList.get_Localizacao();
+                    objArtArm.Armazem = artArmOffList.get_Localizacao();
                     objArtArm.Stock = artArmOffList.get_StkActual();
+                    objArtArm.Lote = artArmOffList.get_Lote();
+
+                    GcpBEArmazem armazem = PriEngine.Engine.Comercial.Armazens.Edita(artArmOffList.get_Armazem());
+
+                    objArtArm.CodPost = armazem.get_CodigoPostal();
+                    objArtArm.Localidade = armazem.get_Localidade();
+                    objArtArm.Morada = armazem.get_Morada();
+
 
                     listArtigoArmazens.Add(objArtArm);
                 }
