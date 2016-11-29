@@ -9,12 +9,12 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var agenda = require('./routes/agenda');
-var costumers = require('./routes/customers');
-var costumer = require('./routes/customer');
+var costumers = require('./routes/costumers');
+var costumer = require('./routes/costumer');
 var event = require('./routes/event');
 var products = require('./routes/products');
 var product = require('./routes/product');
-var new_costumer = require('./routes/new_customer');
+var new_costumer = require('./routes/new_costumer');
 var new_event = require('./routes/new_event');
 
 var app = express();

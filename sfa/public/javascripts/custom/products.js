@@ -19,22 +19,6 @@ app.controller('ProductsController', function () {
 });
 
 // TODO retrieve client list
-var categories = [
-    {
-        id: "Cat1",
-        nome: 'Processadores'
-    },
-    {
-        id: "Cat2",
-        nome: 'Gráficas'
-    },
-    {
-        id: "Cat3",
-        nome: 'Outros'
-    }
-];
-
-// TODO retrieve client list
 var products = [
     {
         id: "Exemplo2",
@@ -44,7 +28,7 @@ var products = [
         preco_atual: 22.12,
         stock_total: 100,
         stock_disponivel: 85,
-        categoria: "Cat1"
+        categoria: 'id'
     },
     {
         id: "Exemplo3",
@@ -81,5 +65,21 @@ var products = [
         preco_atual: 22.12,
         stock_total: 100,
         stock_disponivel: 85
+    }
+];
+
+// TODO retrieve client list
+var categories = [
+    {
+        id: "Exemplo2",
+        nome: 'Processadores'
+    },
+    {
+        id: "Exemplo2",
+        nome: 'Gráficas'
+    },
+    {
+        id: "Exemplo2",
+        nome: 'Outros'
     }
 ];

@@ -3,36 +3,29 @@
 
 <head>
     <title> <%= title %> </title>
-    <% include templates/common/header.ejs %>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.js"></script>
-    <script src="//cdn.rawgit.com/indrimuska/angular-moment-picker/master/dist/angular-moment-picker.min.js"></script>
-    <link href="//cdn.rawgit.com/indrimuska/angular-moment-picker/master/dist/angular-moment-picker.min.css"
-          rel="stylesheet">
+    <% include templates/comon/header.ejs %>
 </head>
 
 <body>
 <div id="wrapper">
-    <% include templates/common/nav-bar.ejs %>
+    <% include templates/comon/nav-bar.ejs %>
     <div id="page-wrapper">
         <div class="container-fluid">
 
-            <% include templates/common/breadcrumbs.ejs %>
+            <% include templates/comon/breadcrums.ejs %>
 
             <div class="row">
                 <div class="span12">
-
                     <form action="" method="post" ng-controller="NewEventController as newEventCtrl">
                         <div class="row">
-                            <div class="span12">
-
+                            <div class="span6">
                                 <!-- Event Type -->
                                 <div class="form-group row">
-                                    <label for="event-type" class="col-sm-2 col-form-label"> Tipo de evento </label>
-                                    <div class="col-sm-5">
-                                        <select name="=event-type" class="form-control selectpicker"
-                                                title="Selecione um tipo..."
-                                                ng-options="type as type.nome for type in newEventCtrl.eventTypes"
-                                                ng-model="newEventCtrl.newEvent.eventType">
+                                    <label for="event_type" class="col-sm-2 col-form-label"> Tipo de evento </label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control selectpicker"
+                                                ng-options="type.nome as type.nome for type in newEventCtrl.eventTypes"
+                                                ng-model="newEventCtrl.eventType">
                                         </select>
                                     </div>
                                 </div>
@@ -40,87 +33,39 @@
                                 <!-- Description -->
                                 <div class="form-group row">
                                     <label for="offer_description" class="col-sm-2 col-form-label"> Descrição </label>
-                                    <div class="col-sm-5">
-                                        <textarea style="resize:vertical;" rows="3" cols="20" class="form-control"
-                                                  placeholder="Descrição"
-                                                  ng-model="newEventCtrl.newEvent.descricao"></textarea>
+                                    <div class="col-sm-10">
+                                <textarea rows="3" cols="20" class="form-control" id="offer_description"
+                                          placeholder="Descrição ..."></textarea>
                                     </div>
                                 </div>
 
-                                <!-- Date, Time -->
-                                <div class="form-group row">
-                                    <label for="date-time" class="col-sm-2 col-form-label"> Data </label>
-                                    <div name="date-time" class="col-sm-5">
-
-                                        <div class="input-group"
-                                             moment-picker="newEventCtrl.newEvent.date"
-                                             format="DD-MM-YYYY" locale="pt">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </span>
-                                            <input class="form-control"
-                                                   placeholder="Selecionar data"
-                                                   ng-model="newEventCtrl.newEvent.date"
-                                                   ng-model-options="{ updateOn: 'blur' }">
-                                        </div>
-
-                                        <br>
-
-                                        <div class="input-group"
-                                             moment-picker="newEventCtrl.newEvent.time"
-                                             format="HH:mm" locale="pt">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-clock-o"></i>
-                                            </span>
-                                            <input class="form-control"
-                                                   placeholder="Selecionar hora"
-                                                   ng-model="newEventCtrl.newEvent.time"
-                                                   ng-model-options="{ updateOn: 'blur' }">
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <!-- Customer -->
-                                <div class="form-group row">
-                                    <label for="customer" class="col-sm-2 col-form-label">Cliente</label>
-                                    <div name="customer" class="col-sm-5">
-                                        <% include templates/customers/customer-selector.ejs %>
-                                    </div>
-                                </div>
-
-                                <!-- Products -->
-                                <div class="form-group row">
-                                    <label for="products" class="col-sm-2 col-form-label">Oportunidades</label>
-                                    <div name="procuts" class="col-sm-5" ng-controller="OpportunitiesController as opportunitiesCtrl">
-                                        <% include templates/products/product-selector.ejs %>
-                                    </div>
-                                </div>
+                                <!-- TODO add datetime input -->
 
                                 <!-- Notes -->
                                 <div class="form-group row">
                                     <label for="offer_description" class="col-sm-2 col-form-label"> Notas </label>
-                                    <div class="col-sm-5">
-                                        <textarea style="resize:vertical;" rows="3" cols="20" class="form-control"
-                                                  placeholder="Notas" ng-model="newEventCtrl.newEvent.notes"></textarea>
+                                    <div class="col-sm-10">
+                                <textarea rows="3" cols="20" class="form-control" id="offer_description"
+                                          placeholder="Notas ..."></textarea>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Buttons -->
-                            <div class="form-group row">
-                                <div class="col-sm-5 pull-right">
-                                    <a href="/agenda" class="btn btn-primary"> Cancelar</a>
-                                    <button type="submit" class="btn btn-primary"> Criar evento</button>
-                                </div>
+                            <div class="span6">
+                                <% include templates/costumers/costumer-finder.ejs %>
                             </div>
-
                         </div>
 
+                        <!-- Submit Button -->
+                        <div class="form-group row">
+                            <div class="offset-sm-2 col-sm-10">
+                                <button type="submit" id="submit_offer" class="btn btn-primary"> Criar evento</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
-            <% include templates/common/footer.ejs %>
+            <% include templates/comon/footer.ejs %>
         </div>
     </div>
 </div>
