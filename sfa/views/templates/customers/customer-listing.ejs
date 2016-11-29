@@ -1,58 +1,74 @@
-<div class="widget widget-nopad">
-    <!-- widget-header -->
+<div class="widget widget-nopad" ng-controller="CustomersController as customersCtrl"
+     ng-init="customersCtrl.initCtrl()">
     <div class="widget-header"><i class="fa fa-fw fa-address-card"></i> Clientes
-        <a href="/novo_cliente" class="pull-right"><i class="fa fa-plus-square">&nbsp</i></a>
+        <a href="/criar_cliente" class="pull-right"><i class="fa fa-plus-square">&nbsp</i></a>
     </div>
 
     <div class="widget-content">
-        <div class="widget big-stats-container">
+        <div class="widget big-stats-container" style="overflow-y: auto; height:445px;">
             <div class="widget-content">
 
-                <section ng-controller="CostumersController as costumerCtrl">
+                <div ng-show="customersCtrl.loading">
+                    <% include ../common/loading.ejs %>
+                </div>
+
+                <section ng-hide="customersCtrl.loading">
                     <ul class="nav nav-pills">
-                        <li ng-class="{ active:costumerCtrl.isSet(1) }">
-                            <a href ng-click="costumerCtrl.setTab(1)">Top</a>
+                        <li ng-class="{ active:customersCtrl.isSet(1) }">
+                            <a href ng-click="customersCtrl.setTab(1)">Top</a>
                         </li>
-                        <li ng-class="{ active:costumerCtrl.isSet(2) }">
-                            <a href ng-click="costumerCtrl.setTab(2)">Potenciais</a>
-                        </li>
-                        <li ng-class="{ active:costumerCtrl.isSet(3) }">
-                            <a href ng-click="costumerCtrl.setTab(3)">Todos</a>
+                        <li ng-class="{ active:customersCtrl.isSet(2) }">
+                            <a href ng-click="customersCtrl.setTab(2)">Todos</a>
                         </li>
                     </ul>
 
-                    <div ng-show="costumerCtrl.isSet(3)">
-                        <div class="list-group">
-                            <div class="list-group-item"
-                                 ng-repeat="costumer in costumerCtrl.costumers | orderBy : '-vendas'">
-                                <p><a href="clientes/{{costumer.id}}">{{costumer.nome}}</a> <em class="pull-right">{{costumer.vendas
-                                        | currency:"€"}}</em></p>
-                            </div>
-                        </div>
+                    <div ng-show="customersCtrl.isSet(2)">
+                        <form>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%;">Nome</th>
+                                    <th style="width: 30%;">Email</th>
+                                    <th style="width: 20%;">Telefone</th>
+                                   <!-- <th style="width: 30%;">Vendas</th>-->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="customer in customersCtrl.customers | orderBy : '-Nome'">
+                                    <td><a href="cliente?id={{customer.CodCliente}}">{{customer.Nome}}</a></td>
+                                    <td>{{customer.Email}}</td>
+                                    <td>{{customer.Fac_Tel}}</td>
+                                    <!--<td>{{customer.Vendas | currency:"€" }}</td>-->
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
 
-                    <div ng-show="costumerCtrl.isSet(2)">
-                        <div class="list-group">
-                            <div class="list-group-item" ng-repeat="costumer in costumerCtrl.costumers"
-                                 ng-show="costumer.vendas==0">
-                                <p><a href="clientes/{{costumer.id}}">{{costumer.nome}}</a><em class="pull-right">{{costumer.telefone}}</em>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div ng-show="costumerCtrl.isSet(1)">
-                        <div class="list-group">
-                            <div class="list-group-item"
-                                 ng-repeat="costumer in costumerCtrl.costumers | orderBy : '-vendas' | limitTo : 10">
-                                <p><a href="clientes/{{costumer.id}}">{{costumer.nome}}</a> <em class="pull-right">{{costumer.vendas
-                                        | currency:"€"}}</em></p>
-                            </div>
-                        </div>
+                    <div ng-show="customersCtrl.isSet(1)">
+                        <form>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%;">Nome</th>
+                                    <th style="width: 30%;">Morada</th>
+                                    <th style="width: 20%;">Telefone</th>
+                                    <th style="width: 30%;">Vendas</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="customer in customersCtrl.topCustomers | orderBy : '-Vendas' | limitTo : 10">
+                                    <td><a href="cliente?id={{customer.ClienteID}}">{{customer.ClienteID}}</a></td>
+                                    <td>{{customer.Morada}}</td>
+                                    <td>{{customer.Telefone}}</td>
+                                    <td>{{customer.Vendas | currency:"€" }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                 </section>
             </div>
-            <!-- /widget-content -->
         </div>
     </div>
 </div>

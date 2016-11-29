@@ -3,6 +3,7 @@ specification/report/specs.log
 specification/report/specs.out
 specification/report/specs.synctex.gz
 specification/report/specs.toc
+<<<<<<< HEAD
 bin/
 sfa-backend/SalesForceAutomation/SalesForceAutomation.v12.suo
 sfa-backend/SalesForceAutomation/SalesForceAutomation.sln
@@ -17,3 +18,6 @@ sfa-backend/SalesForceAutomation/SalesForceAutomation/obj/Debug/SalesForceAutoma
 sfa-backend/SalesForceAutomation/SalesForceAutomation/obj/Debug/SalesForceAutomation.csproj.FileListAbsolute.txt
 
 
+=======
+sfa/.idea/*
+>>>>>>> frontend

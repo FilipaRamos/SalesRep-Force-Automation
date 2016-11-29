@@ -1,90 +1,33 @@
 <!DOCTYPE html>
-<html ng-app="sfa">
+<html>
 
 <head>
-    <title> <%= title %> </title>
-    <% include templates/comon/header.ejs %>
+    <% include templates/common/header.ejs %>
 </head>
 
 
-<body>
+<body ng-app="eventsModule">
 <div id="wrapper">
-    <% include templates/comon/nav-bar.ejs %>
+    <% include templates/common/nav-bar.ejs %>
     <div id="page-wrapper">
         <div class="container-fluid">
 
-            <% include templates/comon/breadcrums.ejs %>
+            <% include templates/common/breadcrumbs.ejs %>
 
-            <div class="row">
+            <div class="row" ng-controller="EventsController as eventsCtrl"
+                 ng-init="eventsCtrl.initCtrl('full')">
                 <div class="span6">
-                    <div id="calendar"></div>
+                    <% include templates/agenda/calendar-full.ejs %>
                 </div>
                 <div class="span6">
-                    <h3>Eventos</h3>
-                    <div id="upcomming"></div>
+                    <% include templates/agenda/event-list.ejs %>
                 </div>
             </div>
         </div>
 
-        <% include templates/comon/footer.ejs %>
+        <% include templates/common/footer.ejs %>
     </div>
 </div>
-
-<!--fullcalendar-->
-<script language="javascript" type="text/javascript" src="lib/fullcalendar/lib/moment.min.js"></script>
-<script language="javascript" type="text/javascript" src="lib/fullcalendar/fullcalendar.min.js"></script>
-<script language="javascript" type="text/javascript" src="lib/fullcalendar/locale/pt.js"></script>
-<script>
-    $(document).ready(function () {
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
-
-        var eventList = $('#upcomming').fullCalendar({
-            weekends: false,
-            header: {
-                left: '',
-                center: '',
-                right: ''
-            },
-            views: {
-                listNext: {start: date, type: 'list', duration: {days: 4}}
-            },
-            defaultView: 'listNext',
-            events: events
-        });
-
-        var calendar = $('#calendar').fullCalendar({
-            weekends: false,
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            selectable: true,
-            selectHelper: true,
-            select: function (start, end, allDay) {
-                var title = prompt('Event Title:');
-                if (title) {
-                    calendar.fullCalendar('renderEvent',
-                            {
-                                title: title,
-                                start: start,
-                                end: end,
-                                allDay: allDay
-                            },
-                            true // make the event "stick"
-                    );
-                }
-                calendar.fullCalendar('unselect');
-            },
-            editable: true,
-            events: events
-        });
-    });
-</script>
-<!-- /fullcalendar -->
+<script type="text/javascript" src="javascripts/custom/events-module.js"></script>
 </body>
-
 </html>

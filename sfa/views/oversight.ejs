@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include templates/common/header.ejs %>
+</head>
+
+<body ng-app="oversightModule">
+<div id="wrapper">
+    <% include templates/common/nav-bar.ejs %>
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+
+            <% include templates/common/breadcrumbs.ejs %>
+
+            <div class="row">
+                <div class="span6">
+                    <% include templates/users/user-listing.ejs %>
+                </div>
+
+                <div class="span6">
+                    <% include templates/customers/customer-listing.ejs %>
+                </div>
+
+                <div class="span6">
+                    <% include templates/products/product-listing.ejs %>
+                </div>
+
+                <div class="span6" ng-controller="OrdersController as currentCtrl" ng-init="currentCtrl.initCtrl()">
+                    <% include templates/orders/order-listing.ejs %>
+                </div>
+
+            </div>
+        </div>
+
+        <% include templates/common/footer.ejs %>
+    </div>
+</div>
+
+<script type="text/javascript" src="javascripts/custom/products-module.js"></script>
+<script type="text/javascript" src="javascripts/custom/customers-module.js"></script>
+<script type="text/javascript" src="javascripts/custom/orders-module.js"></script>
+<script type="text/javascript" src="javascripts/custom/events-module.js"></script>
+<script type="text/javascript" src="javascripts/custom/users-module.js"></script>
+<script type="text/javascript" src="javascripts/custom/oversight-module.js"></script>
+</body>
+
+</html>

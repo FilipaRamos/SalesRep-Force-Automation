@@ -1,0 +1,11 @@
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <div class="caption">
+            <h4 class="pull-right" ng-show="customer.vendas > 0">{{customer.vendas | currency:"€"}}</h4>
+            <h4><a href="/cliente?id={{customer.CodCliente}}">{{customer.Nome}}</a></h4>
+            <p>{{customer.Fac_Tel}}</p>
+            <p>{{customer.Fac_Mor}}</p>
+        </div>
+    </div>
+</div>
+

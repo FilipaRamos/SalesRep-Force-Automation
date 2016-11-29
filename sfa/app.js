@@ -6,16 +6,23 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
-
+var login = require('./routes/login');
+var register = require('./routes/register');
+var profile = require('./routes/profile');
 var agenda = require('./routes/agenda');
-var costumers = require('./routes/costumers');
-var costumer = require('./routes/costumer');
+var customers = require('./routes/customers');
+var customer = require('./routes/customer');
 var event = require('./routes/event');
 var products = require('./routes/products');
 var product = require('./routes/product');
-var new_costumer = require('./routes/new_costumer');
+var new_customer = require('./routes/new_customer');
 var new_event = require('./routes/new_event');
+var new_order = require('./routes/new_order');
+var edit_customer = require('./routes/edit_customer');
+var edit_event = require('./routes/edit_event');
+var edit_order = require('./routes/edit_order');
+var order = require('./routes/order');
+var oversight = require('./routes/oversight');
 
 var app = express();
 
@@ -31,16 +38,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// TODO review routing to cliente, produto
 app.use('/', index);
-app.use('/agenda', agenda);
-app.use('/clientes', costumers);
-app.use('/cliente', costumer);
+app.use('/entrar', login);
+app.use('/registar', register);
+app.use('/eventos', agenda);
 app.use('/evento', event);
+app.use('/criar_evento', new_event);
+app.use('/editar_evento', edit_event);
+app.use('/encomenda', order);
+app.use('/clientes', customers);
+app.use('/cliente', customer);
+app.use('/criar_cliente', new_customer);
+app.use('/editar_cliente', edit_customer);
+app.use('/nova_encomenda', new_order);
+app.use('/editar_encomenda', edit_order);
 app.use('/produtos', products);
 app.use('/produto', product);
-app.use('/novo_cliente', new_costumer);
-app.use('/novo_evento', new_event);
+app.use('/supervisao', oversight);
+app.use('/perfil', profile);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

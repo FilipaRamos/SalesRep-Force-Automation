@@ -1,19 +1,28 @@
-<div class="widget widget-nopad">
-    <div class="widget-content">
-        <div class="widget big-stats-container">
-            <div class="widget-content">
-                <section>
-
-                    <div class="list-group">
-                        <div ng-repeat="order in customerCtrl.orders">
-                            <div class="list-group-item" ng-repeat="produto in order.produtos">
-                                <p><a href="produto?id={{produto.id}}">{{produto.id}}</a></p>
-                            </div>
-                        </div>
-                    </div>
-
-                </section>
-            </div>
-        </div>
-    </div>
+<div ng-show="newEventCtrl.isProductOpportunity()" class="row">
+    <form>
+    <table class="table span7">
+        <thead>
+        <tr>
+            <th style="width: 30%;">ID</th>
+            <th style="width: 50%;">Descrição</th>
+            <th style="width: 10%;">Iva</th>
+            <th style="width: 10%;">Preço</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="product in productsCtrl.products"
+            ng-show="newEventCtrl.isProductOpportunity(product.CodArtigo)">
+            <td>
+                <label for="{{product.CodArtigo}}">
+                    <span><input ng-hide="eventCtrl" type="checkbox" id="{{product.CodArtigo}}" ng-click="newEventCtrl.toggleOpportunitySelected(product.CodArtigo)"/></span>&emsp;
+                    <a href="/produto?id={{product.CodArtigo}}">{{product.CodArtigo}}</a>
+                </label>
+            </td>
+            <td>{{product.DescArtigo}}</td>
+            <td>{{product.IVA}}%</td>
+            <td>{{product.PrecoMedio | currency:"€" }}</td>
+        </tr>
+        </tbody>
+    </table>
+    </form>
 </div>

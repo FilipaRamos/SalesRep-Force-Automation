@@ -1,70 +1,77 @@
-    <div class="container">
-        <div class="row">
-            <!-- Form To Display Client Information -->
-            <form ng-controller="CustomersController as customerCtrl" role="form">
+<div class="widget widget-nopad">
+    <div class="widget-header">
+        <i class="fa fa-fw fa-address-card"></i> Dados do cliente
+        <a ng-show="editInfo == true;" href="/editar_cliente?id={{currentCtrl.customer.CodCliente}}" class="pull-right"><i class="fa fa-pencil-square">&nbsp</i></a>
+        <a ng-hide="editInfo == true;" href="/cliente?id={{currentCtrl.customer.CodCliente}}" class="pull-right"><i class="fa fa-external-link-square">&nbsp</i></a>
+    </div>
 
-                <!-- Customer Name -->
-                <div class="form-group row">
-                    <label for="customer_name" class="col-sm-2 col-form-label"> Nome: </label>
-                    <div class="col-sm-10">
-                        <input name="customer_name" type="text" class="form-control" style="width: 300px;"
-                               placeholder="{{customerCtrl.customer.nome}}" disabled/>
-                    </div>
-                </div>
+    <div class="widget-content">
+        <div class="container row-align-center">
+            <div ng-show="currentCtrl.loadingCustomer" class="span10">
+                <% include ../common/loading.ejs %>
+            </div>
 
-                <!-- Fiscal Name -->
-                <div class="form-group row">
-                    <label for="fiscal_name" class="col-sm-2 col-form-label"> Nome Fiscal: </label>
-                    <div class="col-sm-10">
-                        <input name="fiscal_name" type="text" class="form-control" style="width: 300px;"
-                               placeholder="{{customerCtrl.customer.nome_fiscal}}" disabled/>
-                    </div>
-                </div>
+            <div  ng-hide="currentCtrl.loadingCustomer"  class="span10">
+                <form role="form">
 
-                <!-- NIF -->
-                <div class="form-group row">
-                    <label for="nif" class="col-sm-2 col-form-label"> NIF: </label>
-                    <div class="col-sm-10">
-                        <input name="nif" type="text" class="form-control" style="width: 300px;"
-                               placeholder="{{customerCtrl.customer.contribuinte}}" disabled/>
+                    <!-- Customer Name -->
+                    <div class="form-group row">
+                        <label for="customer_name" class="col-sm-2 col-form-label"> Nome </label>
+                        <div name=customer_name" class="col-sm-5">
+                            {{currentCtrl.customer.Nome}}
+                        </div>
                     </div>
-                </div>
 
-                <!-- Address -->
-                <div class="form-group row" ng-show="{{customerCtrl.customer.morada}}">
-                    <label for="address" class="col-sm-2 col-form-label"> Morada: </label>
-                    <div class="col-sm-10">
-                        <input name="address" type="text" class="form-control" style="width: 300px;"
-                               placeholder="{{customerCtrl.customer.morada}}" disabled/>
+                    <!-- Fiscal Name -->
+                    <div class="form-group row">
+                        <label for="fiscal_name" class="col-sm-2 col-form-label"> Nome fiscal </label>
+                        <div name="fiscal_name" class="col-sm-5">
+                            {{currentCtrl.customer.NomeFiscal}}
+                        </div>
                     </div>
-                </div>
 
-                <!-- Email -->
-                <div class="form-group row" ng-show="{{customerCtrl.customer.email}}">
-                    <label for="email" class="col-sm-2 col-form-label"> Email: </label>
-                    <div class="col-sm-10">
-                        <input name="email" type="email" class="form-control" style="width: 300px;"
-                               placeholder="{{customerCtrl.customer.email}}" disabled/>
+                    <!-- NIF -->
+                    <div class="form-group row">
+                        <label for="nif" class="col-sm-2 col-form-label"> NIF </label>
+                        <div name="nif" class="col-sm-5">
+                            {{currentCtrl.customer.NumContribuinte}}
+                        </div>
                     </div>
-                </div>
 
-                <!-- Telefone -->
-                <div class="form-group row" ng-show="{{customerCtrl.customer.telefone}}">
-                    <label for="telephone" class="col-sm-2 col-form-label"> Telefone: </label>
-                    <div class="col-sm-10">
-                        <input name="telephone" type="tel" class="form-control" style="width: 300px;"
-                               placeholder="{{customerCtrl.customer.telefone}}" disabled/>
+                    <!-- Address -->
+                    <div class="form-group row" ng-show="currentCtrl.customer.Fac_Mor">
+                        <label for="address" class="col-sm-2 col-form-label"> Morada </label>
+                        <div name="address" class="col-sm-5">
+                            {{currentCtrl.customer.Fac_Mor}}
+                        </div>
                     </div>
-                </div>
 
-                <!-- Total de Vendas -->
-                <div class="form-group row">
-                    <label for="total-sales" class="col-sm-2 col-form-label control-label"> Total Vendas: </label>
-                    <div class="col-sm-10">
-                        <input name="total-sales" type="text" class="form-control" style="width: 300px;"
-                               placeholder="{{customerCtrl.customer.vendas}}" disabled/>
+                    <!-- Email -->
+                    <div class="form-group row" ng-show="currentCtrl.customer.Email">
+                        <label for="email" class="col-sm-2 col-form-label"> Email </label>
+                        <div name="email" class="col-sm-5">
+                            {{currentCtrl.customer.Email}}
+                        </div>
                     </div>
-                </div>
-            </form>
+
+                    <!-- Telefone -->
+                    <div class="form-group row" ng-show="currentCtrl.customer.Fac_Tel">
+                        <label for="telephone" class="col-sm-2 col-form-label"> Telefone </label>
+                        <div name="telephone" class="col-sm-5">
+                            {{currentCtrl.customer.Fac_Tel}}
+                        </div>
+                    </div>
+
+                    <!-- Total de Vendas -->
+                    <div ng-show="currentCtrl.currentCtrl.customer.Vendas" class="form-group row">
+                        <label for="total-sales" class="col-sm-2 col-form-label control-label"> Total de
+                            vendas </label>
+                        <div name="total-sales" class="col-sm-5">
+                            {{currentCtrl.customer.Vendas | currency: "€"}}
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+</div>

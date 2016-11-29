@@ -1,52 +1,68 @@
 <!DOCTYPE html>
-<html ng-app="sfa">
+<html>
 
 <head>
-	<% include templates/comon/header.ejs %>
-	<link rel="stylesheet" type="text/css" href="stylesheets/pages/products.css" />
+    <% include templates/common/header.ejs %>
+    <link rel="stylesheet" type="text/css" href="stylesheets/pages/products.css"/>
 </head>
 
 
-<body>
-	<div id="wrapper">
-		<% include templates/comon/nav-bar.ejs %>
+<body ng-app="productsModule">
+<div id="wrapper">
+    <% include templates/common/nav-bar.ejs %>
 
-		<div id="page-wrapper">
-			<div class="container-fluid">
+    <div id="page-wrapper">
+        <div class="container-fluid">
 
-				<% include templates/comon/breadcrums.ejs %>
+            <% include templates/common/breadcrumbs.ejs %>
 
-				<div class="row" ng-controller="ProductsController as productsCtrl">
+            <div class="row" ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.initCtrl()">
 
-					<div class="col-md-3">
-						<p class="lead">Categorias </p>
-						<div class="list-group">
-							<div>
-								<a href="#" ng-click="productsCtrl.filterBy('all')" class="list-group-item">Todos</a>
-							</div>
-							<div ng-click="productsCtrl.filterBy(category.id)"
-									ng-repeat="category in productsCtrl.categories | orderBy: '-nome' " >
-								<a href="#" class="list-group-item">{{category.nome}}</a>
-							</div>
-						</div>
-					</div>
+                <div class="col-md-3">
+                    <% include templates/products/product-search.ejs %>
+                    <br>
 
-					<div class="col-md-9">
+                    <p class="lead text-muted"><i class="fa fa-fw fa-eye"></i>Filtrar</p>
 
-						<div class="row">
-							<% include templates/products/product-preview.ejs %>
-						</div>
+                    <div class="list-group">
+                        <div>
+                            <a href="#" ng-click="productsCtrl.filterBy('all')" class="list-group-item">Todos os
+                                produtos</a>
+                        </div>
+                        <div ng-repeat="category in productsCtrl.categories | orderBy: 'nome' "
+                             ng-click="productsCtrl.filterBy(category.Familia)">
+                            <a href="#{{category.Descricao}}" class="list-group-item">{{category.Descricao}}</a>
+                        </div>
+                    </div>
 
-					</div>
 
-				</div>
-			</div>
+                </div>
 
-			<% include templates/comon/footer.ejs %>
-		</div>
-	</div>
+                <div ng-show="productsCtrl.loading" class="col-md-9">
+                    <p class="lead"><i class="fa fa-fw fa-address-card"></i> Produtos</p>
 
-	<script type="text/javascript" src="javascripts/custom/products.js"></script>
+                    <% include templates/common/loading.ejs %>
+                </div>
+
+                <div ng-hide="productsCtrl.loading" class="col-md-9">
+                    <p class="lead"><i class="fa fa-fw fa-address-card"></i> Produtos</p>
+
+                    <div ng-repeat="product in productsCtrl.products"
+                         ng-show="productsCtrl.filteringBy(product.Familia)">
+                        <% include templates/products/product-preview.ejs %>
+                    </div>
+                    <div ng-show="productsCtrl.isFilterEmpty()">Não foram encontrados produtos...</div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <% include templates/common/footer.ejs %>
+    </div>
+</div>
+
+<script type="text/javascript" src="javascripts/custom/products-module.js"></script>
 </body>
 
 </html>

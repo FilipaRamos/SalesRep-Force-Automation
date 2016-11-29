@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="sfa">
+<html>
 
 <head>
     <% include templates/comon/header.ejs %>
@@ -7,7 +7,7 @@
 </head>
 
 
-<body>
+<body ng-app="productsModule">
 <div id="wrapper">
     <% include templates/comon/nav-bar.ejs %>
 
@@ -16,17 +16,21 @@
 
             <% include templates/comon/breadcrums.ejs %>
 
-            <div class="row" ng-controller="ProductController as productCtrl">
+            <div class="row" ng-controller="ProductController as productCtrl"
+                 ng-init="productCtrl.initCtrl('<%= productId %>')">
 
                 <div class="col-md-12">
 
-                    <div class="thumbnail">
-                        <img class="img-responsive" src="http://placehold.it/800x200" alt="">
+                    <div ng-show="productCtrl.loadingInfo" class="col-md-9">
+                        <% include templates/common/loading.ejs %>
+                    </div>
+
+                    <div ng-hide="productCtrl.loadingInfo" class="thumbnail">
                         <div class="caption-full">
-                            <h4 class="pull-right">{{productCtrl.product.preco_atual | currency:"€"}}</h4>
-                            <h4>{{productCtrl.product.nome}}</h4>
-                            <p class="pull-right"> IVA {{productCtrl.product.iva_atual}}%</p>
-                            <p> {{productCtrl.product.descricao}}</p>
+                            <h4 class="pull-right">{{productCtrl.product.PrecoMedio | currency:"€"}}</h4>
+                            <h4>{{productCtrl.product.CodArtigo}}</h4>
+                            <p class="pull-right"> IVA {{productCtrl.product.IVA}}%</p>
+                            <p> {{productCtrl.product.DescArtigo}}</p>
                         </div>
                     </div>
 
@@ -38,7 +42,7 @@
 
                 <div class="col-md-12">
                     <div class="text-right">
-                        <a href="/nova_encomenda" class="btn btn-success">Fazer encomenda</a>
+                        <a href="/nova_encomenda?produtoId=<%= productId %>" class="btn btn-primary">Encomendar</a>
                     </div>
                 </div>
 
@@ -49,7 +53,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="javascripts/custom/product.js"></script>
+<script type="text/javascript" src="javascripts/custom/products-module.js"></script>
 </body>
 
 </html>

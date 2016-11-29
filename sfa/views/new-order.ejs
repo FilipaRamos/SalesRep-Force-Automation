@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include templates/common/header.ejs %>
+</head>
+
+<body ng-app="newOrderModule">
+<div id="wrapper">
+    <% include templates/common/nav-bar.ejs %>
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+
+            <% include templates/common/breadcrumbs.ejs %>
+
+            <div class="row-align-center" ng-controller="NewOrderController as newOrderCtrl" ng-init="newOrderCtrl.initCtrl(); newOrderCtrl.setCustomer('<%= customerId %>');">
+
+                <div class="span6" ng-controller="CustomerController as customerCtrl"
+                     ng-init="customerCtrl.initCtrl('<%= customerId %>'); currentCtrl = customerCtrl;">
+                    <% include templates/customers/customer-info.ejs %>
+                </div>
+
+                <div class="span12">
+                    <% include templates/orders/product-listing.ejs %>
+                </div>
+
+                <div class="span12">
+                    <% include templates/orders/product-selector.ejs %>
+                </div>
+
+                <div class="span12">
+                    <br>
+                    <button type="button" class="btn btn-primary pull-right" ng-click="newOrderCtrl.addOrder()" ng-disabled="newOrderCtrl.waitingAPIResponse"> Encomendar</button>
+                </div>
+
+            </div>
+        </div>
+        <% include templates/common/footer.ejs %>
+    </div>
+</div>
+<script src="javascripts/custom/customers-module.js"></script>
+<script src="javascripts/custom/products-module.js"></script>
+<script src="javascripts/custom/orders-module.js "></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<div class="widget widget-nopad">
+    <div class="widget-header"><i class="fa fa-fw fa-address-card"></i> Vendedores
+        <a href="/registar" class="pull-right"><i class="fa fa-plus-square">&nbsp</i></a>
+    </div>
+
+    <div class="widget-content" ng-controller="UsersController as usersCtrl" ng-init="usersCtrl.initCtrl(); currentCtrl = usersCtrl">
+        <div class="widget big-stats-container" style="overflow-y: auto; height:445px;">
+            <div class="widget-content">
+
+                <div ng-show="currentCtrl.loading" class="span10">
+                    <% include ../common/loading.ejs %>
+                </div>
+
+                <div ng-show="!currentCtrl.loading && currentCtrl.salesReps.length == 0" class="span10">
+                    Não foram encontrados vendedores...
+                </div>
+
+                <section ng-hide="currentCtrl.loading || currentCtrl.salesReps.length == 0">
+                    <ul class="nav nav-pills">
+                        <li ng-class="{ active:usersCtrl.isSet(1) }">
+                            <a href ng-click="usersCtrl.setTab(1)">Top</a>
+                        </li>
+                        <li ng-class="{ active:usersCtrl.isSet(2) }">
+                            <a href ng-click="usersCtrl.setTab(2)">Todos</a>
+                        </li>
+                    </ul>
+
+                    <div ng-show="usersCtrl.isSet(2)">
+                        <form>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%;">Nome</th>
+                                    <th style="width: 30%;">Morada</th>
+                                    <th style="width: 20%;">Telefone</th>
+                                    <th style="width: 30%;">Vendas</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="user in usersCtrl.users | orderBy : '-Nome'">
+                                    <td><a href="perfil?id={{user.VendedorID}}">{{user.Nome}}</a></td>
+                                    <td>{{user.Morada}}</td>
+                                    <td>{{user.Telemovel}}</td>
+                                    <td>{{user.Vendas | currency:"€" }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+
+                    <div ng-show="usersCtrl.isSet(1)">
+                        <form>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%;">Nome</th>
+                                    <th style="width: 30%;">Morada</th>
+                                    <th style="width: 20%;">Telefone</th>
+                                    <th style="width: 30%;">Vendas</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="user in usersCtrl.users | orderBy : '-vendas' | limitTo : 10">
+                                    <td><a href="perfil?id={{user.id}}">{{user.Nome}}</a></td>
+                                    <td>{{user.Morada}}</td>
+                                    <td>{{user.Telemovel}}</td>
+                                    <td>{{user.Vendas | currency:"€" }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

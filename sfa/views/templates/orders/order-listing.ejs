@@ -1,0 +1,97 @@
+<div class="widget widget-nopad">
+
+    <div class="widget-header"><i class="fa fa-fw fa-shopping-cart"></i> Encomendas
+        <a ng-show="createOrder==true" href="/nova_encomenda{{currentCtrl.customer.CodCliente ? '?clienteId=' + currentCtrl.customer.CodCliente : ''}}"
+           class="pull-right"><i class="fa fa-plus-square">&nbsp</i></a>
+    </div>
+
+    <div class="widget-content">
+        <div class="widget big-stats-container" style="overflow-y: auto; height:445px;">
+            <div class="widget-content">
+
+                <div ng-show="currentCtrl.loadingOrders" class="span10">
+                    <% include ../common/loading.ejs %>
+                </div>
+
+                <div ng-show="!currentCtrl.loadingOrders && currentCtrl.orders.length == 0" class="span10">
+                    Não foram encontradas encomendas...
+                </div>
+
+
+                <section ng-hide="currentCtrl.loadingOrders || currentCtrl.orders.length == 0">
+                    <div ng-show="currentCtrl.orderScope('all')">
+                        <form>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th style="width: 25%;">ID</th>
+                                    <th style="width: 25%;">Data</th>
+                                    <th style="width: 20%;">ID Responsavel</th>
+                                    <th style="width: 20%;">ID Cliente</th>
+                                    <th style="width: 10%;">Valor</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="order in currentCtrl.orders | orderBy : '-Data'">
+                                    <td><a href="/encomenda?id={{order.Id}}">{{order.Id}}</a></td>
+                                    <td>{{order.Data | date:"dd-MM-yyyy"}}</td>
+                                    <td><a href="/vendedor?id={{order.Responsavel}}">{{order.Responsavel}}</a></td>
+                                    <td><a href="/cliente?id={{order.Entidade}}">{{order.Entidade}}</a></td>
+                                    <td>{{order.TotalMerc | currency:"€" }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+
+                    <div ng-show="currentCtrl.orderScope('salesRep')">
+                        <form>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%;">ID</th>
+                                    <th style="width: 30%;">Data</th>
+                                    <th style="width: 20%;">ID Cliente</th>
+                                    <th style="width: 30%;">Valor</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="order in currentCtrl.orders | orderBy : '-Data'">
+                                    <td><a href="/encomenda?id={{order.Id}}">{{order.Id}}</a></td>
+                                    <td>{{order.Data | date:"dd-MM-yyyy"}}</td>
+                                    <td><td><a href="/cliente?id={{order.Entidade}}">{{order.Entidade}}</a></td>
+                                    <td>{{order.TotalMerc| currency:"€" }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+
+                    <div ng-show="currentCtrl.orderScope('customer')">
+                        <form>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%;">ID</th>
+                                    <th style="width: 30%;">Data</th>
+                                    <th style="width: 20%;">ID Vendedor</th>
+                                    <th style="width: 30%;">Valor</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="order in currentCtrl.orders | orderBy : '-Data'">
+                                    <td><a href="/encomenda?id={{order.Id}}">{{order.Id}}</a></td>
+                                    <td>{{order.Data | date:"dd-MM-yyyy"}}</td>
+                                    <td><a href="/vendedor?id={{order.Responsavel}}">{{order.Responsavel}}</a></td>
+                                    <td>{{order.TotalMerc| currency:"€" }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</div>

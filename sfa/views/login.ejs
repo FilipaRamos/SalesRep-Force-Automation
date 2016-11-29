@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include templates/common/header.ejs %>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pages/login.css">
+</head>
+
+<body ng-app="usersModule">
+<div id="wrapper">
+    <% include templates/common/nav-bar.ejs %>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <% include templates/common/breadcrumbs.ejs %>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 col-md-offset-4">
+                        <h1 class="text-center login-title">Introduza as suas credenciais para entrar</h1>
+                        <div class="account-wall">
+                            <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                                 alt="">
+                            <form class="form-signin" ng-controller="LoginController as loginCtrl">
+                                <input ng-model="loginCtrl.user.username" type="text" class="form-control" placeholder="Utilizador" required autofocus>
+                                <input ng-model="loginCtrl.user.password" type="password" class="form-control" placeholder="Palavra-passe" required>
+                                <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="loginCtrl.login()">
+                                    Entrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <% include templates/common/footer.ejs %>
+    </div>
+</div>
+<script type="text/javascript" src="javascripts/custom/users-module.js"></script>
+</body>
+
+</html>

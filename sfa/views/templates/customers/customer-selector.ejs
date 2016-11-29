@@ -1,10 +1,10 @@
-<div ng-controller="CustomersController as customersCtrl">
-    <select id="client-selector" class="form-control selectpicker"
+<div ng-controller="CustomersController as customersCtrl" ng-init="customersCtrl.initCtrl()">
+    <select id="customer-selector" class="form-control selectpicker"
             data-live-search-placeholder="Procurar por nome..."
-            title="Cliente" data-live-search="true">
+            title="Clientes" data-live-search="true" data-dropup-auto="false" data-live-search-normalize="true">
         <option ng-repeat="customer in customersCtrl.customers"
-                value="{{customer.id}}" data-subtext="&emsp;{{customer.telefone}} ">
-            {{customer.nome}}
+                value="{{customer.CodCliente}}" data-subtext="&emsp;{{customer.Fac_Tel}} ">
+            {{customer.Nome}}
         </option>
     </select>
 </div>

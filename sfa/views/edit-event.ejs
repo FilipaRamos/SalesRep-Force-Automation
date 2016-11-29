@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include templates/common/header.ejs %>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.js"></script>
+    <script src="//cdn.rawgit.com/indrimuska/angular-moment-picker/master/dist/angular-moment-picker.min.js"></script>
+    <link href="//cdn.rawgit.com/indrimuska/angular-moment-picker/master/dist/angular-moment-picker.min.css"
+          rel="stylesheet">
+</head>
+
+<body>
+<div id="wrapper" ng-app="newEventModule">
+    <% include templates/common/nav-bar.ejs %>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+
+            <% include templates/common/breadcrumbs.ejs %>
+
+            <div class="row">
+                <div class="span12">
+
+                    <form action="" method="post" ng-controller="EditEventController as eventCtrl" ng-init="eventCtrl.initCtrl('<%= id %>')">
+                        <div class="row">
+                            <div class="span12">
+
+                                <!-- Event Type -->
+                                <div class="form-group row">
+                                    <label for="event-type" class="col-sm-2 col-form-label"> Tipo de evento </label>
+                                    <div class="col-sm-7">
+                                        <select name="=event-type" class="form-control selectpicker"
+                                                title="Selecione um tipo..."
+                                                ng-options="type as type.nome for type in eventCtrl.eventTypes"
+                                                ng-model="eventCtrl.event.eventType">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="form-group row">
+                                    <label for="offer_description" class="col-sm-2 col-form-label"> Descrição </label>
+                                    <div class="col-sm-7">
+                                        <textarea style="resize:vertical;" rows="3" cols="20" class="form-control"
+                                                  placeholder="Descrição"
+                                                  ng-model="eventCtrl.event.descricao"></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- Date, Time -->
+                                <div class="form-group row">
+                                    <label for="date-time" class="col-sm-2 col-form-label"> Data </label>
+                                    <div name="date-time" class="col-sm-7">
+
+                                        <div class="input-group"
+                                             moment-picker="eventCtrl.event.date"
+                                             format="DD-MM-YYYY" locale="pt">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input class="form-control"
+                                                   placeholder="Selecionar data"
+                                                   ng-model="eventCtrl.event.date"
+                                                   ng-model-options="{ updateOn: 'blur' }">
+                                        </div>
+
+                                        <br>
+
+                                        <div class="input-group"
+                                             moment-picker="eventCtrl.event.time"
+                                             format="HH:mm" locale="pt">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-clock-o"></i>
+                                            </span>
+                                            <input class="form-control"
+                                                   placeholder="Selecionar hora"
+                                                   ng-model="eventCtrl.event.time"
+                                                   ng-model-options="{ updateOn: 'blur' }">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Customer (non-editable) -->
+                                <div class="form-group row">
+                                    <label for="customer" class="col-sm-2 col-form-label">Cliente</label>
+                                    <div name="customer" class="col-sm-7">
+                                        {{eventCtrl.event.customer}}
+                                    </div>
+                                </div>
+
+                                <!-- Products -->
+                                <div class="form-group row">
+                                    <label for="products" class="col-sm-2 col-form-label">Oportunidades</label>
+                                    <div name="procuts" class="col-sm-7">
+                                        <% include templates/products/product-selector.ejs %>
+                                    </div>
+                                </div>
+
+                                <!-- Notes -->
+                                <div class="form-group row">
+                                    <label for="offer_description" class="col-sm-2 col-form-label"> Notas </label>
+                                    <div class="col-sm-7">
+                                        <textarea style="resize:vertical;" rows="3" cols="20" class="form-control"
+                                                  placeholder="Notas" ng-model="eventCtrl.event.notes"></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- Buttons -->
+                                <div class="form-group row">
+                                    <div class="col-sm-7 col-sm-offset-2">
+                                        <button type="submit" class="btn btn-primary btn-block"> Alterar evento </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <% include templates/common/footer.ejs %>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="javascripts/custom/products-module.js"></script>
+<script type="text/javascript" src="javascripts/custom/customers-module.js"></script>
+<script type="text/javascript" src="javascripts/custom/events-module.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<div class="widget widget-nopad">
+
+    <div class="widget-header">
+        <i class="fa fa-fw fa-dropbox"></i> Produtos
+    </div>
+
+    <div class="widget-content">
+        <div class="widget big-stats-container">
+            <div class="widget-content">
+                <div class="container">
+                    <form>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>ID Produto</th>
+                                <th>Stock</th>
+                                <th>Quantidade</th>
+                                <th>Preço Unitário</th>
+                                <th>Desconto Unitário</th>
+                                <th>IVA</th>
+                                <th>Sub-Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="line in newOrderCtrl.linesDoc" ng-init="line.IVA = line.IVA ? line.IVA : 23;"
+                                id="{{line.CodArtigo}}">
+                                <td>
+                                    <div><span ng-hide="showTick==false;" >
+                                            <input type="radio" name="optradio"
+                                                   ng-click="newOrderCtrl.selectProduct(line.CodArtigo)">
+                                        </span>
+                                        <a href="/produto?id={{line.CodArtigo}}">{{line.CodArtigo}}</a>
+                                    </div>
+                                </td>
+                                <td>{{line.Stock}}</td>
+                                <td>
+                                    <div ng-hide="newOrderCtrl.isProductSelected(line.CodArtigo)">
+                                        {{line.Quantidade}}
+                                    </div>
+                                    <input ng-show="newOrderCtrl.isProductSelected(line.CodArtigo)" ng-model="line.Quantidade"></input>
+                                </td>
+                                <td>{{line.PrecoUnitario | currency:"€" }}</td>
+                                <td>
+                                    <div ng-hide="newOrderCtrl.isProductSelected(line.CodArtigo)">
+                                        {{line.Desconto | currency:"€" }}
+                                    </div>
+                                    <input ng-show="newOrderCtrl.isProductSelected(line.CodArtigo)" ng-model="line.Desconto"></input>
+                                </td>
+                                <td>{{line.IVA}}%</td>
+                                <td>
+                                    {{(((line.IVA/100)+1)*((line.PrecoUnitario*line.Quantidade)-(line.Desconto*line.Quantidade)))
+                                    | currency:"€"}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><b>TOTAL</b></td>
+                                <td>{{newOrderCtrl.total() | currency:"€"}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+
+                    <br>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1 @@
+var indexModule = angular.module('indexModule', ['eventsModule', 'customersModule']);
