@@ -16,6 +16,17 @@ namespace SalesForceAutomation.Lib_Primavera
 {
     public class PriIntegration
     {
+        public static Boolean initializaCompany(){
+            if (!PriEngine.isCompanyInitialized())
+            {
+                PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim());
+                return true;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
         # region Cliente
 
@@ -26,7 +37,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             List<Models.Cliente> listClientes = new List<Models.Cliente>();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            if (initializaCompany() == true)
             {
 
                 selectList = PriEngine.Engine.Consulta("SELECT Cliente, Nome, NomeFiscal, Fac_Tel, NumContrib, B2BEnderecoMail, Fac_Mor FROM  CLIENTES");
@@ -62,7 +73,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             Models.Cliente cliente = new Models.Cliente();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            if (initializaCompany() == true)
             {
 
                 if (PriEngine.Engine.Comercial.Clientes.Existe(codCliente) == true)
@@ -97,7 +108,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             try
             {
-                if (PriEngine.InitializeCompany(Properties.Settings.Default.Company.Trim(), Properties.Settings.Default.User.Trim(), Properties.Settings.Default.Password.Trim()) == true)
+                if (initializaCompany() == true)
                 {
 
                     newCliente.set_Cliente(cliente.CodCliente);
@@ -144,7 +155,7 @@ namespace SalesForceAutomation.Lib_Primavera
             try
             {
 
-                if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+                if (initializaCompany() == true)
                 {
 
                     if (PriEngine.Engine.Comercial.Clientes.Existe(cliente.CodCliente) == false)
@@ -200,7 +211,7 @@ namespace SalesForceAutomation.Lib_Primavera
             GcpBEArtigo objArtigo = new GcpBEArtigo();
             Models.Artigo myArt = new Models.Artigo();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            if (initializaCompany() == true)
             {
 
                 string company = SalesForceAutomation.Properties.Settings.Default["Company"].ToString();
@@ -238,9 +249,10 @@ namespace SalesForceAutomation.Lib_Primavera
             Models.Artigo art = new Models.Artigo();
             List<Models.Artigo> listArts = new List<Models.Artigo>();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            if (initializaCompany() == true)
             {
 
+                try{
                 //  objList = PriEngine.Engine.Comercial.Artigos.LstArtigos();
                 objList = PriEngine.Engine.Consulta("Select * FROM Artigo");
 
@@ -258,6 +270,9 @@ namespace SalesForceAutomation.Lib_Primavera
                     listArts.Add(art);
                     objList.Seguinte();
                 }
+            }catch(Exception e){
+
+            }
 
                 return listArts;
 
@@ -281,7 +296,7 @@ namespace SalesForceAutomation.Lib_Primavera
             Models.Familias familia = new Models.Familias();
             List<Models.Familias> listFamilies = new List<Models.Familias>();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            if (initializaCompany() == true)
             {
 
                 objList = PriEngine.Engine.Consulta("SELECT Familia, Descricao FROM  Familias");
@@ -318,7 +333,7 @@ namespace SalesForceAutomation.Lib_Primavera
             Models.ArtigoArmazem objArtArm;
             List<Models.ArtigoArmazem> listArtigoArmazens = new List<Models.ArtigoArmazem>();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            if (initializaCompany() == true)
             {
                 objList = PriEngine.Engine.Comercial.ArtigosArmazens.ListaArtigosArmazens(artigoID);
 
@@ -359,7 +374,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             List<Models.Reuniao> listReunioes = new List<Models.Reuniao>();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            if (initializaCompany() == true)
             {
 
                 selectList = PriEngine.Engine.Consulta("SELECT Tarefas.Id AS RId, * FROM Tarefas LEFT JOIN TiposTarefa ON TipoActividade = 'REUN'");
@@ -397,7 +412,7 @@ namespace SalesForceAutomation.Lib_Primavera
             
             Models.Reuniao reuniao = new Models.Reuniao();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            if (initializaCompany() == true)
             {
                 if (PriEngine.Engine.CRM.Actividades.Existe(codReuniao) == false)
                 {
@@ -437,7 +452,7 @@ namespace SalesForceAutomation.Lib_Primavera
            
             try
             {
-                if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+                if (initializaCompany() == true)
                 {
 
                     /****************************************************************************************************
@@ -491,7 +506,7 @@ namespace SalesForceAutomation.Lib_Primavera
             try
             {
 
-                if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+                if (initializaCompany() == true)
                 {
 
                     if (PriEngine.Engine.CRM.Actividades.Existe(meeting.CodReuniao) == false)
@@ -558,7 +573,7 @@ namespace SalesForceAutomation.Lib_Primavera
             try
             {
 
-                if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+                if (initializaCompany() == true)
                 {
 
                     if (PriEngine.Engine.CRM.Actividades.Existe(meeting.CodReuniao) == false)
@@ -607,7 +622,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             List<Models.Reuniao> listReunioes = new List<Models.Reuniao>();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            if (initializaCompany() == true)
             {
 
                 selectList = PriEngine.Engine.Consulta("SELECT Tarefas.Id AS RId, * FROM Tarefas LEFT JOIN TiposTarefa ON TipoActividade = 'REUN' WHERE EntidadePrincipal = '" + codEntidade + "'");
@@ -651,7 +666,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             try
             {
-                if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+                if (initializaCompany() == true)
                 {
                     if (PriEngine.Engine.CRM.OportunidadesVenda.ExisteID(id))
                     {
@@ -699,7 +714,7 @@ namespace SalesForceAutomation.Lib_Primavera
            
             try
             {
-                if (PriEngine.InitializeCompany(Properties.Settings.Default.Company.Trim(), Properties.Settings.Default.User.Trim(), Properties.Settings.Default.Password.Trim()) == true)
+                if (initializaCompany() == true)
                 {
 
 
@@ -779,7 +794,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             try
             {
-                if (PriEngine.InitializeCompany(Properties.Settings.Default.Company.Trim(), Properties.Settings.Default.User.Trim(), Properties.Settings.Default.Password.Trim()) == true)
+                if (initializaCompany() == true)
                 {
 
                     if (PriEngine.Engine.CRM.OportunidadesVenda.ExisteID(oport.Id))
@@ -864,7 +879,7 @@ namespace SalesForceAutomation.Lib_Primavera
             List<Models.Encomenda> saleList = new List<Models.Encomenda>();
 
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            if (initializaCompany() == true)
             {
 
                 objListDoc = PriEngine.Engine.Consulta("SELECT TOP 20 id, Entidade, Data, NumDoc, Responsavel, TotalMerc, Serie FROM CabecDoc WHERE TipoDoc = 'ECL' ORDER BY TotalMerc DESC");
@@ -922,7 +937,7 @@ namespace SalesForceAutomation.Lib_Primavera
             Models.LinhaEncomenda saleLine = new Models.LinhaEncomenda();
             List<Models.LinhaEncomenda> saleLineList = new List<Models.LinhaEncomenda>();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
+            if (initializaCompany())
             {
                 objListDoc = PriEngine.Engine.Consulta("SELECT id, Entidade, Data, NumDoc, Responsavel, TotalMerc, Serie FROM CabecDoc WHERE TipoDoc = 'ECL' AND id = '" + id + "'");
 
@@ -976,7 +991,7 @@ namespace SalesForceAutomation.Lib_Primavera
             List<Models.LinhaEncomenda> lstlindv = new List<Models.LinhaEncomenda>();
 
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim()) == true)
+            if (initializaCompany() == true)
             {
                 
                 myEnc.set_DataDoc(DateTime.Now);
@@ -1033,7 +1048,7 @@ namespace SalesForceAutomation.Lib_Primavera
             Models.LinhaEncomenda tmpLine;
             List<Models.LinhaEncomenda> tmpListLine;
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
+            if (initializaCompany())
             {
                 listRepSales = PriEngine.Engine.Consulta("SELECT id, Entidade, Data, NumDoc, TotalMerc, Serie, Responsavel FROM CabecDoc WHERE TipoDoc = 'ECL' AND Responsavel='"+salesRepID+"'");
 
@@ -1090,7 +1105,7 @@ namespace SalesForceAutomation.Lib_Primavera
             Models.LinhaEncomenda tmpLine;
             List<Models.LinhaEncomenda> tmpListLine;
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
+            if (initializaCompany())
             {
                 listClientPurchases = PriEngine.Engine.Consulta("SELECT id, Entidade, Data, NumDoc, TotalMerc, Serie, Responsavel FROM CabecDoc WHERE TipoDoc = 'ECL' AND Entidade='" + clientID + "'");
 
@@ -1148,7 +1163,7 @@ namespace SalesForceAutomation.Lib_Primavera
             List<Models.Vendedor> salesRepList = new List<Models.Vendedor>();
             Models.Vendedor tmpSalesRep;
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
+            if (initializaCompany())
             {
 
                 objList = PriEngine.Engine.Consulta("SELECT Vendedor, Nome, Comissao, Localidade, Morada, CPostal, Telemovel, EMail FROM Vendedores");
@@ -1185,7 +1200,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             Models.VendasArtigo productSales = new Models.VendasArtigo();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
+            if (initializaCompany())
             {
                 objList = PriEngine.Engine.Consulta("SELECT Artigo.Artigo AS Artigo, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Artigo, LinhasDoc, CabecDoc WHERE Artigo.Artigo = LinhasDoc.Artigo AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND Artigo.Artigo = '" + productID + "' GROUP BY Artigo.Artigo");
 
@@ -1203,7 +1218,7 @@ namespace SalesForceAutomation.Lib_Primavera
             Models.VendasArtigo tmpProdSales;
             List<Models.VendasArtigo> productSalesList = new List<Models.VendasArtigo>();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
+            if (initializaCompany())
             {
                 objList = PriEngine.Engine.Consulta("SELECT Artigo.Artigo AS Artigo, SUM(LinhasDoc.PrecoLiquido) AS Soma, Artigo.STKActual AS STKActual, Artigo.PCUltimo AS PCUltimo FROM Artigo, LinhasDoc, CabecDoc WHERE Artigo.Artigo = LinhasDoc.Artigo AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' GROUP BY Artigo.Artigo, STKActual, PCUltimo");
 
@@ -1231,7 +1246,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             Models.VendasVendedor repSales = new Models.VendasVendedor();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
+            if (initializaCompany())
             {
                 objList = PriEngine.Engine.Consulta("SELECT Vendedores.Vendedor AS Vendedor, Vendedores.Nome AS Nome, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Vendedores, LinhasDoc, CabecDoc WHERE Vendedores.Vendedor = CabecDoc.Responsavel AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND Vendedores.Vendedor = '" + salesRepID + "' GROUP BY Vendedores.Vendedor, Vendedores.Nome");
 
@@ -1250,7 +1265,7 @@ namespace SalesForceAutomation.Lib_Primavera
             Models.VendasVendedor tmpRepSales;
             List<Models.VendasVendedor> repSalesList = new List<Models.VendasVendedor>();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
+            if (initializaCompany())
             {
                 objList = PriEngine.Engine.Consulta("SELECT Vendedores.Vendedor AS Vendedor, Vendedores.Nome AS Nome, SUM(LinhasDoc.PrecoLiquido) AS Soma, Vendedores.Morada AS Morada, Vendedores.Telemovel AS Telemovel FROM Vendedores, LinhasDoc, CabecDoc WHERE Vendedores.Vendedor = CabecDoc.Responsavel AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' GROUP BY Vendedores.Vendedor, Vendedores.Nome, Vendedores.Morada, Vendedores.Telemovel");
 
@@ -1283,7 +1298,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             Models.VendasCliente client = new Models.VendasCliente();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
+            if (initializaCompany())
             {
                 objList = PriEngine.Engine.Consulta("SELECT Clientes.Cliente AS ClienteID, Clientes.Fac_Mor AS Morada, Clientes.Fac_Tel AS Telefone, Clientes.Fac_Cp AS CodPost, Clientes.Fac_Local AS Localidade, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Clientes, LinhasDoc, CabecDoc WHERE Clientes.Cliente = CabecDoc.Entidade AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND Clientes.Cliente = '" + clientID + "' GROUP BY Clientes.Cliente, Clientes.Fac_Tel, Clientes.Fac_Mor, Clientes.Fac_Cp, Clientes.Fac_Local");
 
@@ -1305,7 +1320,7 @@ namespace SalesForceAutomation.Lib_Primavera
             Models.VendasCliente tmpClientSales;
             List<Models.VendasCliente> clientList = new List<Models.VendasCliente>();
 
-            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
+            if (initializaCompany())
             {
                 objList = PriEngine.Engine.Consulta("SELECT Clientes.Cliente AS ClienteID, Clientes.Fac_Mor AS Morada, Clientes.Fac_Tel AS Telefone, Clientes.Fac_Cp AS CodPost, Clientes.Fac_Local AS Localidade, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Clientes, LinhasDoc, CabecDoc WHERE Clientes.Cliente = CabecDoc.Entidade AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' GROUP BY Clientes.Cliente, Clientes.Fac_Tel, Clientes.Fac_Mor, Clientes.Fac_Cp, Clientes.Fac_Local");
 
