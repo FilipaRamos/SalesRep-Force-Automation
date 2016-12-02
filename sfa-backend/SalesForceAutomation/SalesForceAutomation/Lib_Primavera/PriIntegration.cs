@@ -11,6 +11,7 @@ using Interop.ICrmBS900;
 using Interop.CrmBE900;
 using System.Diagnostics;
 using System.Collections;
+using SalesForceAutomation.Models;
 
 namespace SalesForceAutomation.Lib_Primavera
 {
@@ -90,49 +91,49 @@ namespace SalesForceAutomation.Lib_Primavera
         public static Models.RespostaErro PostCliente(Models.Cliente cliente)
         {
 
-            Models.RespostaErro erro = new Models.RespostaErro();
+                Models.RespostaErro erro = new Models.RespostaErro();
 
 
-            GcpBECliente newCliente = new GcpBECliente();
+                GcpBECliente newCliente = new GcpBECliente();
 
-            try
-            {
-                if (PriEngine.InitializeCompany(Properties.Settings.Default.Company.Trim(), Properties.Settings.Default.User.Trim(), Properties.Settings.Default.Password.Trim()) == true)
+                try
                 {
+                    if (PriEngine.InitializeCompany(Properties.Settings.Default.Company.Trim(), Properties.Settings.Default.User.Trim(), Properties.Settings.Default.Password.Trim()) == true)
+                    {
 
-                    newCliente.set_Cliente(cliente.CodCliente);
-                    newCliente.set_Nome(cliente.Nome);
-                    newCliente.set_NomeFiscal(cliente.NomeFiscal);
-                    newCliente.set_NumContribuinte(cliente.NumContribuinte);
-                    newCliente.set_Morada(cliente.Fac_Mor);
-                    newCliente.set_Telefone(cliente.Fac_Tel);
-                    newCliente.set_B2BEnderecoMail(cliente.Email);
-                    newCliente.set_Moeda("EUR");
+                        newCliente.set_Cliente(cliente.CodCliente);
+                        newCliente.set_Nome(cliente.Nome);
+                        newCliente.set_NomeFiscal(cliente.NomeFiscal);
+                        newCliente.set_NumContribuinte(cliente.NumContribuinte);
+                        newCliente.set_Morada(cliente.Fac_Mor);
+                        newCliente.set_Telefone(cliente.Fac_Tel);
+                        newCliente.set_B2BEnderecoMail(cliente.Email);
+                        newCliente.set_Moeda("EUR");
 
-                    PriEngine.Engine.Comercial.Clientes.Actualiza(newCliente);
+                        PriEngine.Engine.Comercial.Clientes.Actualiza(newCliente);
 
-                        erro.Erro = 0;
-                        erro.Descricao = "Sucesso";
+                            erro.Erro = 0;
+                            erro.Descricao = "Sucesso";
+                            return erro;
+                        }
+                    else
+                    {
+                        erro.Erro = 1;
+                        erro.Descricao = "Erro ao abrir empresa";
                         return erro;
                     }
-                else
+                }
+
+                catch (Exception ex)
                 {
                     erro.Erro = 1;
-                    erro.Descricao = "Erro ao abrir empresa";
+                    erro.Descricao = ex.Message;
+                    Debug.WriteLine(ex.Message);
                     return erro;
                 }
+
+
             }
-
-            catch (Exception ex)
-            {
-                erro.Erro = 1;
-                erro.Descricao = ex.Message;
-                Debug.WriteLine(ex.Message);
-                return erro;
-            }
-
-
-        }
 
         public static Models.RespostaErro PutCliente(Models.Cliente cliente)
         {
@@ -1140,7 +1141,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
         #region Administration
 
-        public static List<Models.Vendedor> get_all_salesRep()
+        public static List<Models.Vendedor> GetSalesRep()
         {
             StdBELista objList;
 
@@ -1149,7 +1150,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
             {
-
+                //objList = PriEngine.Engine.Comercial.Vendedores.LstVendedores();
                 objList = PriEngine.Engine.Consulta("SELECT Vendedor, Nome, Comissao, Localidade, Morada, CPostal, Telemovel, EMail FROM Vendedores");
 
                 while (!objList.NoFim())
@@ -1172,6 +1173,27 @@ namespace SalesForceAutomation.Lib_Primavera
             }
 
             return salesRepList;
+        }
+
+        public static RespostaErro PostSalesRep(Vendedor newSalesRep)
+        {
+            RespostaErro erro = new RespostaErro();
+
+            GcpBEVendedor newRep = new GcpBEVendedor();
+            if (PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company, SalesForceAutomation.Properties.Settings.Default.User, SalesForceAutomation.Properties.Settings.Default.Password))
+            {
+                    newRep.set_CodigoPostal(newSalesRep.CPostal);
+                    newRep.set_Nome(newSalesRep.Nome);
+                    newRep.set_Morada(newSalesRep.Morada);
+                    newRep.set_Localidade(newSalesRep.Localidade);
+                    newRep.set_Comissao((float) newSalesRep.Comissao);
+                    newRep.set_Email(newSalesRep.Email);
+                    newRep.set_Telemovel(newSalesRep.Telemovel);
+
+                    PriEngine.Engine.Comercial.Vendedores.Actualiza(newRep);
+            }
+            
+            return erro;
         }
 
         #endregion
