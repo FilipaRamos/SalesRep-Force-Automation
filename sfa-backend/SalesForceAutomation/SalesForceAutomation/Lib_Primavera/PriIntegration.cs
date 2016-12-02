@@ -452,6 +452,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     actividade.set_Prioridade(reuniao.Prioridade.ToString());
                     actividade.set_TodoDia(reuniao.TodoDia);
                     actividade.set_EntidadePrincipal(reuniao.Entidade);
+                    actividade.set_Estado("0");
 
                     // guardar Tarefa
                     PriEngine.Engine.CRM.Actividades.Actualiza(actividade);
