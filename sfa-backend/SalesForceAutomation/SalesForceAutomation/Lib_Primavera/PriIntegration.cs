@@ -536,7 +536,6 @@ namespace SalesForceAutomation.Lib_Primavera
 
         public static Models.RespostaErro PutReuniao(Models.Reuniao meeting)
         {
-
             Models.RespostaErro erro = new Models.RespostaErro();
 
             CrmBEActividade actividade = new CrmBEActividade();
@@ -815,7 +814,6 @@ namespace SalesForceAutomation.Lib_Primavera
 
         public static Models.RespostaErro PutOportunidadeVenda(Models.OportunidadeVenda oport)
         {
-
             Models.RespostaErro erro = new Models.RespostaErro();
 
             CrmBEOportunidadeVenda oportunidade = new CrmBEOportunidadeVenda();
@@ -833,8 +831,6 @@ namespace SalesForceAutomation.Lib_Primavera
 
                         // atualizar OportunidadeVenda
                         PriEngine.Engine.CRM.OportunidadesVenda.Actualiza(oportunidade);
-
-                        Debug.WriteLine("AFTER OPORTUNIDADE");
 
                         /****************************************************************************************************
                          *                                     criar novas LinhasPropostaVenda
@@ -862,8 +858,6 @@ namespace SalesForceAutomation.Lib_Primavera
                             PriEngine.Engine.CRM.PropostasOPV.Actualiza(proposta);
                         }
                         catch (Exception e) { }
-
-                        Debug.WriteLine("AFTER PROPOSTA");
 
                         erro.Erro = 0;
                         erro.Descricao = "Sucesso";
