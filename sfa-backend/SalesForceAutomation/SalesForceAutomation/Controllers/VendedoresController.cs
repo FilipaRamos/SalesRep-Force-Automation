@@ -13,7 +13,7 @@ namespace SalesForceAutomation.Controllers
         // GET: /vendedores/
         public IEnumerable<Models.Vendedor> Get()
         {
-            return Lib_Primavera.PriIntegration.GetSalesRep();
+            return Lib_Primavera.PriIntegration.GetSalesReps();
         }
 
         // POST: /vendedores/

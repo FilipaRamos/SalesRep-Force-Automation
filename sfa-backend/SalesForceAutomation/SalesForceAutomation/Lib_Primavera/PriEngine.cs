@@ -15,6 +15,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
         public static StdPlatBS Platform { get; set; }
         public static ErpBS Engine { get; set; }
+        public static Boolean initialized = false;
 
         public static bool InitializeCompany(string Company, string User, string Password)
         {
@@ -59,7 +60,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
                 // Returns the engine.
                 Engine = MotorLE;
-
+                initialized = true;
                 return true;
             }
             else
@@ -68,6 +69,11 @@ namespace SalesForceAutomation.Lib_Primavera
             }
 
 
+        }
+
+        public static bool isCompanyInitialized()
+        {
+            return initialized;
         }
 
     }

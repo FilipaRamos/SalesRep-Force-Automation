@@ -12,6 +12,11 @@ namespace SalesForceAutomation.Models
             get;
             set;
         }
+        public string Password
+        {
+            get;
+            set;
+        }
         public string Nome
         {
             get;
