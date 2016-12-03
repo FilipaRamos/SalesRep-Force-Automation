@@ -21,20 +21,16 @@
                 <div class="span12">
 
                     <!-- TODO add sales rep to init-->
-                    <form ng-controller="NewEventController as newEventCtrl" ng-init="newEventCtrl.initCtrl()">
+                    <form ng-controller="NewEventController as newEventCtrl" ng-init="newEventCtrl.initCtrl();">
                         <div class="row">
                             <div class="span12">
-                                <!-- Event Type
+                                <!-- Event Type -->
                                 <div class="form-group row">
                                     <label for="event-type" class="col-sm-2 col-form-label"> Tipo de evento </label>
                                     <div class="col-sm-7">
-                                        <select name="=event-type" class="form-control selectpicker"
-                                                title="Selecione um tipo..."
-                                                ng-options="type as type.nome for type in newEventCtrl.eventTypes"
-                                                ng-model="newEventCtrl.newEvent.eventType">
-                                        </select>
+                                        <% include templates/agenda/event-type-selector.ejs %>
                                     </div>
-                                </div>-->
+                                </div>
 
                                 <!-- Description -->
                                 <div class="form-group row">
@@ -97,15 +93,6 @@
                                                    ng-model="newEventCtrl.newEvent.endTime"
                                                    ng-model-options="{ updateOn: 'blur' }">
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div ng-hide="newEventCtrl.newEvent.TodoDia" class="form-group row">
-                                    <label for="event_duration" class="col-sm-2 col-form-label"> Duração </label>
-                                    <div class="col-sm-7">
-                                        <input name="event_duration" ng-model="newEventCtrl.newEvent.Duracao"
-                                               min="0" max="10000" step="15"
-                                               type="number" class="form-control" placeholder="Duração em minutos">
                                     </div>
                                 </div>
 

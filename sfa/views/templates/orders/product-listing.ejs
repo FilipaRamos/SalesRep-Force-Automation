@@ -15,6 +15,7 @@
                                 <th>ID Produto</th>
                                 <th>Stock</th>
                                 <th>Quantidade</th>
+                                <th>Unidade</th>
                                 <th>Preço Unitário</th>
                                 <th>Desconto Unitário</th>
                                 <th>IVA</th>
@@ -39,6 +40,7 @@
                                     </div>
                                     <input ng-show="newOrderCtrl.isProductSelected(line.CodArtigo)" ng-model="line.Quantidade"></input>
                                 </td>
+                                <td>{{line.Unidade}}</td>
                                 <td>{{line.PrecoUnitario | currency:"€" }}</td>
                                 <td>
                                     <div ng-hide="newOrderCtrl.isProductSelected(line.CodArtigo)">
@@ -54,6 +56,7 @@
                             </tr>
 
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>

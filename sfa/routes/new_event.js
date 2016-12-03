@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET [?data=MM/DD/YYYY], [?clienteId=clientId]. */
+/* GET [?data=YYYY-MM-DD], [?clienteId=clientId]. */
 router.get('/', function(req, res, next) {
   res.render('new-event', { title: 'Criar evento',
                             breadcrumb: 'Criar evento',

@@ -106,22 +106,83 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
     /**
      * Initiate controller
      */
-    self.initCtrl = function () {
+    self.initCtrl = function () {};
+
+    /**
+     * GET product opportunities from API
+     */
+    self.getProductOpportunities = function (id) {
+        console.log(id);
+        if(id==undefined || id==null) {
+            return;
+        }
+
+        $http.get(API_URL + '/api/OportunidadeVenda/' + id).then(function (data) {
+                console.log(data);
+
+                if(!self.productsCtrl.loading){
+                    self.addCurrentOpportunities(data.data.Artigos);
+                }
+                else{
+                    setTimeout(function(){
+                        self.addCurrentOpportunities(data.data.Artigos);
+                    },250);
+                }
+            },
+            function (data) {
+                console.log("Erro ao obter oportunidades de venda " + id);
+                console.log(data);
+            });
+    };
+
+    self.addCurrentOpportunities = function (opportnities) {
+        for(var i=0; i < opportnities.length; i++){
+            self.addProduct(opportnities[i]);
+        }
+    }
+
+    self.setProductsCtrl = function (productsCtrl) {
+        self.productsCtrl = productsCtrl;
     };
 
     self.setCustomer = function (id) {
-        self.newOrder.Entidade = id;
+        if(id!='null') {
+            self.newOrder.Entidade = id;
+        }
+    };
+
+    self.createLineDoc = function (productId) {
+        var product = self.productsCtrl.getProductById(productId);
+
+        if (product) {
+            self.products.push(productId);
+
+            var lineEntry = {};
+
+            lineEntry.CodArtigo = product.CodArtigo;
+            lineEntry.Stock = product.StockAtual;
+            lineEntry.Unidade = product.Unidade;
+            lineEntry.Quantidade = 1;
+            lineEntry.PrecoUnitario = product.PrecoMedio;
+            lineEntry.Iva = product.IVA;
+            lineEntry.Desconto = 0;
+
+            self.linesDoc.push(lineEntry);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
      * Add order through API
      */
     self.addOrder = function () {
-        // TODO do form validation
-
+        if(self.newOrder.LinhasDoc.empty) {
+            return;
+        }
 
         self.waitingAPIResponse = true;
-
         self.newOrder.Responsavel = "1"; // TODO change to vendedor loggin
         self.newOrder.Serie = "A";
         self.newOrder.LinhasDoc = self.linesDoc;
@@ -137,6 +198,7 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
                 window.location.replace('/encomenda?id=' + data.data.Id);
             },
             function (data) {
+                self.waitingAPIResponse = false;
                 console.log(data);
             });
     };
@@ -150,7 +212,11 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
         return total;
     };
 
-    // remove a product
+
+    /**
+     * Product handlers
+     */
+    // remove a product from order
     self.removeProduct = function () {
         if (self.selected) {
             var productIndex = self.products.indexOf(self.selected);
@@ -167,9 +233,6 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
         selector.selectpicker('refresh');
     };
 
-    /**
-     * Product handlers
-     */
     self.selectProduct = function (id) {
         self.selected = id;
         console.log("selected " + id);
@@ -179,30 +242,15 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
         return self.selected == id;
     }
 
-    self.addProduct = function (productsCtrl) {
-        var selectBox = document.getElementById("product-selector");
-        var productId = selectBox.options[selectBox.selectedIndex].value;
+    self.addProduct = function (productId) {
+        if(productId == undefined) {
+            var selectBox = document.getElementById("product-selector");
+            productId = selectBox.options[selectBox.selectedIndex].value;
+        }
 
         // add product to list of, if not present already
         if (productId && self.products.indexOf(productId) == -1) {
-            var product = productsCtrl.getProductById(productId);
-
-            self.products.push(productId);
-
-            console.log(product);
-
-            if (product) {
-                var lineEntry = {};
-
-                lineEntry.CodArtigo = product.CodArtigo;
-                lineEntry.Stock = product.StockAtual;
-                lineEntry.Quantidade = 1;
-                lineEntry.PrecoUnitario = product.PrecoMedio;
-                lineEntry.Iva = product.IVA;
-                lineEntry.Desconto = 0;
-
-                self.linesDoc.push(lineEntry);
-
+            if(self.createLineDoc(productId)) {
                 $("#product-" + productId).toggle(false);
             }
         }

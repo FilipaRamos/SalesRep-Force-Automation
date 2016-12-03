@@ -103,12 +103,49 @@ usersModule.controller('UserController', function ($http, $location) {
 
 });
 
-// TODO retrieve client list
-var usersTemp = [
-    {
-        id: "Exemplo2",
-        nome: 'pedro',
-        password: 'pp',
-        sales: 20000
-    }
-];
+/**
+ * UserController
+ */
+usersModule.controller('NewUserController', function ($http, $location) {
+    var self = this;
+
+    self.newUser = {};
+    self.waitingAPIResponse = false;
+
+    /**
+     * initiate controller
+     */
+    self.initCtrl = function () {
+    };
+
+    /**
+     * Add customer through API
+     */
+    self.addUser = function () {
+        // TODO do form validation
+        console.log(self.newUser);
+
+        self.waitingAPIResponse = true;
+
+        $http({
+            method: 'POST',
+            url: API_URL + '/api/vendedores',
+            headers: {'Content-Type': 'application/json'},
+            data: self.newUser
+        }).then(
+            function (data) {
+                console.log(data);
+                if(data.status==201) {
+                    window.location.replace('/vendedor?id=' + data.data.VendedorId);
+                }else{
+                    self.waitingAPIResponse = false;
+                    self.errorMessage = data.data;
+                }
+            },
+            function (data) {
+                console.log(data);
+                self.waitingAPIResponse = false;
+                self.errorMessage = data.data;
+            });
+    };
+});

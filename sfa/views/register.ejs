@@ -18,23 +18,23 @@
                     <div class="form-group">
                         <label for="name" class="col-sm-2 control-label">Nome</label>
                         <div class="col-sm-5">
-                            <input type="text" id="name" ng-model="userCtrl.user.nome" placeholder="Nome" class="form-control" autofocus>
+                            <input type="text" id="name" ng-model="userCtrl.user.Nome" placeholder="Nome" class="form-control" autofocus>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="email" class="col-sm-2 control-label">Email</label>
                         <div class="col-sm-5">
-                            <input type="email" id="email" ng-model="userCtrl.user.email" placeholder="Email" class="form-control">
+                            <input type="email" id="email" ng-model="userCtrl.user.Email" placeholder="Email" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="password" class="col-sm-2 control-label">Palavra-passe</label>
                         <div class="col-sm-5">
-                            <input type="password" id="password" placeholder="Palavra-passe" class="form-control">
+                            <input type="password" ng-model="userCtrl.user.Password" placeholder="Palavra-passe" class="form-control">
                             <br>
-                            <input type="password" id="password" placeholder="Repita a palavra-passe" class="form-control">
+                            <input type="password" ng-model="userCtrl.user.PasswordConf" placeholder="Repita a palavra-passe" class="form-control">
                         </div>
                     </div>
 
@@ -46,15 +46,36 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="phone" class="col-sm-2 control-label">Telefone</label>
+                        <label for="address" class="col-sm-2 control-label">Localidade</label>
                         <div class="col-sm-5">
-                            <input type="text" id="phone" ng-model="userCtrl.user.telefone" placeholder="Telefone" class="form-control">
+                            <input type="text" id="address" ng-model="userCtrl.user.Localidade" placeholder="Localidade" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address" class="col-sm-2 control-label">Código Postal</label>
+                        <div class="col-sm-5">
+                            <input type="text" id="address" ng-model="userCtrl.user.CodPostal" placeholder="Código Postal" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="col-sm-2 control-label">Telemóvel</label>
+                        <div class="col-sm-5">
+                            <input type="text" id="phone" ng-model="userCtrl.user.Telemovel" placeholder="Telemóvel" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address" class="col-sm-2 control-label">Comissão</label>
+                        <div class="col-sm-5">
+                            <input type="text" id="address" ng-model="userCtrl.user.Comissao" placeholder="Comissão" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-sm-5 col-sm-offset-2">
-                            <button type="submit" class="btn btn-primary btn-block">Registar</button>
+                            <button type="button" ng-click="newUserCtrl.addUser()" ng-disabled="newUserCtrl.waitingAPIResponse" class="btn btn-primary btn-block">Registar</button>
                         </div>
                     </div>
                 </form>

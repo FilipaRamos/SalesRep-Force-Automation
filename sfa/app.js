@@ -20,7 +20,6 @@ var new_event = require('./routes/new_event');
 var new_order = require('./routes/new_order');
 var edit_customer = require('./routes/edit_customer');
 var edit_event = require('./routes/edit_event');
-var edit_order = require('./routes/edit_order');
 var order = require('./routes/order');
 var oversight = require('./routes/oversight');
 
@@ -51,7 +50,6 @@ app.use('/cliente', customer);
 app.use('/criar_cliente', new_customer);
 app.use('/editar_cliente', edit_customer);
 app.use('/nova_encomenda', new_order);
-app.use('/editar_encomenda', edit_order);
 app.use('/produtos', products);
 app.use('/produto', product);
 app.use('/supervisao', oversight);
