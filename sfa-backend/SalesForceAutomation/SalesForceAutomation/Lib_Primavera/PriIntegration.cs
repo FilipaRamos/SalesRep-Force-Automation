@@ -17,6 +17,9 @@ namespace SalesForceAutomation.Lib_Primavera
 {
     public class PriIntegration
     {
+
+        public static int TIMESPAN_STATISTIC = 6 * 30;
+
         public static Boolean initializeCompany(){
             if (!PriEngine.isCompanyInitialized())
             {
@@ -1291,9 +1294,15 @@ namespace SalesForceAutomation.Lib_Primavera
 
             Models.VendasArtigo productSales = new Models.VendasArtigo();
 
+            TimeSpan halfAYear = new TimeSpan(TIMESPAN_STATISTIC, 0, 0, 0);
+            DateTime myDateTime = DateTime.Now;
+            myDateTime = myDateTime.Subtract(halfAYear);
+            string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
+
+
             if (initializeCompany())
             {
-                objList = PriEngine.Engine.Consulta("SELECT Artigo.Artigo AS Artigo, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Artigo, LinhasDoc, CabecDoc WHERE Artigo.Artigo = LinhasDoc.Artigo AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND Artigo.Artigo = '" + productID + "' GROUP BY Artigo.Artigo");
+                objList = PriEngine.Engine.Consulta("SELECT Artigo.Artigo AS Artigo, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Artigo, LinhasDoc, CabecDoc WHERE Artigo.Artigo = LinhasDoc.Artigo AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND Artigo.Artigo = '" + productID + "' AND CabecDoc.Data > '" + sqlFormattedDate + "' GROUP BY Artigo.Artigo");
 
                 productSales.ArtigoID = objList.Valor("Artigo");
                 productSales.Vendas = objList.Valor("Soma");
@@ -1309,9 +1318,14 @@ namespace SalesForceAutomation.Lib_Primavera
             Models.VendasArtigo tmpProdSales;
             List<Models.VendasArtigo> productSalesList = new List<Models.VendasArtigo>();
 
+            TimeSpan halfAYear = new TimeSpan(TIMESPAN_STATISTIC, 0, 0, 0);
+            DateTime myDateTime = DateTime.Now;
+            myDateTime = myDateTime.Subtract(halfAYear);
+            string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
+
             if (initializeCompany())
             {
-                objList = PriEngine.Engine.Consulta("SELECT Artigo.Artigo AS Artigo, SUM(LinhasDoc.PrecoLiquido) AS Soma, Artigo.STKActual AS STKActual, Artigo.PCUltimo AS PCUltimo FROM Artigo, LinhasDoc, CabecDoc WHERE Artigo.Artigo = LinhasDoc.Artigo AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' GROUP BY Artigo.Artigo, STKActual, PCUltimo");
+                objList = PriEngine.Engine.Consulta("SELECT Artigo.Artigo AS Artigo, SUM(LinhasDoc.PrecoLiquido) AS Soma, Artigo.STKActual AS STKActual, Artigo.PCUltimo AS PCUltimo FROM Artigo, LinhasDoc, CabecDoc WHERE Artigo.Artigo = LinhasDoc.Artigo AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND CabecDoc.Data > '" + sqlFormattedDate + "' GROUP BY Artigo.Artigo, STKActual, PCUltimo");
 
                 while (!objList.NoFim())
                 {
@@ -1337,9 +1351,14 @@ namespace SalesForceAutomation.Lib_Primavera
 
             Models.VendasVendedor repSales = new Models.VendasVendedor();
 
+            TimeSpan halfAYear = new TimeSpan(TIMESPAN_STATISTIC, 0, 0, 0);
+            DateTime myDateTime = DateTime.Now;
+            myDateTime = myDateTime.Subtract(halfAYear);
+            string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
+
             if (initializeCompany())
             {
-                objList = PriEngine.Engine.Consulta("SELECT Vendedores.Vendedor AS Vendedor, Vendedores.Nome AS Nome, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Vendedores, LinhasDoc, CabecDoc WHERE Vendedores.Vendedor = CabecDoc.Responsavel AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND Vendedores.Vendedor = '" + salesRepID + "' GROUP BY Vendedores.Vendedor, Vendedores.Nome");
+                objList = PriEngine.Engine.Consulta("SELECT Vendedores.Vendedor AS Vendedor, Vendedores.Nome AS Nome, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Vendedores, LinhasDoc, CabecDoc WHERE Vendedores.Vendedor = CabecDoc.Responsavel AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND Vendedores.Vendedor = '" + salesRepID + "' AND CabecDoc.Data > '" + sqlFormattedDate + "' GROUP BY Vendedores.Vendedor, Vendedores.Nome");
 
                 repSales.VendedorID = objList.Valor("Vendedor");
                 repSales.Nome = objList.Valor("Nome");
@@ -1356,9 +1375,14 @@ namespace SalesForceAutomation.Lib_Primavera
             Models.VendasVendedor tmpRepSales;
             List<Models.VendasVendedor> repSalesList = new List<Models.VendasVendedor>();
 
+            TimeSpan halfAYear = new TimeSpan(TIMESPAN_STATISTIC, 0, 0, 0);
+            DateTime myDateTime = DateTime.Now;
+            myDateTime = myDateTime.Subtract(halfAYear);
+            string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
+
             if (initializeCompany())
             {
-                objList = PriEngine.Engine.Consulta("SELECT Vendedores.Vendedor AS Vendedor, Vendedores.Nome AS Nome, SUM(LinhasDoc.PrecoLiquido) AS Soma, Vendedores.Morada AS Morada, Vendedores.Telemovel AS Telemovel FROM Vendedores, LinhasDoc, CabecDoc WHERE Vendedores.Vendedor = CabecDoc.Responsavel AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' GROUP BY Vendedores.Vendedor, Vendedores.Nome, Vendedores.Morada, Vendedores.Telemovel");
+                objList = PriEngine.Engine.Consulta("SELECT Vendedores.Vendedor AS Vendedor, Vendedores.Nome AS Nome, SUM(LinhasDoc.PrecoLiquido) AS Soma, Vendedores.Morada AS Morada, Vendedores.Telemovel AS Telemovel FROM Vendedores, LinhasDoc, CabecDoc WHERE Vendedores.Vendedor = CabecDoc.Responsavel AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND CabecDoc.Data > '" + sqlFormattedDate + "' GROUP BY Vendedores.Vendedor, Vendedores.Nome, Vendedores.Morada, Vendedores.Telemovel");
 
                 try
                 {
@@ -1389,9 +1413,14 @@ namespace SalesForceAutomation.Lib_Primavera
 
             Models.VendasCliente client = new Models.VendasCliente();
 
+            TimeSpan halfAYear = new TimeSpan(TIMESPAN_STATISTIC, 0, 0, 0);
+            DateTime myDateTime = DateTime.Now;
+            myDateTime = myDateTime.Subtract(halfAYear);
+            string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
+
             if (initializeCompany())
             {
-                objList = PriEngine.Engine.Consulta("SELECT Clientes.Cliente AS ClienteID, Clientes.Fac_Mor AS Morada, Clientes.Fac_Tel AS Telefone, Clientes.Fac_Cp AS CodPost, Clientes.Fac_Local AS Localidade, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Clientes, LinhasDoc, CabecDoc WHERE Clientes.Cliente = CabecDoc.Entidade AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND Clientes.Cliente = '" + clientID + "' GROUP BY Clientes.Cliente, Clientes.Fac_Tel, Clientes.Fac_Mor, Clientes.Fac_Cp, Clientes.Fac_Local");
+                objList = PriEngine.Engine.Consulta("SELECT Clientes.Cliente AS ClienteID, Clientes.Fac_Mor AS Morada, Clientes.Fac_Tel AS Telefone, Clientes.Fac_Cp AS CodPost, Clientes.Fac_Local AS Localidade, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Clientes, LinhasDoc, CabecDoc WHERE Clientes.Cliente = CabecDoc.Entidade AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND Clientes.Cliente = '" + clientID + "' AND CabecDoc.Data > '" + sqlFormattedDate + "' GROUP BY Clientes.Cliente, Clientes.Fac_Tel, Clientes.Fac_Mor, Clientes.Fac_Cp, Clientes.Fac_Local");
 
                 client.ClienteID = objList.Valor("ClienteID");
                 client.Vendas = objList.Valor("Soma");
@@ -1411,9 +1440,14 @@ namespace SalesForceAutomation.Lib_Primavera
             Models.VendasCliente tmpClientSales;
             List<Models.VendasCliente> clientList = new List<Models.VendasCliente>();
 
+            TimeSpan halfAYear = new TimeSpan(TIMESPAN_STATISTIC, 0, 0, 0);
+            DateTime myDateTime = DateTime.Now;
+            myDateTime = myDateTime.Subtract(halfAYear);
+            string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
+
             if (initializeCompany())
             {
-                objList = PriEngine.Engine.Consulta("SELECT Clientes.Cliente AS ClienteID, Clientes.Fac_Mor AS Morada, Clientes.Fac_Tel AS Telefone, Clientes.Fac_Cp AS CodPost, Clientes.Fac_Local AS Localidade, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Clientes, LinhasDoc, CabecDoc WHERE Clientes.Cliente = CabecDoc.Entidade AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' GROUP BY Clientes.Cliente, Clientes.Fac_Tel, Clientes.Fac_Mor, Clientes.Fac_Cp, Clientes.Fac_Local");
+                objList = PriEngine.Engine.Consulta("SELECT Clientes.Cliente AS ClienteID, Clientes.Fac_Mor AS Morada, Clientes.Fac_Tel AS Telefone, Clientes.Fac_Cp AS CodPost, Clientes.Fac_Local AS Localidade, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Clientes, LinhasDoc, CabecDoc WHERE Clientes.Cliente = CabecDoc.Entidade AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND CabecDoc.Data > '" + sqlFormattedDate + "' GROUP BY Clientes.Cliente, Clientes.Fac_Tel, Clientes.Fac_Mor, Clientes.Fac_Cp, Clientes.Fac_Local");
 
                 while (!objList.NoFim())
                 {
