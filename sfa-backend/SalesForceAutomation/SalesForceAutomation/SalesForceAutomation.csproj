@@ -402,6 +402,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OportunidadeVendaController.cs" />
     <Compile Include="Controllers\ReuniaoController.cs" />
+    <Compile Include="Controllers\TiposReuniaoController.cs" />
     <Compile Include="Controllers\VendasArtigoController.cs" />
     <Compile Include="Controllers\VendasClienteController.cs" />
     <Compile Include="Controllers\VendasVendedorController.cs" />
@@ -420,6 +421,7 @@
     <Compile Include="Models\OportunidadeVenda.cs" />
     <Compile Include="Models\RespostaErro.cs" />
     <Compile Include="Models\Reuniao.cs" />
+    <Compile Include="Models\TiposReuniao.cs" />
     <Compile Include="Models\VendasArtigo.cs" />
     <Compile Include="Models\VendasCliente.cs" />
     <Compile Include="Models\VendasVendedor.cs" />

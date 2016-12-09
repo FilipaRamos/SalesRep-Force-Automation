@@ -210,6 +210,7 @@ namespace SalesForceAutomation.Lib_Primavera
         {
 
             GcpBEArtigo objArtigo = new GcpBEArtigo();
+            GcpBEArtigoMoeda artigoMoeda;
             Models.Artigo myArt = new Models.Artigo();
 
             if (initializeCompany() == true)
@@ -226,9 +227,18 @@ namespace SalesForceAutomation.Lib_Primavera
                     objArtigo = PriEngine.Engine.Comercial.Artigos.Edita(codArtigo);
                     myArt.CodArtigo = objArtigo.get_Artigo();
                     myArt.DescArtigo = objArtigo.get_Descricao();
-                    myArt.PrecoMedio = objArtigo.get_PCMedio();
                     myArt.IVA = objArtigo.get_IVA();
                     myArt.StockAtual = objArtigo.get_StkActual();
+
+                    artigoMoeda = PriEngine.Engine.Comercial.ArtigosPrecos.Edita(codArtigo, "EUR", objArtigo.get_UnidadeSaida());
+
+                    myArt.UnidadeVenda = artigoMoeda.get_Unidade();
+                    myArt.PVP1 = artigoMoeda.get_PVP1();
+                    myArt.PVP2 = artigoMoeda.get_PVP2();
+                    myArt.PVP3 = artigoMoeda.get_PVP3();
+                    myArt.PVP4 = artigoMoeda.get_PVP4();
+                    myArt.PVP5 = artigoMoeda.get_PVP5();
+                    myArt.PVP6 = artigoMoeda.get_PVP6();
 
 
                     return myArt;
@@ -246,27 +256,35 @@ namespace SalesForceAutomation.Lib_Primavera
         {
 
             StdBELista objList;
+            GcpBEArtigoMoeda artigoMoeda;
 
             Models.Artigo art = new Models.Artigo();
             List<Models.Artigo> listArts = new List<Models.Artigo>();
+            
 
             if (initializeCompany() == true)
             {
 
                 try{
-                //  objList = PriEngine.Engine.Comercial.Artigos.LstArtigos();
-                objList = PriEngine.Engine.Consulta("Select * FROM Artigo");
+                    objList = PriEngine.Engine.Consulta("Select Artigo.Artigo AS CodArtigo, Descricao, Artigo.IVA AS IVA, STKMaximo, Familia, ArtigoMoeda.Unidade AS Unidade, PVP1, PVP2, PVP3, PVP4, PVP5, PVP6 FROM Artigo, ArtigoMoeda WHERE Artigo.Artigo = ArtigoMoeda.Artigo AND Artigo.UnidadeVenda = ArtigoMoeda.Unidade");
 
                 while (!objList.NoFim())
                 {
                     art = new Models.Artigo();
 
-                    art.CodArtigo = objList.Valor("Artigo");
+                    art.CodArtigo = objList.Valor("CodArtigo");
                     art.DescArtigo = objList.Valor("Descricao");
-                    art.PrecoMedio = objList.Valor("PCMedio");
                     art.IVA = objList.Valor("IVA");
                     art.StockAtual = objList.Valor("STKMaximo");
                     art.Familia = objList.Valor("Familia");
+
+                    art.UnidadeVenda = objList.Valor("Unidade");
+                    art.PVP1 = objList.Valor("PVP1");
+                    art.PVP2 = objList.Valor("PVP2");
+                    art.PVP3 = objList.Valor("PVP3");
+                    art.PVP4 = objList.Valor("PVP4");
+                    art.PVP5 = objList.Valor("PVP5");
+                    art.PVP6 = objList.Valor("PVP6");
 
                     listArts.Add(art);
                     objList.Seguinte();

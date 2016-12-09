@@ -7,6 +7,7 @@ namespace SalesForceAutomation.Models
 {
     public class Artigo
     {
+        
         public string CodArtigo
         {
             get;
@@ -14,12 +15,6 @@ namespace SalesForceAutomation.Models
         }
 
         public string DescArtigo
-        {
-            get;
-            set;
-        }
-
-        public double PrecoMedio
         {
             get;
             set;
@@ -43,5 +38,41 @@ namespace SalesForceAutomation.Models
             set;
         }
 
+        public double PVP1
+        {
+            get;
+            set;
+        }
+        public double PVP2
+        {
+            get;
+            set;
+        }
+        public double PVP3
+        {
+            get;
+            set;
+        }
+        public double PVP4
+        {
+            get;
+            set;
+        }
+        public double PVP5
+        {
+            get;
+            set;
+        }
+        public double PVP6
+        {
+            get;
+            set;
+        }
+
+        public string UnidadeVenda
+        {
+            get;
+            set;
+        }
     }
 }
