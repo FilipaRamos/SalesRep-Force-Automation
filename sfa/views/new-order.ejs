@@ -6,7 +6,7 @@
 </head>
 
 <body ng-app="newOrderModule">
-<div id="wrapper">
+<div id="wrapper" ng-controller="SessionController as sessionCtrl" ng-init="sessionCtrl.initCtrl('<%= user %>')">
     <% include templates/common/nav-bar.ejs %>
 
     <div id="page-wrapper">
@@ -15,7 +15,7 @@
             <% include templates/common/breadcrumbs.ejs %>
 
             <div class="row-align-center" ng-controller="NewOrderController as newOrderCtrl"
-                 ng-init="newOrderCtrl.initCtrl(); newOrderCtrl.setCustomer('<%= customerId %>'); newOrderCtrl.getProductOpportunities('<%= opportunityId %>')">
+                 ng-init="newOrderCtrl.initCtrl('<%= user %>'); newOrderCtrl.setCustomer('<%= customerId %>'); newOrderCtrl.getProductOpportunities('<%= opportunityId %>')">
 
                 <div ng-hide="'<%= customerId %>' == 'null'" class="span6" ng-controller="CustomerController as customerCtrl"
                      ng-init="customerCtrl.initCtrl('<%= customerId %>'); currentCtrl = customerCtrl;">

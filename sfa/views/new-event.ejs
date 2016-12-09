@@ -9,8 +9,8 @@
           rel="stylesheet">
 </head>
 
-<body>
-<div id="wrapper" ng-app="newEventModule">
+<body ng-app="newEventModule">
+<div id="wrapper" ng-controller="SessionController as sessionCtrl" ng-init="sessionCtrl.initCtrl('<%= user %>')">
     <% include templates/common/nav-bar.ejs %>
     <div id="page-wrapper">
         <div class="container-fluid">
@@ -21,7 +21,7 @@
                 <div class="span12">
 
                     <!-- TODO add sales rep to init-->
-                    <form ng-controller="NewEventController as newEventCtrl" ng-init="newEventCtrl.initCtrl();">
+                    <form ng-controller="NewEventController as newEventCtrl" ng-init="newEventCtrl.initCtrl('<%= user %>');">
                         <div class="row">
                             <div class="span12">
                                 <!-- Event Type -->

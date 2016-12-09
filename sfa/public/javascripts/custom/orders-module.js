@@ -78,16 +78,37 @@ ordersModule.controller('OrderController', function ($http, $location) {
             self.linesDoc = self.order.LinhasDoc;
             self.customerCtrl.initCtrl(self.order.Entidade);
 
+            for(var i=0; i<self.linesDoc.length; i++){
+                self.getProduct(self.linesDoc[i].CodArtigo);
+            }
+
             console.log(data);
         });
     };
 
+    /**
+     * GET product info from API
+     */
+    self.getProduct = function (id) {
+        $http.get(API_URL + '/api/Artigos/' + id).then(function (data) {
+            console.log(data);
+            for(var i=0; i<self.linesDoc.length; i++){
+                if(self.linesDoc[i].CodArtigo == id){
+                    self.linesDoc[i].UnidadeVenda = data.data.UnidadeVenda;
+                    self.linesDoc[i].IVA = data.data.IVA;
+                }
+            }
+        }, function (data) {
+            console.log('Erro ao informação sobre o produto ' + id);
+            console.log(data);
+        });
+    };
 
     // displays the order price
     self.total = function () {
         var total = 0;
         self.linesDoc.forEach(function (element) {
-            total += ((element.IVA / 100) + 1) * ((element.PrecoUnitario * element.Quantidade) - (element.Desconto * element.Quantidade));
+            total += ((element.IVA / 100) + 1) * element.PrecoUnitario * element.Quantidade * (1-element.Desconto/100)*(1-((self.customerCtrl.customer? self.customerCtrl.customer.DescEntidade : 0 )/100));
         });
         return total;
     };
@@ -106,14 +127,16 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
     /**
      * Initiate controller
      */
-    self.initCtrl = function () {};
+    self.initCtrl = function (codVendedor) {
+        self.newOrder.Responsavel = codVendedor;
+        self.DescEntidade = 0;
+    };
 
     /**
      * GET product opportunities from API
      */
     self.getProductOpportunities = function (id) {
-        console.log(id);
-        if(id==undefined || id==null) {
+        if(id==undefined || id==null || id=="null") {
             return;
         }
 
@@ -148,7 +171,22 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
     self.setCustomer = function (id) {
         if(id!='null') {
             self.newOrder.Entidade = id;
+
+            self.getCustomer(id);
         }
+    };
+
+    /**
+     * GET customer info from API
+     */
+    self.getCustomer = function (id) {
+        $http.get(API_URL + '/api/Cliente/' + id).then(function (data) {
+            self.DescEntidade = data.data.DescEntidade;
+            console.log(data.data);
+        }, function (data) {
+            console.log('Erro ao obter informação de cliente ' + id);
+            console.log(data);
+        });
     };
 
     self.createLineDoc = function (productId) {
@@ -161,10 +199,10 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
 
             lineEntry.CodArtigo = product.CodArtigo;
             lineEntry.Stock = product.StockAtual;
-            lineEntry.Unidade = product.Unidade;
+            lineEntry.UnidadeVenda = product.UnidadeVenda;
             lineEntry.Quantidade = 1;
-            lineEntry.PrecoUnitario = product.PrecoMedio;
-            lineEntry.Iva = product.IVA;
+            lineEntry.PrecoUnitario = product.PVP1;
+            lineEntry.IVA = product.IVA;
             lineEntry.Desconto = 0;
 
             self.linesDoc.push(lineEntry);
@@ -178,13 +216,12 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
      * Add order through API
      */
     self.addOrder = function () {
-        if(self.newOrder.LinhasDoc.empty) {
+        if(self.linesDoc.length == 0) {
             return;
         }
 
         self.waitingAPIResponse = true;
-        self.newOrder.Responsavel = "1"; // TODO change to vendedor loggin
-        self.newOrder.Serie = "A";
+        self.newOrder.Serie = (new Date()).getFullYear();
         self.newOrder.LinhasDoc = self.linesDoc;
 
         $http({
@@ -207,7 +244,7 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
     self.total = function () {
         var total = 0;
         self.linesDoc.forEach(function (element) {
-            total += ((element.IVA / 100) + 1) * ((element.PrecoUnitario * element.Quantidade) - (element.Desconto * element.Quantidade));
+            total += ((element.IVA / 100) + 1) * element.PrecoUnitario * element.Quantidade * (1-element.Desconto/100)*(1-(self.DescEntidade/100));
         });
         return total;
     };

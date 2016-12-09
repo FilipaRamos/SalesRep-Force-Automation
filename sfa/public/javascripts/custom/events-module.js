@@ -1,4 +1,4 @@
-var eventsModule = angular.module('eventsModule', []);
+var eventsModule = angular.module('eventsModule', ['usersModule']);
 var newEventModule = angular.module('newEventModule', ['moment-picker', 'customersModule', 'productsModule']);
 var viewEventModule = angular.module('viewEventModule', ['eventsModule', 'productsModule']);
 
@@ -328,9 +328,8 @@ newEventModule.controller('NewEventController', function ($http) {
     /**
      * initiate controller
      */
-    self.initCtrl = function () {
-        // TODO correct this to logged in user
-        self.newEvent.CodVendedor = "1";
+    self.initCtrl = function (codVendedor) {
+        self.newEvent.CodVendedor = codVendedor;
         self.newEvent.Prioridade = "1";
     };
 

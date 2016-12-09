@@ -9,8 +9,8 @@
           rel="stylesheet">
 </head>
 
-<body>
-<div id="wrapper" ng-app="newEventModule">
+<body ng-app="newEventModule">
+<div id="wrapper" ng-controller="SessionController as sessionCtrl" ng-init="sessionCtrl.initCtrl('<%= user %>')">
     <% include templates/common/nav-bar.ejs %>
     <div id="page-wrapper">
         <div class="container-fluid">
@@ -20,7 +20,8 @@
             <div class="row">
                 <div class="span12">
 
-                    <form action="" method="post" ng-controller="EditEventController as eventCtrl" ng-init="eventCtrl.initCtrl('<%= id %>')">
+                    <form action="" method="post" ng-controller="EditEventController as eventCtrl"
+                          ng-init="eventCtrl.initCtrl('<%= id %>')">
                         <div class="row">
                             <div class="span12">
 
@@ -63,7 +64,8 @@
                                         <br>
 
                                         <div class="checkbox">
-                                            <label><input type="checkbox" value="false" ng-model="eventCtrl.event.TodoDia">Todo dia</label>
+                                            <label><input type="checkbox" value="false"
+                                                          ng-model="eventCtrl.event.TodoDia">Todo dia</label>
                                         </div>
 
                                         <br>
@@ -124,7 +126,7 @@
                                 <!-- Buttons -->
                                 <div class="form-group row">
                                     <div class="col-sm-7 col-sm-offset-2">
-                                        <button type="submit" class="btn btn-primary btn-block"> Alterar evento </button>
+                                        <button type="submit" class="btn btn-primary btn-block"> Alterar evento</button>
                                     </div>
                                 </div>
                             </div>

@@ -6,11 +6,11 @@
 </head>
 
 <body ng-app="usersModule">
-<div id="wrapper">
+<div id="wrapper" ng-controller="SessionController as sessionCtrl" ng-init="sessionCtrl.initCtrl('<%= user %>')">
     <% include templates/common/nav-bar.ejs %>
     <div id="page-wrapper">
         <div class="container-fluid" ng-controller="UserController as userCtrl"
-             ng-init="userCtrl.init(<%= id %>)">
+             ng-init="userCtrl.initCtrl(<%= id %>)">
 
             <% include templates/common/breadcrumbs.ejs %>
 

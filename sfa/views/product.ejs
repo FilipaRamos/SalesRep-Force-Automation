@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 
 <head>
     <% include templates/common/header.ejs %>
@@ -8,7 +8,7 @@
 
 
 <body ng-app="productsModule">
-<div id="wrapper">
+<div id="wrapper" ng-controller="SessionController as sessionCtrl" ng-init="sessionCtrl.initCtrl('<%= user %>')">
     <% include templates/common/nav-bar.ejs %>
 
     <div id="page-wrapper">
@@ -27,9 +27,33 @@
 
                     <div ng-hide="productCtrl.loadingInfo" class="thumbnail">
                         <div class="caption-full">
-                            <h4 class="pull-right">{{productCtrl.product.PrecoMedio | currency:"€"}}</h4>
+                            <div class="pull-right">
+                                <h4><span class="text-muted small">PVP1  </span>{{productCtrl.product.PVP1 |
+                                    currency:"€"}}</h4>
+                                <h4 ng-hide="productCtrl.product.PVP2==0"><span class="text-muted small">PVP2  </span>{{productCtrl.product.PVP2
+                                    | currency:"€"}}</h4>
+                                <h4 ng-hide="productCtrl.product.PVP3==0"><span class="text-muted small">PVP3  </span>{{productCtrl.product.PVP3
+                                    | currency:"€"}}</h4>
+                                <h4 ng-hide="productCtrl.product.PVP4==0"><span class="text-muted small">PVP4  </span>{{productCtrl.product.PVP4
+                                    | currency:"€"}}</h4>
+                                <h4 ng-hide="productCtrl.product.PVP5==0"><span class="text-muted small">PVP5  </span>{{productCtrl.product.PVP5
+                                    | currency:"€"}}</h4>
+                                <h4 ng-hide="productCtrl.product.PVP6==0"><span class="text-muted small">PVP6  </span>{{productCtrl.product.PVP6
+                                    | currency:"€"}}</h4>
+                                <h4><span class="text-muted small">Unidade  </span>{{productCtrl.product.UnidadeVenda}}
+                                </h4>
+                                <p> IVA {{productCtrl.product.IVA}}%</p>
+                            </div>
                             <h4>{{productCtrl.product.CodArtigo}}</h4>
-                            <p class="pull-right"> IVA {{productCtrl.product.IVA}}%</p>
+                            <br ng-hide="productCtrl.product.PVP2==0">
+                            <br ng-hide="productCtrl.product.PVP4==0">
+                            <br ng-hide="productCtrl.product.PVP3==0">
+                            <br ng-hide="productCtrl.product.PVP5==0">
+                            <br ng-hide="productCtrl.product.PVP6==0">
+                            <br>
+                            <br>
+                            <br>
+
                             <p> {{productCtrl.product.DescArtigo}}</p>
                         </div>
                     </div>
