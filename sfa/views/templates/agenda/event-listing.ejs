@@ -31,7 +31,7 @@
                             </thead>
                             <tbody>
                             <tr ng-repeat="event in currentCtrl.events | orderBy : '-DataInicio'">
-                                <td><a href="evento?id={{event.CodReuniao}}">{{event.CodReuniao}}</a></td>
+                                <td><a href="evento?id={{event.CodReuniao}}">{{event.Tipo}}</a></td>
                                 <td>{{event.DataInicio | date:"dd-MM-yyyy"}}
                                     {{event.TodoDia ? '' : event.DataInicio | date:"HH:mm" }}
                                     {{event.TodoDia ? '' : " até " + (event.DataFim | date:"HH:mm") }}

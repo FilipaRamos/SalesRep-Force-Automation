@@ -1,4 +1,4 @@
-var customersModule = angular.module('customersModule', []);
+var customersModule = angular.module('customersModule', ['usersModule']);
 
 customersModule.config(function ($httpProvider) {
     $httpProvider.defaults.headers.common = {};

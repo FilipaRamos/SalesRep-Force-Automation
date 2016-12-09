@@ -1,4 +1,4 @@
-<div ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.initCtrl()">
+<div ng-controller="ProductsController as productsCtrl" ng-init="productsCtrl.initCtrl(); newOrderCtrl.setProductsCtrl(productsCtrl);">
 
     <div name="products" class="col-sm-5">
         <select id="product-selector" class="form-control selectpicker"
@@ -7,13 +7,13 @@
             <option ng-repeat="product in productsCtrl.products"
                     value="{{product.CodArtigo}}" data-subtext="{{productsCtrl.getCategory(product.Familia)}}"
                     id="product-{{product.CodArtigo}}">
-                {{product.CodArtigo}} - {{product.PrecoMedio}} €
+                {{product.CodArtigo}} - {{product.PVP1}} €
             </option>
         </select>
     </div>
 
     <div class="col-sm-5">
         <button type="button" class="btn btn-primary " ng-click="newOrderCtrl.removeProduct()">Remover</button>
-        <button type="button" class="btn btn-primary " ng-click="newOrderCtrl.addProduct(productsCtrl)">Adicionar</button>
+        <button type="button" class="btn btn-primary " ng-click="newOrderCtrl.addProduct()">Adicionar</button>
     </div>
 </div>

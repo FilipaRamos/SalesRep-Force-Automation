@@ -78,16 +78,37 @@ ordersModule.controller('OrderController', function ($http, $location) {
             self.linesDoc = self.order.LinhasDoc;
             self.customerCtrl.initCtrl(self.order.Entidade);
 
+            for(var i=0; i<self.linesDoc.length; i++){
+                self.getProduct(self.linesDoc[i].CodArtigo);
+            }
+
             console.log(data);
         });
     };
 
+    /**
+     * GET product info from API
+     */
+    self.getProduct = function (id) {
+        $http.get(API_URL + '/api/Artigos/' + id).then(function (data) {
+            console.log(data);
+            for(var i=0; i<self.linesDoc.length; i++){
+                if(self.linesDoc[i].CodArtigo == id){
+                    self.linesDoc[i].UnidadeVenda = data.data.UnidadeVenda;
+                    self.linesDoc[i].IVA = data.data.IVA;
+                }
+            }
+        }, function (data) {
+            console.log('Erro ao informação sobre o produto ' + id);
+            console.log(data);
+        });
+    };
 
     // displays the order price
     self.total = function () {
         var total = 0;
         self.linesDoc.forEach(function (element) {
-            total += ((element.IVA / 100) + 1) * ((element.PrecoUnitario * element.Quantidade) - (element.Desconto * element.Quantidade));
+            total += ((element.IVA / 100) + 1) * element.PrecoUnitario * element.Quantidade * (1-element.Desconto/100)*(1-((self.customerCtrl.customer? self.customerCtrl.customer.DescEntidade : 0 )/100));
         });
         return total;
     };
@@ -106,24 +127,101 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
     /**
      * Initiate controller
      */
-    self.initCtrl = function () {
+    self.initCtrl = function (codVendedor) {
+        self.newOrder.Responsavel = codVendedor;
+        self.DescEntidade = 0;
+    };
+
+    /**
+     * GET product opportunities from API
+     */
+    self.getProductOpportunities = function (id) {
+        if(id==undefined || id==null || id=="null") {
+            return;
+        }
+
+        $http.get(API_URL + '/api/OportunidadeVenda/' + id).then(function (data) {
+                console.log(data);
+
+                if(!self.productsCtrl.loading){
+                    self.addCurrentOpportunities(data.data.Artigos);
+                }
+                else{
+                    setTimeout(function(){
+                        self.addCurrentOpportunities(data.data.Artigos);
+                    },250);
+                }
+            },
+            function (data) {
+                console.log("Erro ao obter oportunidades de venda " + id);
+                console.log(data);
+            });
+    };
+
+    self.addCurrentOpportunities = function (opportnities) {
+        for(var i=0; i < opportnities.length; i++){
+            self.addProduct(opportnities[i]);
+        }
+    }
+
+    self.setProductsCtrl = function (productsCtrl) {
+        self.productsCtrl = productsCtrl;
     };
 
     self.setCustomer = function (id) {
-        self.newOrder.Entidade = id;
+        if(id!='null') {
+            self.newOrder.Entidade = id;
+
+            self.getCustomer(id);
+        }
+    };
+
+    /**
+     * GET customer info from API
+     */
+    self.getCustomer = function (id) {
+        $http.get(API_URL + '/api/Cliente/' + id).then(function (data) {
+            self.DescEntidade = data.data.DescEntidade;
+            console.log(data.data);
+        }, function (data) {
+            console.log('Erro ao obter informação de cliente ' + id);
+            console.log(data);
+        });
+    };
+
+    self.createLineDoc = function (productId) {
+        var product = self.productsCtrl.getProductById(productId);
+
+        if (product) {
+            self.products.push(productId);
+
+            var lineEntry = {};
+
+            lineEntry.CodArtigo = product.CodArtigo;
+            lineEntry.Stock = product.StockAtual;
+            lineEntry.UnidadeVenda = product.UnidadeVenda;
+            lineEntry.Quantidade = 1;
+            lineEntry.PrecoUnitario = product.PVP1;
+            lineEntry.IVA = product.IVA;
+            lineEntry.Desconto = 0;
+
+            self.linesDoc.push(lineEntry);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
      * Add order through API
      */
     self.addOrder = function () {
-        // TODO do form validation
-
+        if(self.linesDoc.length == 0) {
+            return;
+        }
 
         self.waitingAPIResponse = true;
-
-        self.newOrder.Responsavel = "1"; // TODO change to vendedor loggin
-        self.newOrder.Serie = "A";
+        self.newOrder.Serie = (new Date()).getFullYear();
         self.newOrder.LinhasDoc = self.linesDoc;
 
         $http({
@@ -137,6 +235,7 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
                 window.location.replace('/encomenda?id=' + data.data.Id);
             },
             function (data) {
+                self.waitingAPIResponse = false;
                 console.log(data);
             });
     };
@@ -145,12 +244,16 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
     self.total = function () {
         var total = 0;
         self.linesDoc.forEach(function (element) {
-            total += ((element.IVA / 100) + 1) * ((element.PrecoUnitario * element.Quantidade) - (element.Desconto * element.Quantidade));
+            total += ((element.IVA / 100) + 1) * element.PrecoUnitario * element.Quantidade * (1-element.Desconto/100)*(1-(self.DescEntidade/100));
         });
         return total;
     };
 
-    // remove a product
+
+    /**
+     * Product handlers
+     */
+    // remove a product from order
     self.removeProduct = function () {
         if (self.selected) {
             var productIndex = self.products.indexOf(self.selected);
@@ -167,9 +270,6 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
         selector.selectpicker('refresh');
     };
 
-    /**
-     * Product handlers
-     */
     self.selectProduct = function (id) {
         self.selected = id;
         console.log("selected " + id);
@@ -179,30 +279,15 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
         return self.selected == id;
     }
 
-    self.addProduct = function (productsCtrl) {
-        var selectBox = document.getElementById("product-selector");
-        var productId = selectBox.options[selectBox.selectedIndex].value;
+    self.addProduct = function (productId) {
+        if(productId == undefined) {
+            var selectBox = document.getElementById("product-selector");
+            productId = selectBox.options[selectBox.selectedIndex].value;
+        }
 
         // add product to list of, if not present already
         if (productId && self.products.indexOf(productId) == -1) {
-            var product = productsCtrl.getProductById(productId);
-
-            self.products.push(productId);
-
-            console.log(product);
-
-            if (product) {
-                var lineEntry = {};
-
-                lineEntry.CodArtigo = product.CodArtigo;
-                lineEntry.Stock = product.StockAtual;
-                lineEntry.Quantidade = 1;
-                lineEntry.PrecoUnitario = product.PrecoMedio;
-                lineEntry.Iva = product.IVA;
-                lineEntry.Desconto = 0;
-
-                self.linesDoc.push(lineEntry);
-
+            if(self.createLineDoc(productId)) {
                 $("#product-" + productId).toggle(false);
             }
         }

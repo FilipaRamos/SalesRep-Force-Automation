@@ -6,7 +6,7 @@
 </head>
 
 <body ng-app="customersModule">
-<div id="wrapper">
+<div id="wrapper" ng-controller="SessionController as sessionCtrl" ng-init="sessionCtrl.initCtrl('<%= user %>')">
     <% include templates/common/nav-bar.ejs %>
     <div id="page-wrapper">
         <div class="container-fluid">
@@ -69,6 +69,16 @@
                                 <input name="telephone" ng-model="customerCtrl.customer.Fac_Tel"
                                        value="{{customerCtrl.customer.Fac_Tel}}"
                                        type="tel" class="form-control" placeholder="Telefone">
+                            </div>
+                        </div>
+
+                        <!-- Desconto -->
+                        <div class="form-group row">
+                            <label for="desc" class="col-sm-2 col-form-label"> Desconto </label>
+                            <div class="col-sm-10">
+                                <input name="desc" ng-model="customerCtrl.customer.DescEntidade"
+                                       value="{{customerCtrl.customer.DescEntidade}}"
+                                       type="number" class="form-control" placeholder="Desconto (%)">
                             </div>
                         </div>
 

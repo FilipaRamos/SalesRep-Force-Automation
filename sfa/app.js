@@ -20,7 +20,6 @@ var new_event = require('./routes/new_event');
 var new_order = require('./routes/new_order');
 var edit_customer = require('./routes/edit_customer');
 var edit_event = require('./routes/edit_event');
-var edit_order = require('./routes/edit_order');
 var order = require('./routes/order');
 var oversight = require('./routes/oversight');
 
@@ -30,8 +29,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -51,7 +48,6 @@ app.use('/cliente', customer);
 app.use('/criar_cliente', new_customer);
 app.use('/editar_cliente', edit_customer);
 app.use('/nova_encomenda', new_order);
-app.use('/editar_encomenda', edit_order);
 app.use('/produtos', products);
 app.use('/produto', product);
 app.use('/supervisao', oversight);

@@ -70,6 +70,14 @@
                             {{currentCtrl.customer.Vendas | currency: "€"}}
                         </div>
                     </div>
+
+                    <!-- Desconto -->
+                    <div class="form-group row">
+                        <label for="total-sales" class="col-sm-2 col-form-label control-label"> Desconto </label>
+                        <div name="total-sales" class="col-sm-5">
+                            {{currentCtrl.customer.DescEntidade}} %
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
