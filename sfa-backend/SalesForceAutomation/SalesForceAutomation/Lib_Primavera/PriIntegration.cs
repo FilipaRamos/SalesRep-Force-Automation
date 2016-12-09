@@ -927,7 +927,7 @@ namespace SalesForceAutomation.Lib_Primavera
             if (initializeCompany() == true)
             {
 
-                objListDoc = PriEngine.Engine.Consulta("SELECT TOP 20 id, Entidade, Data, NumDoc, Responsavel, TotalMerc, Serie FROM CabecDoc WHERE TipoDoc = 'ECL' ORDER BY TotalMerc DESC");
+                objListDoc = PriEngine.Engine.Consulta("SELECT TOP 20 id, Entidade, Data, NumDoc, Responsavel, TotalDocumento, Serie FROM CabecDoc WHERE TipoDoc = 'ECL' ORDER BY TotalDocumento DESC");
 
                 while (!objListDoc.NoFim())
                 {
@@ -938,7 +938,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     sale.Data = objListDoc.Valor("Data");
                     sale.Responsavel = objListDoc.Valor("Responsavel");
                     sale.NumDoc = objListDoc.Valor("NumDoc");
-                    sale.TotalMerc = objListDoc.Valor("TotalMerc");
+                    sale.TotalMerc = objListDoc.Valor("TotalDocumento");
                     sale.Serie = objListDoc.Valor("Serie");
 
                     objListDocLines = PriEngine.Engine.Consulta("Select IdCabecDoc, Artigo, Descricao, Quantidade, Unidade, PrecUnit, Desconto1, TotalIliquido, PrecoLiquido FROM LinhasDoc WHERE IdCabecDoc='" + sale.Id + "'");
@@ -984,14 +984,14 @@ namespace SalesForceAutomation.Lib_Primavera
 
             if (initializeCompany())
             {
-                objListDoc = PriEngine.Engine.Consulta("SELECT id, Entidade, Data, NumDoc, Responsavel, TotalMerc, Serie FROM CabecDoc WHERE TipoDoc = 'ECL' AND id = '" + id + "'");
+                objListDoc = PriEngine.Engine.Consulta("SELECT id, Entidade, Data, NumDoc, Responsavel, TotalDocumento, Serie FROM CabecDoc WHERE TipoDoc = 'ECL' AND id = '" + id + "'");
 
                 sale.Id = objListDoc.Valor("id");
                 sale.Entidade = objListDoc.Valor("Entidade");
                 sale.Data = objListDoc.Valor("Data");
                 sale.NumDoc = objListDoc.Valor("NumDoc");
                 sale.Responsavel = objListDoc.Valor("Responsavel");
-                sale.TotalMerc = objListDoc.Valor("TotalMerc");
+                sale.TotalMerc = objListDoc.Valor("TotalDocumento");
                 sale.Serie = objListDoc.Valor("Serie");
 
                 objListDocLines = PriEngine.Engine.Consulta("Select IdCabecDoc, Artigo, Descricao, Quantidade, Unidade, PrecUnit, Desconto1, TotalIliquido, PrecoLiquido FROM LinhasDoc WHERE IdCabecDoc='" + sale.Id + "'");
@@ -1095,7 +1095,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             if (initializeCompany())
             {
-                listRepSales = PriEngine.Engine.Consulta("SELECT id, Entidade, Data, NumDoc, TotalMerc, Serie, Responsavel FROM CabecDoc WHERE TipoDoc = 'ECL' AND Responsavel='"+salesRepID+"'");
+                listRepSales = PriEngine.Engine.Consulta("SELECT id, Entidade, Data, NumDoc, TotalDocumento, Serie, Responsavel FROM CabecDoc WHERE TipoDoc = 'ECL' AND Responsavel='"+salesRepID+"'");
 
                 while (!listRepSales.NoFim())
                 {
@@ -1104,7 +1104,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     tmpSale.Entidade = listRepSales.Valor("Entidade");
                     tmpSale.Data = listRepSales.Valor("Data");
                     tmpSale.NumDoc = listRepSales.Valor("NumDoc");
-                    tmpSale.TotalMerc = listRepSales.Valor("TotalMerc");
+                    tmpSale.TotalMerc = listRepSales.Valor("TotalDocumento");
                     tmpSale.Serie = listRepSales.Valor("Serie");
                     tmpSale.Responsavel = listRepSales.Valor("Responsavel");
 
@@ -1152,7 +1152,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             if (initializeCompany())
             {
-                listClientPurchases = PriEngine.Engine.Consulta("SELECT id, Entidade, Data, NumDoc, TotalMerc, Serie, Responsavel FROM CabecDoc WHERE TipoDoc = 'ECL' AND Entidade='" + clientID + "'");
+                listClientPurchases = PriEngine.Engine.Consulta("SELECT id, Entidade, Data, NumDoc, TotalDocumento, Serie, Responsavel FROM CabecDoc WHERE TipoDoc = 'ECL' AND Entidade='" + clientID + "'");
 
                 while (!listClientPurchases.NoFim())
                 {
@@ -1161,7 +1161,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     tmpSale.Entidade = listClientPurchases.Valor("Entidade");
                     tmpSale.Data = listClientPurchases.Valor("Data");
                     tmpSale.NumDoc = listClientPurchases.Valor("NumDoc");
-                    tmpSale.TotalMerc = listClientPurchases.Valor("TotalMerc");
+                    tmpSale.TotalMerc = listClientPurchases.Valor("TotalDocumento");
                     tmpSale.Serie = listClientPurchases.Valor("Serie");
                     tmpSale.Responsavel = listClientPurchases.Valor("Responsavel");
 
