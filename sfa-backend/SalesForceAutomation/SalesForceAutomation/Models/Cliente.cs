@@ -8,6 +8,11 @@ namespace SalesForceAutomation.Models
 {
     public class Cliente
     {
+        public double DescEntidade
+        {
+            get;
+            set;
+        }
         public string CodCliente
         {
             get;
