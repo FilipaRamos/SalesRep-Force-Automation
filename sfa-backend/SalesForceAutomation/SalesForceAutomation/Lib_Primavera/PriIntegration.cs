@@ -17,7 +17,6 @@ namespace SalesForceAutomation.Lib_Primavera
 {
     public class PriIntegration
     {
-
         public static int TIMESPAN_STATISTIC = 6 * 30;
 
         public static Boolean initializeCompany(){
@@ -1208,6 +1207,7 @@ namespace SalesForceAutomation.Lib_Primavera
             List<Models.Vendedor> salesRepList = new List<Models.Vendedor>();
             Models.Vendedor tmpSalesRep;
 
+            Debug.WriteLine("??????");
             if (initializeCompany())
             {
                 //objList = PriEngine.Engine.Comercial.Vendedores.LstVendedores();
@@ -1226,6 +1226,10 @@ namespace SalesForceAutomation.Lib_Primavera
                     tmpSalesRep.Telemovel = objList.Valor("Telemovel");
                     tmpSalesRep.Email = objList.Valor("EMail");
 
+                    // Ler o campo de utilizador "CDU_Password" directamente
+                    string pwdEncriptada = PriEngine.Engine.Comercial.Vendedores.DaValorAtributo(tmpSalesRep.VendedorID, "CDU_Password");
+                    tmpSalesRep.Password = PriEngine.Platform.Criptografia.Descripta(pwdEncriptada, 50);
+
                     salesRepList.Add(tmpSalesRep);
                     objList.Seguinte();
                 }
@@ -1233,6 +1237,59 @@ namespace SalesForceAutomation.Lib_Primavera
             }
 
             return salesRepList;
+        }
+
+        public static Vendedor GetSalesRep(string email)
+        {
+            Boolean isEmail = email.Contains('@');
+            email = SalesForceAutomation.Tools.Tools.Parse(email);
+            
+            StdBELista objList;
+            GcpBEVendedor rep = new GcpBEVendedor();
+            Models.Vendedor tmpSalesRep = new Vendedor();
+
+            try
+            {
+                if (initializeCompany())
+                {
+                    if (isEmail)
+                    {
+                        objList = PriEngine.Engine.Consulta("SELECT Vendedor FROM Vendedores WHERE EMail = '" + email + "'");
+
+                        if (objList.NoFim())
+                        {
+                            return null;
+                        }
+
+                        tmpSalesRep.VendedorID = objList.Valor("Vendedor");
+                    }
+                    else
+                    {
+                        tmpSalesRep.VendedorID = email;
+                    }
+
+                    rep = PriEngine.Engine.Comercial.Vendedores.Edita(tmpSalesRep.VendedorID);
+
+                    tmpSalesRep.Nome = rep.get_Nome();
+                    tmpSalesRep.Comissao = rep.get_Comissao();
+                    tmpSalesRep.Morada = rep.get_Morada();
+                    tmpSalesRep.Localidade = rep.get_Localidade();
+                    tmpSalesRep.CPostal = rep.get_CodigoPostal();
+                    tmpSalesRep.Telemovel = rep.get_Telemovel();
+                    tmpSalesRep.Email = rep.get_Email();
+
+                    // Ler o campo de utilizador "CDU_Password" directamente
+                    string pwdEncriptada = PriEngine.Engine.Comercial.Vendedores.DaValorAtributo(tmpSalesRep.VendedorID, "CDU_Password");
+                    tmpSalesRep.Password = PriEngine.Platform.Criptografia.Descripta(pwdEncriptada, 50);
+                }
+
+                return tmpSalesRep;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return null;
+            }
         }
 
         public static RespostaErro PostSalesRep(Vendedor newSalesRep)
@@ -1256,6 +1313,15 @@ namespace SalesForceAutomation.Lib_Primavera
                     }
                     newSalesRep.VendedorID = newId.ToString();
 
+                    StdBECampos cmps = new StdBECampos();
+                    StdBECampo cmp = new StdBECampo();
+
+                    cmp.Nome = "CDU_Password";
+                    string ps = PriEngine.Platform.Criptografia.Encripta(newSalesRep.Password, 50);
+                    cmp.Valor = ps;
+                    Debug.WriteLine(ps);
+                    cmps.Insere(cmp);
+
                     newRep.set_Vendedor(newSalesRep.VendedorID);
                     newRep.set_CodigoPostal(newSalesRep.CPostal);
                     newRep.set_Nome(newSalesRep.Nome);
@@ -1264,6 +1330,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     newRep.set_Comissao((float)newSalesRep.Comissao);
                     newRep.set_Email(newSalesRep.Email);
                     newRep.set_Telemovel(newSalesRep.Telemovel);
+                    newRep.set_CamposUtil(cmps);
 
                     PriEngine.Engine.Comercial.Vendedores.Actualiza(newRep);
                     erro.Erro = 0;
