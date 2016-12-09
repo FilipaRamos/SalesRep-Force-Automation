@@ -9,7 +9,6 @@ namespace SalesForceAutomation.Models
 {
     public class Reuniao
     {
-
         public string CodReuniao
         {
             get;
@@ -82,5 +81,10 @@ namespace SalesForceAutomation.Models
             set;
         }
 
+        public string TipoId
+        {
+            get;
+            set;
+        }
     }
 }
