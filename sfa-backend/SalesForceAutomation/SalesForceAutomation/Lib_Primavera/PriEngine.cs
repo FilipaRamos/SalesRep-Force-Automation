@@ -75,7 +75,6 @@ namespace SalesForceAutomation.Lib_Primavera
         {
             return initialized;
         }
-
     }
 
 }
