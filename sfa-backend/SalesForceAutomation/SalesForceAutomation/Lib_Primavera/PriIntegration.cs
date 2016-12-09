@@ -1207,7 +1207,6 @@ namespace SalesForceAutomation.Lib_Primavera
             List<Models.Vendedor> salesRepList = new List<Models.Vendedor>();
             Models.Vendedor tmpSalesRep;
 
-            Debug.WriteLine("??????");
             if (initializeCompany())
             {
                 //objList = PriEngine.Engine.Comercial.Vendedores.LstVendedores();
@@ -1229,6 +1228,9 @@ namespace SalesForceAutomation.Lib_Primavera
                     // Ler o campo de utilizador "CDU_Password" directamente
                     string pwdEncriptada = PriEngine.Engine.Comercial.Vendedores.DaValorAtributo(tmpSalesRep.VendedorID, "CDU_Password");
                     tmpSalesRep.Password = PriEngine.Platform.Criptografia.Descripta(pwdEncriptada, 50);
+
+                    // Ler o campo de utilizador "CDU_EChefe"
+                    tmpSalesRep.VendedorChefe = PriEngine.Engine.Comercial.Vendedores.DaValorAtributo(tmpSalesRep.VendedorID, "CDU_EChefe");
 
                     salesRepList.Add(tmpSalesRep);
                     objList.Seguinte();
@@ -1281,6 +1283,9 @@ namespace SalesForceAutomation.Lib_Primavera
                     // Ler o campo de utilizador "CDU_Password" directamente
                     string pwdEncriptada = PriEngine.Engine.Comercial.Vendedores.DaValorAtributo(tmpSalesRep.VendedorID, "CDU_Password");
                     tmpSalesRep.Password = PriEngine.Platform.Criptografia.Descripta(pwdEncriptada, 50);
+
+                    // Ler o campo de utilizador "CDU_EChefe"
+                    tmpSalesRep.VendedorChefe = PriEngine.Engine.Comercial.Vendedores.DaValorAtributo(tmpSalesRep.VendedorID, "CDU_EChefe");
                 }
 
                 return tmpSalesRep;
@@ -1314,13 +1319,17 @@ namespace SalesForceAutomation.Lib_Primavera
                     newSalesRep.VendedorID = newId.ToString();
 
                     StdBECampos cmps = new StdBECampos();
-                    StdBECampo cmp = new StdBECampo();
+                    StdBECampo cmp1 = new StdBECampo();
+                    StdBECampo cmp2 = new StdBECampo();
 
-                    cmp.Nome = "CDU_Password";
+                    cmp1.Nome = "CDU_EChefe";
+                    cmp1.Valor = newSalesRep.VendedorChefe;
+                    cmps.Insere(cmp1);
+
+                    cmp2.Nome = "CDU_Password";
                     string ps = PriEngine.Platform.Criptografia.Encripta(newSalesRep.Password, 50);
-                    cmp.Valor = ps;
-                    Debug.WriteLine(ps);
-                    cmps.Insere(cmp);
+                    cmp2.Valor = ps;
+                    cmps.Insere(cmp2);
 
                     newRep.set_Vendedor(newSalesRep.VendedorID);
                     newRep.set_CodigoPostal(newSalesRep.CPostal);

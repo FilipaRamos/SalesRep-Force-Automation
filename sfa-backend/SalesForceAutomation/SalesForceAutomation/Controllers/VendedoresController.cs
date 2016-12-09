@@ -22,8 +22,7 @@ namespace SalesForceAutomation.Controllers
             Models.Vendedor vendedor = Lib_Primavera.PriIntegration.GetSalesRep(id);
             if (vendedor == null)
             {
-                throw new HttpResponseException(
-                  Request.CreateResponse(HttpStatusCode.NotFound));
+                return null;
             }
             else
             {
