@@ -9,6 +9,7 @@ productsModule.controller('ProductsController', function ($http, $scope, $locati
     self.products = [];
     self.categories = [];
     self.filter = 'all';
+    self.callBack = null;
 
     /**
      * initiate controller
@@ -25,6 +26,7 @@ productsModule.controller('ProductsController', function ($http, $scope, $locati
             self.products = data.data;
 
             self.loading = false;
+
             self.getCategories();
         }, function (data) {
             console.log('Erro ao obter lista de produtos.');
@@ -60,6 +62,10 @@ productsModule.controller('ProductsController', function ($http, $scope, $locati
         selector.selectpicker('refresh');
     };
 
+    self.onLoad = function (parameter, callbackFunction) {
+        self.callBack = {callback: callbackFunction, param: parameter};
+    };
+
     /**
      * Redirect to selected product page
      */
@@ -80,6 +86,10 @@ productsModule.controller('ProductsController', function ($http, $scope, $locati
             for (productIndex in self.products) {
                 var product = self.products[productIndex];
                 $("#product-" + product.CodArtigo).attr('data-subtext', self.getCategory(product.Familia));
+            }
+
+            if(self.callBack) {
+                self.callBack.callback(self.callBack.param);
             }
 
             var selector = $('#product-selector');

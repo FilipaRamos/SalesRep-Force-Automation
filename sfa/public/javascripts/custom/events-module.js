@@ -9,6 +9,7 @@ eventsModule.controller('EventsController', function ($http, $location, $window)
     var self = this;
 
     self.events = [];
+    self.allEvents = [];
     self.calendar = null;
     self.eventList = null;
     self.showAll = false;
@@ -25,6 +26,10 @@ eventsModule.controller('EventsController', function ($http, $location, $window)
             self.initFullCalendar();
         }
     };
+
+    self.setSalesRep = function (id) {
+        self.salesRep = id;
+    }
 
     /**
      * GET events list from API
@@ -51,7 +56,16 @@ eventsModule.controller('EventsController', function ($http, $location, $window)
 
                 if (self.eventList) {
                     self.eventList.fullCalendar('removeEvents');
-                    self.eventList.fullCalendar('addEventSource', self.events);
+                    var events = self.events.slice();
+                    if(!self.showAll){
+                        for(var i=0; i<events.length; i++){
+                            if(events[i].CodVendedor!=self.salesRep){
+                                events.splice(i, 1);
+                                i--;
+                            }
+                        }
+                    }
+                    self.eventList.fullCalendar('addEventSource', events);
                     self.eventList.fullCalendar('refetchEvents');
                 }
             },
@@ -103,8 +117,24 @@ eventsModule.controller('EventsController', function ($http, $location, $window)
 
     self.changeView = function () {
         self.showAll = !self.showAll;
+
+        var events = self.events.slice();
+        if(!self.showAll){
+            console.log('cliena');
+            for(var i=0; i<events.length; i++){
+                if(events[i].CodVendedor!=self.salesRep){
+                    events.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
         var newView = self.showAll ? 'listYear' : 'listNext';
         self.eventList.fullCalendar('changeView', newView);
+
+        self.eventList.fullCalendar('removeEvents');
+        self.eventList.fullCalendar('addEventSource', events);
+        self.eventList.fullCalendar('refetchEvents');
 
         var label = self.showAll ? 'Ver futuros' : 'Ver todos';
         $("#change-view").html(label);
@@ -191,6 +221,7 @@ eventsModule.controller('EventController', function ($http, $location)  {
                 self.event = data.data;
                 console.log(data.data);
 
+                self.getSalesRep(self.event.CodVendedor);
                 self.getCustomer(self.event.Entidade);
                 self.event.Tipo = self.getEventType(self.event.TipoId);
 
@@ -203,6 +234,17 @@ eventsModule.controller('EventController', function ($http, $location)  {
                 console.log("Erro ao obter evento " + id);
                 console.log(data);
             });
+    };
+
+    self.getSalesRep = function (user) {
+        if(user==null || user == 'null'){
+            return;
+        }
+
+        $http.get(API_URL + '/api/vendedores/' + user).then(function (response) {
+            console.log(response.data);
+            self.event.Vendedor = response.data;
+        });
     };
 
     /**
@@ -387,6 +429,7 @@ newEventModule.controller('NewEventController', function ($http) {
                 }
             },
             function (data) {
+                self.waitingAPIResponse = false;
                 console.log(data);
             });
     };
@@ -572,9 +615,6 @@ newEventModule.controller('EditEventController', function ($http, $location) {
 
         // set product opportunities
         self.event.Artigos = self.productOpportunities;
-
-        // set customer ID
-        self.event.Entidade = customerId ? customerId : self.event.Entidade;
 
         // set event type ID
         var selectBox = document.getElementById("type-selector");

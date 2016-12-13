@@ -17,25 +17,39 @@
                     Não foram encontradas encomendas...
                 </div>
 
-
                 <section ng-hide="currentCtrl.loadingOrders || currentCtrl.orders.length == 0">
                     <div ng-show="currentCtrl.orderScope('all')">
+                        <ul class="nav nav-pills">
+                            <li ng-class="{ active:currentCtrl.isSet(1) }">
+                                <a href ng-click="currentCtrl.setTab(1)">Top</a>
+                            </li>
+                            <li ng-class="{ active:currentCtrl.isSet(2) }">
+                                <a href ng-click="currentCtrl.setTab(2)">Todos</a>
+                            </li>
+                        </ul>
                         <form>
                             <table class="table">
                                 <thead>
                                 <tr>
                                     <th style="width: 25%;">Número</th>
                                     <th style="width: 25%;">Data</th>
-                                    <th style="width: 20%;">ID Responsavel</th>
-                                    <th style="width: 20%;">ID Cliente</th>
+                                    <th style="width: 20%;">Vendedor</th>
+                                    <th style="width: 20%;">Cliente</th>
                                     <th style="width: 10%;">Valor</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr ng-repeat="order in currentCtrl.orders | orderBy : '-Data'">
+                                <tr ng-show="currentCtrl.isSet(1)" ng-repeat="order in currentCtrl.orders | orderBy : '-TotalMerc' | limitTo: currentCtrl.limit ">
                                     <td><a href="/encomenda?id={{order.Id}}">{{order.NumDoc}}</a></td>
                                     <td>{{order.Data | date:"dd-MM-yyyy"}}</td>
-                                    <td><a href="/vendedor?id={{order.Responsavel}}">{{order.Responsavel}}</a></td>
+                                    <td><a href="/vendedor?id={{order.Responsavel}}">{{order.Nome ? order.Nome : order.Responsavel}}</a></td>
+                                    <td><a href="/cliente?id={{order.Entidade}}">{{order.Entidade}}</a></td>
+                                    <td>{{order.TotalMerc | currency:"€" }}</td>
+                                </tr>
+                                <tr ng-show="currentCtrl.isSet(2)" ng-repeat="order in currentCtrl.orders | orderBy : '-Data'">
+                                    <td><a href="/encomenda?id={{order.Id}}">{{order.NumDoc}}</a></td>
+                                    <td>{{order.Data | date:"dd-MM-yyyy"}}</td>
+                                    <td><a href="/vendedor?id={{order.Responsavel}}">{{order.Nome ? order.Nome : order.Responsavel}}</a></td>
                                     <td><a href="/cliente?id={{order.Entidade}}">{{order.Entidade}}</a></td>
                                     <td>{{order.TotalMerc | currency:"€" }}</td>
                                 </tr>
@@ -45,13 +59,14 @@
                     </div>
 
                     <div ng-show="currentCtrl.orderScope('salesRep')">
+
                         <form>
                             <table class="table">
                                 <thead>
                                 <tr>
                                     <th style="width: 20%;">Número</th>
                                     <th style="width: 30%;">Data</th>
-                                    <th style="width: 20%;">ID Cliente</th>
+                                    <th style="width: 20%;">Cliente</th>
                                     <th style="width: 30%;">Valor</th>
                                 </tr>
                                 </thead>
@@ -74,7 +89,7 @@
                                 <tr>
                                     <th style="width: 20%;">Número</th>
                                     <th style="width: 30%;">Data</th>
-                                    <th style="width: 20%;">ID Vendedor</th>
+                                    <th style="width: 20%;">Vendedor</th>
                                     <th style="width: 30%;">Valor</th>
                                 </tr>
                                 </thead>
@@ -82,7 +97,7 @@
                                 <tr ng-repeat="order in currentCtrl.orders | orderBy : '-Data'">
                                     <td><a href="/encomenda?id={{order.Id}}">{{order.NumDoc}}</a></td>
                                     <td>{{order.Data | date:"dd-MM-yyyy"}}</td>
-                                    <td><a href="/vendedor?id={{order.Responsavel}}">{{order.Responsavel}}</a></td>
+                                    <td><a href="/vendedor?id={{order.Responsavel}}">{{order.Nome ? order.Nome : order.Responsavel}}</a></td>
                                     <td>{{order.TotalMerc| currency:"€" }}</td>
                                 </tr>
                                 </tbody>

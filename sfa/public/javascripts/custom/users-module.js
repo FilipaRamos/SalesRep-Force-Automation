@@ -55,7 +55,6 @@ usersModule.controller('SessionController', function ($http, $window) {
     self.user = null;
 
     self.initCtrl = function (user) {
-        console.log(user);
         if(user!='null'){
             self.getUser(user);
         }

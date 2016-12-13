@@ -3,7 +3,7 @@
     <div class="widget-header"><i class="fa fa-fw fa-calendar"></i> Eventos
         <a href="/criar_evento" class="pull-right"><i class="fa fa-plus-square">&nbsp</i></a>
     </div>
-    <div class="widget-content" ng-init="eventsCtrl.initFutureEventList()">
+    <div class="widget-content" ng-init="eventsCtrl.initFutureEventList(); eventsCtrl.setSalesRep('<%= user %>');">
         <div class="pull-right">
             <button id="change-view" style="margin-top: 5px; margin-bottom: -8px;" class="btn" type="button" ng-click="eventsCtrl.changeView()">Ver todos</button>
         </div>

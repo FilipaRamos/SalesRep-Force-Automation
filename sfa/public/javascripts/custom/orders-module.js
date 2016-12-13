@@ -16,6 +16,7 @@ ordersModule.controller('OrdersController', function ($http, $location) {
      */
     self.initCtrl = function (customerId) {
         self.getOrders(customerId);
+        self.getSalesReps();
     };
 
     self.orderScope = function (scope) {
@@ -29,11 +30,39 @@ ordersModule.controller('OrdersController', function ($http, $location) {
         $http.get(API_URL + '/api/Encomendas' + (customerId? '/Cliente/' + customerId : '')).then(function (data) {
             self.orders = data.data;
             console.log(data.data);
-            self.loadingOrders = false;
         }, function (data) {
             console.log('Erro ao obter lista de encomendas.');
             console.log(data.data);
         });
+    };
+
+    /**
+     * GET users list from API
+     */
+    self.getSalesReps = function () {
+        $http.get(API_URL + '/api/vendedores').then(function (data) {
+            self.salesReps = data.data;
+
+            self.matchSalesReps();
+
+            console.log(data.data);
+        });
+    };
+
+    self.matchSalesReps = function () {
+        var findSalesRepByID = function (id) {
+            for(var i=0; i<self.salesReps.length; i++){
+                if(self.salesReps[i].VendedorID == id){
+                    return self.salesReps[i];
+                }
+            }
+            return {Nome: 'Not found.'};
+        };
+
+        for(var i=0; i<self.orders.length; i++){
+            self.orders[i].Nome = findSalesRepByID(self.orders[i].Responsavel).Nome;
+        }
+        self.loadingOrders = false;
     };
 
 
@@ -41,6 +70,7 @@ ordersModule.controller('OrdersController', function ($http, $location) {
      * Order tab handlers
      */
     self.tab = 1;
+    self.limit = 10;
     self.isSet = function (checkTab) {
         return self.tab === checkTab;
     };
@@ -147,9 +177,7 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
                     self.addCurrentOpportunities(data.data.Artigos);
                 }
                 else{
-                    setTimeout(function(){
-                        self.addCurrentOpportunities(data.data.Artigos);
-                    },250);
+                    self.productsCtrl.onLoad(data.data.Artigos, self.addCurrentOpportunities);
                 }
             },
             function (data) {
@@ -157,7 +185,7 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
                 console.log(data);
             });
     };
-
+    
     self.addCurrentOpportunities = function (opportnities) {
         for(var i=0; i < opportnities.length; i++){
             self.addProduct(opportnities[i]);
@@ -169,10 +197,26 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
     };
 
     self.setCustomer = function (id) {
-        if(id!='null') {
+        if(id!='null' && id!=null) {
             self.newOrder.Entidade = id;
-
+            console.log(id  +'here');
             self.getCustomer(id);
+        }
+    };
+
+    /**
+     * GET product info from API
+     */
+    self.getProduct = function (id) {
+        if(id=='null' || id==null) {
+            return;
+        }
+
+        if(!self.productsCtrl.loading){
+            self.addCurrentOpportunities([id]);
+        }
+        else{
+            self.productsCtrl.onLoad([id], self.addCurrentOpportunities);
         }
     };
 
@@ -180,6 +224,10 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
      * GET customer info from API
      */
     self.getCustomer = function (id) {
+        if(id=='null' || id==null) {
+            return;
+        }
+
         $http.get(API_URL + '/api/Cliente/' + id).then(function (data) {
             self.DescEntidade = data.data.DescEntidade;
             console.log(data.data);

@@ -105,14 +105,52 @@ customersModule.controller('CustomerController', function ($http, $location) {
     self.customer = {};
     self.events = [];
     self.orders = [];
-
+    self.salesReps = [];
+    self.showAllEvents = false;
     /**
      * initiate controller
      */
     self.initCtrl = function (id) {
+        if(id==null || id=='null'){
+            return;
+        }
+
         self.getCustomer(id);
         self.getCustomerEvents(id);
         self.getCustomerOrders(id);
+        self.getSalesReps();
+    };
+
+    /**
+     * GET users list from API
+     */
+    self.getSalesReps = function () {
+        $http.get(API_URL + '/api/vendedores').then(function (data) {
+            self.salesReps = data.data;
+
+            self.matchSalesReps();
+
+            console.log(data.data);
+        });
+    };
+
+    self.matchSalesReps = function () {
+        var findSalesRepByID = function (id) {
+            for(var i=0; i<self.salesReps.length; i++){
+                if(self.salesReps[i].VendedorID == id){
+                    return self.salesReps[i];
+                }
+            }
+            return {Nome: 'Not found.'};
+        };
+
+        for(var i=0; i<self.orders.length; i++){
+            self.orders[i].Nome = findSalesRepByID(self.orders[i].Responsavel).Nome;
+        }
+
+        for(var i=0; i<self.events.length; i++){
+            self.events[i].Nome = findSalesRepByID(self.events[i].CodVendedor).Nome;
+        }
     };
 
     self.orderScope = function (scope) {
@@ -140,8 +178,12 @@ customersModule.controller('CustomerController', function ($http, $location) {
         $http.get(API_URL + '/api/EncomendasCliente/' + id).then(function (data) {
             self.orders = data.data;
             self.loadingOrders = false;
+
+            if(self.salesReps.length > 0) {
+                self.matchSalesReps();
+            }
+
             console.log(data);
-            console.log('whha???');
         }, function (data) {
             console.log('Erro ao obter encomendas de cliente ' + id);
             console.log(data);
@@ -155,7 +197,12 @@ customersModule.controller('CustomerController', function ($http, $location) {
         $http.get(API_URL + '/api/ClienteReuniao/' + id).then(function (data) {
             self.events = data.data;
             self.loadingEvents = false;
-            console.log(self.events);
+
+            if(self.salesReps.length > 0) {
+                self.matchSalesReps();
+            }
+
+            console.log(data);
         }, function (data) {
             console.log('Erro ao obter eventos de cliente ' + id);
             console.log(data);

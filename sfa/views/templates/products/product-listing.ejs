@@ -13,7 +13,7 @@
                 </div>
 
                 <div ng-show="!currentCtrl.loading && currentCtrl.products.length == 0" class="span10">
-                    Não foram encontradas encomendas...
+                    Não foram encontrados produtos...
                 </div>
 
                 <section ng-hide="currentCtrl.loading || currentCtrl.products.length == 0">
@@ -63,7 +63,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr ng-repeat="product in productsCtrl.products | orderBy: '-vendas' | limitTo: 10">
+                                <tr ng-repeat="product in productsCtrl.products | orderBy: '-Vendas' | limitTo: 10">
                                     <td>
                                         <a href="/produto?=id{{product.ArtigoID}}">{{product.ArtigoID}}</a>
                                     </td>
