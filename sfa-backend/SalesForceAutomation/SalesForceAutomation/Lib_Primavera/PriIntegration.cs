@@ -677,15 +677,16 @@ namespace SalesForceAutomation.Lib_Primavera
 
             if (initializeCompany() == true)
             {
-
-                selectList = PriEngine.Engine.Consulta("SELECT Tarefas.Id AS RId, * FROM Tarefas LEFT JOIN TiposTarefa ON TipoActividade = 'REUN' WHERE EntidadePrincipal = '" + codEntidade + "'");
+                selectList = PriEngine.Engine.Consulta("SELECT Tarefas.Id AS RId, TiposTarefa.Descricao AS Tipo, * FROM Tarefas LEFT JOIN TiposTarefa ON IdTipoActividade=TiposTarefa.Id WHERE EntidadePrincipal = '" + codEntidade + "'");
 
                 while (!selectList.NoFim())
                 {
-
+                    Console.WriteLine(selectList.NumLinhas());
                     reuniao = new Models.Reuniao();
 
                     reuniao.CodReuniao = selectList.Valor("RId");
+                    reuniao.Tipo = selectList.Valor("Tipo");
+                    reuniao.TipoId = selectList.Valor("IdTipoActividade");
                     reuniao.CodVendedor = selectList.Valor("CriadoPor");
                     reuniao.Descricao = selectList.Valor("Descricao");
                     reuniao.Notas = selectList.Valor("Resumo");
