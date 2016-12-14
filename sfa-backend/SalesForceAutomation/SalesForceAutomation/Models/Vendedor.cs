@@ -17,6 +17,11 @@ namespace SalesForceAutomation.Models
             get;
             set;
         }
+        public bool VendedorChefe
+        {
+            get;
+            set;
+        }
         public string Nome
         {
             get;

@@ -16,6 +16,20 @@ namespace SalesForceAutomation.Controllers
             return Lib_Primavera.PriIntegration.GetSalesReps();
         }
 
+        // GET: /vendedores/:email
+        public Vendedor Get(string id)
+        {
+            Models.Vendedor vendedor = Lib_Primavera.PriIntegration.GetSalesRep(id);
+            if (vendedor == null)
+            {
+                return null;
+            }
+            else
+            {
+                return vendedor;
+            }
+        }
+
         // POST: /vendedores/
         public HttpResponseMessage Post(Vendedor vendedor)
         {

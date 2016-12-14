@@ -17,7 +17,9 @@ namespace SalesForceAutomation.Controllers
         public Models.VendasVendedor Get(string id)
         {
             Models.VendasVendedor venda;
+
             venda = Lib_Primavera.PriIntegration.get_salesRep_sales_value(id);
+
             if (venda == null)
             {
                 throw new HttpResponseException(
