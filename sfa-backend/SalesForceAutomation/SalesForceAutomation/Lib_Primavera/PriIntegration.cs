@@ -43,7 +43,7 @@ namespace SalesForceAutomation.Lib_Primavera
             if (initializeCompany() == true)
             {
 
-                selectList = PriEngine.Engine.Consulta("SELECT Cliente, Nome, NomeFiscal, Fac_Tel, NumContrib, B2BEnderecoMail, Fac_Mor, Desconto FROM  CLIENTES");
+                selectList = PriEngine.Engine.Consulta("SELECT Cliente, Nome, NomeFiscal, Fac_Tel, NumContrib, B2BEnderecoMail, Fac_Mor, Desconto, TotalDeb, EncomendasPendentes FROM  CLIENTES");
 
                 while (!selectList.NoFim())
                 {
@@ -57,6 +57,8 @@ namespace SalesForceAutomation.Lib_Primavera
                     cliente.Fac_Mor = selectList.Valor("Fac_Mor");
                     cliente.Email = selectList.Valor("B2BEnderecoMail");
                     cliente.DescEntidade = selectList.Valor("Desconto");
+                    cliente.ContaCorrente = selectList.Valor("TotalDeb");
+                    cliente.EncomendasPendentes = selectList.Valor("EncomendasPendentes");
 
                     listClientes.Add(cliente);
                     selectList.Seguinte();
@@ -91,6 +93,8 @@ namespace SalesForceAutomation.Lib_Primavera
                     cliente.Fac_Mor = objCli.get_Morada();
                     cliente.Email = objCli.get_B2BEnderecoMail();
                     cliente.DescEntidade = objCli.get_Desconto();
+                    cliente.ContaCorrente = objCli.get_DebitoContaCorrente();
+                    cliente.EncomendasPendentes = objCli.get_DebitoEncomendasPendentes();
 
                     return cliente;
                 }

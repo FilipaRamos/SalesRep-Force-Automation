@@ -55,5 +55,16 @@ namespace SalesForceAutomation.Models
             set;
         }
 
+        public double EncomendasPendentes
+        {
+            get;
+            set;
+        }
+
+        public double ContaCorrente
+        {
+            get;
+            set;
+        }
     }
 }
