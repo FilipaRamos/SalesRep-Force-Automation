@@ -364,7 +364,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
         #endregion ArtigoArmazem
 
-        #region TiposReuniao
+       /* #region TiposReuniao
 
         public static List<Models.TiposReuniao> GetTiposReuniao()
         {
@@ -397,7 +397,7 @@ namespace SalesForceAutomation.Lib_Primavera
                 return null;
         }
 
-        #endregion TiposReuniao
+        #endregion TiposReuniao*/
 
         #region Reuniao
 
