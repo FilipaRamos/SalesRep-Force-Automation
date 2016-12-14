@@ -53,7 +53,7 @@
                         <a href="/criar_cliente"><i class="fa fa-plus-square">&nbsp</i></a></p>
 
                     <div ng-show="customersCtrl.isSet(3)">
-                        <div ng-repeat="customer in customersCtrl.customers | orderBy : '-vendas' | limitTo : 10">
+                        <div ng-repeat="customer in customersCtrl.customers | orderBy : 'Vendas' | limitTo : 10" ng-show="customer.Vendas > 0">
                             <% include templates/customers/customer-preview.ejs %>
                         </div>
 
@@ -64,7 +64,7 @@
 
                     <div ng-show="customersCtrl.isSet(2)">
                         <div ng-repeat="customer in customersCtrl.customers"
-                             ng-show="customer.vendas==0">
+                             ng-show="customer.Vendas==0">
                             <% include templates/customers/customer-preview.ejs %>
                         </div>
                     </div>

@@ -22,7 +22,6 @@ customersModule.controller('CustomersController', function ($http, $location) {
      */
     self.initCtrl = function () {
         self.getCustomers();
-        self.getCustomersStats();
     };
 
     /**
@@ -33,6 +32,7 @@ customersModule.controller('CustomersController', function ($http, $location) {
             self.customers = data.data;
 
             self.updateCustomerList();
+            self.getCustomersStats();
             console.log(data);
         }, function (data) {
             console.log('Erro ao obter lista de clientes.');
@@ -48,6 +48,25 @@ customersModule.controller('CustomersController', function ($http, $location) {
             self.topCustomers = data.data;
             self.loading = false;
             console.log(data);
+
+            var findUserIndex = function (id) {
+              for(var i=0; i<self.customers.length; i++){
+                  if(self.customers[i].CodCliente==id){
+                      return i;
+                  }
+              }
+              return -1;
+            };
+
+            for(var i=0; i<self.topCustomers.length; i++){
+                var customerIndex = findUserIndex(self.topCustomers[i].ClienteID);
+                if(customerIndex != -1){
+                    console.log(self.topCustomers[i].Vendas);
+                    self.customers[customerIndex].Vendas = self.topCustomers[i].Vendas;
+                    console.log(self.customers[customerIndex].Vendas);
+                }
+            }
+
         }, function (data) {
             console.log('Erro ao obter lista de esattísticas de clientes.');
             console.log(data);
@@ -223,7 +242,7 @@ customersModule.controller('CustomerController', function ($http, $location) {
 
     self.prospectCustomers = function () {
         var prospectCustomers = self.customers.filter(function (customer) {
-            return customer.vendas == 0;
+            return customer.Vendas == 0;
         });
 
         return prospectCustomers.length > 0;

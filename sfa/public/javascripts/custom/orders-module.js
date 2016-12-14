@@ -138,7 +138,7 @@ ordersModule.controller('OrderController', function ($http, $location) {
     self.total = function () {
         var total = 0;
         self.linesDoc.forEach(function (element) {
-            total += ((element.IVA / 100) + 1) * element.PrecoUnitario * element.Quantidade * (1-element.Desconto/100)*(1-((self.customerCtrl.customer? self.customerCtrl.customer.DescEntidade : 0 )/100));
+            total += (((element.IVA / 100) + 1) * element.PrecoUnitario * element.Quantidade * (1-element.Desconto/100)*(1-((self.customerCtrl.customer? self.customerCtrl.customer.DescEntidade : 0)/100)));
         });
         return total;
     };
@@ -190,7 +190,7 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
         for(var i=0; i < opportnities.length; i++){
             self.addProduct(opportnities[i]);
         }
-    }
+    };
 
     self.setProductsCtrl = function (productsCtrl) {
         self.productsCtrl = productsCtrl;
@@ -258,7 +258,7 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
         }else{
             return false;
         }
-    }
+    };
 
     /**
      * Add order through API
@@ -272,10 +272,12 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
         self.newOrder.Serie = (new Date()).getFullYear();
         self.newOrder.LinhasDoc = self.linesDoc;
 
+        console.log(self.newOrder);
+
         $http({
             method: 'POST',
-            url: API_URL + '/api/Encomendas/',
-            headers: {'Content-Type': 'application/json'},
+            url: API_URL + '/api/encomendas/',
+            headers: {'Content-Type': 'application/json;charset=utf-8'},
             data: self.newOrder
         }).then(
             function (data) {
@@ -292,7 +294,7 @@ newOrderModule.controller('NewOrderController', function ($http, $location) {
     self.total = function () {
         var total = 0;
         self.linesDoc.forEach(function (element) {
-            total += ((element.IVA / 100) + 1) * element.PrecoUnitario * element.Quantidade * (1-element.Desconto/100)*(1-(self.DescEntidade/100));
+            total += (((element.IVA / 100) + 1) * element.PrecoUnitario * element.Quantidade * (1-element.Desconto/100)*(1-(self.DescEntidade/100)));
         });
         return total;
     };

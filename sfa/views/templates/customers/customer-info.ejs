@@ -78,6 +78,22 @@
                             {{currentCtrl.customer.DescEntidade}} %
                         </div>
                     </div>
+
+                    <!-- Encomendas pendentes -->
+                    <div class="form-group row">
+                        <label for="total-sales" class="col-sm-2 col-form-label control-label"> Encomendas Pendentes </label>
+                        <div name="total-sales" class="col-sm-5">
+                            {{currentCtrl.customer.EncomendasPendentes | currency: "€"}}
+                        </div>
+                    </div>
+
+                    <!-- Conta corrente -->
+                    <div class="form-group row">
+                        <label for="total-sales" class="col-sm-2 col-form-label control-label"> Conta Corrente </label>
+                        <div name="total-sales" class="col-sm-5">
+                            {{currentCtrl.customer.ContaCorrente | currency: "€"}}
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

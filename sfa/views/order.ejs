@@ -16,16 +16,19 @@
 
             <div class="row-align-center" ng-controller="CustomerController as customerCtrl" ng-init="newOrderCtrl.initCtrl('<%= id %>', customerCtrl);">
 
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"> Número de encomenda </label>
+                    <div class="col-sm-5">
+                        {{newOrderCtrl.order.NumDoc}}
+                    </div>
+                </div>
+
                 <div class="span6" ng-init="currentCtrl = customerCtrl;">
                     <% include templates/customers/customer-info.ejs %>
                 </div>
 
                 <div class="span12" ng-init="showTick = false;">
                     <% include templates/orders/product-listing.ejs %>
-                </div>
-
-                <div class="span12">
-                    <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.cancelOrder()" ng-disabled="newOrderCtrl.waitingAPIResponse"> Cancelar</button>
                 </div>
 
             </div>
