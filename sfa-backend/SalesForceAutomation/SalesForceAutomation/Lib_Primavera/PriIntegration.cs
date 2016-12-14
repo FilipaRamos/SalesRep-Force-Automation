@@ -390,7 +390,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
         #endregion ArtigoArmazem
 
-       /* #region TiposReuniao
+       #region TiposReuniao
 
         public static List<Models.TiposReuniao> GetTiposReuniao()
         {
@@ -423,7 +423,7 @@ namespace SalesForceAutomation.Lib_Primavera
                 return null;
         }
 
-        #endregion TiposReuniao*/
+        #endregion TiposReuniao
 
         #region Reuniao
 
@@ -1333,6 +1333,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
                     cmp2.Nome = "CDU_Password";
                     string ps = PriEngine.Platform.Criptografia.Encripta(newSalesRep.Password, 50);
+                    Debug.WriteLine(newSalesRep.Password);
                     cmp2.Valor = ps;
                     cmps.Insere(cmp2);
 
