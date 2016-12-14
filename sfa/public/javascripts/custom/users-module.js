@@ -100,7 +100,16 @@ usersModule.controller('UsersController', function ($http, $location) {
      */
     self.initCtrl = function () {
         self.getUsers();
-        self.getAllUsers();
+    };
+
+    self.findUser = function (id) {
+        for(var i=0; i<self.users.length; i++){
+            if(self.users[i].VendedorID == id){
+                return true;
+            }
+        }
+
+        return false;
     };
 
     /**
@@ -109,6 +118,9 @@ usersModule.controller('UsersController', function ($http, $location) {
     self.getUsers = function () {
         $http.get(API_URL + '/api/vendasvendedor').then(function (data) {
             self.users = self.users.concat(data.data);
+
+            self.getAllUsers();
+
             self.loading = false;
             console.log(data.data);
         });
@@ -119,7 +131,12 @@ usersModule.controller('UsersController', function ($http, $location) {
      */
     self.getAllUsers = function () {
         $http.get(API_URL + '/api/vendedores').then(function (data) {
-            self.users = self.users.concat(data.data);
+            for(var i=0; i<data.data.length; i++){
+                if(!self.findUser(data.data[i].VendedorID)) {
+                    self.users.push(data.data[i]);
+                }
+            }
+
             self.loading = false;
             console.log(data.data);
         });

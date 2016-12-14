@@ -165,3 +165,12 @@
 	background: #E3E3E3;	
 	background: #FFF;
 }
+
+div div button.btn.btn-primary.verProduto{
+	margin-top: 10px;
+}
+
+div div button.btn.btn-primary.verClientes{
+	margin-top: 10px;
+}
+
