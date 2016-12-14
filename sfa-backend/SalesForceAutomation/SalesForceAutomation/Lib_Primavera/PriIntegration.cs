@@ -1315,10 +1315,10 @@ namespace SalesForceAutomation.Lib_Primavera
                     // generate next sales rep Id
                     int newId = 1;
                     StdBELista objList;
-                    objList = PriEngine.Engine.Consulta("SELECT MAX(Vendedor) AS NewId FROM Vendedores");
+                    objList = PriEngine.Engine.Consulta("SELECT COUNT(Vendedor) AS NewId FROM Vendedores");
                     if (!objList.Vazia())
                     {
-                        newId = Int32.Parse(objList.Valor("NewId")) + 1;
+                        newId = objList.Valor("NewId") + 1;
                         Debug.WriteLine(newId);
                     }
                     newSalesRep.VendedorID = newId.ToString();
