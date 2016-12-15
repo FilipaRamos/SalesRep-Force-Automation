@@ -66,5 +66,11 @@ namespace SalesForceAutomation.Models
             get;
             set;
         }
+
+        public string CondPag
+        {
+            get;
+            set;
+        }
     }
 }

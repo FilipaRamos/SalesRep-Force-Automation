@@ -119,7 +119,7 @@ namespace SalesForceAutomation.Lib_Primavera
             {
                 if (initializeCompany() == true)
                 {
-
+                        cliente.CodCliente = Tools.Tools.Truncate(cliente.CodCliente, 12);
                         newCliente.set_Cliente(cliente.CodCliente);
                         newCliente.set_Nome(cliente.Nome);
                         newCliente.set_NomeFiscal(cliente.NomeFiscal);
@@ -128,6 +128,8 @@ namespace SalesForceAutomation.Lib_Primavera
                         newCliente.set_Telefone(cliente.Fac_Tel);
                         newCliente.set_B2BEnderecoMail(cliente.Email);
                         newCliente.set_Moeda("EUR");
+                        newCliente.set_CondPag(cliente.CondPag);
+                        newCliente.set_ModoPag("NUM");
 
                         PriEngine.Engine.Comercial.Clientes.Actualiza(newCliente);
 
@@ -1554,5 +1556,43 @@ namespace SalesForceAutomation.Lib_Primavera
         }
 
         #endregion
+
+        #region Payment Modes and Conditions
+
+        public static IEnumerable<Models.CondPag> listCondPag()
+        {
+            StdBELista objList;
+
+            Models.CondPag condPag = new Models.CondPag();
+            List<Models.CondPag> listCondPag = new List<Models.CondPag>();
+
+            if (initializeCompany() == true)
+            {
+
+                objList = PriEngine.Engine.Comercial.CondsPagamento.LstCondsPagamento();
+
+                while (!objList.NoFim())
+                {
+                    condPag = new Models.CondPag();
+                    condPag.condPag = objList.Valor("CondPag");
+                    condPag.Descricao = objList.Valor("Descricao");
+
+                    listCondPag.Add(condPag);
+                    objList.Seguinte();
+                }
+
+                return listCondPag;
+
+            }
+            else
+            {
+                return null;
+
+            }
+        }
+
+        #endregion
+
+
     }
 }
