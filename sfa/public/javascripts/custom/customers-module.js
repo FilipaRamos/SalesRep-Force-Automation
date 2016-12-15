@@ -320,11 +320,21 @@ customersModule.controller('NewCustomerController', function ($http, $location) 
 
     self.newCustomer = {};
     self.waitingAPIResponse = false;
+    self.condPags = [];
 
     /**
      * initiate controller
      */
     self.initCtrl = function () {
+        self.getCondPags();
+    };
+
+    self.getCondPags = function () {
+        $http.get(API_URL + '/api/CondPag/').then(function (data) {
+            self.condPags = data.data
+
+            console.log(data.data);
+        });
     };
 
     /**
@@ -332,6 +342,11 @@ customersModule.controller('NewCustomerController', function ($http, $location) 
      */
     self.addCustomer = function () {
         // TODO do form validation
+
+        // set event type ID
+        var selectBox = document.getElementById("pay-selector");
+        self.newCustomer.CondPag = selectBox.options[selectBox.selectedIndex].value;
+
         console.log(self.newCustomer);
 
         self.waitingAPIResponse = true;

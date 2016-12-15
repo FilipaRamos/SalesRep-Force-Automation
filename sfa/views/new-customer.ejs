@@ -15,7 +15,7 @@
 
             <div class="row-align-center">
                 <div class="span6">
-                    <form ng-controller="NewCustomerController as customerCtrl" ng-submit="customerCtrl.addCustomer()">
+                    <form ng-controller="NewCustomerController as customerCtrl" ng-init="customerCtrl.initCtrl()" ng-submit="customerCtrl.addCustomer()">
 
                         <!-- Customer ID -->
                         <div class="form-group row">
@@ -94,6 +94,21 @@
                                 <input name="desc" ng-model="customerCtrl.newCustomer.DescEntidade"
                                        value="{{customerCtrl.newCustomer.DescEntidade}}"
                                        type="number" class="form-control" placeholder="Desconto (%)">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="event-type" class="col-sm-2 col-form-label"> Condição de pagamento </label>
+                            <div class="col-sm-7">
+                                <div>
+                                    <select id="pay-selector" class="form-control"
+                                            title="Condição de pagamento" data-live-search="false" data-dropup-auto="false">
+                                        <option ng-repeat="type in customerCtrl.condPags"
+                                                value="{{type.CondPag}}" data-subtext="&emsp;{{type.Descricao}} ">
+                                            {{type.Descricao}}
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
