@@ -17,7 +17,7 @@ namespace SalesForceAutomation.Lib_Primavera
 {
     public class PriIntegration
     {
-        public static int TIMESPAN_STATISTIC = 6 * 30;
+        public static int TIMESPAN_STATISTIC = 12 * 30;
 
         public static Boolean initializeCompany(){
             if (!PriEngine.isCompanyInitialized())
@@ -1409,7 +1409,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             if (initializeCompany())
             {
-                objList = PriEngine.Engine.Consulta("SELECT Artigo.Artigo AS Artigo, SUM(LinhasDoc.PrecoLiquido) AS Soma, Artigo.STKActual AS STKActual, Artigo.PCUltimo AS PCUltimo FROM Artigo, LinhasDoc, CabecDoc WHERE Artigo.Artigo = LinhasDoc.Artigo AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND CabecDoc.Data > '" + sqlFormattedDate + "' GROUP BY Artigo.Artigo, STKActual, PCUltimo");
+                objList = PriEngine.Engine.Consulta("SELECT Artigo.Artigo AS Artigo, SUM(LinhasDoc.PrecoLiquido) AS Soma, Artigo.STKActual AS STKActual, Artigo.PCUltimo AS PCUltimo FROM Artigo, LinhasDoc, CabecDoc WHERE Artigo.Artigo = LinhasDoc.Artigo AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND (CabecDoc.TipoDoc = 'FAI' OR CabecDoc.TipoDoc = 'FI' OR CabecDoc.TipoDoc = 'FM' OR CabecDoc.TipoDoc = 'FO' OR CabecDoc.TipoDoc = 'FP' OR CabecDoc.TipoDoc = 'FR' OR CabecDoc.TipoDoc = 'FS' OR CabecDoc.TipoDoc = 'FA') AND CabecDoc.Data > '" + sqlFormattedDate + "' GROUP BY Artigo.Artigo, STKActual, PCUltimo");
 
                 while (!objList.NoFim())
                 {
@@ -1442,7 +1442,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             if (initializeCompany())
             {
-                objList = PriEngine.Engine.Consulta("SELECT Vendedores.Vendedor AS Vendedor, Vendedores.Nome AS Nome, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Vendedores, LinhasDoc, CabecDoc WHERE Vendedores.Vendedor = CabecDoc.Responsavel AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND Vendedores.Vendedor = '" + salesRepID + "' AND CabecDoc.Data > '" + sqlFormattedDate + "' GROUP BY Vendedores.Vendedor, Vendedores.Nome");
+                objList = PriEngine.Engine.Consulta("SELECT Vendedores.Vendedor AS Vendedor, Vendedores.Nome AS Nome, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Vendedores, LinhasDoc, CabecDoc WHERE Vendedores.Vendedor = CabecDoc.Responsavel AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND (CabecDoc.TipoDoc = 'FAI' OR CabecDoc.TipoDoc = 'FI' OR CabecDoc.TipoDoc = 'FM' OR CabecDoc.TipoDoc = 'FO' OR CabecDoc.TipoDoc = 'FP' OR CabecDoc.TipoDoc = 'FR' OR CabecDoc.TipoDoc = 'FS' OR CabecDoc.TipoDoc = 'FA') AND Vendedores.Vendedor = '" + salesRepID + "' AND CabecDoc.Data > '" + sqlFormattedDate + "' GROUP BY Vendedores.Vendedor, Vendedores.Nome");
 
                 repSales.VendedorID = objList.Valor("Vendedor");
                 repSales.Nome = objList.Valor("Nome");
@@ -1466,7 +1466,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             if (initializeCompany())
             {
-                objList = PriEngine.Engine.Consulta("SELECT Vendedores.Vendedor AS Vendedor, Vendedores.Nome AS Nome, SUM(LinhasDoc.PrecoLiquido) AS Soma, Vendedores.Morada AS Morada, Vendedores.Telemovel AS Telemovel FROM Vendedores, LinhasDoc, CabecDoc WHERE Vendedores.Vendedor = CabecDoc.Responsavel AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND CabecDoc.Data > '" + sqlFormattedDate + "' GROUP BY Vendedores.Vendedor, Vendedores.Nome, Vendedores.Morada, Vendedores.Telemovel");
+                objList = PriEngine.Engine.Consulta("SELECT Vendedores.Vendedor AS Vendedor, Vendedores.Nome AS Nome, SUM(LinhasDoc.PrecoLiquido) AS Soma, Vendedores.Morada AS Morada, Vendedores.Telemovel AS Telemovel FROM Vendedores, LinhasDoc, CabecDoc WHERE Vendedores.Vendedor = CabecDoc.Responsavel AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND (CabecDoc.TipoDoc = 'FAI' OR CabecDoc.TipoDoc = 'FI' OR CabecDoc.TipoDoc = 'FM' OR CabecDoc.TipoDoc = 'FO' OR CabecDoc.TipoDoc = 'FP' OR CabecDoc.TipoDoc = 'FR' OR CabecDoc.TipoDoc = 'FS' OR CabecDoc.TipoDoc = 'FA') AND CabecDoc.Data > '" + sqlFormattedDate + "' GROUP BY Vendedores.Vendedor, Vendedores.Nome, Vendedores.Morada, Vendedores.Telemovel");
 
                 try
                 {
@@ -1504,7 +1504,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             if (initializeCompany())
             {
-                objList = PriEngine.Engine.Consulta("SELECT Clientes.Cliente AS ClienteID, Clientes.Fac_Mor AS Morada, Clientes.Fac_Tel AS Telefone, Clientes.Fac_Cp AS CodPost, Clientes.Fac_Local AS Localidade, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Clientes, LinhasDoc, CabecDoc WHERE Clientes.Cliente = CabecDoc.Entidade AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND Clientes.Cliente = '" + clientID + "' AND CabecDoc.Data > '" + sqlFormattedDate + "' GROUP BY Clientes.Cliente, Clientes.Fac_Tel, Clientes.Fac_Mor, Clientes.Fac_Cp, Clientes.Fac_Local");
+                objList = PriEngine.Engine.Consulta("SELECT Clientes.Cliente AS ClienteID, Clientes.Fac_Mor AS Morada, Clientes.Fac_Tel AS Telefone, Clientes.Fac_Cp AS CodPost, Clientes.Fac_Local AS Localidade, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Clientes, LinhasDoc, CabecDoc WHERE Clientes.Cliente = CabecDoc.Entidade AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND (CabecDoc.TipoDoc = 'FAI' OR CabecDoc.TipoDoc = 'FI' OR CabecDoc.TipoDoc = 'FM' OR CabecDoc.TipoDoc = 'FO' OR CabecDoc.TipoDoc = 'FP' OR CabecDoc.TipoDoc = 'FR' OR CabecDoc.TipoDoc = 'FS' OR CabecDoc.TipoDoc = 'FA') AND Clientes.Cliente = '" + clientID + "' AND CabecDoc.Data > '" + sqlFormattedDate + "' GROUP BY Clientes.Cliente, Clientes.Fac_Tel, Clientes.Fac_Mor, Clientes.Fac_Cp, Clientes.Fac_Local");
 
                 client.ClienteID = objList.Valor("ClienteID");
                 client.Vendas = objList.Valor("Soma");
@@ -1531,7 +1531,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
             if (initializeCompany())
             {
-                objList = PriEngine.Engine.Consulta("SELECT Clientes.Cliente AS ClienteID, Clientes.Fac_Mor AS Morada, Clientes.Fac_Tel AS Telefone, Clientes.Fac_Cp AS CodPost, Clientes.Fac_Local AS Localidade, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Clientes, LinhasDoc, CabecDoc WHERE Clientes.Cliente = CabecDoc.Entidade AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND CabecDoc.TipoDoc = 'ECL' AND CabecDoc.Data > '" + sqlFormattedDate + "' GROUP BY Clientes.Cliente, Clientes.Fac_Tel, Clientes.Fac_Mor, Clientes.Fac_Cp, Clientes.Fac_Local");
+                objList = PriEngine.Engine.Consulta("SELECT Clientes.Cliente AS ClienteID, Clientes.Fac_Mor AS Morada, Clientes.Fac_Tel AS Telefone, Clientes.Fac_Cp AS CodPost, Clientes.Fac_Local AS Localidade, SUM(LinhasDoc.PrecoLiquido) AS Soma FROM Clientes, LinhasDoc, CabecDoc WHERE Clientes.Cliente = CabecDoc.Entidade AND LinhasDoc.IdCabecDoc = CabecDoc.Id AND (CabecDoc.TipoDoc = 'FAI' OR CabecDoc.TipoDoc = 'FI' OR CabecDoc.TipoDoc = 'FM' OR CabecDoc.TipoDoc = 'FO' OR CabecDoc.TipoDoc = 'FP' OR CabecDoc.TipoDoc = 'FR' OR CabecDoc.TipoDoc = 'FS' OR CabecDoc.TipoDoc = 'FA') AND CabecDoc.Data > '" + sqlFormattedDate + "' GROUP BY Clientes.Cliente, Clientes.Fac_Tel, Clientes.Fac_Mor, Clientes.Fac_Cp, Clientes.Fac_Local");
 
                 while (!objList.NoFim())
                 {
