@@ -59,7 +59,7 @@
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="user in usersCtrl.users | orderBy : '-Vendas' | limitTo : 10" ng-show="user.Vendas > 0">
-                                    <td><a href="perfil?id={{user.id}}">{{user.Nome}}</a></td>
+                                    <td><a href="perfil?id={{user.VendedorID}}">{{user.Nome}}</a></td>
                                     <td>{{user.Morada}}</td>
                                     <td>{{user.Telemovel}}</td>
                                     <td>{{user.Vendas | currency:"€" }}</td>

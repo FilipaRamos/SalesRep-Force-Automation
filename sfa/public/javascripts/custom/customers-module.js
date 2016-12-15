@@ -331,7 +331,7 @@ customersModule.controller('NewCustomerController', function ($http, $location) 
 
     self.getCondPags = function () {
         $http.get(API_URL + '/api/CondPag/').then(function (data) {
-            self.condPags = data.data
+            self.condPags = data.data;
 
             console.log(data.data);
         });
