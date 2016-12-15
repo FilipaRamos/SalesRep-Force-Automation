@@ -18,6 +18,7 @@ namespace SalesForceAutomation.Lib_Primavera
     public class PriIntegration
     {
         public static int TIMESPAN_STATISTIC = 6 * 30;
+        public static bool start = PriEngine.InitializeCompany(SalesForceAutomation.Properties.Settings.Default.Company.Trim(), SalesForceAutomation.Properties.Settings.Default.User.Trim(), SalesForceAutomation.Properties.Settings.Default.Password.Trim());
 
         public static Boolean initializeCompany(){
             if (!PriEngine.isCompanyInitialized())
