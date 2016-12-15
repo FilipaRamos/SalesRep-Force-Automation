@@ -16,12 +16,13 @@ namespace SalesForceAutomation.Lib_Primavera
         public static StdPlatBS Platform { get; set; }
         public static ErpBS Engine { get; set; }
         public static Boolean initialized = false;
+        public static StdPlatBS Plataforma = null;
 
         public static bool InitializeCompany(string Company, string User, string Password)
         {
 
             StdBSConfApl objAplConf = new StdBSConfApl();
-            StdPlatBS Plataforma = new StdPlatBS();
+            Plataforma = new StdPlatBS();
             ErpBS MotorLE = new ErpBS();
 
             EnumTipoPlataforma objTipoPlataforma = new EnumTipoPlataforma();
@@ -73,7 +74,7 @@ namespace SalesForceAutomation.Lib_Primavera
 
         public static bool isCompanyInitialized()
         {
-            return initialized;
+            return Plataforma.Inicializada;
         }
     }
 
