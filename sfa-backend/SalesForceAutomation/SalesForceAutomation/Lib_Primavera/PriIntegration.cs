@@ -127,6 +127,7 @@ namespace SalesForceAutomation.Lib_Primavera
                         newCliente.set_Morada(cliente.Fac_Mor);
                         newCliente.set_Telefone(cliente.Fac_Tel);
                         newCliente.set_B2BEnderecoMail(cliente.Email);
+                        newCliente.set_Desconto(cliente.DescEntidade);
                         newCliente.set_Moeda("EUR");
                         newCliente.set_CondPag(cliente.CondPag);
                         newCliente.set_ModoPag("NUM");
@@ -1320,7 +1321,7 @@ namespace SalesForceAutomation.Lib_Primavera
                     objList = PriEngine.Engine.Consulta("SELECT COUNT(Vendedor) AS NewId FROM Vendedores");
                     if (!objList.Vazia())
                     {
-                        newId = objList.Valor("NewId") + 1;
+                        newId = objList.Valor("NewId") + 2;
                         Debug.WriteLine(newId);
                     }
                     newSalesRep.VendedorID = newId.ToString();
