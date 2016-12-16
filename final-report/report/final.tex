@@ -134,8 +134,8 @@
 %----------------------------------------------------------------------------------------
 
 \HRule \\[1.2cm]
-{ \huge \bfseries \textit{Sales Representative Automation}}\\[0.6cm] % Title of your document
-{ \large \bfseries Especificação Funcional} \\[0.6cm]
+{ \huge \bfseries \textit{Sales Force Automation}}\\[0.6cm] % Title of your document
+{ \large \bfseries Relatório de Implementação} \\[0.6cm]
 \HRule \\[2cm]
  
 %----------------------------------------------------------------------------------------
@@ -144,8 +144,9 @@
 
 
 % If you don't want a supervisor, uncomment the two lines below and remove the section above
-\Large \emph{Authors:}\\[0.5cm] \normalsize
-Filipa \textsc{Ramos}\\[0.1cm] 
+\Large \emph{Estudantes:}\\[0.5cm] \normalsize
+Turma 4MIEIC02, Grupo C\\[0.2cm] 
+\small Filipa \textsc{Ramos}\\[0.1cm] 
 - up201305378@fe.up.pt\\[0.1cm]  
 Gil \textsc{Domingues}\\[0.1cm]  
 - up201304646@fe.up.pt\\[0.1cm]
@@ -170,21 +171,19 @@ Pedro \textsc{Melo}\\[0.1cm]
 %	INTRODUÇÃO
 %----------------------------------------------------------------------------------------
 
+
 \section{Introdução} 
 
 \justify\normalsize
-Muito tem sido dito acerca do papel da tecnologia no marketing e como esta pode substituir os processos de venda tradicionais. No entanto, os representantes de vendas ainda são fundamentais no fecho de negócios: falando com clientes por telefone ou pessoalmente, são eles quem «vende» aos clientes os méritos e benefícios de um dado produto, levando à geração de lucros. A tecnologia não consegue substituir, por completo, a interação humana. 
+Muito tem sido dito acerca do papel da tecnologia no \textit{marketing} e como esta pode substituir os processos de venda tradicionais. No entanto, os representantes de vendas ainda são fundamentais no fecho de negócios: falando com clientes por telefone ou pessoalmente, são eles quem «vende» aos clientes os méritos e benefícios de um dado produto, levando à geração de lucros. A tecnologia não consegue substituir, por completo, a interação humana. 
 
 Com efeito, a equipa de vendas continua a ser a face de uma empresa – ainda que nuns setores mais que noutros. Porque essas empresas despendem uma considerável quantidade de tempo e dinheiro com as equipas de vendas, importa geri-las de forma tão eficiente e eficaz quanto possível. 
 
-Para tal, existem soluções SFA – Sales Force Automation –, software que permite automatizar tarefas como controlo de inventário, processo de vendas, e registo de interações com clientes. São normalmente integradas na componente de Costumer Relationship Management (CRM) de um sistema de Enterprise Resource Planning (ERP), existindo várias alternativas no mercado: SAP CRM (Sales), Microsoft Dynamics CRM e Oracle Siebel são alguns exemplos. 
+Para tal, existem soluções \textit{SFA} – \textit{Sales Force Automation} –, software que permite automatizar tarefas como controlo de inventário, processo de vendas, e registo de interações com clientes. São normalmente integradas na componente de \textit{Customer Relationship Management (CRM)} de um sistema de \textit{Enterprise Resource Planning (ERP)}, existindo várias alternativas no mercado: \textit{SAP CRM (Sales)}, \textit{Microsoft Dynamics CRM} e \textit{Oracle Siebel} são alguns exemplos.
 
-Realizado no âmbito da unidade curricular de Sistemas de Informação, o presente documento detalha a especificação de uma aplicação web que oferecerá as funcionalidades de uma solução SFA. Ao longo do documento, é feita uma descrição do projeto, enumerando-se as funcionalidades a implementar, e identificam-se os pontos de ligação com o ERP Primavera. 
+Realizado no âmbito da unidade curricular de Sistemas de Informação, o presente documento detalha a especificação de uma aplicação web que oferecerá as funcionalidades de uma solução \textit{SFA}. Ao longo do documento, é feita uma descrição do projeto, enumerando-se as funcionalidades a implementar, e identificam-se os pontos de ligação com o \textit{ERP} Primavera. 
 
-%----------------------------------------------------------------------------------------
-
-\newpage % Start the article content on the second page, remove this if you have a longer abstract that goes onto the second page
-
+\newpage
 %----------------------------------------------------------------------------------------
 %	ESPECIFICAÇÃO
 %----------------------------------------------------------------------------------------
@@ -194,43 +193,14 @@ Realizado no âmbito da unidade curricular de Sistemas de Informação, o presen
 \subsection{Descrição}
 \justify\normalsize
 
-O projeto consiste no desenvolvimento de uma aplicação web que oferecerá as funcionalidades de uma solução SFA. Existirá uma camada de autenticação, através da qual um supervisor e os representantes de vendas deverão autenticar-se, para que possam organizar da sua agenda, manter o registo dos seus contactos com clientes e registar ordens de venda.
+///////////////////////////////////////////////////////////////////////////////////
+O projeto consiste no desenvolvimento de uma aplicação web que oferecerá as funcionalidades de uma solução \textit{SFA}. Existirá uma camada de autenticação, através da qual um supervisor e os representantes de vendas deverão autenticar-se, para que possam organizar da sua agenda, manter o registo dos seus contactos com clientes e registar ordens de venda.
  
-A aplicação web será desenvolvida utilizando Node.js. Porque com este trabalho se pretende, também, adquirir conhecimentos no que respeita ao uso de um ERP – no caso, o Primavera – prevê-se, igualmente, a criação de um servidor back-end em C\#, que fara a comuniação com o Primavera, passando a informação à aplicação front-end atraves de uma API RESTful. 
+A aplicação web será desenvolvida utilizando Node.js. Porque com este trabalho se pretende, também, adquirir conhecimentos no que respeita ao uso de um ERP – no caso, o Primavera – prevê-se, igualmente, a criação de um servidor back-end em \textit{C\#}, que fara a comuniação com o Primavera, passando a informação à aplicação front-end atraves de uma API RESTful. 
 
-\subsection{Funcionalidades}
+\subsection{Core Views}
 
-\begin{table}[H]
-\centering
-\caption{Descrição das funcionalidades do software.}
-\label{my-label}
-\begin{tabular}{|c|l|c|}
-\hline
-Funcionalidade           & Finalidade                                                                                                                                                   & CoreView  \\ \hline
-REGISTER\_REPRESENTATIVE           & Registar um representante de vendas  & ADMIN\_PAGE    \\ \hline
-VIEW\_TOP\_REPRESENTATIVES           &  \begin{tabular}[c]{@{}l@{}}Ver uma lista com os representantes \\ de vendas com maior número de vendas.\end{tabular}  & ADMIN\_PAGE  \\ \hline
-VIEW\_STATISTICS           & \begin{tabular}[c]{@{}l@{}}Ver estatísticas de vendas, como volume total \\ de vendas ou volume de vendas por vendedor.\end{tabular}  & ADMIN\_PAGE  \\ \hline
-VIEW\_PRODUCT\_CATALOGUE           & Ver a lista de produtos  & CAT\_PAGE \\ \hline
-VIEW\_MEETINGS           & Consultar reuniões agendadas                                                                                                                                 & HOM\_PAGE \\ \hline
-VIEW\_PROSPECTS\_CLIENTS & Consultar lista de potenciais clientes                                                                                                                       & HOM\_PAGE \\ \hline
-VIEW\_TOP\_CLIENTS       & \begin{tabular}[c]{@{}l@{}}Consultar lista dos clientes com mais \\ encomendas\end{tabular}                                                                  & HOM\_PAGE \\ \hline
-CREATE\_CLIENT           & Criar um novo cliente                                                                                                                                        & NEW\_CLI  \\ \hline
-VIEW\_CLIENT             & \begin{tabular}[c]{@{}l@{}}Consultar informação sobre um cliente, \\ incluindo reuniões agendadas e encomendas \\ efetuadas\end{tabular}                     & CLI\_PAGE \\ \hline
-EDIT\_CLIENT             & Alterar informação acerca de um cliente                                                                                                                      &           \\ \hline
-CREATE\_ORDER            & \begin{tabular}[c]{@{}l@{}}Criar uma nova encomenda, por parte de \\ um cliente\end{tabular}                                                                 & NEW\_ORD  \\ \hline
-VIEW\_ORDER              & \begin{tabular}[c]{@{}l@{}}Consultar informação sobre uma encomenda, \\ incluindo estado e produtos associados\end{tabular}                               & ORD\_PAGE \\ \hline
-CREATE\_MEETING          & Agendar uma reunião com um cliente                                                                                                                           & NEW\_MEE  \\ \hline
-VIEW\_MEETING            & \begin{tabular}[c]{@{}l@{}}Consultar e editar informação acerca de uma \\ reunião com um cliente, incluindo sugestões \\ de produtos e notas\end{tabular} & MEE\_PAGE \\ \hline
-EDIT\_MEETING            & Alterar a data de uma reunião                                                                                                                                &           \\ \hline
-DELETE\_MEETING          & \begin{tabular}[c]{@{}l@{}}Cancelar uma reunião com um cliente\end{tabular}                                                                               &           \\ \hline
-VIEW\_PRODUCT            & \begin{tabular}[c]{@{}l@{}}Consultar informação sobre um produto, \\ incluindo os armazéns que o têm em stock\end{tabular}                                & PRO\_PAGE \\ \hline
-SEARCH                   & Procurar produtos e clientes                                                                                                                                 &           \\ \hline
-\end{tabular}
-\end{table}
-
-\section{Core Views}
-
-\subsection{Client Page: Display of client information and transaction history}
+\subsubsection{Client Page: Display of client information and transaction history}
 
 \begin{figure}[H]
   \centering
@@ -252,7 +222,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \end{tabular}
 \end{table}
 
-\subsection{Homepage: Overview of schedule}
+\subsubsection{Homepage: Overview of schedule}
 
 \begin{figure}[H]
   \centering
@@ -274,7 +244,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \end{tabular}
 \end{table}
 
-\subsection{Meeting Page: Overview of meeting}
+\subsubsection{Meeting Page: Overview of meeting}
 
 \begin{figure}[H]
   \centering
@@ -296,7 +266,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \end{tabular}
 \end{table}
 
-\subsection{New Client Page: Create page for new potencial client}
+\subsubsection{New Client Page: Create page for new potencial client}
 
 \begin{figure}[H]
   \centering
@@ -318,7 +288,7 @@ OUTWARD PATHS                                                  & -Allows the cre
 \end{tabular}
 \end{table}
 
-\subsection{New Meeting Page: Schedule meeting with client}
+\subsubsection{New Meeting Page: Schedule meeting with client}
 
 \begin{figure}[H]
   \centering
@@ -340,7 +310,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \end{tabular}
 \end{table}
 
-\subsection{New Order Page: Sell products to client}
+\subsubsection{New Order Page: Sell products to client}
 
 \begin{figure}[H]
   \centering
@@ -362,7 +332,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \end{tabular}
 \end{table}
 
-\subsection{Order Status Page: Overview of order status}
+\subsubsection{Order Status Page: Overview of order status}
 
 \begin{figure}[H]
   \centering
@@ -384,7 +354,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \end{tabular}
 \end{table}
 
-\subsection{Product Page: Overview of product}
+\subsubsection{Product Page: Overview of product}
 
 \begin{figure}[H]
   \centering
@@ -406,7 +376,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \end{tabular}
 \end{table}
 
-\subsection{Catalog Page: List of products}
+\subsubsection{Catalog Page: List of products}
 
 \begin{figure}[H]
   \centering
@@ -428,7 +398,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \end{tabular}
 \end{table}
 
-\subsection{Administration Page: Overview of sales and sales team}
+\subsubsection{Administration Page: Overview of sales and sales team}
 
 \begin{figure}[H]
   \centering
@@ -450,10 +420,50 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \end{tabular}
 \end{table}
 
-\newpage
-\section{Interoperabilidade}
 
-\subsection{Clientes}
+%----------------------------------------------------------------------------------------
+%	FUNCIONALIDADES
+%----------------------------------------------------------------------------------------
+
+\subsection{Funcionalidades}
+
+\begin{table}[H]
+	\centering
+	\caption{Descrição das funcionalidades do software.}
+	\label{my-label}
+	\begin{tabular}{|c|l|c|}
+		\hline
+		Funcionalidade           & Finalidade                                                                                                                                                   & CoreView  \\ \hline
+		REGISTER\_REPRESENTATIVE           & Registar um representante de vendas  &    \\ \hline
+		VIEW\_TOP\_REPRESENTATIVES           &  \begin{tabular}[c]{@{}l@{}}Ver uma lista com os representantes \\ de vendas com maior número de vendas.\end{tabular}  & ADMIN\_PAGE  \\ \hline
+		VIEW\_TOP\_ORDERS           & \begin{tabular}[c]{@{}l@{}}Ver uma lista com as encomendas de maior valor.\end{tabular}  & ADMIN\_PAGE  \\ \hline
+		VIEW\_PRODUCT\_CATALOGUE           & Ver a lista de produtos  & CAT\_PAGE \\ \hline
+		VIEW\_EVENTS           & Consultar atividades agendadas                                                                                                                                 & HOM\_PAGE \\ \hline
+		VIEW\_PROSPECTS\_CLIENTS & Consultar lista de potenciais clientes                                                                                                                       & HOM\_PAGE \\ \hline
+		VIEW\_TOP\_CLIENTS       & \begin{tabular}[c]{@{}l@{}}Consultar lista dos clientes com mais \\ encomendas\end{tabular}                                                                  & HOM\_PAGE \\ \hline
+		CREATE\_CLIENT           & Criar um novo cliente                                                                                                                                        & NEW\_CLI  \\ \hline
+		VIEW\_CLIENT             & \begin{tabular}[c]{@{}l@{}}Consultar informação sobre um cliente, \\ incluindo reuniões agendadas e encomendas \\ efetuadas\end{tabular}                     & CLI\_PAGE \\ \hline
+		EDIT\_CLIENT             & Alterar informação acerca de um cliente                                                                                                                      &           \\ \hline
+		CREATE\_ORDER            & \begin{tabular}[c]{@{}l@{}}Criar uma nova encomenda, por parte de \\ um cliente\end{tabular}                                                                 & NEW\_ORD  \\ \hline
+		VIEW\_ORDER              & \begin{tabular}[c]{@{}l@{}}Consultar informação sobre uma encomenda, \\ incluindo estado e produtos associados\end{tabular}                               & ORD\_PAGE \\ \hline
+		CREATE\_MEETING          & Agendar uma reunião com um cliente                                                                                                                           & NEW\_MEE  \\ \hline
+		VIEW\_MEETING            & \begin{tabular}[c]{@{}l@{}}Consultar e editar informação acerca de uma \\ reunião com um cliente, incluindo sugestões \\ de produtos e notas\end{tabular} & MEE\_PAGE \\ \hline
+		EDIT\_MEETING            & Alterar a data de uma reunião                                                                                                                                &           \\ \hline
+		DELETE\_MEETING          & \begin{tabular}[c]{@{}l@{}}Cancelar uma reunião com um cliente\end{tabular}                                                                               &           \\ \hline
+		VIEW\_PRODUCT            & \begin{tabular}[c]{@{}l@{}}Consultar informação sobre um produto, \\ incluindo os armazéns que o têm em stock\end{tabular}                                & PRO\_PAGE \\ \hline
+		SEARCH                   & Procurar produtos e clientes                                                                                                                                 &           \\ \hline
+	\end{tabular}
+\end{table}
+
+%--------------------------------------------------------------------------------------
+% Implementação
+%--------------------------------------------------------------------------------------
+\newpage
+\section{Implementação}
+
+\subsection{Interoperabilidade}
+
+\subsubsection{Clientes}
 
 \begin{table}[H]
 \centering
@@ -505,7 +515,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \end{tabular}
 \end{table}
 
-\subsection{Reuniões}
+\subsubsection{Reuniões}
 
 \begin{table}[H]
 \centering
@@ -579,7 +589,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \end{tabular}
 \end{table}
 
-\subsection{Armazéns}
+\subsubsection{Armazéns}
 
 \begin{table}[H]
 \centering
@@ -598,7 +608,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \end{tabular}
 \end{table}
 
-\subsection{Transações}
+\subsubsection{Transações}
 
 \begin{table}[H]
 	\centering
@@ -634,7 +644,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 	\end{tabular}
 \end{table}
 
-\subsection{Artigos}
+\subsubsection{Artigos}
 
 \begin{table}[H]
 	\centering
@@ -686,7 +696,7 @@ OUTWARD PATHS                                                  & \begin{tabular}
 \end{table}
 
 
-\subsection{Administrador}
+\subsubsection{Administrador}
 
 \begin{table}[H]
 	\centering
@@ -758,10 +768,18 @@ OUTWARD PATHS                                                  & \begin{tabular}
 	\end{tabular}
 \end{table}
 
+\subsection{Caminhos}
+
+\section{Arquitetura}
+estrutura lógica, etc
+
+\section{Especificação vs Implementação}
+«Project Specifications vs Delivered Project»
 
 
-\section{Conclusão}
+\section{Conclusões}
 \justify\normalsize
+«Lessons Learned»
 Finda esta fase, consideram-se atingidos os objetivos definidos para esta primeira fase: foi feita a descrição do projeto – uma aplicação web que oferecerá funcionalidades de uma solução SFA. Enumeraram-se as funcionalidades a implementar e identificaram-se os pontos de ligação com o ERP Primavera.
 
 \end{titlepage}

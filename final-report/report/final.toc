@@ -1,0 +1,28 @@
+\select@language {portuguese}
+\contentsline {section}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{2}{section.1}
+\contentsline {section}{\numberline {2}Especifica\IeC {\c c}\IeC {\~a}o}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Descri\IeC {\c c}\IeC {\~a}o}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Core Views}{4}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Client Page: Display of client information and transaction history}{4}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}Homepage: Overview of schedule}{5}{subsubsection.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.3}Meeting Page: Overview of meeting}{6}{subsubsection.2.2.3}
+\contentsline {subsubsection}{\numberline {2.2.4}New Client Page: Create page for new potencial client}{7}{subsubsection.2.2.4}
+\contentsline {subsubsection}{\numberline {2.2.5}New Meeting Page: Schedule meeting with client}{8}{subsubsection.2.2.5}
+\contentsline {subsubsection}{\numberline {2.2.6}New Order Page: Sell products to client}{9}{subsubsection.2.2.6}
+\contentsline {subsubsection}{\numberline {2.2.7}Order Status Page: Overview of order status}{10}{subsubsection.2.2.7}
+\contentsline {subsubsection}{\numberline {2.2.8}Product Page: Overview of product}{11}{subsubsection.2.2.8}
+\contentsline {subsubsection}{\numberline {2.2.9}Catalog Page: List of products}{12}{subsubsection.2.2.9}
+\contentsline {subsubsection}{\numberline {2.2.10}Administration Page: Overview of sales and sales team}{13}{subsubsection.2.2.10}
+\contentsline {subsection}{\numberline {2.3}Funcionalidades}{14}{subsection.2.3}
+\contentsline {section}{\numberline {3}Implementa\IeC {\c c}\IeC {\~a}o}{15}{section.3}
+\contentsline {subsection}{\numberline {3.1}Interoperabilidade}{15}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Clientes}{15}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Reuni\IeC {\~o}es}{16}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.3}Armaz\IeC {\'e}ns}{17}{subsubsection.3.1.3}
+\contentsline {subsubsection}{\numberline {3.1.4}Transa\IeC {\c c}\IeC {\~o}es}{18}{subsubsection.3.1.4}
+\contentsline {subsubsection}{\numberline {3.1.5}Artigos}{19}{subsubsection.3.1.5}
+\contentsline {subsubsection}{\numberline {3.1.6}Administrador}{20}{subsubsection.3.1.6}
+\contentsline {subsection}{\numberline {3.2}Caminhos}{21}{subsection.3.2}
+\contentsline {section}{\numberline {4}Arquitetura}{21}{section.4}
+\contentsline {section}{\numberline {5}Especifica\IeC {\c c}\IeC {\~a}o vs Implementa\IeC {\c c}\IeC {\~a}o}{21}{section.5}
+\contentsline {section}{\numberline {6}Conclus\IeC {\~o}es}{21}{section.6}
