@@ -6,7 +6,7 @@
 </head>
 
 <body ng-app="viewEventModule">
-<div id="wrapper">
+<div id="wrapper" ng-controller="SessionController as sessionCtrl" ng-init="sessionCtrl.initCtrl('<%= user %>')">
     <% include templates/common/nav-bar.ejs %>
     <div id="page-wrapper">
         <div class="container-fluid">
@@ -76,6 +76,7 @@
                                 <div class="col-sm-5 pull-right">
                                     <button ng-click="eventCtrl.cancelEvent(eventCtrl.event.CodReuniao)" class="btn btn-primary">Remover</button>
                                     <a href="/editar_evento?id={{eventCtrl.event.CodReuniao}}" class="btn btn-primary">Editar</a>
+                                    <a ng-show="eventCtrl.event.Oportunidade" href="/nova_encomenda?clienteId={{eventCtrl.event.Entidade}}&oportunidadeId={{eventCtrl.event.Oportunidade}}" class="btn btn-primary">Encomendar</a>
                                 </div>
                             </div>
 

@@ -1,4 +1,4 @@
-var productsModule = angular.module('productsModule', []);
+var productsModule = angular.module('productsModule', ['usersModule']);
 /**
  * ProductsController
  */
@@ -53,7 +53,7 @@ productsModule.controller('ProductsController', function ($http, $scope, $locati
 
         for (productIndex in self.products) {
             var product = self.products[productIndex];
-            var productOption = '<option value="' + product.CodArtigo + '" data-subtext="&emsp;' + product.PrecoMedio + '€" data-tokens="" id="product-' + product.CodArtigo + '">' + product.CodArtigo + '</option>';
+            var productOption = '<option value="' + product.CodArtigo + '" data-subtext="&emsp;' + product.PVP1 + '€" data-tokens="" id="product-' + product.CodArtigo + '">' + product.CodArtigo + '</option>';
             selector.append(productOption);
         }
 

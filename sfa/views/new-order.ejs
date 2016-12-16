@@ -6,7 +6,7 @@
 </head>
 
 <body ng-app="newOrderModule">
-<div id="wrapper">
+<div id="wrapper" ng-controller="SessionController as sessionCtrl" ng-init="sessionCtrl.initCtrl('<%= user %>')">
     <% include templates/common/nav-bar.ejs %>
 
     <div id="page-wrapper">
@@ -14,11 +14,20 @@
 
             <% include templates/common/breadcrumbs.ejs %>
 
-            <div class="row-align-center" ng-controller="NewOrderController as newOrderCtrl" ng-init="newOrderCtrl.initCtrl(); newOrderCtrl.setCustomer('<%= customerId %>');">
+            <div class="row-align-center" ng-controller="NewOrderController as newOrderCtrl"
+                 ng-init="newOrderCtrl.initCtrl('<%= user %>'); newOrderCtrl.setCustomer('<%= customerId %>'); newOrderCtrl.getProductOpportunities('<%= opportunityId %>')">
 
-                <div class="span6" ng-controller="CustomerController as customerCtrl"
+                <div ng-hide="'<%= customerId %>' == 'null'" class="span6" ng-controller="CustomerController as customerCtrl"
                      ng-init="customerCtrl.initCtrl('<%= customerId %>'); currentCtrl = customerCtrl;">
                     <% include templates/customers/customer-info.ejs %>
+                </div>
+
+                <!-- Customer -->
+                <div ng-show="'<%= customerId %>' == 'null'" class="form-group row">
+                    <label for="customer" class="col-sm-2 col-form-label">Cliente</label>
+                    <div name="customer" class="col-sm-7">
+                        <% include templates/customers/customer-selector.ejs %>
+                    </div>
                 </div>
 
                 <div class="span12">
@@ -31,7 +40,8 @@
 
                 <div class="span12">
                     <br>
-                    <button type="button" class="btn btn-primary pull-right" ng-click="newOrderCtrl.addOrder()" ng-disabled="newOrderCtrl.waitingAPIResponse"> Encomendar</button>
+                    <button type="button" class="btn btn-primary pull-right" ng-click="newOrderCtrl.addOrder()"
+                            ng-disabled="newOrderCtrl.waitingAPIResponse"> Encomendar</button>
                 </div>
 
             </div>

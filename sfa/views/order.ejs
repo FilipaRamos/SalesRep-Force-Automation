@@ -6,7 +6,7 @@
 </head>
 
 <body ng-app="newOrderModule">
-<div id="wrapper">
+<div id="wrapper" ng-controller="SessionController as sessionCtrl" ng-init="sessionCtrl.initCtrl('<%= user %>')">
     <% include templates/common/nav-bar.ejs %>
 
     <div id="page-wrapper">
@@ -26,7 +26,6 @@
 
                 <div class="span12">
                     <button type="button" class="btn btn-primary" ng-click="newOrderCtrl.cancelOrder()" ng-disabled="newOrderCtrl.waitingAPIResponse"> Cancelar</button>
-                    <a href="/editar_encomenda?id={{newOrderCtrl.Id}}" class="btn btn-primary" ng-disabled="newOrderCtrl.waitingAPIResponse">Editar</a>
                 </div>
 
             </div>

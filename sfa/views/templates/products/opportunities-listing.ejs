@@ -14,13 +14,13 @@
             ng-show="newEventCtrl.isProductOpportunity(product.CodArtigo)">
             <td>
                 <label for="{{product.CodArtigo}}">
-                    <span><input ng-hide="eventCtrl" type="checkbox" id="{{product.CodArtigo}}" ng-click="newEventCtrl.toggleOpportunitySelected(product.CodArtigo)"/></span>&emsp;
+                    <span><input ng-show="newEventCtrl" type="checkbox" id="{{product.CodArtigo}}" ng-click="newEventCtrl.toggleOpportunitySelected(product.CodArtigo)"/></span>&emsp;
                     <a href="/produto?id={{product.CodArtigo}}">{{product.CodArtigo}}</a>
                 </label>
             </td>
             <td>{{product.DescArtigo}}</td>
             <td>{{product.IVA}}%</td>
-            <td>{{product.PrecoMedio | currency:"€" }}</td>
+            <td>{{product.PVP1 | currency:"€" }}</td>
         </tr>
         </tbody>
     </table>

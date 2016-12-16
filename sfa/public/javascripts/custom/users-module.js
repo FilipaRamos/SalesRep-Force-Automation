@@ -1,8 +1,8 @@
 var usersModule = angular.module('usersModule', []);
 
 /**
-* LoginController
-*/
+ * LoginController
+ */
 usersModule.controller('LoginController', function ($http, $window) {
     var self = this;
 
@@ -11,14 +11,79 @@ usersModule.controller('LoginController', function ($http, $window) {
     /**
      * Login handler
      */
-    self.login = function() {
-        // TODO implement this
-        // add error messages
-        /*$http.get('api/vendedores?username=' + self.user.username).then(function (data) {
-            self.user = data;
-        });*/
-        console.log('oi??');
-        $window.location.href = '/';
+    self.login = function () {
+        // TODO implement erro messages
+        if (!self.user.Email || !self.user.Password) {
+            return;
+        }
+
+        var target = self.user.Email;
+        var email = target.split('.').join('_-_');
+
+        $http.get(API_URL + '/api/vendedores/' + email).then(function (data) {
+            console.log(data.data);
+            if (self.user.Password == data.data.Password) {
+                self.user = data.data;
+
+                console.log('login ok');
+
+                $http({
+                    method: 'POST',
+                    url: '/entrar',
+                    headers: {'Content-Type': 'application/json'},
+                    data: {login: true, user: self.user}
+                }).then(function (response) {
+                    if (response.data.status == 'success') {
+                        window.location.replace('/');
+                    } else {
+                        console.log(response);
+                    }
+                });
+            } else {
+                console.log('login failed');
+            }
+        });
+    };
+});
+
+/**
+ * SessionController
+ */
+usersModule.controller('SessionController', function ($http, $window) {
+    var self = this;
+
+    self.user = null;
+
+    self.initCtrl = function (user) {
+        console.log(user);
+        if(user!='null'){
+            self.getUser(user);
+        }
+    };
+
+    self.getUser = function (user) {
+        $http.get(API_URL + '/api/vendedores/' + user).then(function (response) {
+            console.log(response.data);
+            self.user = response.data;
+        });
+    };
+
+    /**
+     * Logout handler
+     */
+    self.logout = function () {
+        $http({
+            method: 'POST',
+            url: '/entrar',
+            headers: {'Content-Type': 'application/json'},
+            data: {logout: true}
+        }).then(function (response) {
+            if (response.data.status == 'success') {
+                window.location.replace('/');
+            } else {
+                console.log(response);
+            }
+        });
     };
 });
 
@@ -34,10 +99,9 @@ usersModule.controller('UsersController', function ($http, $location) {
     /**
      * initiate controller
      */
-    self.initCtrl = function() {
-        // TODO change this
-        self.users = usersTemp;
+    self.initCtrl = function () {
         self.getUsers();
+        self.getAllUsers();
     };
 
     /**
@@ -45,8 +109,19 @@ usersModule.controller('UsersController', function ($http, $location) {
      */
     self.getUsers = function () {
         $http.get(API_URL + '/api/vendasvendedor').then(function (data) {
-            self.users = data.data;
-            self.loading=false;
+            self.users = self.users.concat(data.data);
+            self.loading = false;
+            console.log(data.data);
+        });
+    };
+
+    /**
+     * GET users list from API
+     */
+    self.getAllUsers = function () {
+        $http.get(API_URL + '/api/vendedores').then(function (data) {
+            self.users = self.users.concat(data.data);
+            self.loading = false;
             console.log(data.data);
         });
     };
@@ -76,19 +151,19 @@ usersModule.controller('UserController', function ($http, $location) {
     /**
      * initiate controller
      */
-    self.initCtrl = function(id) {
-        // TODO
-        self.user = usersTemp[0];
-        //self.getUser(id);
-        //self.getUserEvents(id);
+    self.initCtrl = function (id) {
+        self.getUser(id);
+        self.getUserEvents(id);
     };
 
     /**
-     * GET users list from API
+     * GET user list from API
      */
-    self.getUser = function (id) {
-        $http.get('api/vendedores?id=' + id).then(function (data) {
-            self.user = data;
+    self.getUser = function (user) {
+        $http.get(API_URL + '/api/vendedores/' + user).then(function (response) {
+            console.log(response.data);
+            self.user = response.data;
+            self.user.CPostal = self.user.CPostal.replace('.', '-');
         });
     };
 
@@ -96,19 +171,70 @@ usersModule.controller('UserController', function ($http, $location) {
      * GET user's event list from API
      */
     self.getUserEvents = function (id) {
-        $http.get('api/Eventos?id=' + id).then(function (data) {
-            self.user = data;
+        $http.get(API_URL + '/api/Reuniao/').then(function (response) {
+            self.events = response.data;
+
+            console.log(self.events);
+            self.events = self.events.filter(function (event) {
+                event.CodVendedor == id;
+            });
+
+            console.log(self.events);
         });
     };
 
 });
 
-// TODO retrieve client list
-var usersTemp = [
-    {
-        id: "Exemplo2",
-        nome: 'pedro',
-        password: 'pp',
-        sales: 20000
-    }
-];
+/**
+ * UserController
+ */
+usersModule.controller('NewUserController', function ($http, $location) {
+    var self = this;
+
+    self.user = {};
+    self.waitingAPIResponse = false;
+
+    /**
+     * initiate controller
+     */
+    self.initCtrl = function () {
+    };
+
+    /**
+     * Add customer through API
+     */
+    self.addUser = function () {
+
+        if (self.user.Password != self.user.PasswordConf) {
+            console.error("Passowrds don't match");
+            return;
+        }
+
+        //self.user.Password = sha256(self.user.Password);
+
+        console.log(self.user);
+
+        self.waitingAPIResponse = true;
+
+        $http({
+            method: 'POST',
+            url: API_URL + '/api/vendedores',
+            headers: {'Content-Type': 'application/json'},
+            data: self.user
+        }).then(
+            function (data) {
+                console.log(data);
+                if (data.status == 201) {
+                    window.location.replace('/perfil?id=' + data.data.VendedorID);
+                } else {
+                    self.waitingAPIResponse = false;
+                    self.errorMessage = data.data;
+                }
+            },
+            function (data) {
+                console.log(data);
+                self.waitingAPIResponse = false;
+                self.errorMessage = data.data;
+            });
+    };
+});

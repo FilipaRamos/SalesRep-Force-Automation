@@ -1,0 +1,11 @@
+<div ng-controller="TypesController as typesCtrl" ng-init="typesCtrl.initCtrl(); eventCtrl.setTypesCtrl(typesCtrl);">
+    <select id="type-selector" class="form-control"
+            data-live-search-placeholder="Procurar por nome..."
+            title="Tipos de evento" data-live-search="false" data-dropup-auto="false">
+        <option ng-repeat="type in typesCtrl.eventTypes"
+                value="{{type.Id}}" data-subtext="&emsp;{{type.Descricao}} ">
+            {{type.Descricao}}
+        </option>
+    </select>
+</div>
+

@@ -13,8 +13,9 @@
                             <thead>
                             <tr>
                                 <th>ID Produto</th>
-                                <th>Stock</th>
+                                <th ng-hide="showTick==false;">Stock</th>
                                 <th>Quantidade</th>
+                                <th>Unidade</th>
                                 <th>Preço Unitário</th>
                                 <th>Desconto Unitário</th>
                                 <th>IVA</th>
@@ -22,7 +23,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="line in newOrderCtrl.linesDoc" ng-init="line.IVA = line.IVA ? line.IVA : 23;"
+                            <tr ng-repeat="line in newOrderCtrl.linesDoc"
                                 id="{{line.CodArtigo}}">
                                 <td>
                                     <div><span ng-hide="showTick==false;" >
@@ -32,28 +33,34 @@
                                         <a href="/produto?id={{line.CodArtigo}}">{{line.CodArtigo}}</a>
                                     </div>
                                 </td>
-                                <td>{{line.Stock}}</td>
+                                <td ng-hide="showTick==false;">{{line.Stock}}</td>
                                 <td>
                                     <div ng-hide="newOrderCtrl.isProductSelected(line.CodArtigo)">
                                         {{line.Quantidade}}
                                     </div>
                                     <input ng-show="newOrderCtrl.isProductSelected(line.CodArtigo)" ng-model="line.Quantidade"></input>
                                 </td>
-                                <td>{{line.PrecoUnitario | currency:"€" }}</td>
+                                <td>{{line.UnidadeVenda}}</td>
                                 <td>
                                     <div ng-hide="newOrderCtrl.isProductSelected(line.CodArtigo)">
-                                        {{line.Desconto | currency:"€" }}
+                                        {{line.PrecoUnitario | currency:"€" }}
+                                    </div>
+                                    <input ng-show="newOrderCtrl.isProductSelected(line.CodArtigo)" ng-model="line.PrecoUnitario"></input></td>
+                                <td>
+                                    <div ng-hide="newOrderCtrl.isProductSelected(line.CodArtigo)">
+                                        {{line.Desconto}} %
                                     </div>
                                     <input ng-show="newOrderCtrl.isProductSelected(line.CodArtigo)" ng-model="line.Desconto"></input>
                                 </td>
                                 <td>{{line.IVA}}%</td>
                                 <td>
-                                    {{(((line.IVA/100)+1)*((line.PrecoUnitario*line.Quantidade)-(line.Desconto*line.Quantidade)))
+                                    {{((line.IVA / 100) + 1) * line.PrecoUnitario * line.Quantidade * (1-line.Desconto/100)*(1-((newOrderCtrl.customerCtrl.customer? newOrderCtrl.customerCtrl.customer.DescEntidade : 0 )/100))
                                     | currency:"€"}}
                                 </td>
                             </tr>
 
                             <tr>
+                                <td ng-hide="showTick==false;"></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
